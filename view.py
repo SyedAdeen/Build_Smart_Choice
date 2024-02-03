@@ -3,8 +3,8 @@ from flask import jsonify
 
 class LoginView:
     @staticmethod
-    def success_response(username):
-        return jsonify({"message": "Login successful", 'username': username}), 200
+    def success_response(username,role):
+        return jsonify({"message": "Login successful", 'username': username,'role':role}), 200
 
     @staticmethod
     def failure_response():
@@ -12,15 +12,17 @@ class LoginView:
 
 class SignupView:
     @staticmethod
-    def success_response(username, password, emailaddr, secret):
+    def success_response(username, password, emailaddr, SECRET_ANSWER):
         return jsonify({
             'username': username,
             'password': password,
             'emailaddr': emailaddr,
-            'secret': secret
+            'SECRET_ANSWER': SECRET_ANSWER
         }), 200
 
     @staticmethod
+    def duplicate_email_response():
+        return jsonify({"error": "Duplicate email"}), 408
     def duplicate_username_response():
         return jsonify({"error": "Duplicate username"}), 409
 
@@ -30,8 +32,8 @@ class SignupView:
     
 class VerifyUserView:
     @staticmethod
-    def success_response(username, secret):
-        return jsonify({"username": username, "secret": secret}), 200
+    def success_response(username, SECRET_ANSWER):
+        return jsonify({"username": username, "SECRET_ANSWER": SECRET_ANSWER}), 200
 
     @staticmethod
     def failure_response():
@@ -71,8 +73,8 @@ class FeedbackView:
 
 class CheckPassView:
     @staticmethod
-    def success_response(username, new_secret):
-        return {"username": username, "newpass": new_secret}
+    def success_response(username, new_SECRET_ANSWER):
+        return {"username": username, "newpass": new_SECRET_ANSWER}
 
     @staticmethod
     def failure_response():

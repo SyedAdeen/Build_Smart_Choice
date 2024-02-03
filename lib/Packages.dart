@@ -322,7 +322,10 @@ class Packs extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => Pack2(user: user),
+                builder: (context) => Pack2(
+                  user: user,
+                  selectedImages: selectedImages,
+                ),
               ),
             );
           },
@@ -378,6 +381,7 @@ class Packs extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => Pack3(
                   user: user,
+                  selectedImages: selectedImages,
                 ),
               ),
             );
@@ -432,7 +436,10 @@ class Packs extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => PremiumPack(user: user),
+                builder: (context) => PremiumPack(
+                  user: user,
+                  selectedImages: selectedImages,
+                ),
               ),
             );
           },

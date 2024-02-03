@@ -20,8 +20,8 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController _prevpassword = TextEditingController();
   final TextEditingController _newpassword = TextEditingController();
   final TextEditingController _confirmpassword = TextEditingController();
-  final TextEditingController _prevsecretpass = TextEditingController();
-  final TextEditingController _newsecret = TextEditingController();
+  final TextEditingController _prevSECRET_ANSWERpass = TextEditingController();
+  final TextEditingController _newSECRET_ANSWER = TextEditingController();
   bool _obscuretext = true;
   bool _obscuretext2 = true;
   bool _obscuretext3 = true;
@@ -110,28 +110,31 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> checkpass2() async {
     final String user = widget.username;
-    final String pass = _prevsecretpass.text;
-    final String newsecret = _newsecret.text;
+    final String pass = _prevSECRET_ANSWERpass.text;
+    final String newSECRET_ANSWER = _newSECRET_ANSWER.text;
     //   const String apiUrl = 'http://192.168.18.30:5000/check_pass2';
     const String apiUrl = ApiUrls.checkpass2;
     final response = await http.post(
       Uri.parse(apiUrl),
-      body: json
-          .encode({'username': user, 'password': pass, 'newsecret': newsecret}),
+      body: json.encode({
+        'username': user,
+        'password': pass,
+        'newSECRET_ANSWER': newSECRET_ANSWER
+      }),
       headers: {'Content-Type': 'application/json'},
     );
     debugPrint('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
-      _newsecret.text = '';
-      _prevsecretpass.text = '';
+      _newSECRET_ANSWER.text = '';
+      _prevSECRET_ANSWERpass.text = '';
       // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             title: const Text("Verification"),
-            content: const Text("Secret answer has been changed successfully"),
+            content: const Text("Secret Answer has been changed successfully"),
             actions: [
               TextButton(
                   onPressed: () {
@@ -241,7 +244,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void checkvalid2() {
-    if (_prevsecretpass.text.isEmpty || _newsecret.text.isEmpty) {
+    if (_prevSECRET_ANSWERpass.text.isEmpty || _newSECRET_ANSWER.text.isEmpty) {
       showDialog(
         context: context,
         builder: (context) {
@@ -419,7 +422,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                     const SizedBox(height: 10.0),
                     TextFormField(
-                      controller: _prevsecretpass,
+                      controller: _prevSECRET_ANSWERpass,
                       obscureText: _obscuretext4,
                       inputFormatters: [NoSpaceInputFormatter()],
                       maxLength: 16,
@@ -441,7 +444,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
                     ),
                     TextFormField(
-                      controller: _newsecret,
+                      controller: _newSECRET_ANSWER,
                       inputFormatters: [NoSpaceInputFormatter()],
                       maxLength: 20,
                       decoration: const InputDecoration(

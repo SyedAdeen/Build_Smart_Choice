@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:sampleapp/Settings.dart';
 
@@ -147,13 +149,13 @@ class _UsersDataState extends State<UsersData> {
                 },
                 cells: [
                   DataCell(
-                    Container(
+                    SizedBox(
                       width: 180,
                       child: Text('Username ${index + 1}'),
                     ),
                   ),
                   DataCell(
-                    Container(
+                    SizedBox(
                       width: 180,
                       child: Text('Feedback ${index + 1}'),
                     ),

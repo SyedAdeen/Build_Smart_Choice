@@ -1,11 +1,13 @@
 // ignore: file_names
 
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sampleapp/First_Screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:sampleapp/api_urls.dart';
+import 'package:email_otp/email_otp.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,8 +32,12 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+  EmailOTP myAuth = EmailOTP();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _secretans = TextEditingController();
+  final TextEditingController _SECRET_ANSWERans = TextEditingController();
+  // late EmailAuth emailAuth;
   bool _obscureText = true;
 
   String? checkemail, checkpass;
@@ -71,14 +77,200 @@ class _SignUpPageState extends State<SignUpPage> {
     return _formKey.currentState!.validate();
   }
 
-  Future<void> signup() async {
+  // void showOtpDialog(BuildContext context) async {
+  //   int remainingTime = 60;
+  //   TextEditingController _otpController = TextEditingController();
+
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (BuildContext context) {
+  //       return StatefulBuilder(
+  //         builder: (context, setState) {
+  //           return AlertDialog(
+  //             title: const Text('Enter OTP'),
+  //             content: Column(
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 TextField(
+  //                   controller: _otpController,
+  //                   keyboardType: TextInputType.number,
+  //                   maxLength: 6,
+  //                   decoration: const InputDecoration(
+  //                     labelText: 'OTP',
+  //                     hintText: 'Enter OTP',
+  //                   ),
+  //                 ),
+  //                 SizedBox(height: 20),
+  //                 Text('Timer Started of : $remainingTime seconds'),
+  //               ],
+  //             ),
+  //             actions: [
+  //               ElevatedButton(
+  //                 onPressed: () {
+  //                   Navigator.of(context).pop(); // Close the dialog
+  //                 },
+  //                 child: Text('Cancel'),
+  //               ),
+  //               ElevatedButton(
+  //                 onPressed: () async {
+  //                   verifyOTP();
+  //                 },
+  //                 child: const Text("Verify"),
+  //               ),
+  //             ],
+  //           );
+  //         },
+  //       );
+  //     },
+  //   );
+
+  //   // Countdown Timer
+  //   Timer.periodic(Duration(seconds: 1), (timer) {
+  //     remainingTime -= 1;
+  //     if (remainingTime <= 0) {
+  //       timer.cancel();
+  //       Navigator.of(context).pop(); // Close the dialog after 60 seconds
+  //     } else {
+  //       // Update the dialog with the remaining time
+  //       (context as Element).markNeedsBuild();
+  //     }
+  //   });
+  // }
+
+  void showOtpDialog(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('OTP Sent to ${_emailController.text}'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _otpController,
+                keyboardType: TextInputType.number,
+                maxLength: 6,
+                decoration: const InputDecoration(
+                  labelText: 'OTP',
+                  hintText: 'Enter OTP',
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+                onPressed: () async {
+                  verifyOTP(context);
+                },
+                child: const Text("Verify")),
+          ],
+        );
+      },
+    );
+  }
+
+  // void sendOTP() async {
+  //   emailAuth = EmailAuth(sessionName: "Email Verification");
+  //   var res = await emailAuth.sendOtp(recipientMail: _emailController.text);
+  //   debugPrint(res as String?);
+  //   if (res) {
+  //     debugPrint("OTP Send");
+  //   } else {
+  //     debugPrint("Unable to send OTP");
+  //   }
+  // }
+
+  // void verifyOTP() {
+  //   var res = emailAuth.validateOtp(
+  //       recipientMail: _emailController.value.text,
+  //       userOtp: _otpController.value.text);
+  //   if (res) {
+  //     debugPrint("OTP Verified");
+  //   } else {
+  //     debugPrint("OTP Not verified");
+  //   }
+  // }
+
+  Future<void> sendOTP() async {
+    myAuth.setConfig(
+      appEmail: "adeenashraf@gmail.com",
+      appName: "Build Smart Choice",
+      userEmail: _emailController.text,
+      otpLength: 6,
+      otpType: OTPType.digitsOnly,
+    );
+
+    try {
+      await myAuth.sendOTP();
+      debugPrint('OTP Sent Successfully to ${_emailController.text}');
+    } catch (e) {
+      debugPrint('Failed to send OTP. Error: $e');
+    }
+  }
+
+  Future<void> verifyOTP(BuildContext context) async {
+    if (await myAuth.verifyOTP(otp: _otpController.text)) {
+      Navigator.of(context).pop(); // Close the dialog
+      _otpController.clear();
+      addUser();
+    } else {
+      FocusScope.of(context).unfocus();
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Invalid OTP'),
+            content: const Text('Please enter a valid OTP.'),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the alert dialog
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+  // Future<void> verifyOTP() async {
+  //   if (await myAuth.verifyOTP(otp: _otpController.text) == true) {
+  //     // ignore: use_build_context_synchronously
+  //     Navigator.of(context).pop(); // Close the dialog
+
+  //     _otpController.clear();
+  //     addUser();
+  //   } else {
+  //     FocusScope.of(context).unfocus();
+
+  //     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+  //       content: Text("Invalid OTP"),
+  //     ));
+  //   }
+  // }
+
+  void verifyEmail() {
+    sendOTP();
+    showOtpDialog(context);
+  }
+
+  Future<void> addUser() async {
     final String username = _usernameController.text;
     final String password = _passwordController.text;
     final String emailaddr = _emailController.text;
-    final String secret = _secretans.text.toLowerCase();
+    final String SECRET_ANSWER = _SECRET_ANSWERans.text.toLowerCase();
 
     // const String apiUrl = 'http://192.168.18.30:5000/signup';
-    const String apiUrl = ApiUrls.signup;
+    const String apiUrl = ApiUrls.adduser;
     // const String apiUrl =
     //     'http://127.0.0.1:5000/signup'; // Replace with your API endpoint
 
@@ -88,7 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
         'username': username,
         'password': password,
         'emailaddr': emailaddr,
-        'secret': secret
+        'SECRET_ANSWER': SECRET_ANSWER
       }),
       headers: {'Content-Type': 'application/json'},
     );
@@ -106,6 +298,58 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           );
         });
+      });
+    } else {
+      setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Error"),
+          ),
+        );
+      });
+    }
+  }
+
+  Future<void> signup() async {
+    final String username = _usernameController.text;
+    final String password = _passwordController.text;
+    final String emailaddr = _emailController.text;
+    final String SECRET_ANSWER = _SECRET_ANSWERans.text.toLowerCase();
+
+    // const String apiUrl = 'http://192.168.18.30:5000/signup';
+    const String apiUrl = ApiUrls.signup;
+    // const String apiUrl =
+    //     'http://127.0.0.1:5000/signup'; // Replace with your API endpoint
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      body: json.encode({
+        'username': username,
+        'password': password,
+        'emailaddr': emailaddr,
+        'SECRET_ANSWER': SECRET_ANSWER
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+    print('Response body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      setState(() {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const FirstScreen()));
+
+        setState(() {
+          verifyEmail();
+        });
+      });
+    } else if (response.statusCode == 408) {
+      setState(() {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content:
+                Text("Email Address already used, please change Email Address"),
+          ),
+        );
       });
     } else if (response.statusCode == 409) {
       setState(() {
@@ -236,7 +480,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   const SizedBox(height: 10.0),
                   TextFormField(
-                    controller: _secretans,
+                    controller: _SECRET_ANSWERans,
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(
                           '[a-zA-Z]+')), // Only allow alphabetic characters
@@ -244,7 +488,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     maxLength: 20,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      labelText: 'Please! remember your secret answer',
+                      labelText: 'Please! remember your Secret Answer',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(39),
                       ),
@@ -264,7 +508,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             _usernameController.text.isNotEmpty &&
                                 _passwordController.text.isNotEmpty &&
                                 _emailController.text.isNotEmpty &&
-                                _secretans.text.isNotEmpty &&
+                                _SECRET_ANSWERans.text.isNotEmpty &&
                                 checkemail == null &&
                                 checkpass == '';
                       });

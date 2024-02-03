@@ -248,16 +248,16 @@ class _Package1PageState extends State<Package1Page> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
-                'Package No. 1',
-                style: TextStyle(
-                  fontSize: 40,
-                  color: Color.fromARGB(255, 0, 0, 0),
-                ),
-              ),
+              // const Text(
+              //   'Package No. 1',
+              //   style: TextStyle(
+              //     fontSize: 40,
+              //     color: Color.fromARGB(255, 0, 0, 0),
+              //   ),
+              // ),
               const Divider(
                 thickness: 2.0,
-                color: Colors.white,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
               const SizedBox(height: 30),
               ElevatedButton(

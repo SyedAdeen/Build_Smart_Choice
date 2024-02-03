@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, file_names
+
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'dart:async';
@@ -24,12 +26,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late StreamSubscription<dynamic> _subscription;
+  final InAppPurchase _inAppPurchase = InAppPurchase.instance;
+
   @override
   void initState() {
     super.initState();
 
     // Set up a stream subscription for purchase updates
-    final Stream purchaseUpdated = InAppPurchase.instance.purchaseStream;
+    final Stream purchaseUpdated = _inAppPurchase.purchaseStream;
 
     _subscription = purchaseUpdated.listen(
       (purchaseDetailsList) {
@@ -43,24 +47,70 @@ class _MyHomePageState extends State<MyHomePage> {
       onError: (error) {
         // Handle errors here
         // You might want to display an error message or log the error
-        print("Error during purchase stream: $error");
+        debugPrint("Error during purchase stream: $error");
       },
     );
   }
 
   void _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) {
-    // Handle the purchase updates here
-    // This method is called whenever there is a change in the user's purchases
-    // You can check the purchase details and update your app's state accordingly
     for (var purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         // Handle pending purchases
         // You might want to show a loading indicator
-      } else {
+      } else if (purchaseDetails.status == PurchaseStatus.purchased) {
         // Handle completed purchases
         // You can unlock premium features, update UI, etc.
-        print("Purchase details: ${purchaseDetails.productID}");
+        debugPrint("Purchase details: ${purchaseDetails.productID}");
       }
+    }
+  }
+
+  // Future<void> _initiatePurchase() async {
+  //   try {
+  //     final bool available = await _inAppPurchase.isAvailable();
+  //     if (available) {
+  //       // Replace 'your_product_id_here' with your actual product ID
+  //       final ProductDetailsResponse productDetails =
+  //           await _inAppPurchase.queryProductDetails({'your_product_id_here'});
+  //       final ProductDetails productDetail =
+  //           productDetails.productDetails.first;
+  //       final PurchaseParam purchaseParam =
+  //           PurchaseParam(productDetails: productDetail);
+  //       await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+  //     } else {
+  //       // In-app purchase is not available on this device
+  //       debugPrint("In-app purchase is not available on this device.");
+  //     }
+  //   } catch (e) {
+  //     // Handle errors here
+  //     debugPrint("Error during purchase initiation: $e");
+  //   }
+  // }
+
+  Future<void> _initiatePurchase() async {
+    try {
+      final bool available = await _inAppPurchase.isAvailable();
+      if (available) {
+        // Dummy product details for testing
+        final ProductDetails dummyProduct = ProductDetails(
+          id: '23',
+          title: 'Dummy Product',
+          description: 'This is a dummy product for testing.',
+          price: '0.99', // Replace with the actual price
+          currencyCode: 'USD',
+          rawPrice: 0.99,
+        );
+
+        final PurchaseParam purchaseParam =
+            PurchaseParam(productDetails: dummyProduct);
+        await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      } else {
+        // In-app purchase is not available on this device
+        debugPrint("In-app purchase is not available on this device.");
+      }
+    } catch (e) {
+      // Handle errors here
+      debugPrint("Error during purchase initiation: $e");
     }
   }
 
@@ -92,13 +142,11 @@ class _MyHomePageState extends State<MyHomePage> {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Trigger the purchase process when the button is pressed
-                // You should implement your own logic here
-              },
-              child: Text('Upgrade Now'),
+              onPressed:
+                  _initiatePurchase, // Call the method when the button is pressed
+              child: const Text('Upgrade Now'),
             ),
           ],
         ),

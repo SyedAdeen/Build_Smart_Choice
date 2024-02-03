@@ -19,9 +19,10 @@ class LoginController:
                 return jsonify({"message": "Username and password are required"}), 400
 
             user = self.user_model.get_user_by_username(username)
+            role=user[6]
 
-            if user and self.user_auth_model.check_password(password, user[1]):
-                return LoginView.success_response(username)
+            if user and self.user_auth_model.check_password(password, user[3]):
+                return LoginView.success_response(username,role)
             else:
                 return LoginView.failure_response()
 
@@ -39,21 +40,39 @@ class SignupController:
             username = data.get('username')
             password = data.get('password')
             emailaddr = data.get('emailaddr')
-            secret = data.get('secret')
+            SECRET_ANSWER = data.get('SECRET_ANSWER')
 
-            if not username or not password or not emailaddr or not secret:
+            if not username or not password or not emailaddr or not SECRET_ANSWER:
                 return SignupView.failure_response("All fields are required"), 400
 
             existing_user = self.user_model.get_user_by_username(username)
             if existing_user:
                 return SignupView.duplicate_username_response()
+            
+            existing_email = self.user_model.check_user_email(emailaddr) 
+            if existing_email:   
+                return SignupView.duplicate_email_response()           
+            
+            else:
+                return SignupView.success_response(username, password, emailaddr, SECRET_ANSWER)
 
+        except Exception as e:
+            return SignupView.failure_response(str(e))
+    
+    def adduser(self):
+        try:
+            data = request.json
+            username = data.get('username')
+            password = data.get('password')
+            emailaddr = data.get('emailaddr')
+            SECRET_ANSWER = data.get('SECRET_ANSWER')
+            
             salt = bcrypt.gensalt()
             hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
 
-            self.signup_model.create_user(username, hashed_password, emailaddr, secret)
+            self.signup_model.create_user(username, hashed_password, emailaddr, SECRET_ANSWER)
             
-            return SignupView.success_response(username, password, emailaddr, secret)
+            return SignupView.success_response(username, password, emailaddr, SECRET_ANSWER)
 
         except Exception as e:
             return SignupView.failure_response(str(e))
@@ -66,15 +85,15 @@ class VerifyUserController:
         try:
             data = request.json
             username = data.get('username')
-            secret = data.get('secret')
+            SECRET_ANSWER = data.get('SECRET_ANSWER')
 
-            if not username or not secret:
+            if not username or not SECRET_ANSWER:
                 return VerifyUserView.failure_response(), 400
 
-            user = self.verify_user_model.verify_user(username, secret)
+            user = self.verify_user_model.verify_user(username, SECRET_ANSWER)
 
             if user:
-                return VerifyUserView.success_response(username, secret)
+                return VerifyUserView.success_response(username, SECRET_ANSWER)
             else:
                 return VerifyUserView.failure_response()
 
@@ -161,14 +180,14 @@ class CheckPassController2:
             data = request.json
             username = data.get('username')
             password = data.get('password')
-            new_secret = data.get('newsecret')
+            new_SECRET_ANSWER = data.get('newSECRET_ANSWER')
 
             if not username or not password:
                 return jsonify(CheckPassView.failure_response()), 400
             
-            user = self.check_pass_model.update_secret(username, new_secret, password)
-            if user != "User not found":
-                return jsonify(CheckPassView.success_response(username, new_secret))
+            user = self.check_pass_model.update_SECRET_ANSWER(username, new_SECRET_ANSWER, password)
+            if user != "Incorrect password":
+                return jsonify(CheckPassView.success_response(username, new_SECRET_ANSWER))
             else:
                 return jsonify(CheckPassView.failure_response()), 401
 

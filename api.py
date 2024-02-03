@@ -36,7 +36,7 @@ def login():
         cursor = db_connection.cursor()
 
         # Query the database to check if the user exists
-        cursor.execute('SELECT * FROM user_data WHERE username = %s', (username,))
+        cursor.execute('SELECT * FROM USERS WHERE username = %s', (username,))
         user = cursor.fetchone()
 
         # Close the cursor
@@ -64,13 +64,13 @@ def verify_user():
     try:
         data = request.json
         username = data.get('username')
-        secret = data.get('secret')
+        SECRET_ANSWER = data.get('SECRET_ANSWER')
 
         # Create a cursor to execute SQL queries
         cursor = db_connection.cursor()
 
         # Query the database to check if the user exists and the password matches
-        cursor.execute('SELECT * FROM user_data WHERE username = %s AND SECRET = %s', (username,secret))
+        cursor.execute('SELECT * FROM USERS WHERE username = %s AND SECRET_ANSWER = %s', (username,SECRET_ANSWER))
         user = cursor.fetchone()
 
         # Close the cursor
@@ -81,12 +81,12 @@ def verify_user():
         if user:
             
             
-            return jsonify({"username": username, "secret": secret}),200
+            return jsonify({"username": username, "SECRET_ANSWER": SECRET_ANSWER}),200
         else:
             return jsonify({"message": "Username not found"}),401
 
     except Exception as e:
-        # return jsonify({"username":username,"password":password, "secret":secret})
+        # return jsonify({"username":username,"password":password, "SECRET_ANSWER":SECRET_ANSWER})
        print(f"Error occurred: {str(e)}")
        return jsonify({"message": "Error occurred"}), 500
 
@@ -101,7 +101,7 @@ def forgot():
         data = request.json
         username = data.get('username')
         password = data.get('password')
-        secret = data.get('secret')
+        SECRET_ANSWER = data.get('SECRET_ANSWER')
 
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
@@ -111,13 +111,13 @@ def forgot():
         cursor = db_connection.cursor()
 
         # Query the database to check if the user exists and the password matches
-        cursor.execute('SELECT * FROM user_data WHERE username = %s AND SECRET = %s', (username,secret))
+        cursor.execute('SELECT * FROM USERS WHERE username = %s AND SECRET_ANSWER = %s', (username,SECRET_ANSWER))
         user = cursor.fetchone()
 
         # Close the cursor
 
         if user:
-            query = "UPDATE USER_DATA SET USER_PASS = %s WHERE USERNAME = %s"
+            query = "UPDATE USERS SET PASSWORD = %s WHERE USERNAME = %s"
             cursor.execute(query, (hashed_password, username))
             
             cursor.close()
@@ -125,10 +125,10 @@ def forgot():
             db_connection.close()
             return jsonify({"username": username, "password": password})
         else:
-            return jsonify({"message": "Username not found", "username": username,"password":password, "secret":secret}),401
+            return jsonify({"message": "Username not found", "username": username,"password":password, "SECRET_ANSWER":SECRET_ANSWER}),401
 
     except Exception as e:
-        # return jsonify({"username":username,"password":password, "secret":secret})
+        # return jsonify({"username":username,"password":password, "SECRET_ANSWER":SECRET_ANSWER})
        print(f"Error occurred: {str(e)}")
        return jsonify({"message": "Error occurred"}), 500
 
@@ -142,17 +142,17 @@ def signup():
     username = data.get('username')
     password = data.get('password')
     emailaddr = data.get('emailaddr')
-    secret = data.get('secret')
+    SECRET_ANSWER = data.get('SECRET_ANSWER')
 
     try:
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
 
 
-        insert_query = ("INSERT INTO user_data (username,user_pass,email_id,secret) VALUES (%s, %s,%s,%s)")
+        insert_query = ("INSERT INTO USERS (username,PASSWORD,EMAIL_ADDRESS,SECRET_ANSWER) VALUES (%s, %s,%s,%s)")
         cursor = db_connection.cursor()
 
-        cursor.execute(insert_query,(username,hashed_password.decode('utf-8'),emailaddr,secret))
+        cursor.execute(insert_query,(username,hashed_password.decode('utf-8'),emailaddr,SECRET_ANSWER))
         
         db_connection.commit()
         db_connection.close()
@@ -162,7 +162,7 @@ def signup():
         'username': username,
         'password': password,
         'emailaddr': emailaddr,
-        'secret': secret
+        'SECRET_ANSWER': SECRET_ANSWER
       }),200
     
     except mysql.connector.IntegrityError as e:
@@ -172,7 +172,7 @@ def signup():
     except Exception as e:
         return jsonify({"error": str(e)}), 500  # Use 500 Internal Server Error for other errors
 
-#check password to change secret password
+#check password to change SECRET_ANSWER password
 @app.route('/check_pass2', methods=['POST'])
 def check_pass2():
     db_connection = mysql.connector.connect(**db_config)
@@ -180,28 +180,28 @@ def check_pass2():
     data = request.json
     username = data.get('username')
     password = data.get('password')
-    newpass = data.get('newsecret')
+    newpass = data.get('newSECRET_ANSWER')
    
 
     try:
-        query1 = ("SELECT * FROM USER_DATA WHERE USERNAME = %s AND USER_PASS = %s")
+        query1 = ("SELECT * FROM USERS WHERE USERNAME = %s AND PASSWORD = %s")
         cursor = db_connection.cursor()
 
         cursor.execute(query1,(username,password))
         user = cursor.fetchone()
         if user:
-            query = "UPDATE USER_DATA SET SECRET = %s WHERE USERNAME = %s"
+            query = "UPDATE USERS SET SECRET_ANSWER = %s WHERE USERNAME = %s"
             cursor.execute(query, (newpass, username))
             
             cursor.close()
             db_connection.commit()
             db_connection.close()
-            return jsonify({"username": username, "newsecret": newpass})
+            return jsonify({"username": username, "newSECRET_ANSWER": newpass})
         else:
             return jsonify({"message": "Username not found"}),401
 
     except Exception as e:
-        # return jsonify({"username":username,"password":password, "secret":secret})
+        # return jsonify({"username":username,"password":password, "SECRET_ANSWER":SECRET_ANSWER})
        print(f"Error occurred: {str(e)}")
        return jsonify({"message": "Error occurred"}), 500
 
@@ -217,7 +217,7 @@ def send_feed():
    
     try:       
        
-        query = "UPDATE USER_DATA SET FEEDBACK = %s WHERE USERNAME = %s"
+        query = "UPDATE USERS SET FEEDBACK = %s WHERE USERNAME = %s"
         cursor = db_connection.cursor() 
         cursor.execute(query, (feedback, username))
         
@@ -228,7 +228,7 @@ def send_feed():
 
         
     except Exception as e:
-        # return jsonify({"username":username,"password":password, "secret":secret})
+        # return jsonify({"username":username,"password":password, "SECRET_ANSWER":SECRET_ANSWER})
        print(f"Error occurred: {str(e)}")
        return jsonify({"message": "Error occurred"}), 500
 
@@ -248,12 +248,12 @@ def check_pass():
         cursor = db_connection.cursor()
 
         # Query the database to check if the user exists
-        query = "SELECT USER_PASS FROM USER_DATA WHERE USERNAME = %s"
+        query = "SELECT PASSWORD FROM USERS WHERE USERNAME = %s"
         cursor.execute(query, (username,))
-        user_data = cursor.fetchone()
+        USERS = cursor.fetchone()
 
-        if user_data:
-            hashed_password = user_data[0]
+        if USERS:
+            hashed_password = USERS[0]
 
             # Verify the current password
             if bcrypt.checkpw(current_password.encode('utf-8'), hashed_password.encode('utf-8')):
@@ -262,7 +262,7 @@ def check_pass():
                 hashed_new_password = bcrypt.hashpw(new_password.encode('utf-8'), salt)
 
                 # Update the password in the database
-                update_query = "UPDATE USER_DATA SET USER_PASS = %s WHERE USERNAME = %s"
+                update_query = "UPDATE USERS SET PASSWORD = %s WHERE USERNAME = %s"
                 cursor.execute(update_query, (hashed_new_password, username))
 
                 cursor.close()

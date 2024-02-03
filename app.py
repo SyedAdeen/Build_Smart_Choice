@@ -5,12 +5,12 @@ from controller import CheckPassController, CheckPassController2, FeedbackContro
 app = Flask(__name__)
 CORS(app)
 
-db_config = {
-    "host": "127.0.0.1",
-    "user": "root",
-    "password": "admin",
-    "database": "db_bsc",
-}
+# db_config = {
+#     "host": "127.0.0.1",
+#     "user": "root",
+#     "password": "admin",
+#     "database": "db_bsc",
+# }
 
 login_controller = LoginController()
 signup_controller = SignupController()
@@ -24,8 +24,6 @@ Grey_Controller = GreyMaterialsController()
 
 
 
-
-
 @app.route('/login', methods=['POST'])
 def login():
     return login_controller.login()
@@ -33,6 +31,10 @@ def login():
 @app.route('/signup', methods=['POST'])
 def signup():
     return signup_controller.signup()
+
+@app.route('/adduser', methods=['POST'])
+def adduser():
+    return signup_controller.adduser()
 
 @app.route('/verify_user', methods=['POST'])
 def verify_user():

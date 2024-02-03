@@ -3,19 +3,10 @@ import base64
 import mysql.connector
 import bcrypt
 from mysql.connector import pooling
+from db_config import create_db_handler, poolname,poolsize, db_config
 
-poolname="MySqlPool1"
-poolsize=20
 
-db_config = {
-    "host": "127.0.0.1",
-    "user": "root",
-    "password": "admin",
-    "database": "db_bsc",
-}
-
-connection_pool = pooling.MySQLConnectionPool(pool_name=poolname, pool_size=poolsize,pool_reset_session=True, **db_config)
-
+connection_pool = create_db_handler()
 class UserModel:
     # def __init__(self):
     #     self.db_config = db_config
@@ -30,7 +21,7 @@ class UserModel:
             # db_connection = mysql.connector.connect(**self.db_config)
             # cursor = db_connection.cursor()
            
-            cursor.execute('SELECT * FROM user_data WHERE username = %s', (username,))
+            cursor.execute('SELECT * FROM USERS WHERE username = %s', (username,))
             user = cursor.fetchone()
             cursor.close()
             return user
@@ -45,27 +36,57 @@ class UserModel:
 
                 print("Connection is closed")
 
+    def check_user_email(self, emailaddr):
+        connection = connection_pool.get_connection()
+        cursor = connection.cursor()
+    
+        if connection:
+            print("Connection built for check_user_email")
+        
+        try:
+            print(emailaddr)
+            cursor.execute('SELECT * FROM USERS WHERE EMAIL_ADDRESS = %s', (emailaddr,))
+            user = cursor.fetchone()
+            print(user)
+
+            # Consume the result set
+            for _ in cursor.fetchall():
+                pass
+
+            cursor.close()
+            return user
+
+        except Exception as e:
+            print(f"An error occurred during check_user_email: {str(e)}")
+        
+        finally:
+            if connection and connection.is_connected():
+                cursor.close()
+                connection.close()
+                print("Connection is closed")
 
 
 class UserAuthModel:
     def check_password(self, entered_password, stored_hashed_password):
+        
         return bcrypt.checkpw(entered_password.encode('utf-8'), stored_hashed_password.encode('utf-8'))
 
 class SignupModel:
     # def __init__(self, ):
 
-    def create_user(self, username, hashed_password, emailaddr, secret):
+    def create_user(self, username, hashed_password, emailaddr, SECRET_ANSWER):
         # db_connection = mysql.connector.connect(**self.db_config)
         connection=connection_pool.get_connection()
         cursor=connection.cursor()
         try:
 
             if connection:
+                
                 print("Connection built for create_user")
 
 
-            insert_query = ("INSERT INTO user_data (username, user_pass, email_id, secret) VALUES (%s, %s, %s, %s)")
-            cursor.execute(insert_query, (username, hashed_password, emailaddr, secret))
+            insert_query = ("INSERT INTO USERS (username, PASSWORD, EMAIL_ADDRESS, SECRET_ANSWER) VALUES (%s, %s, %s, %s)")
+            cursor.execute(insert_query, (username, hashed_password, emailaddr, SECRET_ANSWER))
             connection.commit()
             cursor.close()
             
@@ -82,7 +103,7 @@ class SignupModel:
 class VerifyUserModel:
     # def __init__(self):
 
-    def verify_user(self, username, secret):
+    def verify_user(self, username, SECRET_ANSWER):
         # db_connection = mysql.connector.connect(**self.db_config)
         connection=connection_pool.get_connection()
         cursor=connection.cursor()
@@ -91,7 +112,7 @@ class VerifyUserModel:
                 print("Connection built for verify_user")
 
                 
-            cursor.execute('SELECT * FROM user_data WHERE username = %s AND SECRET = %s', (username, secret))
+            cursor.execute('SELECT * FROM USERS WHERE username = %s AND SECRET_ANSWER = %s', (username, SECRET_ANSWER))
             user = cursor.fetchone()
 
             cursor.close()
@@ -120,7 +141,7 @@ class ForgotModel:
                 print("Connection built for update_password")
 
 
-            query = "UPDATE USER_DATA SET USER_PASS = %s WHERE USERNAME = %s"
+            query = "UPDATE USERS SET PASSWORD = %s WHERE USERNAME = %s"
             cursor.execute(query, (hashed_password, username))
             connection.commit()
             cursor.close()
@@ -147,12 +168,20 @@ class FeedbackModel:
         try:
             if connection:
                 print("Connection built for update_feedback")
+                query = "SELECT * FROM USERS WHERE USERNAME = %s"
+                cursor.execute(query, (username,))
+                user = cursor.fetchone()
+                if user:
+                    feed_user = user[0]
+                    insert_query = "INSERT INTO FEEDBACKS (DETAIL,USER_ID_FK) VALUES (%s,%s)"
+                    DATA = (feedback,feed_user)
+                    cursor.execute(insert_query, DATA)                
 
             # Create a cursor to execute SQL queries
 
             # Update the feedback in the database
-            update_query = "UPDATE USER_DATA SET FEEDBACK = %s WHERE USERNAME = %s"
-            cursor.execute(update_query, (feedback, username))
+            # update_query = "UPDATE USERS SET FEEDBACK = %s WHERE USERNAME = %s"
+            # cursor.execute(update_query, (feedback, username))
 
             # Commit the changes and close the cursor
             connection.commit()
@@ -182,15 +211,15 @@ class CheckPassModel:
             # Create a cursor to execute SQL queries
 
             # Query the database to check if the user exists
-            query = "SELECT * FROM USER_DATA WHERE USERNAME = %s"
+            query = "SELECT * FROM USERS WHERE USERNAME = %s"
             cursor.execute(query, (username,))
             user = cursor.fetchone()
             if user:
                 # If the user exists, check if the hashed password matches
-                hashed_password_db = user[1]  # Assuming the hashed password is in the second column
+                hashed_password_db = user[3]  # Assuming the hashed password is in the second column
                 if bcrypt.checkpw(password.encode('utf-8'), hashed_password_db.encode('utf-8')):
                           
-                    query2 = "UPDATE USER_DATA SET USER_PASS = %s WHERE USERNAME = %s"
+                    query2 = "UPDATE USERS SET PASSWORD = %s WHERE USERNAME = %s"
                     cursor.execute(query2, (newpass, username))
                     cursor.close()
                     connection.commit()
@@ -214,31 +243,33 @@ class CheckPassModel2:
     # def __init__(self, db_config):
     #     self.db_config = db_config
 
-    def update_secret(self, username, new_secret, password):
+    def update_SECRET_ANSWER(self, username, new_SECRET_ANSWER, password):
         # db_connection = mysql.connector.connect(**self.db_config)
 
         connection=connection_pool.get_connection()
         cursor=connection.cursor()
         try:
             if connection:
-                print("Connection built for update_secret")
+                print("Connection built for update_SECRET_ANSWER")
             
             # Query the database to check if the user exists
-            query = "SELECT * FROM USER_DATA WHERE USERNAME = %s"
+            query = "SELECT * FROM USERS WHERE USERNAME = %s"
             cursor.execute(query, (username,))
             user = cursor.fetchone()
 
             if user:
                 # If the user exists, check if the hashed password matches
-                hashed_password_db = user[1] 
+                hashed_password_db = user[3] 
                 # print(hashed_password_db.encode('utf-8')) # Assuming the hashed password is in the second column
                 if bcrypt.checkpw(password.encode('utf-8'), hashed_password_db.encode('utf-8')):
                     
+                    
+
                     try:
                         # print("abc")
-                        # Update the secret in the database
-                        update_query = "UPDATE USER_DATA SET SECRET = %s WHERE USERNAME = %s"
-                        cursor.execute(update_query, (new_secret, username))
+                        # Update the SECRET_ANSWER in the database
+                        update_query = "UPDATE USERS SET SECRET_ANSWER = %s WHERE USERNAME = %s"
+                        cursor.execute(update_query, (new_SECRET_ANSWER, username))
 
                         # Commit the changes and close the cursor
                         connection.commit()
@@ -247,7 +278,7 @@ class CheckPassModel2:
                         return None  # Return None if the update is successful
 
                     except Exception as e:
-                         print(f"An error occurred during update_secret: {str(e)}")
+                         print(f"An error occurred during update_SECRET_ANSWER: {str(e)}")
 
                     # finally:
                     #     if connection or connection.is_connected():
@@ -257,8 +288,9 @@ class CheckPassModel2:
 
                 else:
                     # Return an error message if the password doesn't match
-                    
+                    print("Incorrect Password")
                     return "Incorrect password"
+
 
             else:
                 # Return an error message if the user doesn't exist
@@ -267,7 +299,7 @@ class CheckPassModel2:
                 return "User not found"
 
         except Exception as e:
-            print(f"An error occurred during update_secret: {str(e)}")
+            print(f"An error occurred during update_SECRET_ANSWER: {str(e)}")
 
         finally:
             if connection or connection.is_connected():

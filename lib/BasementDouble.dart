@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:photo_view/photo_view.dart';
+import 'package:sampleapp/Packages.dart';
 import 'dart:async';
 import 'api_urls.dart';
 import 'Settings.dart';
@@ -28,6 +29,7 @@ class BasementDouble extends StatefulWidget {
 class _BasementDoubleState extends State<BasementDouble> {
   List<Map<String, dynamic>> imagesData = [];
   bool isLoading = true;
+  List<String> selectedImages = [];
 
   @override
   void initState() {
@@ -91,6 +93,20 @@ class _BasementDoubleState extends State<BasementDouble> {
           id: planId,
           storey: storeyFloor,
         ),
+      ),
+    );
+  }
+
+  void _onSelectButtonPressed(List<String> images) {
+    setState(() {
+      selectedImages = List<String>.from(images);
+    });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            PackagesPage(user: widget.user, selectedImages: selectedImages),
       ),
     );
   }
@@ -299,7 +315,12 @@ class _BasementDoubleState extends State<BasementDouble> {
                               alignment: Alignment.bottomCenter,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Add your button action here
+                                  _onSelectButtonPressed([
+                                    Basement,
+                                    groundFloor,
+                                    firstFloor,
+                                    roofTop
+                                  ]);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,

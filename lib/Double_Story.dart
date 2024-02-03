@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:photo_view/photo_view.dart';
+import 'package:sampleapp/Packages.dart';
 import 'dart:async';
 import 'api_urls.dart';
 import 'Settings.dart';
@@ -28,6 +29,7 @@ class ImageListScreen2 extends StatefulWidget {
 class _ImageListScreenState extends State<ImageListScreen2> {
   List<Map<String, dynamic>> imagesData = [];
   bool isLoading = true;
+  List<String> selectedImages = [];
 
   @override
   void initState() {
@@ -91,6 +93,20 @@ class _ImageListScreenState extends State<ImageListScreen2> {
           id: planId,
           storey: storeyFloor,
         ),
+      ),
+    );
+  }
+
+  void _onSelectButtonPressed(List<String> images) {
+    setState(() {
+      selectedImages = List<String>.from(images);
+    });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            PackagesPage(user: widget.user, selectedImages: selectedImages),
       ),
     );
   }
@@ -222,7 +238,7 @@ class _ImageListScreenState extends State<ImageListScreen2> {
 
                       String ground = "Ground";
                       String first = "First";
-                      String Rooftop = "Rooftop";
+                      String roof = "Rooftop";
 
                       return Container(
                         margin: const EdgeInsets.only(top: 10, bottom: 20),
@@ -267,8 +283,7 @@ class _ImageListScreenState extends State<ImageListScreen2> {
                                   Expanded(
                                     child: GestureDetector(
                                       onTap: () {
-                                        _openZoomableImage(
-                                            RoofTop, id, Rooftop);
+                                        _openZoomableImage(RoofTop, id, roof);
                                       },
                                       child: Image.memory(
                                         RoofTop != null
@@ -284,7 +299,8 @@ class _ImageListScreenState extends State<ImageListScreen2> {
                               alignment: Alignment.bottomCenter,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Add your button action here
+                                  _onSelectButtonPressed(
+                                      [groundFloor, firstFloor, RoofTop]);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,

@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:sampleapp/Settings.dart';
+import 'package:sampleapp/api_urls.dart';
 // import 'package:sampleapp/Profile.dart';
 
 // class MyApp extends StatelessWidget {
@@ -28,7 +29,7 @@ class FeedbackPage extends StatefulWidget {
 }
 
 class _FeedbackPageState extends State<FeedbackPage> {
-  double _rating = 0.0;
+  //double _rating = 0.0;
   final TextEditingController _Feedback_Text = TextEditingController();
   // Initial rating value
 
@@ -93,8 +94,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
     String username = widget.user;
     String feed = _Feedback_Text.text;
 
-    const String apiUrl = 'http://192.168.18.30:5000/send_feed';
     //const String apiUrl = 'http://10.0.2.2:5000/send_feed';
+    const String apiUrl = ApiUrls.sendfeed;
 
     final response = await http.post(
       Uri.parse(apiUrl),
