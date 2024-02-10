@@ -17,7 +17,8 @@ class GreyMaterials extends StatefulWidget {
 }
 
 class _GreyMaterialsState extends State<GreyMaterials> {
-  List<Map<String, dynamic>> greyData = []; // Store fetched data here
+  List<Map<String, dynamic>> greyData = [];
+  List<Map<String, dynamic>> filteredData = [];
 
   @override
   void initState() {
@@ -26,13 +27,10 @@ class _GreyMaterialsState extends State<GreyMaterials> {
   }
 
   Future<void> fetchGreyData() async {
-    // Replace this URL with your backend API endpoint
-
     try {
       final response = await http.get(Uri.parse('${ApiUrls.baseUrl}/get_grey'));
 
       if (response.statusCode == 200) {
-        // Parse the JSON response
         final List<Map<String, dynamic>> data =
             List<Map<String, dynamic>>.from(json.decode(response.body));
 
@@ -40,11 +38,9 @@ class _GreyMaterialsState extends State<GreyMaterials> {
           greyData = data;
         });
       } else {
-        // Handle error
         debugPrint('Failed to fetch data: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle exception
       debugPrint('Error fetching data: $e');
     }
   }
@@ -60,7 +56,6 @@ class _GreyMaterialsState extends State<GreyMaterials> {
         }),
       );
       if (response.statusCode == 200) {
-        // ignore: use_build_context_synchronously
         showDialog(
             context: context,
             builder: (context) {
@@ -78,23 +73,18 @@ class _GreyMaterialsState extends State<GreyMaterials> {
                 ],
               );
             });
-
-        // Parse the JSON response
       } else {
-        // Handle error
         debugPrint('Failed to fetch data: ${response.statusCode}');
       }
     } catch (e) {
-      // Handle exception
       debugPrint('Error fetching data: $e');
     }
   }
 
-  int selectedRowIndex = -1; //Track the selected row
+  int selectedRowIndex = -1;
   final TextEditingController changedrate = TextEditingController();
 
   bool isValidNumber(String input) {
-    // // Use a regular expression to check if the input is a valid number
     RegExp regex = RegExp(r'^\d+(\.\d{0,1})?$');
     return regex.hasMatch(input);
   }
@@ -108,23 +98,21 @@ class _GreyMaterialsState extends State<GreyMaterials> {
             return IconButton(
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.of(context).pop(); // Navigate back
+                Navigator.of(context).pop();
               },
             );
           },
         ),
         backgroundColor: const Color.fromARGB(255, 251, 18, 1),
-        //automaticallyImplyLeading: false,
         title: const Text("Grey Structure Materials"),
         actions: [
           PopupMenuButton<int>(
             icon: const Icon(
               Icons.menu,
-              color: Colors.white, // Change the icon color
-              size: 32, // Change the icon size
+              color: Colors.white,
+              size: 32,
             ),
             onSelected: (value) {
-              // Navigate to different screens based on the selected option
               if (value == 2) {
                 Navigator.push(
                   context,
@@ -144,14 +132,13 @@ class _GreyMaterialsState extends State<GreyMaterials> {
                         actions: <Widget>[
                           TextButton(
                             onPressed: () {
-                              Navigator.of(context).pop(false); // Cancel logout
+                              Navigator.of(context).pop(false);
                             },
                             child: const Text('Cancel'),
                           ),
                           TextButton(
                             onPressed: () {
                               Navigator.popAndPushNamed(context, '/logout');
-                              // Perform logout actions here
                             },
                             child: const Text('Logout'),
                           ),
@@ -164,14 +151,14 @@ class _GreyMaterialsState extends State<GreyMaterials> {
               PopupMenuItem<int>(
                 child: ListTile(
                   leading: const Icon(
-                    Icons.account_circle, // Customize the leading icon
-                    color: Colors.blue, // Change the icon color
+                    Icons.account_circle,
+                    color: Colors.blue,
                   ),
                   title: Text(
                     widget.user,
                     style: const TextStyle(
-                      fontSize: 24, // Change the font size
-                      color: Colors.black, // Change the text color
+                      fontSize: 24,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -180,14 +167,14 @@ class _GreyMaterialsState extends State<GreyMaterials> {
                 value: 2,
                 child: ListTile(
                   leading: Icon(
-                    Icons.settings, // Customize the leading icon
-                    color: Colors.green, // Change the icon color
+                    Icons.settings,
+                    color: Colors.green,
                   ),
                   title: Text(
                     'Settings',
                     style: TextStyle(
-                      fontSize: 18, // Change the font size
-                      color: Colors.black, // Change the text color
+                      fontSize: 18,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -196,14 +183,14 @@ class _GreyMaterialsState extends State<GreyMaterials> {
                 value: 3,
                 child: ListTile(
                   leading: Icon(
-                    Icons.logout, // Customize the leading icon
-                    color: Colors.red, // Change the icon color
+                    Icons.logout,
+                    color: Colors.red,
                   ),
                   title: Text(
                     'Log out',
                     style: TextStyle(
-                      fontSize: 18, // Change the font size
-                      color: Colors.black, // Change the text color
+                      fontSize: 18,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -212,135 +199,162 @@ class _GreyMaterialsState extends State<GreyMaterials> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Enable horizontal scrolling
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical, // Enable vertical scrolling
-          child: DataTable(
-            dataRowMinHeight: 40,
-            columns: const [
-              DataColumn(label: Text('Material Name')),
-              DataColumn(label: Text('Factor')),
-              DataColumn(label: Text('Rate')),
-              DataColumn(label: Text('Edit')),
-            ],
-            rows: greyData.asMap().entries.map((entry) {
-              final int index = entry.key;
-              final Map<String, dynamic> rowData = entry.value;
-
-              return DataRow.byIndex(
-                index: index,
-                selected: selectedRowIndex == index,
-                onSelectChanged: (isSelected) {
-                  setState(() {
-                    selectedRowIndex = isSelected! ? index : -1;
-                  });
-                },
-                cells: [
-                  DataCell(
-                    Container(
-                      width: 180,
-                      child: Text(rowData['Material_Name']),
-                    ),
-                  ),
-                  DataCell(
-                    Container(
-                      width: 50,
-                      child: Text(rowData['Factor'].toString()),
-                    ),
-                  ),
-                  DataCell(
-                    Container(
-                      width: 80,
-                      child: Text(rowData['Rate'].toString()),
-                    ),
-                  ),
-                  DataCell(
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromARGB(255, 60, 71, 194)),
-                      onPressed: () {
-                        // Implement your edit logic here
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                  'Edit Rate for ${rowData['Material_Name']}'),
-                              content: TextFormField(
-                                controller: changedrate,
-                                decoration: const InputDecoration(
-                                  hintText: "Upto one Decimal Place",
-                                ),
-                                keyboardType: TextInputType.number,
-                              ),
-                              // Add text fields or input widgets to get the new rate
-                              actions: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(
-                                          255, 60, 71, 194)),
-                                  onPressed: () {
-                                    debugPrint(changedrate.text.toString());
-                                    bool vflag =
-                                        isValidNumber(changedrate.text);
-                                    debugPrint(vflag.toString());
-                                    if (vflag.toString() == "false") {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              title: const Text(
-                                                  'Invlaid Material Rate'),
-                                              content: const Text(
-                                                  'Field must not be empty & Number should have at most one decimal place'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop(
-                                                        false); // Cancel logout
-                                                  },
-                                                  child: const Text('OK'),
-                                                ),
-                                              ],
-                                            );
-                                          });
-                                    } else {
-                                      updaterate(
-                                          rowData['Material_Name'].toString(),
-                                          changedrate.text.toString());
-                                      changedrate.clear();
-                                      Navigator.pop(context);
-                                      fetchGreyData();
-                                      setState(() {});
-                                    }
-                                  },
-                                  child: const Text('Save'),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color.fromARGB(
-                                          255, 177, 47, 38)),
-                                  onPressed: () {
-                                    changedrate.clear();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Cancel'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      child: const Text('Edit'),
-                    ),
-                  ),
-                ],
-              );
-            }).toList(),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  filteredData = greyData
+                      .where((data) => data['Material_Name']
+                          .toLowerCase()
+                          .contains(value.toLowerCase()))
+                      .toList();
+                });
+              },
+              decoration: InputDecoration(
+                labelText: 'Search Material',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+            ),
           ),
-        ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: DataTable(
+                  dataRowMinHeight: 40,
+                  columns: const [
+                    DataColumn(label: Text('Material Name')),
+                    DataColumn(label: Text('Factor')),
+                    DataColumn(label: Text('Rate')),
+                    DataColumn(label: Text('Edit')),
+                  ],
+                  rows: (filteredData.isEmpty ? greyData : filteredData)
+                      .asMap()
+                      .entries
+                      .map((entry) {
+                    final int index = entry.key;
+                    final Map<String, dynamic> rowData = entry.value;
+
+                    return DataRow.byIndex(
+                      index: index,
+                      selected: selectedRowIndex == index,
+                      onSelectChanged: (isSelected) {
+                        setState(() {
+                          selectedRowIndex = isSelected! ? index : -1;
+                        });
+                      },
+                      cells: [
+                        DataCell(
+                          Container(
+                            width: 180,
+                            child: Text(rowData['Material_Name']),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 50,
+                            child: Text(rowData['Factor'].toString()),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 80,
+                            child: Text(rowData['Rate'].toString()),
+                          ),
+                        ),
+                        DataCell(
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    const Color.fromARGB(255, 60, 71, 194)),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                        'Edit Rate for ${rowData['Material_Name']}'),
+                                    content: TextFormField(
+                                      controller: changedrate,
+                                      decoration: const InputDecoration(
+                                        hintText: "Upto one Decimal Place",
+                                      ),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                    actions: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 60, 71, 194)),
+                                        onPressed: () {
+                                          bool vflag =
+                                              isValidNumber(changedrate.text);
+                                          if (vflag.toString() == "false") {
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Invlaid Material Rate'),
+                                                    content: const Text(
+                                                        'Field must not be empty & Number should have at most one decimal place'),
+                                                    actions: <Widget>[
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop(false);
+                                                        },
+                                                        child: const Text('OK'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                });
+                                          } else {
+                                            updaterate(
+                                                rowData['Material_Name']
+                                                    .toString(),
+                                                changedrate.text.toString());
+                                            changedrate.clear();
+                                            Navigator.pop(context);
+                                            fetchGreyData();
+                                            setState(() {});
+                                          }
+                                        },
+                                        child: const Text('Save'),
+                                      ),
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 177, 47, 38)),
+                                        onPressed: () {
+                                          changedrate.clear();
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Cancel'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: const Text('Edit'),
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

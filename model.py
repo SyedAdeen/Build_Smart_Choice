@@ -21,7 +21,7 @@ class UserModel:
             # db_connection = mysql.connector.connect(**self.db_config)
             # cursor = db_connection.cursor()
            
-            cursor.execute('SELECT * FROM USERS WHERE username = %s', (username,))
+            cursor.execute('SELECT * FROM USERS WHERE username = %s and is_active="Y"', (username,))
             user = cursor.fetchone()
             cursor.close()
             return user
@@ -44,10 +44,10 @@ class UserModel:
             print("Connection built for check_user_email")
         
         try:
-            print(emailaddr)
+            # print(emailaddr)
             cursor.execute('SELECT * FROM USERS WHERE EMAIL_ADDRESS = %s', (emailaddr,))
             user = cursor.fetchone()
-            print(user)
+            #print(user)
 
             # Consume the result set
             for _ in cursor.fetchall():
@@ -155,6 +155,58 @@ class ForgotModel:
                 connection.close()
                 print("Connection is closed")
 
+class GetUserModel:
+    def get_all_users(self):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for get_all_users")
+
+                select_query = """select username, email_address, IS_PREMIUM_USER 
+                                    from users where role="USER" and is_active='Y' """
+
+                with connection.cursor(dictionary=True) as cursor:
+                    cursor.execute(select_query)
+                    all_users = cursor.fetchall()
+
+                return all_users
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+
+            return []
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_all_users")
+
+    def remove_users(self,id):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for rmeove_user")
+
+                update_query = "update users set is_active='N' WHERE USERNAME = %s"
+                with connection.cursor() as cursor:
+                    cursor.execute(update_query, (id,))
+                    connection.commit()
+
+                return True
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for remove_users")
+
+        
+
 
 class FeedbackModel:
     # def __init__(self, ):
@@ -195,6 +247,61 @@ class FeedbackModel:
                 cursor.close()
                 connection.close()
                 print("Connection is closed")
+
+
+    def get_all_feeds(self):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for get_all_feeds")
+
+                select_query = """SELECT users.USERNAME,users.EMAIL_ADDRESS, feedbacks.FEEDBACK_ID,feedbacks.detail, feedbacks.date_time, feedbacks.Action 
+                                FROM users
+                                INNER JOIN feedbacks ON 
+                                users.USER_ID = feedbacks.USER_ID_FK order by feedbacks.DATE_TIME desc"""
+                with connection.cursor(dictionary=True) as cursor:
+                    cursor.execute(select_query)
+                    all_feedbacks = cursor.fetchall()
+
+                return all_feedbacks
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+
+            return []
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for fetch_grey_materials")
+
+    def action_update(self,action,id):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for action_update")
+
+                update_query = "UPDATE feedbacks SET action = %s WHERE feedback_id = %s"
+                with connection.cursor() as cursor:
+                    cursor.execute(update_query, (action, id))
+                    connection.commit()
+
+                return True
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for action_update")
+
+        
+
+        
 
 class CheckPassModel:
     # def __init__(self):

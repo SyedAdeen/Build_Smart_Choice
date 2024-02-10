@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:sampleapp/AdminHome.dart';
 import 'package:sampleapp/SignUp_Page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -182,6 +183,7 @@ class _FirstScreenState extends State<FirstScreen> {
   Future<void> _login() async {
     final String username = _usernameController.text;
     final String password = _passwordController.text;
+    String role = '';
 
     const String apiUrl = ApiUrls.login;
 
@@ -190,9 +192,12 @@ class _FirstScreenState extends State<FirstScreen> {
 
     final response = await http.post(
       Uri.parse(apiUrl),
-      body: json.encode({'username': username, 'password': password}),
+      body: json
+          .encode({'username': username, 'password': password, "role": role}),
       headers: {'Content-Type': 'application/json'},
     );
+    final Map<String, dynamic> responseData = json.decode(response.body);
+
     debugPrint('Response body: ${response.body}');
 
     if (response.statusCode == 200) {
@@ -200,16 +205,30 @@ class _FirstScreenState extends State<FirstScreen> {
 
       final String loggedInUsername = data['username'];
       String result = capitalizeWords(loggedInUsername);
+      role = responseData['role'];
 
-      setState(() {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomePage(
-                      username: result,
-                    )));
-      });
-    } else {
+      role = role.toUpperCase();
+
+      if (role == "USER") {
+        setState(() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => HomePage(
+                        username: result,
+                      )));
+        });
+      } else if (role == "ADMIN") {
+        setState(() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AdminHome(
+                        user: result,
+                      )));
+        });
+      }
+    } else if (response.statusCode == 401) {
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

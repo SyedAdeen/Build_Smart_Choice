@@ -1,7 +1,7 @@
 # controllers.py
 from flask import jsonify, request
-from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel
-from view import CheckPassView, FeedbackView, ForgotView, GreyView1, GreyView2, ImageView, LoginView, SignupView, VerifyUserView
+from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
+from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetUserView, GreyView1, GreyView2, ImageView, LoginView, SignupView, VerifyUserView
 import bcrypt
 
 class LoginController:
@@ -19,9 +19,10 @@ class LoginController:
                 return jsonify({"message": "Username and password are required"}), 400
 
             user = self.user_model.get_user_by_username(username)
-            role=user[6]
 
             if user and self.user_auth_model.check_password(password, user[3]):
+                role=user[6]
+
                 return LoginView.success_response(username,role)
             else:
                 return LoginView.failure_response()
@@ -76,7 +77,103 @@ class SignupController:
 
         except Exception as e:
             return SignupView.failure_response(str(e))
+
+
+class FeedbackController:
+    def __init__(self):
+        self.feedback_model = FeedbackModel()
+
+    def update_feedback(self):
+        try:
+            data = request.json
+            username = data.get('username')
+            feedback = data.get('feedback')
+
+            if not username or not feedback:
+                return jsonify(FeedbackView.failure_response()), 400
+
+            self.feedback_model.update_feedback(username, feedback)
+
+            return jsonify(FeedbackView.success_response(username, feedback)), 200
+
+        except Exception as e:
+            return jsonify(FeedbackView.error_response(str(e))), 500
         
+    def getFeedbacks(self):
+        try:
+            # Assuming you have a method in your model to fetch Feedbacks
+            feedbacks=self.feedback_model.get_all_feeds()
+            
+            return GetFeedView.success_response(feedbacks)
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+    def update_action(self):
+        try:
+            # Assuming you have a method in your model to update the rate
+            data = request.get_json()
+            
+
+            action = data.get('action')
+            id = data.get('feedback_id')
+            print(action)
+            print(id)
+            # Update the rate in the model
+            success = self.feedback_model.action_update(action,id)
+
+            if success:
+                return FeedbackView.success_update_action()
+            else:
+                return FeedbackView.error_response()
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return ImageView.error_response()
+
+
+
+class GetUserController:
+        
+    def __init__(self):
+        self.getuser_model=GetUserModel()
+
+
+    def getusers(self):
+        try:
+            # Assuming you have a method in your model to fetch Feedbacks
+            fetched_users=self.getuser_model.get_all_users()
+            
+            return GetUserView.success_response(fetched_users)
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+    def remove_users(self):
+        try:
+            # Assuming you have a method in your model to update the rate
+            data = request.get_json()
+            
+            id = data.get('username')
+            print(id)
+            # Update the rate in the model
+            success = self.getuser_model.remove_users(id)
+            print(success)
+
+            if success:
+                return GetUserView.success_update_action()
+            else:
+                return GetUserView.error_response()
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return ImageView.error_response()
+
+
+
+
+
+
 class VerifyUserController:
     def __init__(self):
         self.verify_user_model = VerifyUserModel()
@@ -85,12 +182,16 @@ class VerifyUserController:
         try:
             data = request.json
             username = data.get('username')
-            SECRET_ANSWER = data.get('SECRET_ANSWER')
+            SECRET_ANSWER = data.get('secret')
+            print(SECRET_ANSWER)
+            print(username)
+
 
             if not username or not SECRET_ANSWER:
                 return VerifyUserView.failure_response(), 400
 
             user = self.verify_user_model.verify_user(username, SECRET_ANSWER)
+
 
             if user:
                 return VerifyUserView.success_response(username, SECRET_ANSWER)
@@ -123,25 +224,7 @@ class ForgotController:
             return jsonify(ForgotView.error_response(str(e))), 500
         
 
-class FeedbackController:
-    def __init__(self):
-        self.feedback_model = FeedbackModel()
 
-    def update_feedback(self):
-        try:
-            data = request.json
-            username = data.get('username')
-            feedback = data.get('feedback')
-
-            if not username or not feedback:
-                return jsonify(FeedbackView.failure_response()), 400
-
-            self.feedback_model.update_feedback(username, feedback)
-
-            return jsonify(FeedbackView.success_response(username, feedback)), 200
-
-        except Exception as e:
-            return jsonify(FeedbackView.error_response(str(e))), 500
         
 
 class CheckPassController:

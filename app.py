@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from controller import CheckPassController, CheckPassController2, FeedbackController, ForgotController, GreyMaterialsController, ImageController, LoginController, SignupController, VerifyUserController
+from controller import CheckPassController, CheckPassController2, FeedbackController, ForgotController, GreyMaterialsController, ImageController, LoginController, SignupController, VerifyUserController, GetUserController
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +21,7 @@ check_pass_controller = CheckPassController()
 check_pass_controller2 = CheckPassController2()
 image_controller=ImageController()
 Grey_Controller = GreyMaterialsController()
+Get_User_controller = GetUserController()
 
 
 
@@ -82,6 +83,22 @@ def get_grey():
 @app.route('/updaterate', methods=['PUT'])
 def updaterate():
     return Grey_Controller.update_rate()
+
+@app.route('/get_all_feeds', methods=['GET'])
+def get_all_feeds():
+    return feedback_controller.getFeedbacks()
+
+@app.route('/update_action', methods=['PUT'])
+def update_action():
+    return feedback_controller.update_action()
+
+@app.route('/get_users', methods=['Get'])
+def get_users():
+    return Get_User_controller.getusers()
+
+@app.route('/remove_users', methods=['PUT'])
+def remove_users():
+    return Get_User_controller.remove_users()
 
 
 if __name__ == '__main__':

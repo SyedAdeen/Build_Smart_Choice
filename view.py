@@ -67,9 +67,44 @@ class FeedbackView:
         return {"message": "Error updating feedback"}
 
     @staticmethod
+    def success_update_action():
+        return {"message": "Successful updating action"},200
+
+    @staticmethod
+    def failed_update_action():
+        return {"message": "Failed to update action"}
+
+    @staticmethod
     def error_response(error_message):
         return {"error": error_message}
+
+
+class GetUserView:
+    @staticmethod
+    def success_response(users):
+        return jsonify(users)
     
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500  
+    
+    @staticmethod
+    def success_update_action():
+        return {"message": "Successful Removing User"},200
+
+    @staticmethod
+    def failed_update_action():
+        return {"message": "Failed to Remove User"}
+
+
+class GetFeedView:
+    @staticmethod
+    def success_response(feedbacks):
+        return jsonify(feedbacks)
+    
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500  
 
 class CheckPassView:
     @staticmethod
