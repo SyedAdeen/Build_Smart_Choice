@@ -541,6 +541,36 @@ class ImageModel:
                 print("Connection is closed")
 
 class GreyMaterialsModel:
+
+    def update_scraped(self,prices):
+        try:
+            connection = connection_pool.get_connection()
+            cursor=connection.cursor()
+
+            if connection.is_connected():
+                print("Connection established for update_scraped")
+                for i in range(1,32):
+                    if(prices[i-1]>0): 
+                        update_query = "UPDATE Grey_Materials SET Rate = %s WHERE Material_ID = %s"
+                        with connection.cursor() as cursor:
+                            cursor.execute(update_query, (prices[i-1],i))
+                    
+                connection.commit()   
+                
+                cursor.close()
+                print("Data Updated In DB")
+                return 1
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return 0
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for update_scraped")
+
+
     def fetch_grey_materials(self):
         try:
             connection = connection_pool.get_connection()
@@ -548,7 +578,7 @@ class GreyMaterialsModel:
             if connection.is_connected():
                 print("Connection established for fetch_grey_materials")
 
-                select_query = "SELECT Material_Name, Factor, Rate FROM Grey_Materials"
+                select_query = "SELECT Material_Name, Factor, Rate,Brand FROM Grey_Materials"
                 with connection.cursor(dictionary=True) as cursor:
                     cursor.execute(select_query)
                     grey_materials = cursor.fetchall()

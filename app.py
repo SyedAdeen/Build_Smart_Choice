@@ -100,6 +100,10 @@ def get_users():
 def remove_users():
     return Get_User_controller.remove_users()
 
+@app.route('/scrap_data', methods=['PUT'])
+def scrap_data():
+    return Grey_Controller.scrap_data()
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

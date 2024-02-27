@@ -3,6 +3,7 @@ from flask import jsonify, request
 from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
 from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetUserView, GreyView1, GreyView2, ImageView, LoginView, SignupView, VerifyUserView
 import bcrypt
+from grey_scrap import main
 
 class LoginController:
     def __init__(self):
@@ -338,6 +339,24 @@ class ImageController:
 class GreyMaterialsController:
     def __init__(self):
         self.grey_materials_model = GreyMaterialsModel()
+
+    def scrap_data(self):
+        try:
+            prices = main()
+            # print (prices)
+
+            ans=self.grey_materials_model.update_scraped(prices)
+            if(ans==1):
+
+                return GreyView2.success_response("Data has been updated successfully")
+            else:
+                return GreyView2.error_response("Unable to update Data")
+
+
+        except Exception as e:
+            print(f"Error: {e}")
+
+        
 
     def fetch_grey_materials(self):
         try:
