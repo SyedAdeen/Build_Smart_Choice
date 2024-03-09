@@ -1,9 +1,11 @@
 # controllers.py
 from flask import jsonify, request
 from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
-from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetUserView, GreyView1, GreyView2, ImageView, LoginView, SignupView, VerifyUserView
+from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetGreyMaterialCost, GetUserView, GreyView1, GreyView2, ImageView, LoginView, SignupView, VerifyUserView
 import bcrypt
 from grey_scrap import main
+import locale
+
 
 class LoginController:
     def __init__(self):
@@ -390,3 +392,186 @@ class GreyMaterialsController:
             print(f"Error: {e}")
             return ImageView.error_response()
     
+    def getsinglestory(self):
+        try:
+            area=request.args['area']
+            id=request.args['set']
+            print(area)
+            print(id)
+
+            grey_materials = self.grey_materials_model.get_singlestory_materials(area, id)
+
+            grey_cost = self.grey_materials_model.get_singlestory_greycost(area, id)
+
+            print(grey_materials)
+            print(grey_cost)
+
+            # Initialize the sum
+            total_cost = 0
+
+            # Iterate over the list and add each value to the sum
+            for cost_tuple in grey_cost:
+                for cost_value in cost_tuple:
+                    total_cost += cost_value
+            total_cost=round(total_cost,0)
+
+
+            # Set the locale to Indian English
+            locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+            # Define the number
+
+            # Format the number
+            formatted_number = locale.format_string("%.2f", total_cost, grouping=True)
+
+
+            print(formatted_number)
+
+            if(formatted_number!="" and grey_materials!=[]):
+                return GetGreyMaterialCost.success_response(grey_materials, formatted_number)
+            else:
+                return GetGreyMaterialCost.error_response()
+
+
+        except Exception as e:
+                    print(f"Error: {e}")
+                    return GetGreyMaterialCost.error_response()
+
+
+    def getsinglebasement(self):
+        try:
+            area=request.args['area']
+            id=request.args['set']
+            print(area)
+            print(id)
+
+            grey_materials = self.grey_materials_model.get_singlebasement_materials(area, id)
+
+            grey_cost = self.grey_materials_model.get_singlebasement_greycost(area, id)
+
+            print(grey_materials)
+            print(grey_cost)
+
+            # Initialize the sum
+            total_cost = 0
+
+            # Iterate over the list and add each value to the sum
+            for cost_tuple in grey_cost:
+                for cost_value in cost_tuple:
+                    total_cost += cost_value
+            total_cost=round(total_cost,0)
+
+
+            # Set the locale to Indian English
+            locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+            # Define the number
+
+            # Format the number
+            formatted_number = locale.format_string("%.2f", total_cost, grouping=True)
+
+
+            print(formatted_number)
+
+            if(formatted_number!="" and grey_materials!=[]):
+                return GetGreyMaterialCost.success_response(grey_materials, formatted_number)
+            else:
+                return GetGreyMaterialCost.error_response()
+
+
+        except Exception as e:
+                    print(f"Error: {e}")
+                    return GetGreyMaterialCost.error_response()
+
+
+
+    def getdoublestory(self):
+        try:
+            area=request.args['area']
+            id=request.args['set']
+            print(area)
+            print(id)
+
+            grey_materials = self.grey_materials_model.get_doublestory_materials(area, id)
+
+            grey_cost = self.grey_materials_model.get_doublestory_greycost(area, id)
+
+            print(grey_materials)
+            print(grey_cost)
+
+            # Initialize the sum
+            total_cost = 0
+
+            # Iterate over the list and add each value to the sum
+            for cost_tuple in grey_cost:
+                for cost_value in cost_tuple:
+                    total_cost += cost_value
+            total_cost=round(total_cost,0)
+
+
+            # Set the locale to Indian English
+            locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+            # Define the number
+
+            # Format the number
+            formatted_number = locale.format_string("%.2f", total_cost, grouping=True)
+
+
+            print(formatted_number)
+
+            if(formatted_number!="" and grey_materials!=[]):
+                return GetGreyMaterialCost.success_response(grey_materials, formatted_number)
+            else:
+                return GetGreyMaterialCost.error_response()
+
+
+        except Exception as e:
+                    print(f"Error: {e}")
+                    return GetGreyMaterialCost.error_response() 
+
+   
+    def getdoublebasement(self):
+        try:
+            area=request.args['area']
+            id=request.args['set']
+            print(area)
+            print(id)
+
+            grey_materials = self.grey_materials_model.get_doublebasement_materials(area, id)
+
+            grey_cost = self.grey_materials_model.get_doublebasement_greycost(area, id)
+
+            print(grey_materials)
+            print(grey_cost)
+
+            # Initialize the sum
+            total_cost = 0
+
+            # Iterate over the list and add each value to the sum
+            for cost_tuple in grey_cost:
+                for cost_value in cost_tuple:
+                    total_cost += cost_value
+            total_cost=round(total_cost,0)
+
+
+            # Set the locale to Indian English
+            locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+            # Define the number
+
+            # Format the number
+            formatted_number = locale.format_string("%.2f", total_cost, grouping=True)
+
+
+            print(formatted_number)
+
+            if(formatted_number!="" and grey_materials!=[]):
+                return GetGreyMaterialCost.success_response(grey_materials, formatted_number)
+            else:
+                return GetGreyMaterialCost.error_response()
+
+
+        except Exception as e:
+                    print(f"Error: {e}")
+                    return GetGreyMaterialCost.error_response() 

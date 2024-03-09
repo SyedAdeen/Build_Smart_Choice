@@ -8,18 +8,30 @@ import 'package:printing/printing.dart';
 import 'package:sampleapp/Settings.dart';
 
 class Pack2 extends StatefulWidget {
-  final String user;
+  String user;
   List<String> selectedImages;
+  final dynamic grey_data_pack;
 
-  Pack2({Key? key, required this.user, required this.selectedImages})
-      : super(key: key);
+  Pack2({
+    Key? key,
+    required this.user,
+    required this.selectedImages,
+    required this.grey_data_pack,
+  }) : super(key: key);
 
   @override
   State<Pack2> createState() => _Pack1State();
 }
 
 class _Pack1State extends State<Pack2> {
-  List<List<dynamic>> tableRows = generateRows(20);
+  late List<List<dynamic>> tableRows;
+
+  @override
+  void initState() {
+    super.initState();
+    // debugPrint(widget.grey_data_pack.toString());
+    tableRows = generateRows(widget.grey_data_pack);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +39,7 @@ class _Pack1State extends State<Pack2> {
       user: widget.user,
       selectedImages: widget.selectedImages,
       tableRows: tableRows,
+      grey_data_pack: widget.grey_data_pack,
       updateTable: (newRows) {
         setState(() {
           tableRows = newRows;
@@ -42,14 +55,16 @@ class Package1Page extends StatefulWidget {
   List<String> selectedImages;
   List<List<dynamic>> tableRows;
   ValueChanged<List<List<dynamic>>> updateTable;
+  final dynamic grey_data_pack;
 
-  Package1Page({
-    Key? key,
-    required this.user,
-    required this.selectedImages,
-    required this.tableRows,
-    required this.updateTable,
-  }) : super(key: key);
+  Package1Page(
+      {Key? key,
+      required this.user,
+      required this.selectedImages,
+      required this.tableRows,
+      required this.updateTable,
+      required this.grey_data_pack})
+      : super(key: key);
 
   @override
   State<Package1Page> createState() => _Package1PageState();
@@ -100,16 +115,24 @@ class _Package1PageState extends State<Package1Page> {
         build: (pw.Context context) {
           return [
             pw.Container(
-              padding: pw.EdgeInsets.all(10.0),
+              padding: pw.EdgeInsets.all(1.0),
+              // ignore: deprecated_member_use
               child: pw.Table.fromTextArray(
                 context: context,
                 cellAlignment: pw.Alignment.center,
                 cellStyle: pw.TextStyle(
                   fontWeight: pw.FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 8,
                 ),
                 headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                headers: ['Material', 'Cost', 'Quantity', 'Price'],
+                headers: [
+                  'Material',
+                  'Brand',
+                  'Factor',
+                  'Rate',
+                  'Quantity',
+                  'Cost'
+                ],
                 data: tableRows,
               ),
             ),
@@ -225,7 +248,80 @@ class _Package1PageState extends State<Package1Page> {
         ],
       ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
+      // body: SingleChildScrollView(
+      //   // scrollDirection: Axis.horizontal,
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(20.0),
+      //     child: Column(
+      //       crossAxisAlignment: CrossAxisAlignment.start,
+      //       children: [
+      //         Container(
+      //           margin: const EdgeInsets.only(left: 40, right: 30),
+      //           height: 350,
+      //           child: ListView.builder(
+      //             scrollDirection: Axis.horizontal,
+      //             itemCount: widget.selectedImages.length,
+      //             itemBuilder: (context, index) {
+      //               return Image.memory(
+      //                 // ignore: unnecessary_null_comparison
+      //                 widget.selectedImages[index] != null
+      //                     ? base64Decode(widget.selectedImages[index])
+      //                     : Uint8List(0),
+      //               );
+      //             },
+      //           ),
+      //         ),
+      //         const SizedBox(height: 30),
+      //         // const Text(
+      //         //   'Package No. 1',
+      //         //   style: TextStyle(
+      //         //     fontSize: 40,
+      //         //     color: Color.fromARGB(255, 0, 0, 0),
+      //         //   ),
+      //         // ),
+      //         const Divider(
+      //           thickness: 2.0,
+      //           color: Color.fromARGB(255, 0, 0, 0),
+      //         ),
+      //         const SizedBox(height: 30),
+      //         ElevatedButton(
+      //           onPressed: () => _displayPdf(context),
+      //           child: const Text("Save PDF"),
+      //         ),
+      //         SingleChildScrollView(
+      //           scrollDirection: Axis.horizontal,
+      //           child: DataTable(
+      //             columns: [
+      //               DataColumn(label: Text('Material')),
+      //               DataColumn(label: Text('Brand')),
+      //               DataColumn(label: Text('Factor')),
+      //               DataColumn(label: Text('Rate')),
+      //               // Uncomment to add more columns
+      //               DataColumn(label: Text('Quantity')),
+      //               DataColumn(label: Text('Cost')),
+      //             ],
+      //             rows: widget.tableRows
+      //                 .map(
+      //                   (row) => DataRow(
+      //                     cells: row
+      //                         .map(
+      //                           (item) => DataCell(
+      //                             Text(item.toString()),
+      //                           ),
+      //                         )
+      //                         .toList(),
+      //                   ),
+      //                 )
+      //                 .toList(),
+      //           ),
+      //         ),
+      //         const SizedBox(height: 30),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
+        // scrollDirection: Axis.horizontal,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -248,13 +344,6 @@ class _Package1PageState extends State<Package1Page> {
                 ),
               ),
               const SizedBox(height: 30),
-              // const Text(
-              //   'Package No. 1',
-              //   style: TextStyle(
-              //     fontSize: 40,
-              //     color: Color.fromARGB(255, 0, 0, 0),
-              //   ),
-              // ),
               const Divider(
                 thickness: 2.0,
                 color: Color.fromARGB(255, 0, 0, 0),
@@ -264,26 +353,52 @@ class _Package1PageState extends State<Package1Page> {
                 onPressed: () => _displayPdf(context),
                 child: const Text("Save PDF"),
               ),
-              DataTable(
-                columns: const [
-                  DataColumn(label: Text('Material')),
-                  DataColumn(label: Text('Cost')),
-                  DataColumn(label: Text('Quantity')),
-                  DataColumn(label: Text('Price')),
-                ],
-                rows: widget.tableRows
-                    .map(
-                      (row) => DataRow(
-                        cells: row
-                            .map(
-                              (item) => DataCell(
-                                Text(item.toString()),
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    )
-                    .toList(),
+              const SizedBox(
+                  height: 20), // Add some space between button and heading
+              const Text(
+                'Grey Structure Cost', // Heading text
+                style: TextStyle(
+                  fontSize: 24, // Adjust the font size as needed
+                  fontWeight: FontWeight.bold, // Make the heading bold
+                ),
+              ),
+              const SizedBox(
+                  height: 10), // Add some space between heading and total cost
+              Text(
+                'Total Cost: ${widget.grey_data_pack[1]}', // Display total cost
+                style: const TextStyle(
+                  fontSize: 18, // Adjust the font size as needed
+                  fontWeight: FontWeight.bold, // Make the total cost bold
+                ),
+              ),
+              const SizedBox(
+                  height:
+                      20), // Add some space between total cost and DataTable
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columns: const [
+                    DataColumn(label: Text('Material')),
+                    DataColumn(label: Text('Brand')),
+                    DataColumn(label: Text('Factor')),
+                    DataColumn(label: Text('Rate')),
+                    DataColumn(label: Text('Quantity')),
+                    DataColumn(label: Text('Cost')),
+                  ],
+                  rows: widget.tableRows
+                      .map(
+                        (row) => DataRow(
+                          cells: row
+                              .map(
+                                (item) => DataCell(
+                                  Text(item.toString()),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      )
+                      .toList(),
+                ),
               ),
               const SizedBox(height: 30),
             ],
@@ -294,20 +409,42 @@ class _Package1PageState extends State<Package1Page> {
   }
 }
 
-List<List<dynamic>> generateRows(int rowCount) {
+List<List<dynamic>> generateRows(dynamic greyDataPack) {
   List<List<dynamic>> rows = [];
 
-  for (int i = 1; i <= rowCount; i++) {
-    final int cost = i * 10;
-    final int quantity = i * 5;
-    final int price = cost * quantity;
+  if (greyDataPack is List && greyDataPack.isNotEmpty) {
+    List<dynamic>? data = greyDataPack[0];
+    if (data != null) {
+      for (var sublist in data) {
+        if (sublist is List && sublist.length >= 6) {
+          final String material = sublist[0]?.toString() ?? '';
+          final String brand = sublist[1]?.toString() ?? '';
+          final String factor = sublist[2]?.toString() ?? '';
+          final int cost = (sublist[3] is num) ? sublist[3].toInt() : 0;
+          final int quantity = (sublist[4] is num) ? sublist[4].toInt() : 0;
+          final int price = (sublist[5] is num) ? sublist[5].toInt() : 0;
 
-    rows.add([
-      '$i',
-      '$cost',
-      '$quantity',
-      '$price',
-    ]);
+          rows.add([
+            material,
+            brand,
+            factor,
+            cost.toString(),
+            quantity.toString(),
+            price.toString(),
+          ]);
+        }
+      }
+    } else {
+      // If data is null or empty, add a row with "No Data" message
+      rows.add([
+        'No Data',
+        'No Data',
+        'No Data',
+        'No Data',
+        'No Data',
+        'No Data',
+      ]);
+    }
   }
 
   return rows;

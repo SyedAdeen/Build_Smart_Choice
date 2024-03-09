@@ -11,8 +11,13 @@ import 'dart:ui'; // Add this line to import the 'dart:ui' library
 class PackagesPage extends StatefulWidget {
   String user;
   List<String> selectedImages;
+  final dynamic grey_data;
 
-  PackagesPage({super.key, required this.user, required this.selectedImages});
+  PackagesPage(
+      {super.key,
+      required this.user,
+      required this.selectedImages,
+      required this.grey_data});
 
   @override
   State<PackagesPage> createState() => _PackagesPageState();
@@ -21,6 +26,14 @@ class PackagesPage extends StatefulWidget {
 class _PackagesPageState extends State<PackagesPage> {
   @override
   Widget build(BuildContext context) {
+    String? totalCost;
+    if (widget.grey_data is List<dynamic>) {
+      final lastItem = widget.grey_data.last;
+      if (lastItem is String) {
+        totalCost = lastItem;
+      }
+      debugPrint(totalCost);
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 60, 71, 194),
@@ -128,6 +141,8 @@ class _PackagesPageState extends State<PackagesPage> {
           child: Packs(
             user: widget.user,
             selectedImages: widget.selectedImages,
+            totalCost: totalCost,
+            grey_data: widget.grey_data,
           ),
         ),
       ),
@@ -139,10 +154,17 @@ class _PackagesPageState extends State<PackagesPage> {
 class Packs extends StatelessWidget {
   String user;
   List<String> selectedImages;
+  final String? totalCost;
+  final dynamic grey_data;
 
   bool role = false;
 
-  Packs({super.key, required this.user, required this.selectedImages});
+  Packs(
+      {super.key,
+      required this.user,
+      required this.selectedImages,
+      required this.totalCost,
+      required this.grey_data});
 
   @override
   Widget build(BuildContext context) {
@@ -151,14 +173,14 @@ class Packs extends StatelessWidget {
         role
             ? GestureDetector(
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => Pack1(
-                        user: user,
-                        selectedImages: selectedImages,
-                      ),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => Pack1(
+                  //       user: user,
+                  //       selectedImages: selectedImages,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 child: ColoredBox(
                   color: const Color.fromARGB(255, 188, 166, 46),
@@ -169,16 +191,16 @@ class Packs extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         RichText(
-                          text: const TextSpan(
+                          text: TextSpan(
                             text: 'Package No.1 \n',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               height: 1.5,
                               fontWeight: FontWeight.bold,
                               fontSize: 30, // Bold font weight
                             ),
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Total cost: 1 Crore\n',
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
@@ -186,13 +208,13 @@ class Packs extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: 'Grey structure cost : 500,000\n',
-                                style: TextStyle(
+                                text: 'Grey Strcuture Cost : $totalCost\n',
+                                style: const TextStyle(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Finishing material cost : 550,000 ',
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
@@ -268,6 +290,7 @@ class Packs extends StatelessWidget {
                       builder: (context) => Pack1(
                         user: user,
                         selectedImages: selectedImages,
+                        grey_data_pack: grey_data,
                       ),
                     ),
                   );
@@ -281,16 +304,16 @@ class Packs extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           RichText(
-                              text: const TextSpan(
+                              text: TextSpan(
                             text: 'Package No.1 \n',
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               height: 1.5,
                               fontWeight: FontWeight.bold,
                               fontSize: 30, // Bold font weight
                             ),
                             children: [
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Total cost: 1 Crore\n',
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
@@ -298,13 +321,13 @@ class Packs extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: 'Grey structure cost : 500,000\n',
-                                style: TextStyle(
+                                text: 'Grey Strcuture Cost : $totalCost\n',
+                                style: const TextStyle(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
                                 ),
                               ),
-                              TextSpan(
+                              const TextSpan(
                                 text: 'Finishing material cost : 550,000 ',
                                 style: TextStyle(
                                   fontWeight: FontWeight.normal,
@@ -325,6 +348,7 @@ class Packs extends StatelessWidget {
                 builder: (context) => Pack2(
                   user: user,
                   selectedImages: selectedImages,
+                  grey_data_pack: grey_data,
                 ),
               ),
             );
@@ -338,16 +362,16 @@ class Packs extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
-                        text: const TextSpan(
+                        text: TextSpan(
                       text: 'Package No.2 \n',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         height: 1.5,
                         fontSize: 30, // Bold font weight
                       ),
                       children: [
-                        TextSpan(
+                        const TextSpan(
                           text: 'Total cost: 1 Crore\n',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
@@ -355,13 +379,13 @@ class Packs extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: 'Grey structure cost : 500,000\n',
-                          style: TextStyle(
+                          text: 'Grey Strcuture Cost : $totalCost\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: 'Finishing material cost : 550,000 ',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
@@ -382,6 +406,7 @@ class Packs extends StatelessWidget {
                 builder: (context) => Pack3(
                   user: user,
                   selectedImages: selectedImages,
+                  grey_data_pack: grey_data,
                 ),
               ),
             );
@@ -395,16 +420,16 @@ class Packs extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
-                        text: const TextSpan(
+                        text: TextSpan(
                       text: 'Package No.3 \n',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         height: 1.5,
                         fontSize: 30, // Bold font weight
                       ),
                       children: [
-                        TextSpan(
+                        const TextSpan(
                           text: 'Total cost: 1 Crore\n',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
@@ -412,13 +437,13 @@ class Packs extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: 'Grey structure cost : 500,000\n',
-                          style: TextStyle(
+                          text: 'Grey Strcuture Cost : $totalCost\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: 'Finishing material cost : 550,000 ',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
@@ -439,6 +464,7 @@ class Packs extends StatelessWidget {
                 builder: (context) => PremiumPack(
                   user: user,
                   selectedImages: selectedImages,
+                  grey_data_pack: grey_data,
                 ),
               ),
             );
@@ -452,15 +478,15 @@ class Packs extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RichText(
-                        text: const TextSpan(
+                        text: TextSpan(
                       text: 'Premium Package\n',
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
                           height: 1.5),
                       children: [
-                        TextSpan(
+                        const TextSpan(
                           text: 'Total cost: 2 Crore\n',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,
@@ -468,13 +494,13 @@ class Packs extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: 'Grey structure cost : 1,000,000\n',
-                          style: TextStyle(
+                          text: 'Grey Strcuture Cost : $totalCost\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: 'Finishing material cost : 1,000,000 ',
                           style: TextStyle(
                             fontWeight: FontWeight.normal,

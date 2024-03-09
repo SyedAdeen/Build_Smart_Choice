@@ -146,3 +146,12 @@ class GreyView2:
     @staticmethod
     def error_response(message=""):
         return jsonify({"success": False, "error_message": message}), 500
+    
+class GetGreyMaterialCost:
+    @staticmethod
+    def success_response(grey_materials,total_cost):
+        return jsonify(grey_materials,total_cost),200
+    
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500

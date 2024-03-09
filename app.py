@@ -104,6 +104,24 @@ def remove_users():
 def scrap_data():
     return Grey_Controller.scrap_data()
 
+@app.route('/single_package', methods=['GET'])
+def single_package():
+    return Grey_Controller.getsinglestory()
+
+@app.route('/single_basement_package', methods=['GET'])
+def single_basement_package():
+    return Grey_Controller.getsinglebasement()
+
+
+@app.route('/double_package', methods=['GET'])
+def double_package():
+    return Grey_Controller.getdoublestory()
+
+@app.route('/double_basement_package', methods=['GET'])
+def double_basement_package():
+    return Grey_Controller.getdoublebasement()
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

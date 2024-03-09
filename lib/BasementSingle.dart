@@ -97,18 +97,77 @@ class _BasementSingleState extends State<BasementSingle> {
     );
   }
 
-  void _onSelectButtonPressed(List<String> images) {
-    setState(() {
-      selectedImages = List<String>.from(images);
-    });
+  Future<void> _onSelectButtonPressed(List<String> images, int id) async {
+    // setState(() {
+    // });
+    selectedImages = List<String>.from(images);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            PackagesPage(user: widget.user, selectedImages: selectedImages),
-      ),
-    );
+    try {
+      if (widget.area == 1.toString()) {
+        final response = await http.get(Uri.parse(
+            '${ApiUrls.singlestorybasementpackage}?area=10 MARLA&set=$id'));
+        debugPrint('Response Body: ${response.body}');
+
+        if (response.statusCode == 200) {
+          final List<dynamic> data = json.decode(response.body);
+          // debugPrint(data as String?);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PackagesPage(
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+              ),
+            ),
+          );
+        }
+      } else if (widget.area == 2.toString()) {
+        final response = await http.get(Uri.parse(
+            '${ApiUrls.singlestorybasementpackage}?area=20 MARLA&set=$id'));
+
+        if (response.statusCode == 200) {
+          final List<dynamic> data = json.decode(response.body);
+          // debugPrint(data as String?);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PackagesPage(
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+              ),
+            ),
+          );
+        }
+      } else {
+        final response = await http.get(Uri.parse(
+            '${ApiUrls.singlestorybasementpackage}?area=${widget.area} MARLA&set=$id'));
+
+        if (response.statusCode == 200) {
+          final List<dynamic> data = json.decode(response.body);
+          // debugPrint(data as String?);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PackagesPage(
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+              ),
+            ),
+          );
+        }
+      }
+    } catch (error) {
+      debugPrint('Error : $error');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -258,6 +317,19 @@ class _BasementSingleState extends State<BasementSingle> {
                                     child: GestureDetector(
                                       onTap: () {
                                         _openZoomableImage(
+                                            basements, id, Basement);
+                                      },
+                                      child: Image.memory(
+                                        firstFloor != null
+                                            ? base64Decode(basements)
+                                            : Uint8List(0),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        _openZoomableImage(
                                             groundFloor, id, ground);
                                       },
                                       child: Image.memory(
@@ -280,19 +352,6 @@ class _BasementSingleState extends State<BasementSingle> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        _openZoomableImage(
-                                            basements, id, Basement);
-                                      },
-                                      child: Image.memory(
-                                        firstFloor != null
-                                            ? base64Decode(basements)
-                                            : Uint8List(0),
-                                      ),
-                                    ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -301,7 +360,7 @@ class _BasementSingleState extends State<BasementSingle> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   _onSelectButtonPressed(
-                                      [basements, groundFloor, firstFloor]);
+                                      [basements, groundFloor, firstFloor], id);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,

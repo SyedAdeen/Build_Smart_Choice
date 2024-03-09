@@ -250,7 +250,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
           )
         ],
       ),
-      backgroundColor: const Color.fromARGB(255, 255, 213, 213),
+      // backgroundColor: const Color.fromARGB(255, 255, 213, 213),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -298,7 +298,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _Feedback_Text,
-                  maxLength: 180,
+                  maxLength: 100,
                   decoration: const InputDecoration(
                     labelText: 'Feedback',
                     labelStyle: TextStyle(

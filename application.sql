@@ -2,7 +2,7 @@ USE db_bsc;
 DROP TABLE IF EXISTS USER_DATA;
 DROP TABLE IF EXISTS USERS;
 
--- set foreign_key_checks=0;
+set foreign_key_checks=0;
 
 CREATE TABLE USERS
 (
@@ -27,16 +27,16 @@ SELECT * FROM USERS;
 select username, email_address, IS_PREMIUM_USER from users where role="USER";
 delete from users where email_address="adeenashraf@gmail.com";
 delete from users where email_address="aforashraf@gmail.com";
+
+-- ----------------------------------------
 DROP TABLE IF EXISTS FEEDBACKS;
-
-
 
 CREATE TABLE FEEDBACKS
 (
 FEEDBACK_ID INT PRIMARY KEY auto_increment,
 DETAIL VARCHAR(200),
 DATE_TIME TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-ACTION VARCHAR(40) DEFAULT NULL,
+ACTION VARCHAR(40) DEFAULT "Pending",
 USER_ID_FK INT,
 FOREIGN KEY (USER_ID_FK) REFERENCES USERS(USER_ID)
 );
@@ -96,7 +96,7 @@ update user_data set user_pass = "abcd98765";
 
 -- Creating Layout Tables
 DROP TABLE IF EXISTS LAYOUT_3;
-DROP TABLE IF EXISTS LAYOUT_5;
+
 CREATE TABLE layout_3
 (
     ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -174,8 +174,11 @@ NULL
 
 SELECT * FROM LAYOUT_3;
 
+
 -- --------------------------------------------
 -- Layout 5 Marla
+
+DROP TABLE IF EXISTS LAYOUT_5;
 
 CREATE TABLE layout_5
 (
@@ -260,7 +263,7 @@ SELECT * FROM LAYOUT_5;
 -- LAYOUT 7
 
 
-
+DROP TABLE IF EXISTS LAYOUT_7;
 CREATE TABLE layout_7
 (
     ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -340,12 +343,12 @@ NULL
 
 SELECT * FROM LAYOUT_7;
 
-	select * from user_data;
 
 -- ----------------------------------
 
 -- LAYOUTS 10
 
+DROP TABLE IF EXISTS LAYOUT_10;
 CREATE TABLE layout_10
 (
     ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -429,6 +432,7 @@ SELECT * FROM LAYOUT_10;
 
 -- LAYOUT 20
 
+DROP TABLE IF EXISTS LAYOUT_20;
 CREATE TABLE layout_20
 (
     ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -529,7 +533,6 @@ Values
 (LOAD_FILE('E:/SQL uploads/3_3C.png'));
 
 select * from images;
-
 
 
 SHOW VARIABLES LIKE 'max_connections';

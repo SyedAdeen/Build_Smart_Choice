@@ -43,7 +43,7 @@ class _ImageListScreenState extends State<ImageListScreen> {
       if (widget.area == 1.toString()) {
         final response = await http.get(
             Uri.parse('${ApiUrls.baseUrl}/get_images1?table_name=layout_10'));
-        debugPrint('Response Body: ${response.body}');
+        //debugPrint('Response Body: ${response.body}');
 
         if (response.statusCode == 200) {
           final data = json.decode(response.body);
@@ -85,18 +85,77 @@ class _ImageListScreenState extends State<ImageListScreen> {
     }
   }
 
-  void _onSelectButtonPressed(List<String> images) {
-    setState(() {
-      selectedImages = List<String>.from(images);
-    });
+  Future<void> _onSelectButtonPressed(List<String> images, int id) async {
+    // setState(() {
+    // });
+    selectedImages = List<String>.from(images);
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>
-            PackagesPage(user: widget.user, selectedImages: selectedImages),
-      ),
-    );
+    try {
+      if (widget.area == 1.toString()) {
+        final response = await http.get(
+            Uri.parse('${ApiUrls.singlestorypackage}?area=10 MARLA&set=$id'));
+        debugPrint('Response Body: ${response.body}');
+
+        if (response.statusCode == 200) {
+          final List<dynamic> data = json.decode(response.body);
+          // debugPrint(data as String?);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PackagesPage(
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+              ),
+            ),
+          );
+        }
+      } else if (widget.area == 2.toString()) {
+        final response = await http.get(
+            Uri.parse('${ApiUrls.singlestorypackage}?area=20 MARLA&set=$id'));
+
+        if (response.statusCode == 200) {
+          final List<dynamic> data = json.decode(response.body);
+          // debugPrint(data as String?);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PackagesPage(
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+              ),
+            ),
+          );
+        }
+      } else {
+        final response = await http.get(Uri.parse(
+            '${ApiUrls.singlestorypackage}?area=${widget.area} MARLA&set=$id'));
+
+        if (response.statusCode == 200) {
+          final List<dynamic> data = json.decode(response.body);
+          // debugPrint(data as String?);
+          // ignore: use_build_context_synchronously
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PackagesPage(
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+              ),
+            ),
+          );
+        }
+      }
+    } catch (error) {
+      debugPrint('Error : $error');
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   void _openZoomableImage(String imageUrl, int planId, String storeyFloor) {
@@ -287,7 +346,7 @@ class _ImageListScreenState extends State<ImageListScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   _onSelectButtonPressed(
-                                      [groundFloor, firstFloor]);
+                                      [groundFloor, firstFloor], id);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,

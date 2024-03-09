@@ -1,6 +1,6 @@
 class ApiUrls {
-  static const String baseUrl = 'http://10.0.2.2:5000';
-  //static const String baseUrl = 'http://192.168.18.30:5000';
+  //static const String baseUrl = 'http://10.0.2.2:5000';
+  static const String baseUrl = 'http://192.168.18.30:5000';
   //static const String baseUrl = 'https://0883-223-123-11-237.ngrok-free.app';
   static const String forgot = '$baseUrl/forgot';
   static const String login = '$baseUrl/login';
@@ -15,4 +15,10 @@ class ApiUrls {
   static const String updatefeedaction = '$baseUrl/update_action';
   static const String fetchusers = '$baseUrl/get_users';
   static const String deluser = '$baseUrl/remove_users';
+  static const String singlestorypackage = '$baseUrl/single_package';
+  static const String doublestorypackage = '$baseUrl/double_package';
+  static const String singlestorybasementpackage =
+      '$baseUrl/single_basement_package';
+  static const String doublestorybasementpackage =
+      '$baseUrl/double_basement_package';
 }

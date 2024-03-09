@@ -160,6 +160,26 @@ class _GreyMaterialsState extends State<GreyMaterials> {
     );
   }
 
+  void showUpdateDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Success"),
+          content: Text("Rates are Updated Successfully"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> scrapdata(BuildContext context) async {
     // Show loading indicator
     showDialog(
@@ -179,8 +199,13 @@ class _GreyMaterialsState extends State<GreyMaterials> {
 
       if (response.statusCode == 200) {
         Navigator.pop(context); // Dismiss the loading indicator
-        fetchGreyData(); // Fetch the updated data
-        setState(() {}); // Trigger a rebuild to update the UI
+        fetchGreyData();
+        // ignore: use_build_context_synchronously
+        // Fetch the updated data
+        setState(() {});
+        showUpdateDialog(context);
+
+        // Trigger a rebuild to update the UI
       } else {
         Navigator.pop(context); // Dismiss the loading indicator
         debugPrint('Failed to fetch data: ${response.statusCode}');
@@ -335,7 +360,7 @@ class _GreyMaterialsState extends State<GreyMaterials> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: DataTable(
-                  dataRowMinHeight: 40,
+                  dataRowMinHeight: 48,
                   columns: const [
                     DataColumn(label: Text('Material Name')),
                     DataColumn(label: Text('Brand')),

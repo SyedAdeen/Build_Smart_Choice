@@ -123,8 +123,7 @@ class HelpPage extends StatelessWidget {
                       left: 0,
                       right: 0,
                     ),
-                    color: const Color.fromARGB(
-                        255, 255, 213, 213), // Circle color
+                    // color: Color.fromARGB(255, 255, 255, 255), //Back Color
                     height: 150.0,
 
                     child: Container(

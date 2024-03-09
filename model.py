@@ -618,4 +618,517 @@ class GreyMaterialsModel:
                 connection.close()
                 print("Connection closed for update_rate")
 
-       
+    def get_singlestory_materials(self,area,id):
+        try:
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+
+
+
+            if connection.is_connected():
+                print("Connection established for get_singlestory_materials")
+
+                get_query ="""
+                    SELECT 
+                        A.MATERIAL_NAME,
+                        A.BRAND,
+                        A.FACTOR,
+                        ROUND((A.RATE),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY) AS total_quantity,
+                        ROUND((A.RATE * (B.GROUND_QTY + B.ROOFTOP_QTY)),0) AS total_cost
+                    FROM 
+                        grey_materials AS A
+                    JOIN 
+                        FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s 
+                        AND B.LAYOUT_3_ID = %s;
+
+                    """
+                get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_query, (area, id))
+                    grey_materials = cursor.fetchall()
+
+                return grey_materials
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_singlestory_materials")
+
+
+    def get_singlestory_greycost(self,area,id):
+
+        try:
+
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+            if connection.is_connected():
+                print("Connection established for get_singlestory_greycost")
+
+                get_cost ="""
+                    
+                        SELECT 
+                            SUM(GROUND_material_cost) AS 1_total_cost,
+                            SUM(ROOFTOP_material_cost) AS 3_total_cost
+
+
+                        FROM (
+                            SELECT 
+                                (B.GROUND_QTY * A.RATE) AS GROUND_material_cost,
+                                (B.ROOFTOP_QTY * A.RATE) AS ROOFTOP_material_cost
+                                        
+                            FROM 
+                                grey_materials AS A
+                            JOIN 
+                                FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                            WHERE 
+                                B.AREA_QTY = %s 
+                                AND B.LAYOUT_3_ID = %s
+                        ) AS subquery;
+
+
+                    """
+                get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_cost, (area, id))
+                    grey_materials_cost = cursor.fetchall()
+
+
+                return grey_materials_cost
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_singlestory_greycost")
+
+
+    def get_singlebasement_materials(self,area,id):
+        try:
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+
+
+
+            if connection.is_connected():
+                print("Connection established for get_singlebasement_materials")
+
+                get_query ="""
+                    SELECT 
+                        A.MATERIAL_NAME,
+                        A.BRAND,
+                        A.FACTOR,
+                        ROUND((A.RATE),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY + B.BASEMENT_QTY) AS total_quantity,
+                        ROUND((A.RATE * (B.GROUND_QTY + B.ROOFTOP_QTY + B.BASEMENT_QTY)),0) AS total_cost
+                    FROM 
+                        grey_materials AS A
+                    JOIN 
+                        FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s 
+                        AND B.LAYOUT_3_ID = %s;
+
+                    """
+                get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_query, (area, id))
+                    grey_materials = cursor.fetchall()
+
+                return grey_materials
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_singlebasement_materials")
+
+
+    def get_singlebasement_greycost(self,area,id):
+
+        try:
+
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+            if connection.is_connected():
+                print("Connection established for get_singlebasement_greycost")
+
+                get_cost ="""
+                    
+                        SELECT 
+                            SUM(GROUND_material_cost) AS 1_total_cost,
+                            SUM(ROOFTOP_material_cost) AS 3_total_cost,
+                            SUM(BASEMENT_material_cost) AS 2_total_cost
+
+
+
+                        FROM (
+                            SELECT 
+                                (B.GROUND_QTY * A.RATE) AS GROUND_material_cost,
+                                (B.ROOFTOP_QTY * A.RATE) AS ROOFTOP_material_cost,
+                                (B.BASEMENT_QTY * A.RATE) AS BASEMENT_material_cost                                        
+                            FROM 
+                                grey_materials AS A
+                            JOIN 
+                                FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                            WHERE 
+                                B.AREA_QTY = %s 
+                                AND B.LAYOUT_3_ID = %s
+                        ) AS subquery;
+
+
+                    """
+                get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_cost, (area, id))
+                    grey_materials_cost = cursor.fetchall()
+
+
+                return grey_materials_cost
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_singlebasement_greycost")
+
+
+
+    def get_doublestory_materials(self,area,id):
+        try:
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+
+
+
+            if connection.is_connected():
+                print("Connection established for get_doublestory_materials")
+
+                get_query ="""
+                    SELECT 
+                        A.MATERIAL_NAME,
+                        A.BRAND,
+                        A.FACTOR,
+                        ROUND((A.RATE),0),
+                        (B.GROUND_QTY + B.FIRST_FLOOR_QTY + B.ROOFTOP_QTY) AS total_quantity,
+                        ROUND((A.RATE * (B.GROUND_QTY + B.FIRST_FLOOR_QTY + B.ROOFTOP_QTY)),0) AS total_cost
+                    FROM 
+                        grey_materials AS A
+                    JOIN 
+                        FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s 
+                        AND B.LAYOUT_3_ID = %s;
+
+                    """
+                get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_query, (area, id))
+                    grey_materials = cursor.fetchall()
+
+                return grey_materials
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_doublestory_materials")
+
+
+    def get_doublestory_greycost(self,area,id):
+
+        try:
+
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+            if connection.is_connected():
+                print("Connection established for get_doublestory_greycost")
+
+                get_cost ="""
+                                            
+                        SELECT 
+                            SUM(GROUND_material_cost) AS 1_total_cost,
+                            SUM(FIRST_FLOOR_material_cost) as 2_total_cost,
+                            SUM(ROOFTOP_material_cost) AS 3_total_cost
+                        FROM (
+                            SELECT 
+                                (B.GROUND_QTY * A.RATE) AS GROUND_material_cost,
+                                (B.ROOFTOP_QTY * A.RATE) AS ROOFTOP_material_cost, -- Added comma here
+                                (B.FIRST_FLOOR_QTY * A.RATE) AS FIRST_FLOOR_material_cost
+                            FROM 
+                                grey_materials AS A
+                            JOIN 
+                                FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                            WHERE 
+                                B.AREA_QTY = %s
+                                AND B.LAYOUT_3_ID =%s
+                        ) AS subquery;
+
+
+                    """
+                get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_cost, (area, id))
+                    grey_materials_cost = cursor.fetchall()
+
+
+                return grey_materials_cost
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_doublestory_greycost")
+
+
+    def get_doublebasement_materials(self,area,id):
+        try:
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+
+
+
+            if connection.is_connected():
+                print("Connection established for get_doublebasement_materials")
+
+                get_query ="""
+                    SELECT 
+                        A.MATERIAL_NAME,
+                        A.BRAND,
+                        A.FACTOR,
+                        ROUND((A.RATE),0),
+                        (B.BASEMENT_QTY + B.GROUND_QTY + B.FIRST_FLOOR_QTY + B.ROOFTOP_QTY) AS total_quantity,
+                        ROUND((A.RATE * (B.BASEMENT_QTY + B.GROUND_QTY + B.FIRST_FLOOR_QTY + B.ROOFTOP_QTY)),0) AS total_cost
+                    FROM 
+                        grey_materials AS A
+                    JOIN 
+                        FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s 
+                        AND B.LAYOUT_3_ID = %s;
+
+                    """
+                get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_query, (area, id))
+                    grey_materials = cursor.fetchall()
+
+                return grey_materials
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_doublebasement_materials")
+
+
+    def get_doublebasement_greycost(self,area,id):
+
+        try:
+
+            connection = connection_pool.get_connection()
+            layout="LAYOUT_3_ID"
+
+            if(area=="3 Marla"):
+                layout="LAYOUT_3_ID"
+            elif(area=="5 MARLA"):
+                layout="LAYOUT_5_ID"
+            elif(area=="7 MARLA"):
+                layout="LAYOUT_7_ID"
+            elif(area=="10 MARLA"):
+                layout="LAYOUT_10_ID"
+            elif(area=="20 MARLA"):
+                layout="LAYOUT_20_ID"
+            else:
+                print("Issue on Layout Id")
+                layout="LAYOUT_3_ID"
+
+            if connection.is_connected():
+                print("Connection established for get_doublebasement_greycost")
+
+                get_cost ="""
+                                            
+                        SELECT 
+                            SUM(GROUND_material_cost) AS 1_total_cost,
+                            SUM(FIRST_FLOOR_material_cost) as 2_total_cost,
+                            SUM(ROOFTOP_material_cost) AS 3_total_cost,
+                            SUM(BASEMENT_material_cost) AS 4_total_cost
+                            
+                        FROM (
+                            SELECT 
+                                (B.GROUND_QTY * A.RATE) AS GROUND_material_cost,
+                                (B.ROOFTOP_QTY * A.RATE) AS ROOFTOP_material_cost, -- Added comma here
+                                (B.FIRST_FLOOR_QTY * A.RATE) AS FIRST_FLOOR_material_cost,
+                                (B.BASEMENT_QTY * A.RATE) AS BASEMENT_material_cost
+
+                            FROM 
+                                grey_materials AS A
+                            JOIN 
+                                FILTER_GREY_MATERIALS AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                            WHERE 
+                                B.AREA_QTY = %s
+                                AND B.LAYOUT_3_ID =%s
+                        ) AS subquery;
+
+
+                    """
+                get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                with connection.cursor() as cursor:
+                    cursor.execute(get_cost, (area, id))
+                    grey_materials_cost = cursor.fetchall()
+
+
+                return grey_materials_cost
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for get_doublebasement_greycost")
+
+
+
