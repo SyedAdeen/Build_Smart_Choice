@@ -623,7 +623,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -686,7 +686,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -750,7 +750,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -813,7 +813,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -880,7 +880,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -943,7 +943,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -1006,7 +1006,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -1069,7 +1069,7 @@ class GreyMaterialsModel:
             connection = connection_pool.get_connection()
             layout="LAYOUT_3_ID"
 
-            if(area=="3 Marla"):
+            if(area=="3 MARLA"):
                 layout="LAYOUT_3_ID"
             elif(area=="5 MARLA"):
                 layout="LAYOUT_5_ID"
@@ -1131,4 +1131,550 @@ class GreyMaterialsModel:
                 print("Connection closed for get_doublebasement_greycost")
 
 
+class LabourDetailsModel:
+    def fetch_labour_details(self):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for fetch_labour_details")
+
+                select_query = "SELECT LABOUR_TYPE, Factor, Rate FROM LABOUR"
+                with connection.cursor(dictionary=True) as cursor:
+                    cursor.execute(select_query)
+                    labour_details = cursor.fetchall()
+
+                return labour_details
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+
+            return []
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for fetch_labour_details")
+
+    def update_rate(self, material_name, new_rate):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for update_rate for Labour")
+
+                update_query = "UPDATE LABOUR SET Rate = %s WHERE LABOUR_TYPE = %s"
+                with connection.cursor() as cursor:
+                    cursor.execute(update_query, (new_rate, material_name))
+                    connection.commit()
+
+                return True
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for update_rate for Labour")
+
+
+
+    def get_singlestory_labour(self,area,id):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+
+
+
+                if connection.is_connected():
+                    print("Connection established for get_singlestory_labour")
+
+                    get_query ="""
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                ROUND((A.RATE * (B.GROUND_SQFTS )),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s;
+
+
+                        """
+                    get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_query, (area, id))
+                        labour_details = cursor.fetchall()
+
+                    return labour_details
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_singlestory_labour")
+
+    def get_singlestory_labour_cost(self,area,id):
+
+            try:
+
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+                if connection.is_connected():
+                    print("Connection established for get_singlestory_labour_cost")
+
+                    get_cost ="""
+                        
+                        SELECT 
+                            SUM(total_cost) AS total_cost_sum
+                        FROM (
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                A.FACTOR,
+                                ROUND((A.RATE),0) AS rate_rounded,
+                                (B.GROUND_SQFTS) AS total_quantity,
+                                ROUND((A.RATE * (B.GROUND_SQFTS)),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s
+                        ) AS subquery;	
+
+
+
+
+                        """
+                    get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_cost, (area, id))
+                        labour_cost = cursor.fetchall()
+
+
+                    return labour_cost
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_singlestory_labour_cost")
+
+
+    def get_singlestory_basement_labour(self,area,id):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+
+
+
+                if connection.is_connected():
+                    print("Connection established for get_singlestory_basement_labour")
+
+                    get_query ="""
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                ROUND((A.RATE * (B.GROUND_SQFTS + B.BASEMENT_SQFTS )),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s;
+
+
+                        """
+                    get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_query, (area, id))
+                        labour_details = cursor.fetchall()
+
+                    return labour_details
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_singlestory_basement_labour")
+
+    def get_singlestory_basement_labour_cost(self,area,id):
+
+            try:
+
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+                if connection.is_connected():
+                    print("Connection established for get_singlestory_basement_labour_cost")
+
+                    get_cost ="""
+                        
+                        SELECT 
+                            SUM(total_cost) AS total_cost_sum
+                        FROM (
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                A.FACTOR,
+                                ROUND((A.RATE),0) AS rate_rounded,
+                                (B.GROUND_SQFTS + B.BASEMENT_SQFTS) AS total_quantity,
+                                ROUND((A.RATE * (B.GROUND_SQFTS + B.BASEMENT_SQFTS)),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s
+                        ) AS subquery;	
+
+
+
+
+                        """
+                    get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_cost, (area, id))
+                        labour_cost = cursor.fetchall()
+
+
+                    return labour_cost
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_singlestory_basement_labour_cost")
+
+
+
+    def get_doublestory_labour(self,area,id):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+
+
+
+                if connection.is_connected():
+                    print("Connection established for get_doublestory_labour")
+
+                    get_query ="""
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                ROUND((A.RATE * (B.GROUND_SQFTS + B.FIRST_FLOOR_SQFTS )),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s;
+
+
+                        """
+                    get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_query, (area, id))
+                        labour_details = cursor.fetchall()
+
+                    return labour_details
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_doublestory_labour")
+
+    def get_singlestory_labour_cost(self,area,id):
+
+            try:
+
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+                if connection.is_connected():
+                    print("Connection established for get_doublestory_labour_cost")
+
+                    get_cost ="""
+                        
+                        SELECT 
+                            SUM(total_cost) AS total_cost_sum
+                        FROM (
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                A.FACTOR,
+                                ROUND((A.RATE),0) AS rate_rounded,
+                                (B.GROUND_SQFTS + B.FIRST_FLOOR_SQFTS) AS total_quantity,
+                                ROUND((A.RATE * (B.GROUND_SQFTS + B.FIRST_FLOOR_SQFTS)),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s
+                        ) AS subquery;	
+
+
+
+
+                        """
+                    get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_cost, (area, id))
+                        labour_cost = cursor.fetchall()
+
+
+                    return labour_cost
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_doublestory_labour_cost")
+
+
+
+    def get_doublestory_basement_labour(self,area,id):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+
+
+
+                if connection.is_connected():
+                    print("Connection established for get_doublestory_basement_labour")
+
+                    get_query ="""
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                ROUND((A.RATE * (B.GROUND_SQFTS + FIRST_FLOOR_SQFTS + B.BASEMENT_SQFTS )),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s;
+
+
+                        """
+                    get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_query, (area, id))
+                        labour_details = cursor.fetchall()
+
+                    return labour_details
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_doublestory_basement_labour")
+
+    def get_doublestory_basement_labour_cost(self,area,id):
+
+            try:
+
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                if(area=="3 MARLA"):
+                    layout="LAYOUT_3_ID"
+                elif(area=="5 MARLA"):
+                    layout="LAYOUT_5_ID"
+                elif(area=="7 MARLA"):
+                    layout="LAYOUT_7_ID"
+                elif(area=="10 MARLA"):
+                    layout="LAYOUT_10_ID"
+                elif(area=="20 MARLA"):
+                    layout="LAYOUT_20_ID"
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+
+                if connection.is_connected():
+                    print("Connection established for get_doublestory_basement_labour_cost")
+
+                    get_cost ="""
+                        
+                        SELECT 
+                            SUM(total_cost) AS total_cost_sum
+                        FROM (
+                            SELECT 
+                                A.LABOUR_TYPE,
+                                A.FACTOR,
+                                ROUND((A.RATE),0) AS rate_rounded,
+                                (B.GROUND_SQFTS + FIRST_FLOOR_SQFTS + B.BASEMENT_SQFTS) AS total_quantity,
+                                ROUND((A.RATE * (B.GROUND_SQFTS +  FIRST_FLOOR_SQFTS + B.BASEMENT_SQFTS)),0) AS total_cost
+                            FROM 
+                                LABOUR AS A
+                            JOIN 
+                                FILTER_LABOUR AS B ON A.LABOUR_ID = B.LABOUR_ID
+                            WHERE 
+                                B.AREA_SQFTS= %s
+                                AND B.LAYOUT_3_ID = %s
+                        ) AS subquery;	
+
+
+
+
+                        """
+                    get_cost = get_cost.replace("B.LAYOUT_3_ID", layout)
+
+                    with connection.cursor() as cursor:
+                        cursor.execute(get_cost, (area, id))
+                        labour_cost = cursor.fetchall()
+
+
+                    return labour_cost
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_doublestory_basement_labour_cost")
 

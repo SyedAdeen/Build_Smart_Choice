@@ -108,37 +108,52 @@ class _BasementDoubleState extends State<BasementDouble> {
             '${ApiUrls.doublestorybasementpackage}?area=10 MARLA&set=$id'));
         debugPrint('Response Body: ${response.body}');
 
-        if (response.statusCode == 200) {
+        final response2 = await http.get(Uri.parse(
+            '${ApiUrls.labourdoublestorybasementpackage}?area=10 MARLA&set=$id'));
+
+        debugPrint('Response Body1: ${response.body}');
+        debugPrint('Response Body2: ${response2.body}');
+
+        if (response.statusCode == 200 && response2.statusCode == 200) {
           final List<dynamic> data = json.decode(response.body);
+          final List<dynamic> data2 = json.decode(response2.body);
+
           // debugPrint(data as String?);
           // ignore: use_build_context_synchronously
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                user: widget.user,
-                selectedImages: selectedImages,
-                grey_data: data,
-              ),
+                  user: widget.user,
+                  selectedImages: selectedImages,
+                  grey_data: data,
+                  labour_data: data2),
             ),
           );
         }
       } else if (widget.area == 2.toString()) {
         final response = await http.get(Uri.parse(
             '${ApiUrls.doublestorybasementpackage}?area=20 MARLA&set=$id'));
+        final response2 = await http.get(Uri.parse(
+            '${ApiUrls.labourdoublestorybasementpackage}?area=20 MARLA&set=$id'));
 
-        if (response.statusCode == 200) {
+        debugPrint('Response Body1: ${response.body}');
+        debugPrint('Response Body2: ${response2.body}');
+
+        if (response.statusCode == 200 && response2.statusCode == 200) {
           final List<dynamic> data = json.decode(response.body);
+          final List<dynamic> data2 = json.decode(response2.body);
+
           // debugPrint(data as String?);
           // ignore: use_build_context_synchronously
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                user: widget.user,
-                selectedImages: selectedImages,
-                grey_data: data,
-              ),
+                  user: widget.user,
+                  selectedImages: selectedImages,
+                  grey_data: data,
+                  labour_data: data2),
             ),
           );
         }
@@ -146,18 +161,26 @@ class _BasementDoubleState extends State<BasementDouble> {
         final response = await http.get(Uri.parse(
             '${ApiUrls.doublestorybasementpackage}?area=${widget.area} MARLA&set=$id'));
 
-        if (response.statusCode == 200) {
+        final response2 = await http.get(Uri.parse(
+            '${ApiUrls.labourdoublestorybasementpackage}?area=${widget.area} MARLA&set=$id'));
+
+        debugPrint('Response Body1: ${response.body}');
+        debugPrint('Response Body2: ${response2.body}');
+
+        if (response.statusCode == 200 && response2.statusCode == 200) {
           final List<dynamic> data = json.decode(response.body);
+          final List<dynamic> data2 = json.decode(response2.body);
+
           // debugPrint(data as String?);
           // ignore: use_build_context_synchronously
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                user: widget.user,
-                selectedImages: selectedImages,
-                grey_data: data,
-              ),
+                  user: widget.user,
+                  selectedImages: selectedImages,
+                  grey_data: data,
+                  labour_data: data2),
             ),
           );
         }

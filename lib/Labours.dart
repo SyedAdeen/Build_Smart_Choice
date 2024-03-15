@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:sampleapp/Settings.dart';
+import 'package:sampleapp/api_urls.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LaboursData extends StatefulWidget {
   final String user;
@@ -11,6 +15,155 @@ class LaboursData extends StatefulWidget {
 
 class _LaboursDataState extends State<LaboursData> {
   int selectedRowIndex = -1;
+  List<Map<String, dynamic>> labourData = [];
+
+  List<Map<String, dynamic>> filteredData = [];
+  Map<String, dynamic> rowData = {};
+  TextEditingController changedRateController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    fetchLabourData();
+  }
+
+  Future<void> fetchLabourData() async {
+    try {
+      final response =
+          await http.get(Uri.parse('${ApiUrls.baseUrl}/get_labour'));
+
+      if (response.statusCode == 200) {
+        final List<Map<String, dynamic>> data =
+            List<Map<String, dynamic>>.from(json.decode(response.body));
+        debugPrint('Response Body: $data');
+
+        setState(() {
+          labourData = data;
+        });
+      } else {
+        debugPrint('Failed to fetch data: ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('Error fetching data: $e');
+    }
+  }
+
+  bool isValidNumber(String input) {
+    RegExp regex = RegExp(r'^\d+(\.\d{0,1})?$');
+    return regex.hasMatch(input);
+  }
+
+  Future<void> updaterate(String labour_type, String Rate) async {
+    try {
+      final response = await http.put(
+        Uri.parse('${ApiUrls.baseUrl}/update_labour_rate'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'labour_type': labour_type.toString(),
+          'new_rate': Rate.toString(),
+        }),
+      );
+      if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: const Text('Successful'),
+                content: Text('${capitalize(labour_type)} Rate is Updated'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      fetchLabourData();
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('OK'),
+                  ),
+                ],
+              );
+            });
+      } else {
+        debugPrint('Failed to Update data: ${response.statusCode}');
+      }
+    } catch (e) {
+      debugPrint('Error Updating data: $e');
+    }
+  }
+
+  void showEditDialog(BuildContext context, Map<String, dynamic> rowData) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Edit Rate for ${rowData['LABOUR_TYPE']}'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Rate: ${rowData['Rate']} / ${rowData['Factor']}'),
+              TextFormField(
+                controller: changedRateController,
+                decoration: const InputDecoration(
+                  hintText: "Up to one Decimal Place",
+                ),
+                keyboardType: TextInputType.number,
+              ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 60, 71, 194)),
+              onPressed: () {
+                bool vflag = isValidNumber(changedRateController.text);
+                if (vflag.toString() == "false") {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Invalid Labour Rate'),
+                          content: const Text(
+                              'Field must not be empty & Number should have at most one decimal place'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(false);
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        );
+                      });
+                } else {
+                  updaterate(rowData['LABOUR_TYPE'].toString(),
+                      changedRateController.text.toString());
+                  changedRateController.clear();
+                  Navigator.pop(context);
+                  fetchLabourData();
+                }
+              },
+              child: const Text('Save'),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 177, 47, 38)),
+              onPressed: () {
+                changedRateController.clear();
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  String capitalize(String s) {
+    if (s.isEmpty) {
+      return '';
+    }
+    return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,104 +277,86 @@ class _LaboursDataState extends State<LaboursData> {
           )
         ],
       ),
+      // body: Column(
+      //   children: [
+      // Padding(
+      //   padding: const EdgeInsets.all(8.0),
+      //   child: TextField(
+      //     onChanged: (value) {
+      //       setState(() {
+      //         filteredData = labourData
+      //             .where((data) => data['Material_Name']
+      //                 .toLowerCase()
+      //                 .contains(value.toLowerCase()))
+      //             .toList();
+      //       });
+      //     },
+      //     decoration: const InputDecoration(
+      //       labelText: 'Search Material',
+      //       prefixIcon: Icon(Icons.search),
+      //       border: OutlineInputBorder(),
+      //     ),
+      //   ),
+      // ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Enable horizontal scrolling
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical, // Enable vertical scrolling
+        scrollDirection: Axis.horizontal,
+        child: ConstrainedBox(
+          constraints:
+              BoxConstraints(minWidth: MediaQuery.of(context).size.width),
           child: DataTable(
-            dataRowMinHeight: 40,
-            columns: const [
-              DataColumn(label: Text('Labour Type')),
-              DataColumn(label: Text('Factor')),
-              DataColumn(label: Text('Rate')),
-              DataColumn(label: Text('Edit')),
+            dataRowMinHeight: 48,
+            columns: [
+              DataColumn(
+                label: Text(
+                  'Labour Types',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              DataColumn(
+                label: Text(
+                  'RATE',
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ],
-            rows: List.generate(20, (index) {
+            rows: (filteredData.isEmpty ? labourData : filteredData)
+                .asMap()
+                .entries
+                .map((entry) {
+              final int index = entry.key;
+              final Map<String, dynamic> rowData = entry.value;
+
               return DataRow(
-                selected: selectedRowIndex == index,
-                onSelectChanged: (isSelected) {
-                  setState(() {
-                    selectedRowIndex = isSelected! ? index : -1;
-                  });
-                },
                 cells: [
                   DataCell(
-                    Container(
-                      width: 180,
-                      child: Text('Labour Type ${index + 1}'),
-                    ),
-                  ),
-                  DataCell(
-                    Container(
-                      width: 50,
-                      child: Text('Factor ${index + 1}'),
-                    ),
-                  ),
-                  DataCell(
-                    Container(
-                      width: 80,
-                      child: Text('Rate ${index + 1}'),
-                    ),
-                  ),
-                  DataCell(
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 60, 71, 194),
-                      ),
-                      onPressed: () {
-                        // Implement your edit logic here
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                  'Edit Rate for Labour Type ${index + 1}'),
-                              content: TextFormField(
-                                //controller: changedrate,
-                                decoration: const InputDecoration(
-                                  hintText: "Upto one Decimal Place",
-                                ),
-                                keyboardType: TextInputType.number,
-                              ),
-                              // Add text fields or input widgets to get the new rate
-                              actions: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 60, 71, 194),
-                                  ),
-                                  onPressed: () {
-                                    //debugPrint(changedrate.text.toString());
-                                    // Your edit rate logic here
-                                    //changedrate.clear();
-                                    Navigator.pop(context);
-                                    // Refresh data or update UI as needed
-                                    setState(() {});
-                                  },
-                                  child: const Text('Save'),
-                                ),
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 177, 47, 38),
-                                  ),
-                                  onPressed: () {
-                                    //changedrate.clear();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text('Cancel'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                    GestureDetector(
+                      onTap: () {
+                        showEditDialog(context, rowData);
                       },
-                      child: const Text('Edit'),
+                      child: SizedBox(
+                        child: Text(capitalize(rowData['LABOUR_TYPE'])),
+                      ),
+                    ),
+                  ),
+                  DataCell(
+                    GestureDetector(
+                      onTap: () {
+                        showEditDialog(context, rowData);
+                      },
+                      child: SizedBox(
+                        child: Text(rowData['Rate'].toString()),
+                      ),
                     ),
                   ),
                 ],
               );
-            }),
+            }).toList(),
           ),
         ),
       ),

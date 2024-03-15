@@ -12,19 +12,30 @@
 //   List<String> selectedImages;
 //   final dynamic grey_data_pack;
 
-//   Pack1(
-//       {Key? key,
-//       required this.user,
-//       required this.selectedImages,
-//       required this.grey_data_pack})
-//       : super(key: key);
+//   Pack1({
+//     Key? key,
+//     required this.user,
+//     required this.selectedImages,
+//     required this.grey_data_pack,
+//   }) : super(key: key);
 
 //   @override
 //   State<Pack1> createState() => _Pack1State();
 // }
 
 // class _Pack1State extends State<Pack1> {
-//   List<List<dynamic>> tableRows = generateRows(20);
+//   late List<List<dynamic>> tableRows;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     // debugPrint("i AM HERE-----");
+//     // debugPrint(widget.grey_data_pack.toString());
+//     tableRows = generateRows(widget.grey_data_pack);
+
+//     //   tableRows =
+//     //       generateRows(widget.grey_data_pack, widget.grey_data_pack.length - 1);
+//   }
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -32,6 +43,7 @@
 //       user: widget.user,
 //       selectedImages: widget.selectedImages,
 //       tableRows: tableRows,
+//       grey_data_pack: widget.grey_data_pack,
 //       updateTable: (newRows) {
 //         setState(() {
 //           tableRows = newRows;
@@ -41,20 +53,21 @@
 //   }
 // }
 
-// // ignore: must_be_immutable
 // class Package1Page extends StatefulWidget {
 //   String user;
 //   List<String> selectedImages;
 //   List<List<dynamic>> tableRows;
 //   ValueChanged<List<List<dynamic>>> updateTable;
+//   final dynamic grey_data_pack;
 
-//   Package1Page({
-//     Key? key,
-//     required this.user,
-//     required this.selectedImages,
-//     required this.tableRows,
-//     required this.updateTable,
-//   }) : super(key: key);
+//   Package1Page(
+//       {Key? key,
+//       required this.user,
+//       required this.selectedImages,
+//       required this.tableRows,
+//       required this.updateTable,
+//       required this.grey_data_pack})
+//       : super(key: key);
 
 //   @override
 //   State<Package1Page> createState() => _Package1PageState();
@@ -82,8 +95,65 @@
 //     return images;
 //   }
 
+//   // Future<Uint8List> _generatePdf(
+//   //     List<Uint8List> images, List<List<dynamic>> tableRows) async {
+//   //   final doc = pw.Document();
+
+//   //   for (int i = 0; i < images.length; i++) {
+//   //     doc.addPage(
+//   //       pw.Page(
+//   //         build: (pw.Context context) {
+//   //           return pw.Center(
+//   //             child: pw.Image(pw.MemoryImage(images[i])),
+//   //           );
+//   //         },
+//   //       ),
+//   //     );
+//   //   }
+
+//   //   // Add your DataTable to the page with a larger font size (18)
+//   //   doc.addPage(
+//   //     pw.MultiPage(
+//   //       pageFormat: PdfPageFormat.a4,
+//   //       build: (pw.Context context) {
+//   //         return [
+//   //           pw.Container(
+//   //             padding: pw.EdgeInsets.all(1.0),
+//   //             // ignore: deprecated_member_use
+//   //             child: pw.Table.fromTextArray(
+//   //               context: context,
+//   //               cellAlignment: pw.Alignment.center,
+//   //               cellStyle: pw.TextStyle(
+//   //                 fontWeight: pw.FontWeight.bold,
+//   //                 fontSize: 8,
+//   //               ),
+//   //               headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+//   //               headers: [
+//   //                 'Material',
+//   //                 'Brand',
+//   //                 'Factor',
+//   //                 'Rate',
+//   //                 'Quantity',
+//   //                 'Cost'
+//   //               ],
+//   //               data: tableRows,
+//   //             ),
+//   //           ),
+//   //         ];
+//   //       },
+//   //     ),
+//   //   );
+
+//   //   final pdfBytes = await doc.save();
+//   //   return pdfBytes;
+//   // }
 //   Future<Uint8List> _generatePdf(
-//       List<Uint8List> images, List<List<dynamic>> tableRows) async {
+//     List<Uint8List> images,
+//     List<List<dynamic>> greyTableRows,
+//     List<List<dynamic>> labourTableRows,
+//     String greyTotalCost,
+//     String labourTotalCost,
+//   ) async {
 //     final doc = pw.Document();
 
 //     for (int i = 0; i < images.length; i++) {
@@ -98,24 +168,74 @@
 //       );
 //     }
 
-//     // Add your DataTable to the page with a larger font size (18)
+//     // Add Grey Structure Cost table
 //     doc.addPage(
 //       pw.MultiPage(
 //         pageFormat: PdfPageFormat.a4,
 //         build: (pw.Context context) {
 //           return [
 //             pw.Container(
-//               padding: pw.EdgeInsets.all(10.0),
-//               child: pw.Table.fromTextArray(
-//                 context: context,
-//                 cellAlignment: pw.Alignment.center,
-//                 cellStyle: pw.TextStyle(
-//                   fontWeight: pw.FontWeight.bold,
-//                   fontSize: 18,
-//                 ),
-//                 headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-//                 headers: ['Material', 'Cost', 'Quantity', 'Price'],
-//                 data: tableRows,
+//               padding: pw.EdgeInsets.all(1.0),
+//               child: pw.Column(
+//                 crossAxisAlignment: pw.CrossAxisAlignment.start,
+//                 children: [
+//                   pw.Text('Grey Structure Cost',
+//                       style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//                   pw.Text('Total Cost: $greyTotalCost',
+//                       style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//                   pw.Table.fromTextArray(
+//                     context: context,
+//                     cellAlignment: pw.Alignment.center,
+//                     cellStyle: pw.TextStyle(
+//                       fontWeight: pw.FontWeight.bold,
+//                       fontSize: 8,
+//                     ),
+//                     headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+//                     headers: [
+//                       'Material',
+//                       'Brand',
+//                       'Factor',
+//                       'Rate',
+//                       'Quantity',
+//                       'Cost'
+//                     ],
+//                     data: greyTableRows,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ];
+//         },
+//       ),
+//     );
+
+//     // Add Labour Cost table
+//     doc.addPage(
+//       pw.MultiPage(
+//         pageFormat: PdfPageFormat.a4,
+//         build: (pw.Context context) {
+//           return [
+//             pw.Container(
+//               padding: pw.EdgeInsets.all(1.0),
+//               child: pw.Column(
+//                 crossAxisAlignment: pw.CrossAxisAlignment.start,
+//                 children: [
+//                   pw.Text('Labour Cost',
+//                       style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//                   pw.Text('Total Cost: $labourTotalCost',
+//                       style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+//                   pw.Table.fromTextArray(
+//                     context: context,
+//                     cellAlignment: pw.Alignment.center,
+//                     cellStyle: pw.TextStyle(
+//                       fontWeight: pw.FontWeight.bold,
+//                       fontSize: 8,
+//                     ),
+//                     headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+//                     headers: ['Type', 'Cost'],
+//                     data: labourTableRows,
+//                   ),
+//                 ],
 //               ),
 //             ),
 //           ];
@@ -254,13 +374,6 @@
 //                 ),
 //               ),
 //               const SizedBox(height: 30),
-//               // const Text(
-//               //   'Package No. 1',
-//               //   style: TextStyle(
-//               //     fontSize: 40,
-//               //     color: Color.fromARGB(255, 0, 0, 0),
-//               //   ),
-//               // ),
 //               const Divider(
 //                 thickness: 2.0,
 //                 color: Color.fromARGB(255, 0, 0, 0),
@@ -270,28 +383,93 @@
 //                 onPressed: () => _displayPdf(context),
 //                 child: const Text("Save PDF"),
 //               ),
-//               DataTable(
-//                 columns: const [
-//                   DataColumn(label: Text('Material')),
-//                   DataColumn(label: Text('Brand')),
-//                   DataColumn(label: Text('Factor')),
-//                   DataColumn(label: Text('Rate')),
-//                   // DataColumn(label: Text('Quantity')),
-//                   // DataColumn(label: Text('Cost')),
-//                 ],
-//                 rows: widget.tableRows
-//                     .map(
-//                       (row) => DataRow(
-//                         cells: row
-//                             .map(
-//                               (item) => DataCell(
-//                                 Text(item.toString()),
-//                               ),
-//                             )
-//                             .toList(),
-//                       ),
-//                     )
-//                     .toList(),
+//               const SizedBox(
+//                   height: 20), // Add some space between button and heading
+//               const Text(
+//                 'Grey Structure Cost', // Heading text
+//                 style: TextStyle(
+//                   fontSize: 24, // Adjust the font size as needed
+//                   fontWeight: FontWeight.bold, // Make the heading bold
+//                 ),
+//               ),
+//               const SizedBox(
+//                   height: 10), // Add some space between heading and total cost
+//               Text(
+//                 'Total Cost: ${widget.grey_data_pack[1]}', // Display total cost
+//                 style: const TextStyle(
+//                   fontSize: 18, // Adjust the font size as needed
+//                   fontWeight: FontWeight.bold, // Make the total cost bold
+//                 ),
+//               ),
+//               const SizedBox(
+//                   height:
+//                       20), // Add some space between total cost and DataTable
+//               SingleChildScrollView(
+//                 scrollDirection: Axis.horizontal,
+//                 child: DataTable(
+//                   columns: const [
+//                     DataColumn(label: Text('Material')),
+//                     DataColumn(label: Text('Brand')),
+//                     DataColumn(label: Text('Factor')),
+//                     DataColumn(label: Text('Rate')),
+//                     DataColumn(label: Text('Quantity')),
+//                     DataColumn(label: Text('Cost')),
+//                   ],
+//                   rows: widget.tableRows
+//                       .map(
+//                         (row) => DataRow(
+//                           cells: row
+//                               .map(
+//                                 (item) => DataCell(
+//                                   Text(item.toString()),
+//                                 ),
+//                               )
+//                               .toList(),
+//                         ),
+//                       )
+//                       .toList(),
+//                 ),
+//               ),
+//               const SizedBox(height: 30),
+
+//               const SizedBox(height: 20),
+//               const Text(
+//                 'Labour Cost',
+//                 style: TextStyle(
+//                   fontSize: 24,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               const SizedBox(height: 10),
+//               Text(
+//                 'Total Cost: ${widget.labourTotalCost}',
+//                 style: const TextStyle(
+//                   fontSize: 18,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               const SizedBox(height: 20),
+//               SingleChildScrollView(
+//                 scrollDirection: Axis.horizontal,
+//                 child: DataTable(
+//                   columns: const [
+//                     DataColumn(label: Text('Type')),
+//                     DataColumn(label: Text('Cost')),
+//                   ],
+//                   rows: widget.labourRows
+//                       .map(
+//                         (row) => DataRow(
+//                           cells: row
+//                               .map(
+//                                 (item) => DataCell(
+//                                   Text(item.toString()),
+//                                 ),
+//                               )
+//                               .toList(),
+//                         ),
+//                       )
+//                       .toList(),
+//                 ),
 //               ),
 //               const SizedBox(height: 30),
 //             ],
@@ -302,24 +480,177 @@
 //   }
 // }
 
-// List<List<dynamic>> generateRows(int rowCount) {
+// List<List<dynamic>> generateRows(dynamic greyDataPack) {
 //   List<List<dynamic>> rows = [];
 
-//   for (int i = 1; i <= rowCount; i++) {
-//     final int cost = i * 10;
-//     final int quantity = i * 5;
-//     final int price = cost * quantity;
+//   if (greyDataPack is List && greyDataPack.isNotEmpty) {
+//     List<dynamic>? data = greyDataPack[0];
+//     if (data != null) {
+//       for (var sublist in data) {
+//         if (sublist is List && sublist.length >= 6) {
+//           final String material = sublist[0]?.toString() ?? '';
+//           final String brand = sublist[1]?.toString() ?? '';
+//           final String factor = sublist[2]?.toString() ?? '';
+//           final int cost = (sublist[3] is num) ? sublist[3].toInt() : 0;
+//           final int quantity = (sublist[4] is num) ? sublist[4].toInt() : 0;
+//           final int price = (sublist[5] is num) ? sublist[5].toInt() : 0;
 
-//     rows.add([
-//       '$i',
-//       '$cost',
-//       '$quantity',
-//       '$price',
-//     ]);
+//           rows.add([
+//             material,
+//             brand,
+//             factor,
+//             cost.toString(),
+//             quantity.toString(),
+//             price.toString(),
+//           ]);
+//         }
+//       }
+//     } else {
+//       // If data is null or empty, add a row with "No Data" message
+//       rows.add([
+//         'No Data',
+//         'No Data',
+//         'No Data',
+//         'No Data',
+//         'No Data',
+//         'No Data',
+//       ]);
+//     }
 //   }
 
 //   return rows;
 // }
+
+// // List<List<dynamic>> generateRows(dynamic greyDataPack) {
+// //   List<List<dynamic>> rows = [];
+
+// //   if (greyDataPack is List && greyDataPack.isNotEmpty) {
+// //     List<dynamic>? data = greyDataPack[0];
+// //     if (data != null) {
+// //       for (var sublist in data) {
+// //         if (sublist is List && sublist.length >= 3) {
+// //           final String material = sublist[0]?.toString() ?? '';
+// //           final String brand = sublist[1]?.toString() ?? '';
+// //           final String factor = sublist[2]?.toString() ?? '';
+// //           final int cost = (sublist[3] is num) ? sublist[3].toInt() : 0;
+// //           final int quantity = (sublist[4] is num) ? sublist[4].toInt() : 0;
+// //           final int price = cost * quantity;
+
+// //           rows.add([
+// //             material,
+// //             brand,
+// //             factor,
+// //             cost.toString(),
+// //             quantity.toString(),
+// //             price.toString(),
+// //           ]);
+// //         }
+// //       }
+// //     }
+// //   }
+
+// //   return rows;
+// // }
+
+// // List<List<dynamic>> generateRows(dynamic greyDataPack) {
+// //   List<List<dynamic>> rows = [];
+
+// //   if (greyDataPack is List && greyDataPack.isNotEmpty) {
+// //     List<dynamic> data = greyDataPack[0];
+// //     for (var sublist in data) {
+// //       if (sublist is List && sublist.length >= 3) {
+// //         final String material = sublist[0]?.toString() ?? '';
+// //         final String brand = sublist[1]?.toString() ?? '';
+// //         final String factor = sublist[2]?.toString() ?? '';
+// //         final int cost = (sublist[3] is num) ? sublist[3].toInt() : 0;
+// //         final int quantity = (sublist[4] is num) ? sublist[4].toInt() : 0;
+// //         final int price = cost * quantity;
+
+// //         rows.add([
+// //           material,
+// //           brand,
+// //           factor,
+// //           cost.toString(),
+// //           quantity.toString(),
+// //           price.toString(),
+// //         ]);
+// //       }
+// //     }
+// //   }
+
+// //   return rows;
+// // }
+
+// // List<List<dynamic>> generateRows(int rowCount) {
+// //   List<List<dynamic>> rows = [];
+
+// //   for (int i = 1; i <= rowCount; i++) {
+// //     final int cost = i * 10;
+// //     final int quantity = i * 5;
+// //     final int price = cost * quantity;
+
+// //     // Ensure each row has the same number of elements as the DataColumn
+// //     rows.add([
+// //       'Material $i',
+// //       'Brand $i',
+// //       'Factor $i',
+// //       '$cost',
+// //       '$quantity',
+// //       '$price',
+// //     ]);
+// //   }
+
+// //   return rows;
+// // // }
+// // List<List<dynamic>> generateRows(List<dynamic> greyDataPack) {
+// //   List<List<dynamic>> rows = [];
+
+// //   for (var data in greyDataPack) {
+// //     if (data is List && data.length >= 5) {
+// //       final String material = data[0]?.toString() ?? '';
+// //       final String brand = data[1]?.toString() ?? '';
+// //       final String factor = data[2]?.toString() ?? '';
+// //       final int cost = (data[3] is num) ? data[3].toInt() : 0;
+// //       final int quantity = (data[4] is num) ? data[4].toInt() : 0;
+// //       final int price = cost * quantity;
+
+// //       rows.add([
+// //         material,
+// //         brand,
+// //         factor,
+// //         cost.toString(),
+// //         quantity.toString(),
+// //         price.toString(),
+// //       ]);
+// //     }
+// //   }
+
+// //   return rows;
+// // }
+
+// // List<List<dynamic>> generateRows(List<dynamic> grey_data_pack, int length) {
+// //   List<List<dynamic>> rows = [];
+
+// //   for (int i = 0; i < length; i++) {
+// //     final String material = grey_data_pack[i][0];
+// //     final String brand = grey_data_pack[i][1];
+// //     final String factor = grey_data_pack[i][2];
+// //     final int cost = grey_data_pack[i][3];
+// //     final int quantity = grey_data_pack[i][4];
+// //     final int price = cost * quantity;
+
+// //     rows.add([
+// //       material,
+// //       brand,
+// //       factor,
+// //       '$cost',
+// //       '$quantity',
+// //       '$price',
+// //     ]);
+// //   }
+
+// //   return rows;
+// // }
 
 import 'dart:convert';
 import 'dart:typed_data';
@@ -334,30 +665,51 @@ class Pack1 extends StatefulWidget {
   String user;
   List<String> selectedImages;
   final dynamic grey_data_pack;
+  final dynamic labourData;
+  String? labour_cost;
+  String? total_cost;
 
-  Pack1({
-    Key? key,
-    required this.user,
-    required this.selectedImages,
-    required this.grey_data_pack,
-  }) : super(key: key);
+  Pack1(
+      {Key? key,
+      required this.user,
+      required this.selectedImages,
+      required this.grey_data_pack,
+      required this.labourData,
+      required this.labour_cost,
+      required this.total_cost})
+      : super(key: key);
 
   @override
   State<Pack1> createState() => _Pack1State();
 }
 
 class _Pack1State extends State<Pack1> {
-  late List<List<dynamic>> tableRows;
+  late List<List<dynamic>> greyTableRows;
+  late List<List<dynamic>> labourTableRows;
+  String? greyTotalCost;
+  String? labourTotalCost;
 
   @override
   void initState() {
     super.initState();
-    // debugPrint("i AM HERE-----");
-    // debugPrint(widget.grey_data_pack.toString());
-    tableRows = generateRows(widget.grey_data_pack);
+    greyTableRows = generateRows(widget.grey_data_pack);
+    labourTotalCost = widget.labour_cost;
+    debugPrint("Heelllloiiiiiiiii");
+    debugPrint(widget.labour_cost);
+    greyTotalCost = widget.total_cost;
+    labourTableRows = generateLabourRows(widget.labourData);
 
-    //   tableRows =
-    //       generateRows(widget.grey_data_pack, widget.grey_data_pack.length - 1);
+    // greyTotalCost = (widget.grey_data_pack[1] is num)
+    //     ? widget.grey_data_pack[1].toString()
+    //     : '';
+    // labourTotalCost =
+    //     (widget.labourData is List && widget.labourData.isNotEmpty)
+    //         ? widget.labourData
+    //             .map((e) => e[1])
+    //             .whereType<num>() // Filter out non-numeric values
+    //             .fold(0, (a, b) => a + (b as num)) // Perform addition safely
+    //             .toString()
+    //         : '';
   }
 
   @override
@@ -365,13 +717,10 @@ class _Pack1State extends State<Pack1> {
     return Package1Page(
       user: widget.user,
       selectedImages: widget.selectedImages,
-      tableRows: tableRows,
-      grey_data_pack: widget.grey_data_pack,
-      updateTable: (newRows) {
-        setState(() {
-          tableRows = newRows;
-        });
-      },
+      greyTableRows: greyTableRows,
+      labourTableRows: labourTableRows,
+      greyTotalCost: greyTotalCost,
+      labourTotalCost: labourTotalCost,
     );
   }
 }
@@ -379,17 +728,19 @@ class _Pack1State extends State<Pack1> {
 class Package1Page extends StatefulWidget {
   String user;
   List<String> selectedImages;
-  List<List<dynamic>> tableRows;
-  ValueChanged<List<List<dynamic>>> updateTable;
-  final dynamic grey_data_pack;
+  List<List<dynamic>> greyTableRows;
+  List<List<dynamic>> labourTableRows;
+  String? greyTotalCost;
+  String? labourTotalCost;
 
   Package1Page(
       {Key? key,
       required this.user,
       required this.selectedImages,
-      required this.tableRows,
-      required this.updateTable,
-      required this.grey_data_pack})
+      required this.greyTableRows,
+      required this.labourTableRows,
+      required this.greyTotalCost,
+      required this.labourTotalCost})
       : super(key: key);
 
   @override
@@ -400,7 +751,8 @@ class _Package1PageState extends State<Package1Page> {
   Future<void> _displayPdf(BuildContext context) async {
     final images = await _loadImages(widget.selectedImages);
 
-    final pdfBytes = await _generatePdf(images, widget.tableRows);
+    final pdfBytes = await _generatePdf(images, widget.greyTableRows,
+        widget.labourTableRows, widget.greyTotalCost, widget.labourTotalCost);
     await Printing.layoutPdf(
       onLayout: (PdfPageFormat format) async => pdfBytes,
       name: 'Package1.pdf',
@@ -419,7 +771,12 @@ class _Package1PageState extends State<Package1Page> {
   }
 
   Future<Uint8List> _generatePdf(
-      List<Uint8List> images, List<List<dynamic>> tableRows) async {
+    List<Uint8List> images,
+    List<List<dynamic>> greyTableRows,
+    List<List<dynamic>> labourTableRows,
+    String? greyTotalCost,
+    String? labourTotalCost,
+  ) async {
     final doc = pw.Document();
 
     for (int i = 0; i < images.length; i++) {
@@ -434,7 +791,7 @@ class _Package1PageState extends State<Package1Page> {
       );
     }
 
-    // Add your DataTable to the page with a larger font size (18)
+    // Add Grey Structure Cost table
     doc.addPage(
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
@@ -442,30 +799,74 @@ class _Package1PageState extends State<Package1Page> {
           return [
             pw.Container(
               padding: pw.EdgeInsets.all(1.0),
-              // ignore: deprecated_member_use
-              child: pw.Table.fromTextArray(
-                context: context,
-                cellAlignment: pw.Alignment.center,
-                cellStyle: pw.TextStyle(
-                  fontWeight: pw.FontWeight.bold,
-                  fontSize: 8,
-                ),
-                headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                headers: [
-                  'Material',
-                  'Brand',
-                  'Factor',
-                  'Rate',
-                  'Quantity',
-                  'Cost'
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text('Grey Structure Cost',
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Text('Total Cost: $greyTotalCost',
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Table.fromTextArray(
+                    context: context,
+                    cellAlignment: pw.Alignment.center,
+                    cellStyle: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 8,
+                    ),
+                    headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                    headers: [
+                      'Material',
+                      'Brand',
+                      'Factor',
+                      'Rate',
+                      'Quantity',
+                      'Cost'
+                    ],
+                    data: greyTableRows,
+                  ),
                 ],
-                data: tableRows,
               ),
             ),
           ];
         },
       ),
     );
+
+    // Add Labour Cost table if data is available
+    if (labourTableRows.isNotEmpty) {
+      doc.addPage(
+        pw.MultiPage(
+          pageFormat: PdfPageFormat.a4,
+          build: (pw.Context context) {
+            return [
+              pw.Container(
+                padding: pw.EdgeInsets.all(1.0),
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Text('Labour Cost',
+                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                    pw.Text('Total Cost: $labourTotalCost',
+                        style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                    pw.Table.fromTextArray(
+                      context: context,
+                      cellAlignment: pw.Alignment.center,
+                      cellStyle: pw.TextStyle(
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 8,
+                      ),
+                      headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                      headers: ['Type', 'Cost'],
+                      data: labourTableRows,
+                    ),
+                  ],
+                ),
+              ),
+            ];
+          },
+        ),
+      );
+    }
 
     final pdfBytes = await doc.save();
     return pdfBytes;
@@ -574,78 +975,6 @@ class _Package1PageState extends State<Package1Page> {
         ],
       ),
       backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      // body: SingleChildScrollView(
-      //   // scrollDirection: Axis.horizontal,
-      //   child: Padding(
-      //     padding: const EdgeInsets.all(20.0),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Container(
-      //           margin: const EdgeInsets.only(left: 40, right: 30),
-      //           height: 350,
-      //           child: ListView.builder(
-      //             scrollDirection: Axis.horizontal,
-      //             itemCount: widget.selectedImages.length,
-      //             itemBuilder: (context, index) {
-      //               return Image.memory(
-      //                 // ignore: unnecessary_null_comparison
-      //                 widget.selectedImages[index] != null
-      //                     ? base64Decode(widget.selectedImages[index])
-      //                     : Uint8List(0),
-      //               );
-      //             },
-      //           ),
-      //         ),
-      //         const SizedBox(height: 30),
-      //         // const Text(
-      //         //   'Package No. 1',
-      //         //   style: TextStyle(
-      //         //     fontSize: 40,
-      //         //     color: Color.fromARGB(255, 0, 0, 0),
-      //         //   ),
-      //         // ),
-      //         const Divider(
-      //           thickness: 2.0,
-      //           color: Color.fromARGB(255, 0, 0, 0),
-      //         ),
-      //         const SizedBox(height: 30),
-      //         ElevatedButton(
-      //           onPressed: () => _displayPdf(context),
-      //           child: const Text("Save PDF"),
-      //         ),
-      //         SingleChildScrollView(
-      //           scrollDirection: Axis.horizontal,
-      //           child: DataTable(
-      //             columns: [
-      //               DataColumn(label: Text('Material')),
-      //               DataColumn(label: Text('Brand')),
-      //               DataColumn(label: Text('Factor')),
-      //               DataColumn(label: Text('Rate')),
-      //               // Uncomment to add more columns
-      //               DataColumn(label: Text('Quantity')),
-      //               DataColumn(label: Text('Cost')),
-      //             ],
-      //             rows: widget.tableRows
-      //                 .map(
-      //                   (row) => DataRow(
-      //                     cells: row
-      //                         .map(
-      //                           (item) => DataCell(
-      //                             Text(item.toString()),
-      //                           ),
-      //                         )
-      //                         .toList(),
-      //                   ),
-      //                 )
-      //                 .toList(),
-      //           ),
-      //         ),
-      //         const SizedBox(height: 30),
-      //       ],
-      //     ),
-      //   ),
-      // ),
       body: SingleChildScrollView(
         // scrollDirection: Axis.horizontal,
         child: Padding(
@@ -691,7 +1020,7 @@ class _Package1PageState extends State<Package1Page> {
               const SizedBox(
                   height: 10), // Add some space between heading and total cost
               Text(
-                'Total Cost: ${widget.grey_data_pack[1]}', // Display total cost
+                'Total Cost: ${widget.greyTotalCost}', // Display total cost
                 style: const TextStyle(
                   fontSize: 18, // Adjust the font size as needed
                   fontWeight: FontWeight.bold, // Make the total cost bold
@@ -711,7 +1040,7 @@ class _Package1PageState extends State<Package1Page> {
                     DataColumn(label: Text('Quantity')),
                     DataColumn(label: Text('Cost')),
                   ],
-                  rows: widget.tableRows
+                  rows: widget.greyTableRows
                       .map(
                         (row) => DataRow(
                           cells: row
@@ -727,6 +1056,54 @@ class _Package1PageState extends State<Package1Page> {
                 ),
               ),
               const SizedBox(height: 30),
+
+              // Labour Table
+              if (widget.labourTableRows.isNotEmpty) ...[
+                const SizedBox(height: 20),
+                const Text(
+                  'Labour Cost',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Total Cost: ${widget.labourTotalCost}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                        minWidth: MediaQuery.of(context).size.width),
+                    child: DataTable(
+                      columns: const [
+                        DataColumn(label: Text('Type')),
+                        DataColumn(label: Text('Cost')),
+                      ],
+                      rows: widget.labourTableRows
+                          .map(
+                            (row) => DataRow(
+                              cells: row
+                                  .map(
+                                    (item) => DataCell(
+                                      Text(item.toString()),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30),
+              ],
             ],
           ),
         ),
@@ -776,141 +1153,27 @@ List<List<dynamic>> generateRows(dynamic greyDataPack) {
   return rows;
 }
 
+List<List<dynamic>> generateLabourRows(dynamic labourData) {
+  List<List<dynamic>> rows = [];
 
+  if (labourData is List && labourData.isNotEmpty) {
+    List<dynamic>? laborList = labourData[0];
+    if (laborList != null) {
+      for (var item in laborList) {
+        if (item is List && item.length == 2) {
+          final String type = item[0]?.toString() ?? '';
+          final double cost = item[1] is num ? item[1] : 0;
+          debugPrint(type);
+          debugPrint(cost.toString());
 
+          rows.add([
+            type,
+            cost.toString(),
+          ]);
+        }
+      }
+    }
+  }
 
-// List<List<dynamic>> generateRows(dynamic greyDataPack) {
-//   List<List<dynamic>> rows = [];
-
-//   if (greyDataPack is List && greyDataPack.isNotEmpty) {
-//     List<dynamic>? data = greyDataPack[0];
-//     if (data != null) {
-//       for (var sublist in data) {
-//         if (sublist is List && sublist.length >= 3) {
-//           final String material = sublist[0]?.toString() ?? '';
-//           final String brand = sublist[1]?.toString() ?? '';
-//           final String factor = sublist[2]?.toString() ?? '';
-//           final int cost = (sublist[3] is num) ? sublist[3].toInt() : 0;
-//           final int quantity = (sublist[4] is num) ? sublist[4].toInt() : 0;
-//           final int price = cost * quantity;
-
-//           rows.add([
-//             material,
-//             brand,
-//             factor,
-//             cost.toString(),
-//             quantity.toString(),
-//             price.toString(),
-//           ]);
-//         }
-//       }
-//     }
-//   }
-
-//   return rows;
-// }
-
-
-// List<List<dynamic>> generateRows(dynamic greyDataPack) {
-//   List<List<dynamic>> rows = [];
-
-//   if (greyDataPack is List && greyDataPack.isNotEmpty) {
-//     List<dynamic> data = greyDataPack[0];
-//     for (var sublist in data) {
-//       if (sublist is List && sublist.length >= 3) {
-//         final String material = sublist[0]?.toString() ?? '';
-//         final String brand = sublist[1]?.toString() ?? '';
-//         final String factor = sublist[2]?.toString() ?? '';
-//         final int cost = (sublist[3] is num) ? sublist[3].toInt() : 0;
-//         final int quantity = (sublist[4] is num) ? sublist[4].toInt() : 0;
-//         final int price = cost * quantity;
-
-//         rows.add([
-//           material,
-//           brand,
-//           factor,
-//           cost.toString(),
-//           quantity.toString(),
-//           price.toString(),
-//         ]);
-//       }
-//     }
-//   }
-
-//   return rows;
-// }
-
-
-
-
-
-// List<List<dynamic>> generateRows(int rowCount) {
-//   List<List<dynamic>> rows = [];
-
-//   for (int i = 1; i <= rowCount; i++) {
-//     final int cost = i * 10;
-//     final int quantity = i * 5;
-//     final int price = cost * quantity;
-
-//     // Ensure each row has the same number of elements as the DataColumn
-//     rows.add([
-//       'Material $i',
-//       'Brand $i',
-//       'Factor $i',
-//       '$cost',
-//       '$quantity',
-//       '$price',
-//     ]);
-//   }
-
-//   return rows;
-// // }
-// List<List<dynamic>> generateRows(List<dynamic> greyDataPack) {
-//   List<List<dynamic>> rows = [];
-
-//   for (var data in greyDataPack) {
-//     if (data is List && data.length >= 5) {
-//       final String material = data[0]?.toString() ?? '';
-//       final String brand = data[1]?.toString() ?? '';
-//       final String factor = data[2]?.toString() ?? '';
-//       final int cost = (data[3] is num) ? data[3].toInt() : 0;
-//       final int quantity = (data[4] is num) ? data[4].toInt() : 0;
-//       final int price = cost * quantity;
-
-//       rows.add([
-//         material,
-//         brand,
-//         factor,
-//         cost.toString(),
-//         quantity.toString(),
-//         price.toString(),
-//       ]);
-//     }
-//   }
-
-//   return rows;
-// }
-
-// List<List<dynamic>> generateRows(List<dynamic> grey_data_pack, int length) {
-//   List<List<dynamic>> rows = [];
-
-//   for (int i = 0; i < length; i++) {
-//     final String material = grey_data_pack[i][0];
-//     final String brand = grey_data_pack[i][1];
-//     final String factor = grey_data_pack[i][2];
-//     final int cost = grey_data_pack[i][3];
-//     final int quantity = grey_data_pack[i][4];
-//     final int price = cost * quantity;
-
-//     rows.add([
-//       material,
-//       brand,
-//       factor,
-//       '$cost',
-//       '$quantity',
-//       '$price',
-//     ]);
-//   }
-
-//   return rows;
-// }
+  return rows;
+}

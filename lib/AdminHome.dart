@@ -157,7 +157,7 @@ class _AdminHomeState extends State<AdminHome> {
                           ),
                           BoxShadow(
                             color: Colors.blue[900]!,
-                            offset: Offset(5, -5),
+                            offset: const Offset(5, -5),
                             blurRadius: 10,
                             spreadRadius: 2,
                           ),

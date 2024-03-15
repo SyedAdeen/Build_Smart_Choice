@@ -1,7 +1,7 @@
 # controllers.py
 from flask import jsonify, request
-from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
-from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetGreyMaterialCost, GetUserView, GreyView1, GreyView2, ImageView, LoginView, SignupView, VerifyUserView
+from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, LabourDetailsModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
+from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetGreyMaterialCost, GetLabourCost, GetUserView, GreyView1, GreyView2, ImageView, Labour_View, LabourView2, LoginView, SignupView, VerifyUserView
 import bcrypt
 from grey_scrap import main
 import locale
@@ -369,6 +369,8 @@ class GreyMaterialsController:
         except Exception as e:
             print(f"Error: {e}")
             return GreyView1.error_response()
+          
+
 
     def update_rate(self):
         try:
@@ -575,3 +577,201 @@ class GreyMaterialsController:
         except Exception as e:
                     print(f"Error: {e}")
                     return GetGreyMaterialCost.error_response() 
+
+
+class LabourDetailsController:
+    def __init__(self):
+        self.labour_details_model = LabourDetailsModel()
+
+    def labour_details(self):
+        try:
+            # Assuming you have a method in your model to fetch grey materials
+            labour_data = self.labour_details_model.fetch_labour_details()
+            return Labour_View.success_response(labour_data)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return Labour_View.error_response()
+        
+    def update_rate(self):
+        try:
+            # Assuming you have a method in your model to update the rate
+            data = request.get_json()            
+
+            labour_type = data.get('labour_type')
+            new_rate = data.get('new_rate')
+            print(labour_type)
+            print(new_rate)
+            # Update the rate in the model
+            success = self.labour_details_model.update_rate(labour_type, new_rate)
+
+            if success:
+                return LabourView2.success_response(message="Rate updated successfully")
+            else:
+                return LabourView2.error_response(message="Failed to update rate")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return ImageView.error_response()
+
+    def getsinglestory(self):
+            try:
+                area=request.args['area']
+                id=request.args['set']
+                print("Labour Here",area)
+                print(id)
+
+                labour_details = self.labour_details_model.get_singlestory_labour(area, id)
+
+                labour_cost = self.labour_details_model.get_singlestory_labour_cost(area, id)
+
+                print(labour_details)
+                print(labour_cost)
+
+
+
+                # Set the locale to Indian English
+                locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+                # Define the number
+                real_number = labour_cost[0][0]
+
+                # Format the number
+                formatted_number = locale.format_string("%.2f", real_number, grouping=True)
+
+
+
+                print(formatted_number)
+
+                if(formatted_number!="" and labour_details!=[]):
+                    return GetLabourCost.success_response(labour_details, formatted_number)
+                else:
+                    return GetLabourCost.error_response()
+
+
+            except Exception as e:
+                        print(f"Error: {e}")
+                        return GetLabourCost.error_response()
+
+
+    def getdoublestory(self):
+            try:
+                area=request.args['area']
+                id=request.args['set']
+                print("Labour Here",area)
+                print(id)
+
+                labour_details = self.labour_details_model.get_singlestory_labour(area, id)
+
+                labour_cost = self.labour_details_model.get_singlestory_labour_cost(area, id)
+
+                print(labour_details)
+                print(labour_cost)
+
+
+
+                # Set the locale to Indian English
+                locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+                # Define the number
+                real_number = labour_cost[0][0]
+
+                # Format the number
+                formatted_number = locale.format_string("%.2f", real_number, grouping=True)
+
+
+
+                print(formatted_number)
+
+                if(formatted_number!="" and labour_details!=[]):
+                    return GetLabourCost.success_response(labour_details, formatted_number)
+                else:
+                    return GetLabourCost.error_response()
+
+
+            except Exception as e:
+                        print(f"Error: {e}")
+                        return GetLabourCost.error_response()
+            
+
+    def getsinglestorybasement(self):
+            try:
+                area=request.args['area']
+                id=request.args['set']
+                print("Labour Here",area)
+                print(id)
+
+                labour_details = self.labour_details_model.get_singlestory_basement_labour(area, id)
+
+                labour_cost = self.labour_details_model.get_singlestory_basement_labour_cost(area, id)
+
+                print(labour_details)
+                print(labour_cost)
+
+
+
+                # Set the locale to Indian English
+                locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+                # Define the number
+                real_number = labour_cost[0][0]
+
+                # Format the number
+                formatted_number = locale.format_string("%.2f", real_number, grouping=True)
+
+
+
+                print(formatted_number)
+
+                if(formatted_number!="" and labour_details!=[]):
+                    return GetLabourCost.success_response(labour_details, formatted_number)
+                else:
+                    return GetLabourCost.error_response()
+
+
+            except Exception as e:
+                        print(f"Error: {e}")
+                        return GetLabourCost.error_response()
+
+
+
+    def getdoublestorybasement(self):
+            try:
+                area=request.args['area']
+                id=request.args['set']
+                print("Labour Here",area)
+                print(id)
+
+                labour_details = self.labour_details_model.get_doublestory_basement_labour(area, id)
+
+                labour_cost = self.labour_details_model.get_doublestory_basement_labour_cost(area, id)
+
+                print(labour_details)
+                print(labour_cost)
+
+
+
+                # Set the locale to Indian English
+                locale.setlocale(locale.LC_NUMERIC, 'en_IN')
+
+                # Define the number
+                real_number = labour_cost[0][0]
+
+                # Format the number
+                formatted_number = locale.format_string("%.2f", real_number, grouping=True)
+
+
+
+                print(formatted_number)
+
+                if(formatted_number!="" and labour_details!=[]):
+                    return GetLabourCost.success_response(labour_details, formatted_number)
+                else:
+                    return GetLabourCost.error_response()
+
+
+            except Exception as e:
+                        print(f"Error: {e}")
+                        return GetLabourCost.error_response()
+
+

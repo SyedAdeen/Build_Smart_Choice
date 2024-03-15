@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from controller import CheckPassController, CheckPassController2, FeedbackController, ForgotController, GreyMaterialsController, ImageController, LoginController, SignupController, VerifyUserController, GetUserController
+from controller import CheckPassController, CheckPassController2, FeedbackController, ForgotController, GreyMaterialsController, ImageController, LabourDetailsController, LoginController, SignupController, VerifyUserController, GetUserController
 
 app = Flask(__name__)
 CORS(app)
@@ -22,6 +22,7 @@ check_pass_controller2 = CheckPassController2()
 image_controller=ImageController()
 Grey_Controller = GreyMaterialsController()
 Get_User_controller = GetUserController()
+Labour_controller = LabourDetailsController()
 
 
 
@@ -84,6 +85,15 @@ def get_grey():
 def updaterate():
     return Grey_Controller.update_rate()
 
+@app.route('/get_labour', methods=['GET'])
+def get_labour():
+    return Labour_controller.labour_details()
+
+@app.route('/update_labour_rate', methods=['PUT'])
+def update_labour_rate():
+    return Labour_controller.update_rate()
+
+
 @app.route('/get_all_feeds', methods=['GET'])
 def get_all_feeds():
     return feedback_controller.getFeedbacks()
@@ -121,6 +131,22 @@ def double_package():
 def double_basement_package():
     return Grey_Controller.getdoublebasement()
 
+@app.route('/labour_single_package', methods=['GET'])
+def labour_single_package():
+    return Labour_controller.getsinglestory()
+
+@app.route('/labour_single_basement_package', methods=['GET'])
+def labour_single_basement_package():
+    return Labour_controller.getsinglestorybasement()
+
+
+@app.route('/labour_double_package', methods=['GET'])
+def labour_double_package():
+    return Labour_controller.getdoublestory()
+
+@app.route('/labour_double_basement_package', methods=['GET'])
+def labour_double_basement_package():
+    return Labour_controller.getdoublestorybasement()
 
 
 if __name__ == '__main__':

@@ -155,3 +155,32 @@ class GetGreyMaterialCost:
     @staticmethod
     def error_response():
         return jsonify({"error": "Internal Server Error"}), 500
+    
+
+class Labour_View:
+    @staticmethod
+    def success_response(labour_details):
+        return jsonify(labour_details)
+    
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500
+    
+class LabourView2:
+    @staticmethod
+    def success_response(message=""):
+        return jsonify({"success": True, "message": message}), 200
+
+    @staticmethod
+    def error_response(message=""):
+        return jsonify({"success": False, "error_message": message}), 500
+
+
+class GetLabourCost:
+    @staticmethod
+    def success_response(grey_materials,total_cost):
+        return jsonify(grey_materials,total_cost),200
+
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500

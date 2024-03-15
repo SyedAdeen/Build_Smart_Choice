@@ -12,12 +12,14 @@ class PackagesPage extends StatefulWidget {
   String user;
   List<String> selectedImages;
   final dynamic grey_data;
+  final dynamic labour_data;
 
   PackagesPage(
       {super.key,
       required this.user,
       required this.selectedImages,
-      required this.grey_data});
+      required this.grey_data,
+      required this.labour_data});
 
   @override
   State<PackagesPage> createState() => _PackagesPageState();
@@ -34,6 +36,17 @@ class _PackagesPageState extends State<PackagesPage> {
       }
       debugPrint(totalCost);
     }
+
+    String? labour_cost;
+    if (widget.labour_data is List<dynamic>) {
+      final lastItem = widget.labour_data.last;
+      print(widget.labour_data);
+
+      if (lastItem is String) {
+        labour_cost = lastItem;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 60, 71, 194),
@@ -143,6 +156,8 @@ class _PackagesPageState extends State<PackagesPage> {
             selectedImages: widget.selectedImages,
             totalCost: totalCost,
             grey_data: widget.grey_data,
+            labour_cost: labour_cost,
+            labour_data: widget.labour_data,
           ),
         ),
       ),
@@ -155,7 +170,10 @@ class Packs extends StatelessWidget {
   String user;
   List<String> selectedImages;
   final String? totalCost;
+  final String? labour_cost;
+
   final dynamic grey_data;
+  final dynamic labour_data;
 
   bool role = false;
 
@@ -164,7 +182,9 @@ class Packs extends StatelessWidget {
       required this.user,
       required this.selectedImages,
       required this.totalCost,
-      required this.grey_data});
+      required this.grey_data,
+      required this.labour_cost,
+      required this.labour_data});
 
   @override
   Widget build(BuildContext context) {
@@ -288,10 +308,12 @@ class Packs extends StatelessWidget {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => Pack1(
-                        user: user,
-                        selectedImages: selectedImages,
-                        grey_data_pack: grey_data,
-                      ),
+                          user: user,
+                          selectedImages: selectedImages,
+                          grey_data_pack: grey_data,
+                          labourData: labour_data,
+                          total_cost: totalCost,
+                          labour_cost: labour_cost),
                     ),
                   );
                 },
@@ -328,8 +350,15 @@ class Packs extends StatelessWidget {
                                 ),
                               ),
                               const TextSpan(
-                                text: 'Finishing material cost : 550,000 ',
+                                text: 'Finishing material cost : 550,000\n',
                                 style: TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Labour cost : $labour_cost ',
+                                style: const TextStyle(
                                   fontWeight: FontWeight.normal,
                                   fontSize: 15,
                                 ),
@@ -346,10 +375,12 @@ class Packs extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => Pack2(
-                  user: user,
-                  selectedImages: selectedImages,
-                  grey_data_pack: grey_data,
-                ),
+                    user: user,
+                    selectedImages: selectedImages,
+                    grey_data_pack: grey_data,
+                    labourData: labour_data,
+                    total_cost: totalCost,
+                    labour_cost: labour_cost),
               ),
             );
           },
@@ -386,8 +417,15 @@ class Packs extends StatelessWidget {
                           ),
                         ),
                         const TextSpan(
-                          text: 'Finishing material cost : 550,000 ',
+                          text: 'Finishing material cost : 550,000\n',
                           style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Labour cost : $labour_cost ',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -404,10 +442,12 @@ class Packs extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => Pack3(
-                  user: user,
-                  selectedImages: selectedImages,
-                  grey_data_pack: grey_data,
-                ),
+                    user: user,
+                    selectedImages: selectedImages,
+                    grey_data_pack: grey_data,
+                    labourData: labour_data,
+                    total_cost: totalCost,
+                    labour_cost: labour_cost),
               ),
             );
           },
@@ -444,8 +484,15 @@ class Packs extends StatelessWidget {
                           ),
                         ),
                         const TextSpan(
-                          text: 'Finishing material cost : 550,000 ',
+                          text: 'Finishing material cost : 550,000\n',
                           style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Labour cost : $labour_cost ',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -462,10 +509,12 @@ class Packs extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => PremiumPack(
-                  user: user,
-                  selectedImages: selectedImages,
-                  grey_data_pack: grey_data,
-                ),
+                    user: user,
+                    selectedImages: selectedImages,
+                    grey_data_pack: grey_data,
+                    labourData: labour_data,
+                    total_cost: totalCost,
+                    labour_cost: labour_cost),
               ),
             );
           },
@@ -501,8 +550,15 @@ class Packs extends StatelessWidget {
                           ),
                         ),
                         const TextSpan(
-                          text: 'Finishing material cost : 1,000,000 ',
+                          text: 'Finishing material cost : 1,000,000\n',
                           style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'Labour cost : $labour_cost ',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
