@@ -274,7 +274,7 @@ class FeedbackModel:
         finally:
             if connection and connection.is_connected():
                 connection.close()
-                print("Connection closed for fetch_grey_materials")
+                print("Connection closed for get_all_feeds")
 
     def action_update(self,action,id):
         try:
@@ -1129,6 +1129,68 @@ class GreyMaterialsModel:
             if connection and connection.is_connected():
                 connection.close()
                 print("Connection closed for get_doublebasement_greycost")
+
+
+class FinishMaterialsModel:
+
+    def fetch_finish_materials(self):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for fetch_finish_materials")
+
+                select_query = "SELECT Material_Name, Factor, Rate_A,Class_A,Rate_B, Class_B, Rate_C, Class_C, Rate_D, Class_D from Finishing_Materials;"
+                with connection.cursor(dictionary=True) as cursor:
+                    cursor.execute(select_query)
+                    finishing_materials = cursor.fetchall()
+
+                return finishing_materials
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+
+            return []
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for fetch_finish_materials")
+
+    def update_rate(self, material_name, new_rate, class_name):
+        try:
+            connection = connection_pool.get_connection()
+
+            if connection.is_connected():
+                print("Connection established for finishing_update_rate of class ", class_name)
+                update_query=""
+                if(class_name == "A"):
+                    update_query = "UPDATE Finishing_Materials SET Rate_A = %s WHERE Material_Name = %s"
+                elif(class_name == "B"):
+                    update_query = "UPDATE Finishing_Materials SET Rate_B = %s WHERE Material_Name = %s"
+                elif(class_name == "C"):
+                    update_query = "UPDATE Finishing_Materials SET Rate_C = %s WHERE Material_Name = %s"
+                elif(class_name == "D"):
+                    update_query = "UPDATE Finishing_Materials SET Rate_D = %s WHERE Material_Name = %s"
+
+                with connection.cursor() as cursor:
+                    cursor.execute(update_query, (new_rate, material_name))
+                    connection.commit()
+
+                return True
+
+        except Exception as e:
+            print(f"Error Occured: {e}")
+            return False
+
+        finally:
+            if connection and connection.is_connected():
+                connection.close()
+                print("Connection closed for finishing_update_rate of class ", class_name)
+
+
+
+
 
 
 class LabourDetailsModel:

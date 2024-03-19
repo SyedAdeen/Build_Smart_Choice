@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sampleapp/Settings.dart';
 import 'package:http/http.dart' as http;
 import 'package:sampleapp/api_urls.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GreyMaterials extends StatefulWidget {
   final String user;
@@ -29,7 +30,7 @@ class _GreyMaterialsState extends State<GreyMaterials> {
 
   Future<void> fetchGreyData() async {
     try {
-      final response = await http.get(Uri.parse('${ApiUrls.baseUrl}/get_grey'));
+      final response = await http.get(Uri.parse(ApiUrls.getGrey));
 
       if (response.statusCode == 200) {
         final List<Map<String, dynamic>> data =
@@ -326,44 +327,78 @@ class _GreyMaterialsState extends State<GreyMaterials> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          ElevatedButton(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 60, 71, 194)),
+                backgroundColor: const Color.fromARGB(255, 60, 71, 194),
+              ),
               onPressed: () {
                 scrapdata(context);
               },
-              child: const Text("Update Rates")),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  filteredData = greyData
-                      .where((data) => data['Material_Name']
-                          .toLowerCase()
-                          .contains(value.toLowerCase()))
-                      .toList();
-                });
-              },
-              decoration: const InputDecoration(
-                labelText: 'Search Material',
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
+              child: const Text("Update Rates"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {
+                    filteredData = greyData
+                        .where((data) => data['Material_Name']
+                            .toLowerCase()
+                            .contains(value.toLowerCase()))
+                        .toList();
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Search Material',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
+            const SizedBox(height: 10), // Adjust the height as needed
+            FloatingActionButton(
+              onPressed: () {
+                fetchGreyData(); // Call fetchFinishData() to refresh data
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Material Rates are Refreshed'),
+                    duration:
+                        Duration(seconds: 3), // Adjust the duration as needed
+                  ),
+                );
+              },
+              tooltip: 'Refresh',
+              child: Icon(Icons.refresh),
+            ),
+            SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(minWidth: MediaQuery.of(context).size.width),
                 child: DataTable(
                   dataRowMinHeight: 48,
-                  columns: const [
-                    DataColumn(label: Text('Material Name')),
-                    DataColumn(label: Text('Brand')),
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'Material Name',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'Brand',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
                   rows: (filteredData.isEmpty ? greyData : filteredData)
                       .asMap()
@@ -372,26 +407,28 @@ class _GreyMaterialsState extends State<GreyMaterials> {
                     final int index = entry.key;
                     final Map<String, dynamic> rowData = entry.value;
 
-                    return DataRow.byIndex(
-                      index: index,
-                      selected: selectedRowIndex == index,
-                      onSelectChanged: (isSelected) {
-                        setState(() {
-                          selectedRowIndex = (isSelected! ? index : null)!;
-                        });
-                        showEditDialog(context, rowData);
-                      },
+                    return DataRow(
                       cells: [
                         DataCell(
-                          SizedBox(
-                            width: 180,
-                            child: Text(rowData['Material_Name']),
+                          GestureDetector(
+                            onTap: () {
+                              showEditDialog(context, rowData);
+                            },
+                            child: SizedBox(
+                              width: 180,
+                              child: Text(rowData['Material_Name']),
+                            ),
                           ),
                         ),
                         DataCell(
-                          SizedBox(
-                            width: 180,
-                            child: Text(rowData['Brand'].toString()),
+                          GestureDetector(
+                            onTap: () {
+                              showEditDialog(context, rowData);
+                            },
+                            child: SizedBox(
+                              width: 180,
+                              child: Text(rowData['Brand'].toString()),
+                            ),
                           ),
                         ),
                       ],
@@ -400,175 +437,9 @@ class _GreyMaterialsState extends State<GreyMaterials> {
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
-  // body: Column(
-  //   children: [
-  //     Padding(
-  //       padding: const EdgeInsets.all(8.0),
-  //       child: TextField(
-  //         onChanged: (value) {
-  //           setState(() {
-  //             filteredData = greyData
-  //                 .where((data) => data['Material_Name']
-  //                     .toLowerCase()
-  //                     .contains(value.toLowerCase()))
-  //                 .toList();
-  //           });
-  //         },
-  //         decoration: const InputDecoration(
-  //           labelText: 'Search Material',
-  //           prefixIcon: Icon(Icons.search),
-  //           border: OutlineInputBorder(),
-  //         ),
-  //       ),
-  //     ),
-  //     Expanded(
-  //       child: SingleChildScrollView(
-  //         scrollDirection: Axis.horizontal,
-  //         child: SingleChildScrollView(
-  //           scrollDirection: Axis.vertical,
-  //           child: DataTable(
-  //             dataRowMinHeight: 40,
-  //             columns: const [
-  //               DataColumn(label: Text('Material Name')),
-  //               DataColumn(label: Text('Brand')),
-  //               DataColumn(label: Text('Factor')),
-  //               DataColumn(label: Text('Rate')),
-  //               DataColumn(label: Text('Edit')),
-  //             ],
-  //             rows: (filteredData.isEmpty ? greyData : filteredData)
-  //                 .asMap()
-  //                 .entries
-  //                 .map((entry) {
-  //               final int index = entry.key;
-  //               final Map<String, dynamic> rowData = entry.value;
-
-  //               return DataRow.byIndex(
-  //                 index: index,
-  //                 selected: selectedRowIndex == index,
-  //                 onSelectChanged: (isSelected) {
-  //                   setState(() {
-  //                     selectedRowIndex = isSelected! ? index : -1;
-  //                   });
-  //                 },
-  //                 cells: [
-  //                   DataCell(
-  //                     SizedBox(
-  //                       width: 180,
-  //                       child: Text(rowData['Material_Name']),
-  //                     ),
-  //                   ),
-  //                   DataCell(
-  //                     SizedBox(
-  //                       width: 180,
-  //                       // child: Text(rowData['Brand']),
-  //                     ),
-  //                   ),
-  //                   DataCell(
-  //                     SizedBox(
-  //                       width: 50,
-  //                       child: Text(rowData['Factor'].toString()),
-  //                     ),
-  //                   ),
-  //                   DataCell(
-  //                     SizedBox(
-  //                       width: 80,
-  //                       child: Text(rowData['Rate'].toString()),
-  //                     ),
-  //                   ),
-  //                   DataCell(
-  //                     ElevatedButton(
-  //                       style: ElevatedButton.styleFrom(
-  //                           backgroundColor:
-  //                               const Color.fromARGB(255, 60, 71, 194)),
-  //                       onPressed: () {
-  //                         showDialog(
-  //                           context: context,
-  //                           builder: (context) {
-  //                             return AlertDialog(
-  //                               title: Text(
-  //                                   'Edit Rate for ${rowData['Material_Name']}'),
-  //                               content: TextFormField(
-  //                                 controller: changedrate,
-  //                                 decoration: const InputDecoration(
-  //                                   hintText: "Upto one Decimal Place",
-  //                                 ),
-  //                                 keyboardType: TextInputType.number,
-  //                               ),
-  //                               actions: [
-  //                                 ElevatedButton(
-  //                                   style: ElevatedButton.styleFrom(
-  //                                       backgroundColor:
-  //                                           const Color.fromARGB(
-  //                                               255, 60, 71, 194)),
-  //                                   onPressed: () {
-  //                                     bool vflag =
-  //                                         isValidNumber(changedrate.text);
-  //                                     if (vflag.toString() == "false") {
-  //                                       showDialog(
-  //                                           context: context,
-  //                                           builder: (context) {
-  //                                             return AlertDialog(
-  //                                               title: const Text(
-  //                                                   'Invlaid Material Rate'),
-  //                                               content: const Text(
-  //                                                   'Field must not be empty & Number should have at most one decimal place'),
-  //                                               actions: <Widget>[
-  //                                                 TextButton(
-  //                                                   onPressed: () {
-  //                                                     Navigator.of(context)
-  //                                                         .pop(false);
-  //                                                   },
-  //                                                   child: const Text('OK'),
-  //                                                 ),
-  //                                               ],
-  //                                             );
-  //                                           });
-  //                                     } else {
-  //                                       updaterate(
-  //                                           rowData['Material_Name']
-  //                                               .toString(),
-  //                                           changedrate.text.toString());
-  //                                       changedrate.clear();
-  //                                       Navigator.pop(context);
-  //                                       fetchGreyData();
-  //                                       setState(() {});
-  //                                     }
-  //                                   },
-  //                                   child: const Text('Save'),
-  //                                 ),
-  //                                 ElevatedButton(
-  //                                   style: ElevatedButton.styleFrom(
-  //                                       backgroundColor:
-  //                                           const Color.fromARGB(
-  //                                               255, 177, 47, 38)),
-  //                                   onPressed: () {
-  //                                     changedrate.clear();
-  //                                     Navigator.of(context).pop();
-  //                                   },
-  //                                   child: const Text('Cancel'),
-  //                                 ),
-  //                               ],
-  //                             );
-  //                           },
-  //                         );
-  //                       },
-  //                       child: const Text('Edit'),
-  //                     ),
-  //                   ),
-  //                 ],
-  //               );
-  //             }).toList(),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   ],
-  // ),
-//     );
-//   }
 }

@@ -1920,4 +1920,86 @@ FROM (
 ) AS subquery;	
 
  
+-- ------------------------------
+DROP TABLE IF EXISTS FINISHING_MATERIALS;
+ 
+CREATE TABLE FINISHING_MATERIALS
+(
+MATERIAL_ID INT PRIMARY KEY AUTO_INCREMENT,
+MATERIAL_NAME VARCHAR(250),
+FACTOR VARCHAR(15),
+RATE_A FLOAT,
+CLASS_A VARCHAR(200),
+RATE_B FLOAT,
+CLASS_B VARCHAR(200),
+RATE_C FLOAT,
+CLASS_C VARCHAR(200),
+RATE_D FLOAT,
+CLASS_D VARCHAR(200)
+);
+
+INSERT INTO FINISHING_MATERIALS 
+VALUES
+(1,'Main Gate', 'Sqft', 14500, 'Al-Hadeed (Wrought Iron)', 9000, 'Aluminium House (Aluminium)', 6000, 'Steel Tech Ind. (Steel)', 4700, 'Metal Craft (Metal)');
+
+
+INSERT INTO FINISHING_MATERIALS (MATERIAL_NAME, FACTOR, RATE_A, CLASS_A, RATE_B, CLASS_B, RATE_C, CLASS_C, RATE_D, CLASS_D)
+VALUES
+('Garage Tiles', 'Sqft', 600, 'Master Tiles (Porcelain Tiles)', 350, 'Sonex Tiles (Ceramic Tiles)', 250, 'Orient Tiles (Vinyl Tile)', 170, 'Popular Tiles (Concrete Tile)'),
+('Door Bell', 'Unit', 1150, 'Clopal Night Rider', 910, 'Clopal Platinum Switch', 730, 'Clopal Ideas White', 670, 'Clopal Cloud'),
+('Entrance Door', 'Cft', 95000, 'Master Door (Teak Wood)', 46000, 'Star Plywood (MDF)', 28000, 'Master (UPVC)', 14000, 'Al Qaim (Fiber Glass)'),
+('Fan Dimmer', 'Unit', 1830, 'Clopal Pearl Bravo Series', 1500, 'Clopal Platinum Switch', 1360, 'Clopal ARC Series', 1250, 'Clopal Cloud Series'),
+('Telephone Socket', 'Unit', 1200, 'Clopal Night Rider', 1010, 'Clopal Pearl Bravo', 980, 'Clopal Elegant', 790, 'Clopal ARC'),
+('Universal Switch Socket', 'Unit', 3170, 'Clopal Pearl Bravo Series', 2700, 'Clopal Pearl Bravo', 2360, 'Clopal Platinum Switches', 1900, 'Clopal ARC'),
+('Distribution Board', 'Unit', 9120, 'Royal Electric 24/36', 6700, 'Royal Electric 20/30', 3720, 'Royal Electric 15/25', 1500, 'Royal Electric 10/12'),
+('Power Sockets', 'Unit', 1240, 'Clopal Pearl Bravo Series', 1160, 'Clopal Platinum Switch', 870, 'Clopal Golden Metalic', 720, 'Clopal Idea White'),
+('Switch Board', 'Unit', 1360, 'Clopal Platinum Switches', 1240, 'Clopal Night Rider', 1180, 'Clopal ARC', 960, 'Clopal Cloud'),
+('Room Door', 'Cft', 95000, 'Master Door (Teak Wood)', 46000, 'Star Plywood (MDF)', 28000, 'Master (UPVC)', 14000, 'Al Qaim (Fiber Glass)'),
+('Room Window aluminium+glass', 'Sqft', 1900, 'Al Farooq (aluminum frames with double-glazed tempered glass)', 1200, 'Al Fazal (Standard aluminum frames with single-glazed glass)', 900, 'AL Hafeez (Basic aluminum frames with single-glazed glass)', 900, 'AL Hafeez (Basic aluminum frames with single-glazed glass)'),
+('Wardrobe', 'Unit', 103500, 'ANTONIA Watdrobe', 78000, 'JERICHO Wardrobe Pak Tameer', 54000, 'ZOLA Wardrobe Pak Tameer', 33000, 'Elyse Wardrobe Furniture City'),
+('Fans', 'Unit', 14300, 'Royals fans (Lifestyle Ornament)', 11070, 'GFC fans', 9500, 'Royals Fan (Deluxe Imperial)', 8300, 'Rico Innovative Fans (Deluxe Standard)'),
+('Lights', 'Unit', 1270, 'Osaka 7W Light', 1100, 'Coarts 7W Light', 500, 'Orient Lighting', 320, 'Delta Lite'),
+('Paint', 'Gallon', 5000, 'Brighto Weather sheet', 4700, 'Alwan Enamel Paint', 4500, 'Happilac Plastic Emulsion', 2800, 'Alwan Wall Emulsion'),
+('Washroom Door', 'Cft', 95000, 'Master Door (Teak Wood)', 46000, 'Star Plywood (MDF)', 28000, 'Master (UPVC)', 14000, 'Al Qaim (Fiber Glass)'),
+('Washroom Exhaust Fan', 'Unit', 5370, 'GFC Plastic Exhaust Wooden', 4590, 'Royal  Exhaust Fan (2 Way)', 3790, 'Royal Exhaust Plastic Fan(1 Way)', 2990, 'GFC Window Exhaust'),
+('Washroom Slab Marble', 'Sqft', 1200, 'Ziarat Supreme White', 800, 'Ziarat White', 600, 'Strawberry Pink', 350, 'Ziarat Grey'),
+('Washroom Tiles', 'Sqft', 950, 'Master Tiles (Ceramic Tiles)', 600, 'National Tiles (Cermaic Tiles)', 400, 'Popular Tiles (Ceramic Tiles)', 300, 'Milano Tiles (Ceramic Tiles)'),
+('Washroom Wall Tiles', 'Sqft', 950, 'Master Tiles (Ceramic Tiles)', 600, 'National Tiles (Cermaic Tiles)', 400, 'Popular Tiles (Ceramic Tiles)', 300, 'Milano Tiles (Ceramic Tiles)'),
+('Washroom Window', 'Unit', 25400, '4 by 5 Aluminium Window', 20320, '4 by 4 Aluminium Window', 15240, '3 by 4 Aluminium Window', 11430, '3 by 3 Aluminium Window'),
+('Washroom Mirror', 'Unit', 17500, 'LED Vanity Royal Mirror', 13500, 'LED Fancy Royal Mirror', 8500, 'LED Round Vanity Royal Mirror', 2780, 'Faisal Sanitary Plastic Mirror'),
+('Muslim Shower Set', 'Unit', 3050, 'Master Sanitary Fitting', 2710, 'Vigo', 1950, 'Echo Sanitary Ware', 1650, 'Faco Sanitary Ware'),
+('Senitary Set (Shower Set)', 'Unit', 45000, 'Grohe Pakistan', 28000, 'Cera Sanitary Ware', 18000, 'Sonex Sanitary Ware', 16000, 'Faisal Sanitary Ware'),
+('Toilet Seat', 'Unit', 26600, 'Master Sanitary Ware', 18400, 'Pool Sanitary Ware', 15600, 'GALAXY Sanitary Ware', 11660, 'Pool Sanitary Ware'),
+('Wash Basin', 'Unit', 35000, 'Kohler Sanitary', 19000, 'Sonex Sanitary', 15000, 'Faisal Sanitary', 11000, 'Master Sanitary'),
+('Kitchen Cabinets', 'Linear Foot', 12000, 'Inter Wood (MDF with laminate finish)', 10000, 'Master Kitchen (MDF with Laminate finish)', 8000, 'Al Habib (Engineered Wood MDF)', 4500, 'Al Habib (Particle Board or MDF)'),
+('Kitchen Exhaust Fans', 'Unit', 11400, 'Royal Exhaust Metal High Speed', 5510, 'GFC Metal Vip Exhaust Fan', 4390, 'Royal Metal Exhaust Fan', 2990, 'Royal Fans'),
+('Kitchen Hood', 'Unit', 64800, 'HAIER HOOD', 56000, 'Hanco Hood', 33000, 'Nas Gas Hood', 31250, 'Super Asia Kitchen Hood'),
+('Kitchen Slabs', 'Sqft', 3000, 'Granite', 1200, 'Ziarat Supreme White', 800, 'Ziarat White', 350, 'Ziarat Grey'),
+('Kitchen Stove', 'Unit', 81400, 'Dawlance', 76200, 'Haier', 24000, 'Golden Fuji', 17100, 'Aardee Gas Hob'),
+('Kitchen Wall Tiles', 'Sqft', 1400, 'Sonex Ceramics', 1050, 'Master Tiles', 800, 'Stile Tiles', 500, 'Popular Tiles'),
+('Kitchen Wash Basin', 'Unit', 33120, 'Impotrted Double Kitchen Sink', 23500, 'Impotrted Double Kitchen Sink', 22250, 'Imported Double Kitchen Sink', 16000, 'Sus 304 Stainless Steel'),
+('Kitchen Window', 'Sqft', 1900, 'Al Farooq (aluminum frames with double-glazed tempered glass)', 1200, 'Al Fazal (Standard aluminum frames with single-glazed glass)', 900, 'AL Hafeez (Basic aluminum frames with single-glazed glass)', 900, 'AL Hafeez (Basic aluminum frames with single-glazed glass)'),
+('Floor Tiles', 'Sqft', 1300, 'Master Tiles (Ceramic Tiles)', 700, 'Sonex Tiles (Cermaic Tiles)', 550, 'Popular Tiles (Ceramic Tiles)', 300, 'Milano Tiles (Ceramic Tiles)'),
+('Stairs Reiling', 'Linear Foot', 3000, 'Stainless Steel Solutions', 2500, 'Aluminium Creations Pakistan', 1500, 'Steel Crafts Pakistan', 1200, 'Apna Iron Works'),
+('Stairs Tiles', 'Sqft', 800, 'Granite', 550, 'Hard Wood (Maple)', 350, 'Ceramic', 150, 'Vinyl'),
+('Chandelier', 'Unit', 560000, 'Naeem Trading',560000, 'Naeem Trading', 280000, 'Ceiling Lighting Crystal Chandelier',280000, 'Ceiling Lighting Crystal Chandelier'),
+('False Ceiling', 'Sqft', 150, 'Decorita Home services', 120, 'Decorita Home services', 100, 'Decorita Home services', 100, 'Decorita Home services'),
+('Floor Skirting', 'Sqft', 2500, 'Indus Gold', 1800, 'Sunny Grey', 1500, 'Diana Marble', 1000, 'Sahara Beige'),
+('Geyser', 'Unit', 55500, 'Nas Gas Super Heavy', 49800, 'Nas Gas Super Deluxe', 49800, 'Nas Gas Super Deluxe', 41250, 'Nas Gas Deluxe');
+
+
+SELECT * FROM FINISHING_MATERIALS;
+
+SELECT Material_Name, Factor, Rate_A,Class_A,Rate_B, Class_B, Rate_C, Class_C, Rate_D, Class_D 
+from Finishing_Materials;
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
  

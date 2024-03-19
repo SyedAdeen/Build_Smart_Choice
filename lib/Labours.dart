@@ -317,7 +317,7 @@ class _LaboursDataState extends State<LaboursData> {
               ),
               DataColumn(
                 label: Text(
-                  'RATE',
+                  'Rate',
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

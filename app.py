@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from controller import CheckPassController, CheckPassController2, FeedbackController, ForgotController, GreyMaterialsController, ImageController, LabourDetailsController, LoginController, SignupController, VerifyUserController, GetUserController
+from controller import CheckPassController, CheckPassController2, FeedbackController, FinishMaterialsController, ForgotController, GreyMaterialsController, ImageController, LabourDetailsController, LoginController, SignupController, VerifyUserController, GetUserController
 
 app = Flask(__name__)
 CORS(app)
@@ -21,6 +21,7 @@ check_pass_controller = CheckPassController()
 check_pass_controller2 = CheckPassController2()
 image_controller=ImageController()
 Grey_Controller = GreyMaterialsController()
+Finish_Controller = FinishMaterialsController()
 Get_User_controller = GetUserController()
 Labour_controller = LabourDetailsController()
 
@@ -81,9 +82,17 @@ def get_imagesb2():
 def get_grey():
     return Grey_Controller.fetch_grey_materials()
 
+@app.route('/get_finish', methods=['GET'])
+def get_finish():
+    return Finish_Controller.fetch_finish_materials()
+
 @app.route('/updaterate', methods=['PUT'])
 def updaterate():
     return Grey_Controller.update_rate()
+
+@app.route('/update_finish_rate', methods=['PUT'])
+def update_finish_rate():
+    return Finish_Controller.update_rate()
 
 @app.route('/get_labour', methods=['GET'])
 def get_labour():

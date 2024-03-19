@@ -31,7 +31,7 @@ class _UserFeedbacksState extends State<UserFeedbacks> {
       if (response.statusCode == 200) {
         final List<Map<String, dynamic>> data =
             List<Map<String, dynamic>>.from(json.decode(response.body));
-        // debugPrint("RESPONSE BODY = ${response.body}");
+        debugPrint("RESPONSE BODY = ${response.body}");
 
         setState(() {
           userFeedbacks =
@@ -333,7 +333,7 @@ class _UserFeedbacksState extends State<UserFeedbacks> {
             });
       }
     } catch (e) {
-      debugPrint('Error UPdating Action: $e');
+      debugPrint('Error Updating Action: $e');
     }
   }
 }

@@ -1,7 +1,7 @@
 # controllers.py
 from flask import jsonify, request
-from model import CheckPassModel, CheckPassModel2, FeedbackModel, ForgotModel, GreyMaterialsModel, ImageModel, LabourDetailsModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
-from view import CheckPassView, FeedbackView, ForgotView, GetFeedView, GetGreyMaterialCost, GetLabourCost, GetUserView, GreyView1, GreyView2, ImageView, Labour_View, LabourView2, LoginView, SignupView, VerifyUserView
+from model import CheckPassModel, CheckPassModel2, FeedbackModel, FinishMaterialsModel, ForgotModel, GreyMaterialsModel, ImageModel, LabourDetailsModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
+from view import CheckPassView, FeedbackView, FinishView1, FinishView2, ForgotView, GetFeedView, GetGreyMaterialCost, GetLabourCost, GetUserView, GreyView1, GreyView2, ImageView, Labour_View, LabourView2, LoginView, SignupView, VerifyUserView
 import bcrypt
 from grey_scrap import main
 import locale
@@ -577,6 +577,53 @@ class GreyMaterialsController:
         except Exception as e:
                     print(f"Error: {e}")
                     return GetGreyMaterialCost.error_response() 
+
+
+class FinishMaterialsController:
+
+    def __init__(self):
+        self.finshing_materials_model = FinishMaterialsModel()
+     
+    def fetch_finish_materials(self):
+        try:
+            # Assuming you have a method in your model to fetch grey materials
+
+            finish_materials = self.finshing_materials_model.fetch_finish_materials()
+            return FinishView1.success_response(finish_materials)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return GreyView1.error_response()
+        
+
+    def update_rate(self):
+        try:
+            # Assuming you have a method in your model to update the rate
+            data = request.get_json()
+            
+
+            material_name = data.get('material_name')
+            new_rate = data.get('new_rate')
+            class_name = data.get('class_name')
+            print(material_name)
+            print(new_rate)
+            print(class_name)
+            # Update the rate in the model
+            success = self.finshing_materials_model.update_rate(material_name, new_rate,class_name)
+
+            if success:
+                return FinishView2.success_response(message="Rate updated successfully")
+            else:
+                return FinishView2.error_response(message="Failed to update rate")
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return ImageView.error_response()
+          
+
+
+
+
 
 
 class LabourDetailsController:

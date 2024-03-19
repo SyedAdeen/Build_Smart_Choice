@@ -138,6 +138,25 @@ class GreyView1:
     def error_response():
         return jsonify({"error": "Internal Server Error"}), 500
 
+
+class FinishView1:
+    @staticmethod
+    def success_response(finish_materials):
+        return jsonify(finish_materials)
+    
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500
+
+class FinishView2:
+    @staticmethod
+    def success_response(message=""):
+        return jsonify({"success": True, "message": message}), 200
+
+    @staticmethod
+    def error_response(message=""):
+        return jsonify({"success": False, "error_message": message}), 500
+
 class GreyView2:
     @staticmethod
     def success_response(message=""):

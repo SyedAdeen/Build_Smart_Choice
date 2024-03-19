@@ -48,9 +48,12 @@ SET action = 'Pending'
 WHERE action IS NULL;
 -- ---------------- 
 select * from feedbacks;  
-SELECT users.USERNAME, users.EMAIL_ADDRESS, feedbacks.FEEDBACK_ID,feedbacks.detail, feedbacks.date_time, feedbacks.Action
+SELECT users.USERNAME, users.EMAIL_ADDRESS, feedbacks.FEEDBACK_ID,feedbacks.detail, 
+feedbacks.date_time, feedbacks.Action
 FROM users
 INNER JOIN feedbacks ON users.USER_ID = feedbacks.USER_ID_FK order by feedbacks.DATE_TIME desc;
+
+
 
 
 

@@ -42,6 +42,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
   String? checkemail, checkpass;
 
+  late Timer _timer;
+  int _start = 60;
+  bool _timerRunning = true;
+  bool _submitEnabled = true;
+
   String? _validatePassword(String? value) {
     if (value == null ||
         value.isEmpty ||
@@ -138,6 +143,148 @@ class _SignUpPageState extends State<SignUpPage> {
   //   });
   // }
 
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (timer) {
+      if (_start == 0) {
+        _timerRunning = false; // Stop the timer
+        _timer.cancel(); // Cancel the timer
+        setState(() {
+          _submitEnabled = false; // Disable the Submit Button
+        });
+      } else {
+        setState(() {
+          _start--; // Decrement the timer
+        });
+      }
+    });
+  }
+
+  void _sendVerificationCode() {
+    setState(() {
+      _start = 60; // Reset the timer to 60 seconds
+      _timerRunning = true; // Start the timer
+      _submitEnabled = true; // Enable the Submit Button
+    });
+    startTimer(); // Start the countdown
+  }
+
+  // void resendOTP() {
+  //   _timer.cancel(); // Cancel the current timer
+  //   _sendVerificationCode(); // Reset timer and resend OTP
+  // }
+
+  void cancelVerification() {
+    _timer.cancel();
+    setState(() {
+      _timerRunning = false;
+      _submitEnabled = true;
+    });
+    Navigator.of(context).pop(); // Close the dialog
+  }
+
+  void showOTPDialogue(BuildContext context) async {
+    _sendVerificationCode(); // Start the timer when showing the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              return Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'OTP Verification',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Text(
+                      'Verification Code sent to ${_emailController.text}',
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 20.0),
+                    TextField(
+                      controller: _otpController,
+                      keyboardType: TextInputType.number,
+                      maxLength: 6,
+                      decoration: const InputDecoration(
+                        labelText: 'Enter OTP',
+                      ),
+                    ),
+                    const SizedBox(height: 20.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _timerRunning
+                            ? Text(
+                                "Resend OTP in $_start seconds",
+                                style: TextStyle(color: Colors.grey[700]),
+                              )
+                            : Container(),
+                        ElevatedButton(
+                          onPressed: _timerRunning ? null : () => resendOTP(),
+                          child: Opacity(
+                            opacity: _timerRunning ? 0.5 : 1.0,
+                            child: Text(
+                              'Resend OTP',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blueGrey,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _submitEnabled
+                              ? () async {
+                                  await verifyOTP(context);
+                                }
+                              : null,
+                          child: Text(
+                            'Submit OTP',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary:
+                                _submitEnabled ? Colors.green : Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(width: 10.0),
+                        ElevatedButton(
+                          onPressed: () => cancelVerification(),
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
   void showOtpDialog(BuildContext context) async {
     showDialog(
       context: context,
@@ -170,6 +317,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   verifyOTP(context);
                 },
                 child: const Text("Verify")),
+            ElevatedButton(
+                onPressed: () async {
+                  resendOTP();
+                },
+                child: const Text("Resend")),
           ],
         );
       },
@@ -221,8 +373,10 @@ class _SignUpPageState extends State<SignUpPage> {
       _otpController.clear();
       addUser();
     } else {
+      // ignore: use_build_context_synchronously
       FocusScope.of(context).unfocus();
 
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -261,6 +415,30 @@ class _SignUpPageState extends State<SignUpPage> {
   void verifyEmail() {
     sendOTP();
     showOtpDialog(context);
+  }
+
+  void resendOTP() {
+    Navigator.of(context).pop(); // Close the dialog
+    verifyEmail();
+    FocusScope.of(context).unfocus();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('RESEND OTP'),
+          content: const Text('OTP is sent.'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the alert dialog
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> addUser() async {
