@@ -12,15 +12,17 @@ import 'Settings.dart';
 // ignore: must_be_immutable
 class ImageListScreen extends StatefulWidget {
   final String user;
-  final String storey;
+  String storey;
   String area;
+  String budget;
 
-  ImageListScreen({
-    Key? key,
-    required this.user,
-    required this.storey,
-    required this.area,
-  }) : super(key: key);
+  ImageListScreen(
+      {Key? key,
+      required this.user,
+      required this.storey,
+      required this.area,
+      required this.budget})
+      : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -35,11 +37,15 @@ class _ImageListScreenState extends State<ImageListScreen> {
   @override
   void initState() {
     super.initState();
+    widget.storey = "1";
+    debugPrint("Storey = ${widget.storey}");
+    debugPrint("Area = ${widget.area}");
     fetchImagesData();
   }
 
   Future<void> fetchImagesData() async {
     try {
+      debugPrint("Budget Selected  =  ${widget.budget}");
       if (widget.area == 1.toString()) {
         final response = await http.get(
             Uri.parse('${ApiUrls.baseUrl}/get_images1?table_name=layout_10'));
@@ -111,10 +117,15 @@ class _ImageListScreenState extends State<ImageListScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }
@@ -137,10 +148,15 @@ class _ImageListScreenState extends State<ImageListScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }
@@ -164,10 +180,15 @@ class _ImageListScreenState extends State<ImageListScreen> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }

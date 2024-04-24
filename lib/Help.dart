@@ -181,7 +181,7 @@ class HelpPage extends StatelessWidget {
                         NumberedText('2. Select number of Floors'),
                         const SizedBox(height: 7.0),
                         NumberedText(
-                            '3. Provide your overall budget for the\n     House Construction in PKR'),
+                            '3. Provide your overall budget for the\n    House Construction in PKR'),
                         const SizedBox(height: 7.0),
                         NumberedText(
                             '4. We will provide you floor plans\n     according to your plot size'),

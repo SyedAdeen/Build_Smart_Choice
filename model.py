@@ -1193,6 +1193,528 @@ class FinishMaterialsModel:
 
 
 
+    def get_singlestory_finishing(self,area,id,predicted_array):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                area_qty=""
+                j=0
+
+
+                if(area=='3'):
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+                elif(area=='5'):
+                    layout="LAYOUT_5_ID"
+                    area_qty="5 MARLA"
+                elif(area=='7'):
+                    layout="LAYOUT_7_ID"
+                    area_qty="7 MARLA"
+                elif(area=='1'):
+                    layout="LAYOUT_10_ID"
+                    area_qty="10 MARLA"                    
+                elif(area=='2'):
+                    layout="LAYOUT_20_ID"
+                    area_qty="20 MARLA"
+
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+
+                finishing_materials_data = []
+                print("Got Set Id = ",id)
+
+                if connection.is_connected():
+                    print("Connection established for get_singlestory_finishing")
+
+                    get_query ="""
+                        SELECT 
+                        A.MATERIAL_NAME,
+                        A.CLASS_D,
+                        A.FACTOR,
+                        ROUND((A.RATE_D),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY) AS total_quantity,
+                        ROUND((A.RATE_D * (B.GROUND_QTY + B.ROOFTOP_QTY)),0) AS total_cost
+                    FROM 
+                        finishing_materials AS A
+                    JOIN 
+                        filter_finishing_materials AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s
+                        AND B.LAYOUT_3_ID = %s;
+
+                        """
+                    predicted_array = [float(x) for x in predicted_array.strip("[]").split(", ")]
+                    print("Got predicted_array",predicted_array)
+
+                    change_class="A.CLASS_D"
+                    change_rate="A.RATE_D"
+
+                    connection = connection_pool.get_connection()
+
+                    for i in range(len(predicted_array)):
+
+                        if(predicted_array[i]>4.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_D")
+                            get_query = get_query.replace(change_rate, "A.RATE_D")
+                            change_class="A.CLASS_D"
+                            change_rate="A.RATE_D"
+
+                        
+                        elif(predicted_array[i]<1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+
+                        elif(predicted_array[i]==3.0):        
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)               
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+                        elif(predicted_array[i]==2.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_B")
+                            get_query = get_query.replace(change_rate, "A.RATE_B")
+                            change_class="A.CLASS_B"
+                            change_rate="A.RATE_B"
+
+                        elif(predicted_array[i]==1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
+
+
+                        get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+                        with connection.cursor() as cursor:
+                            cursor.execute(get_query, (area_qty, id))
+                            results = cursor.fetchall()  # Fetch all rows returned by the query
+                            
+                            finishing_materials_data.append(results[j])
+                            j=j+1
+
+
+                    finish_cost = 0.0
+                    # print(finishing_materials_data)
+
+                    for i in range(len(finishing_materials_data)):
+                        finish_cost=finish_cost+float(finishing_materials_data[i][5])
+                        # print(finishing_materials_data[i][5])
+
+                    print("Total Cost = ",finish_cost)
+                    finishing_materials_data.append(finish_cost)
+                    return finishing_materials_data
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_singlestory_finishing")
+
+
+
+
+    def get_singlestorybasement_finishing(self,area,id,predicted_array):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                area_qty=""
+                j=0
+
+
+                if(area=='3'):
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+                elif(area=='5'):
+                    layout="LAYOUT_5_ID"
+                    area_qty="5 MARLA"
+                elif(area=='7'):
+                    layout="LAYOUT_7_ID"
+                    area_qty="7 MARLA"
+                elif(area=='1'):
+                    layout="LAYOUT_10_ID"
+                    area_qty="10 MARLA"                    
+                elif(area=='2'):
+                    layout="LAYOUT_20_ID"
+                    area_qty="20 MARLA"
+
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+
+                finishing_materials_data = []
+                print("Got Set Id = ",id)
+
+                if connection.is_connected():
+                    print("Connection established for get_singlestorybasement_finishing")
+
+                    get_query ="""
+                        SELECT 
+                        A.MATERIAL_NAME,
+                        A.CLASS_D,
+                        A.FACTOR,
+                        ROUND((A.RATE_D),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY +B.BASEMENT_QTY) AS total_quantity,
+                        ROUND((A.RATE_D * (B.GROUND_QTY + B.ROOFTOP_QTY + B.BASEMENT_QTY)),0) AS total_cost
+                    FROM 
+                        finishing_materials AS A
+                    JOIN 
+                        filter_finishing_materials AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s
+                        AND B.LAYOUT_3_ID = %s;
+
+                        """
+                    predicted_array = [float(x) for x in predicted_array.strip("[]").split(", ")]
+                    print("Got predicted_array",predicted_array)
+
+                    change_class="A.CLASS_D"
+                    change_rate="A.RATE_D"
+
+                    connection = connection_pool.get_connection()
+
+                    for i in range(len(predicted_array)):
+
+                        if(predicted_array[i]>4.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_D")
+                            get_query = get_query.replace(change_rate, "A.RATE_D")
+                            change_class="A.CLASS_D"
+                            change_rate="A.RATE_D"
+
+                        
+                        elif(predicted_array[i]<1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+
+                        elif(predicted_array[i]==3.0):        
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)               
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+                        elif(predicted_array[i]==2.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_B")
+                            get_query = get_query.replace(change_rate, "A.RATE_B")
+                            change_class="A.CLASS_B"
+                            change_rate="A.RATE_B"
+
+                        elif(predicted_array[i]==1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
+
+
+                        get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+                        with connection.cursor() as cursor:
+                            cursor.execute(get_query, (area_qty, id))
+                            results = cursor.fetchall()  # Fetch all rows returned by the query
+                            
+                            finishing_materials_data.append(results[j])
+                            j=j+1
+
+
+                    finish_cost = 0.0
+                    # print(finishing_materials_data)
+
+                    for i in range(len(finishing_materials_data)):
+                        finish_cost=finish_cost+float(finishing_materials_data[i][5])
+                        # print(finishing_materials_data[i][5])
+
+                    print("Total Cost = ",finish_cost)
+                    finishing_materials_data.append(finish_cost)
+                    return finishing_materials_data
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_singlestorybasement_finishing")
+
+
+
+    def get_doublestory_finishing(self,area,id,predicted_array):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                area_qty=""
+                j=0
+
+
+                if(area=='3'):
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+                elif(area=='5'):
+                    layout="LAYOUT_5_ID"
+                    area_qty="5 MARLA"
+                elif(area=='7'):
+                    layout="LAYOUT_7_ID"
+                    area_qty="7 MARLA"
+                elif(area=='1'):
+                    layout="LAYOUT_10_ID"
+                    area_qty="10 MARLA"                    
+                elif(area=='2'):
+                    layout="LAYOUT_20_ID"
+                    area_qty="20 MARLA"
+
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+
+                finishing_materials_data = []
+                print("Got Set Id = ",id)
+
+                if connection.is_connected():
+                    print("Connection established for get_doublestory_finishing")
+
+                    get_query ="""
+                        SELECT 
+                        A.MATERIAL_NAME,
+                        A.CLASS_D,
+                        A.FACTOR,
+                        ROUND((A.RATE_D),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY + B.FIRST_FLOOR_QTY) AS total_quantity,
+                        ROUND((A.RATE_D * (B.GROUND_QTY + B.ROOFTOP_QTY + B.FIRST_FLOOR_QTY)),0) AS total_cost
+                    FROM 
+                        finishing_materials AS A
+                    JOIN 
+                        filter_finishing_materials AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s
+                        AND B.LAYOUT_3_ID = %s;
+
+                        """
+                    predicted_array = [float(x) for x in predicted_array.strip("[]").split(", ")]
+                    print("Got predicted_array",predicted_array)
+
+                    change_class="A.CLASS_D"
+                    change_rate="A.RATE_D"
+
+                    connection = connection_pool.get_connection()
+
+                    for i in range(len(predicted_array)):
+
+                        if(predicted_array[i]>4.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_D")
+                            get_query = get_query.replace(change_rate, "A.RATE_D")
+                            change_class="A.CLASS_D"
+                            change_rate="A.RATE_D"
+
+                        
+                        elif(predicted_array[i]<1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+
+                        elif(predicted_array[i]==3.0):        
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)               
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+                        elif(predicted_array[i]==2.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_B")
+                            get_query = get_query.replace(change_rate, "A.RATE_B")
+                            change_class="A.CLASS_B"
+                            change_rate="A.RATE_B"
+
+                        elif(predicted_array[i]==1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
+
+
+                        get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+                        with connection.cursor() as cursor:
+                            cursor.execute(get_query, (area_qty, id))
+                            results = cursor.fetchall()  # Fetch all rows returned by the query
+                            
+                            finishing_materials_data.append(results[j])
+                            j=j+1
+
+
+                    finish_cost = 0.0
+                    # print(finishing_materials_data)
+
+                    for i in range(len(finishing_materials_data)):
+                        finish_cost=finish_cost+float(finishing_materials_data[i][5])
+                        # print(finishing_materials_data[i][5])
+
+                    print("Total Cost = ",finish_cost)
+                    finishing_materials_data.append(finish_cost)
+                    return finishing_materials_data
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_doublestory_finishing")
+
+
+
+
+    def get_doublestorybasement_finishing(self,area,id,predicted_array):
+            try:
+                connection = connection_pool.get_connection()
+                layout="LAYOUT_3_ID"
+
+                area_qty=""
+                j=0
+
+
+                if(area=='3'):
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+                elif(area=='5'):
+                    layout="LAYOUT_5_ID"
+                    area_qty="5 MARLA"
+                elif(area=='7'):
+                    layout="LAYOUT_7_ID"
+                    area_qty="7 MARLA"
+                elif(area=='1'):
+                    layout="LAYOUT_10_ID"
+                    area_qty="10 MARLA"                    
+                elif(area=='2'):
+                    layout="LAYOUT_20_ID"
+                    area_qty="20 MARLA"
+
+                else:
+                    print("Issue on Layout Id")
+                    layout="LAYOUT_3_ID"
+                    area_qty="3 MARLA"
+
+                finishing_materials_data = []
+                print("Got Set Id = ",id)
+
+                if connection.is_connected():
+                    print("Connection established for get_doublestorybasement_finishing")
+
+                    get_query ="""
+                        SELECT 
+                        A.MATERIAL_NAME,
+                        A.CLASS_D,
+                        A.FACTOR,
+                        ROUND((A.RATE_D),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY + B.FIRST_FLOOR_QTY + B.BASEMENT_QTY) AS total_quantity,
+                        ROUND((A.RATE_D * (B.GROUND_QTY + B.ROOFTOP_QTY + B.FIRST_FLOOR_QTY + B.BASEMENT_QTY)),0) AS total_cost
+                    FROM 
+                        finishing_materials AS A
+                    JOIN 
+                        filter_finishing_materials AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = %s
+                        AND B.LAYOUT_3_ID = %s;
+
+                        """
+                    predicted_array = [float(x) for x in predicted_array.strip("[]").split(", ")]
+                    print("Got predicted_array",predicted_array)
+
+                    change_class="A.CLASS_D"
+                    change_rate="A.RATE_D"
+
+                    connection = connection_pool.get_connection()
+
+                    for i in range(len(predicted_array)):
+
+                        if(predicted_array[i]>4.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_D")
+                            get_query = get_query.replace(change_rate, "A.RATE_D")
+                            change_class="A.CLASS_D"
+                            change_rate="A.RATE_D"
+
+                        
+                        elif(predicted_array[i]<1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+
+                        elif(predicted_array[i]==3.0):        
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)               
+                            get_query = get_query.replace(change_class, "A.CLASS_C")
+                            get_query = get_query.replace(change_rate, "A.RATE_C")
+                            change_class="A.CLASS_C"
+                            change_rate="A.RATE_C"
+
+                        elif(predicted_array[i]==2.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_B")
+                            get_query = get_query.replace(change_rate, "A.RATE_B")
+                            change_class="A.CLASS_B"
+                            change_rate="A.RATE_B"
+
+                        elif(predicted_array[i]==1.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
+
+
+                        get_query = get_query.replace("B.LAYOUT_3_ID", layout)
+
+                        with connection.cursor() as cursor:
+                            cursor.execute(get_query, (area_qty, id))
+                            results = cursor.fetchall()  # Fetch all rows returned by the query
+                            
+                            finishing_materials_data.append(results[j])
+                            j=j+1
+
+
+                    finish_cost = 0.0
+                    # print(finishing_materials_data)
+
+                    for i in range(len(finishing_materials_data)):
+                        finish_cost=finish_cost+float(finishing_materials_data[i][5])
+                        # print(finishing_materials_data[i][5])
+
+                    print("Total Cost = ",finish_cost)
+                    finishing_materials_data.append(finish_cost)
+                    return finishing_materials_data
+
+            except Exception as e:
+                print(f"Error Occured: {e}")
+                return False
+
+            finally:
+                if connection and connection.is_connected():
+                    connection.close()
+                    print("Connection closed for get_doublestorybasement_finishing")
+
+
+
 class LabourDetailsModel:
     def fetch_labour_details(self):
         try:

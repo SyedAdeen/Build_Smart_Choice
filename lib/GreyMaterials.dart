@@ -199,11 +199,14 @@ class _GreyMaterialsState extends State<GreyMaterials> {
           await http.put(Uri.parse('${ApiUrls.baseUrl}/scrap_data'));
 
       if (response.statusCode == 200) {
+        // ignore: use_build_context_synchronously
         Navigator.pop(context); // Dismiss the loading indicator
         fetchGreyData();
         // ignore: use_build_context_synchronously
         // Fetch the updated data
         setState(() {});
+
+        // ignore: use_build_context_synchronously
         showUpdateDialog(context);
 
         // Trigger a rebuild to update the UI

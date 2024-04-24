@@ -1,10 +1,15 @@
 # controllers.py
 from flask import jsonify, request
 from model import CheckPassModel, CheckPassModel2, FeedbackModel, FinishMaterialsModel, ForgotModel, GreyMaterialsModel, ImageModel, LabourDetailsModel, UserModel, UserAuthModel, SignupModel, VerifyUserModel,GetUserModel
-from view import CheckPassView, FeedbackView, FinishView1, FinishView2, ForgotView, GetFeedView, GetGreyMaterialCost, GetLabourCost, GetUserView, GreyView1, GreyView2, ImageView, Labour_View, LabourView2, LoginView, SignupView, VerifyUserView
+from view import CheckPassView, FeedbackView, FinishView1, FinishView2, ForgotView, GetFeedView, GetGreyMaterialCost, GetLabourCost, GetRecommendation, GetUserView, GreyView1, GreyView2, ImageView, Labour_View, LabourView2, LoginView, SignupView, VerifyUserView
 import bcrypt
 from grey_scrap import main
 import locale
+from bsc_train_test import main2
+import numpy as np
+import json
+
+
 
 
 class LoginController:
@@ -279,18 +284,6 @@ class CheckPassController2:
 
         except Exception as e:
             return jsonify(CheckPassView.error_response(str(e))), 500
-
-
-# class GreyController:
-#     def __init__(self) -> None:
-#         pass
-#     def fetch_grey_data(self):
-#         {
-#             try:
-            
-
-#         }
-
 
 
 class ImageController:
@@ -619,10 +612,107 @@ class FinishMaterialsController:
         except Exception as e:
             print(f"Error: {e}")
             return ImageView.error_response()
+    
+    
+    
+    def recommendation(self):
+
+        try:
+                
+            min = request.args['min']
+
+            max = request.args['max']
+            area=request.args['area']
+            floor = request.args['floor']
+            min=int(min)
+            val1=min+500000
+            print(val1)
+
+
+            print("Printing Parameters",min,val1,area,floor)
+            
+            predicted_classes1 = main2(min,val1,area,floor)
+
+            min=min+200000
+            val1=val1+200000
+
+
+            print("Printing Parameters",min,val1,area,floor)
+
+            predicted_classes2 = main2(min,val1,area,floor)
+            
+            min=min+300000
+
+            val1=val1+300000
+
+            print("Printing Parameters",min,val1,area,floor)
+
+
+            predicted_classes3 = main2(min,val1,area,floor)
+
+            min=min+800000
+            val1=val1+800000
+
+            premium = main2(min,val1,area,floor)
+
+
+            combined_predictions = np.concatenate([predicted_classes1, predicted_classes2, predicted_classes3,premium], axis=0)
+
+            # print("Combined: ",combined_predictions)
+            print(len(combined_predictions))
+            prediction_list=combined_predictions.tolist()
+            # predictions_json = json.dumps(prediction_list)
+            # print("Combined",predictions_json)
+
+            # print(predicted_classes)
+            return GetRecommendation.success_response(prediction_list)
+
+        except Exception as e:
+            print(f"Error: {e}")
+            return GetRecommendation.error_response()
+
+    def fetch_pack1(self):
+        try:
+            set_id = request.args['set_id']
+            area = request.args['area']
+            storey=request.args['storey']
+            predicted_array=request.args['predicted_array']
+
+            print("Set Id",set_id)
+            print("Area",area)
+            print("Storey/Floor",storey)
+            print("Double Array",predicted_array)
+
+            if storey=='1':
+
+                finishing_materials = self.finshing_materials_model.get_singlestory_finishing(area, set_id,predicted_array)
+
+                print("At Controller = ",finishing_materials)
+            elif(storey=='2'):
+                finishing_materials = self.finshing_materials_model.get_singlestorybasement_finishing(area, set_id,predicted_array)
+
+                print("At Controller = ",finishing_materials)
+
+            elif(storey=='3'):
+                finishing_materials = self.finshing_materials_model.get_doublestory_finishing(area, set_id,predicted_array)
+
+                print("At Controller = ",finishing_materials)
+
+            elif(storey=='4'):
+                finishing_materials = self.finshing_materials_model.get_doublestorybasement_finishing(area, set_id,predicted_array)
+
+                print("At Controller = ",finishing_materials)
+
+
+
+
+            return GetRecommendation.success_response(finishing_materials)
           
 
 
-
+        except Exception as e:
+            print(f"Error: {e}")
+            return GetRecommendation.error_response()
 
 
 
@@ -665,8 +755,6 @@ class LabourDetailsController:
             try:
                 area=request.args['area']
                 id=request.args['set']
-                print("Labour Here",area)
-                print(id)
 
                 labour_details = self.labour_details_model.get_singlestory_labour(area, id)
 

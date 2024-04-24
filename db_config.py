@@ -9,7 +9,7 @@ db_config = {
 }
 
 poolname = "MySqlPool1"
-poolsize = 10
+poolsize = 20
 
 def create_db_handler():
     return mysql.connector.pooling.MySQLConnectionPool(

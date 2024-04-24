@@ -11,15 +11,17 @@ import 'Settings.dart';
 // ignore: must_be_immutable
 class BasementDouble extends StatefulWidget {
   final String user;
-  final String storey;
+  String storey;
   String area;
+  String budget;
 
-  BasementDouble({
-    Key? key,
-    required this.user,
-    required this.storey,
-    required this.area,
-  }) : super(key: key);
+  BasementDouble(
+      {Key? key,
+      required this.user,
+      required this.storey,
+      required this.area,
+      required this.budget})
+      : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -34,11 +36,16 @@ class _BasementDoubleState extends State<BasementDouble> {
   @override
   void initState() {
     super.initState();
+    widget.storey = "4";
+    debugPrint("Storey = ${widget.storey}");
+    debugPrint("Area = ${widget.area}");
     fetchImagesData();
   }
 
   Future<void> fetchImagesData() async {
     try {
+      debugPrint("Budget Selected  =  ${widget.budget}");
+
       if (widget.area == 1.toString()) {
         final response = await http.get(
             Uri.parse('${ApiUrls.baseUrl}/get_imagesb2?table_name=layout_10'));
@@ -124,10 +131,15 @@ class _BasementDoubleState extends State<BasementDouble> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }
@@ -150,10 +162,15 @@ class _BasementDoubleState extends State<BasementDouble> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }
@@ -177,10 +194,15 @@ class _BasementDoubleState extends State<BasementDouble> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }

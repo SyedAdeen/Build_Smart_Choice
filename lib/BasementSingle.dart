@@ -11,14 +11,16 @@ import 'Settings.dart';
 // ignore: must_be_immutable
 class BasementSingle extends StatefulWidget {
   final String user;
-  final String storey;
+  String storey;
   String area;
+  String budget;
 
   BasementSingle({
     Key? key,
     required this.user,
     required this.storey,
     required this.area,
+    required this.budget,
   }) : super(key: key);
 
   @override
@@ -34,11 +36,16 @@ class _BasementSingleState extends State<BasementSingle> {
   @override
   void initState() {
     super.initState();
+    widget.storey = "2";
+    debugPrint("Storey = ${widget.storey}");
+    debugPrint("Area = ${widget.area}");
     fetchImagesData();
   }
 
   Future<void> fetchImagesData() async {
     try {
+      debugPrint("Budget Selected  =  ${widget.budget}");
+
       if (widget.area == 1.toString()) {
         final response = await http.get(
             Uri.parse('${ApiUrls.baseUrl}/get_imagesb1?table_name=layout_10'));
@@ -122,10 +129,15 @@ class _BasementSingleState extends State<BasementSingle> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }
@@ -149,10 +161,15 @@ class _BasementSingleState extends State<BasementSingle> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }
@@ -176,10 +193,15 @@ class _BasementSingleState extends State<BasementSingle> {
             context,
             MaterialPageRoute(
               builder: (context) => PackagesPage(
-                  user: widget.user,
-                  selectedImages: selectedImages,
-                  grey_data: data,
-                  labour_data: data2),
+                user: widget.user,
+                selectedImages: selectedImages,
+                grey_data: data,
+                labour_data: data2,
+                budget: widget.budget,
+                Storey: widget.storey,
+                Area: widget.area,
+                layout_id: id,
+              ),
             ),
           );
         }

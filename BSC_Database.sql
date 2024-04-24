@@ -1626,6 +1626,18 @@ INSERT INTO LABOUR VALUES
 (2,"PLUMBING","sqft",31),
 (3,"ELECTRICAL","sqft",32);
 
+INSERT INTO LABOUR VALUES
+(4, "Paint", "sqft", 30),
+(5, "Tiles Installation", "sqft", 20),
+(6, "Electrician", "day", 2000),
+(7, "Kitchen Slab", "sqft", 150),
+(8, "Washroom Slab", "sqft", 80),
+(9, "Window Installation", "sqft", 800),
+(10, "False Ceiling", "sqft", 25),
+(11, "Carpenter", "day", 2500),
+(12, "Plumber", "day", 2000);
+
+
 SELECT * FROM LABOUR;
 
 -- ------------------------------------
@@ -1879,10 +1891,613 @@ VALUES
 ("20 MARLA",8,2,4555,4468),  
 ("20 MARLA",8,3,4555,4468);  
 
- 
+-- ---------------
+-- Finishing Materials
+-- 3_1 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 1, 4, 4945, 3440, 3170),
+("3 Marla", 1, 5, 1179, 713, 727),
+("3 Marla", 1, 6, 10, 10, 10),
+("3 Marla", 1, 7, 32, 0, 4),
+("3 Marla", 1, 8, 4, 8, 0),
+("3 Marla", 1, 9, 5, 4, 2),
+("3 Marla", 1, 10, 667, 586, 401),
+("3 Marla", 1, 11, 15, 15, 15),
+("3 Marla", 1, 12, 15, 15, 15);
+
+-- 3_2 Marla
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 2, 4, 4780, 3505, 2442),
+("3 Marla", 2, 5, 971, 681, 765),
+("3 Marla", 2, 6, 10, 10, 10),
+("3 Marla", 2, 7, 32, 0, 0),
+("3 Marla", 2, 8, 4, 4, 0),
+("3 Marla", 2, 9, 5, 4, 0),
+("3 Marla", 2, 10, 706, 625, 675),
+("3 Marla", 2, 11, 15, 15, 15),
+("3 Marla", 2, 12, 15, 15, 15);
+
+-- 3_3 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 3, 4, 3950, 3344, 0),
+("3 Marla", 3, 5, 1115, 944, 0),
+("3 Marla", 3, 6, 10, 10, 0),
+("3 Marla", 3, 7, 26, 0, 0),
+("3 Marla", 3, 8, 8, 8, 0),
+("3 Marla", 3, 9, 5, 4, 0),
+("3 Marla", 3, 10, 720, 565, 0),
+("3 Marla", 3, 11, 15, 15, 0),
+("3 Marla", 3, 12, 15, 15, 0);
+
+-- 3_4 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 4, 4, 4280, 3256, 0),
+("3 Marla", 4, 5, 1210, 945, 0),
+("3 Marla", 4, 6, 10, 10, 0),
+("3 Marla", 4, 7, 27, 0, 0),
+("3 Marla", 4, 8, 24, 16, 0),
+("3 Marla", 4, 9, 5, 4, 0),
+("3 Marla", 4, 10, 696, 615, 0),
+("3 Marla", 4, 11, 15, 15, 0),
+("3 Marla", 4, 12, 15, 15, 0);
+
+-- 3 Mirrors
+
+-- 3_5 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 5, 4, 4945, 3440, 3170),
+("3 Marla", 5, 5, 1179, 713, 727),
+("3 Marla", 5, 6, 10, 10, 10),
+("3 Marla", 5, 7, 32, 0, 4),
+("3 Marla", 5, 8, 4, 8, 0),
+("3 Marla", 5, 9, 5, 4, 2),
+("3 Marla", 5, 10, 667, 586, 401),
+("3 Marla", 5, 11, 15, 15, 15),
+("3 Marla", 5, 12, 15, 15, 15);
+
+-- 3_6 Marla
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 6, 4, 4780, 3505, 2442),
+("3 Marla", 6, 5, 971, 681, 765),
+("3 Marla", 6, 6, 10, 10, 10),
+("3 Marla", 6, 7, 32, 0, 0),
+("3 Marla", 6, 8, 4, 4, 0),
+("3 Marla", 6, 9, 5, 4, 0),
+("3 Marla", 6, 10, 706, 625, 675),
+("3 Marla", 6, 11, 15, 15, 15),
+("3 Marla", 6, 12, 15, 15, 15);
+
+-- 3_7 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 7, 4, 3950, 3344, 0),
+("3 Marla", 7, 5, 1115, 944, 0),
+("3 Marla", 7, 6, 10, 10, 0),
+("3 Marla", 7, 7, 26, 0, 0),
+("3 Marla", 7, 8, 8, 8, 0),
+("3 Marla", 7, 9, 5, 4, 0),
+("3 Marla", 7, 10, 720, 565, 0),
+("3 Marla", 7, 11, 15, 15, 0),
+("3 Marla", 7, 12, 15, 15, 0);
+
+-- 3_8 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_3_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("3 Marla", 8, 4, 4280, 3256, 0),
+("3 Marla", 8, 5, 1210, 945, 0),
+("3 Marla", 8, 6, 10, 10, 0),
+("3 Marla", 8, 7, 27, 0, 0),
+("3 Marla", 8, 8, 24, 16, 0),
+("3 Marla", 8, 9, 5, 4, 0),
+("3 Marla", 8, 10, 696, 615, 0),
+("3 Marla", 8, 11, 15, 15, 0),
+("3 Marla", 8, 12, 15, 15, 0);
+
+-- 5 Marla
+
+-- 5_1 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 Marla", 1, 4, 5966, 4559, 3080),
+("5 Marla", 1, 5, 1567, 1304, 1113),
+("5 Marla", 1, 6, 10, 10, 10),
+("5 Marla", 1, 7, 53, 0, 0),
+("5 Marla", 1, 8, 4, 8, 0),
+("5 Marla", 1, 9, 6, 5, 0),
+("5 Marla", 1, 10, 1114, 993, 1023),
+("5 Marla", 1, 11, 15, 15, 15),
+("5 Marla", 1, 12, 15, 15, 15);
+
+-- 5_2 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 MARLA", 2, 4, 6330, 4543, 3872),
+("5 MARLA", 2, 5, 1538, 1371, 1434),
+("5 MARLA", 2, 6, 10, 10, 10),
+("5 MARLA", 2, 7, 44, 0, 0),
+("5 MARLA", 2, 8, 12, 12, 4),
+("5 MARLA", 2, 9, 8, 7, 2),
+("5 MARLA", 2, 10, 1075, 905, 951),
+("5 MARLA", 2, 11, 15, 15, 15),
+("5 MARLA", 2, 12, 15, 15, 15);
+
+-- 5_ 3 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 Marla", 3, 4, 5942, 4708, 0),
+("5 Marla", 3, 5, 1693, 1230, 90),
+("5 Marla", 3, 6, 10, 10, 0),
+("5 Marla", 3, 7, 45, 0, 0),
+("5 Marla", 3, 8, 8, 8, 0),
+("5 Marla", 3, 9, 7, 7, 0),
+("5 Marla", 3, 10, 1061, 857, 0),
+("5 Marla", 3, 11, 15, 15, 0),
+("5 Marla", 3, 12, 15, 15, 0);
+
+-- 5_4 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 Marla", 4, 4, 5923, 4361, 0),
+("5 Marla", 4, 5, 1688, 1242, 0),
+("5 Marla", 4, 6, 10, 10, 0),
+("5 Marla", 4, 7, 48, 0, 0),
+("5 Marla", 4, 8, 8, 8, 0),
+("5 Marla", 4, 9, 7, 6, 0),
+("5 Marla", 4, 10, 1058, 937, 0),
+("5 Marla", 4, 11, 15, 15, 0),
+("5 Marla", 4, 12, 15, 15, 0);
+
+-- 5 Marla Mirrors
+
+-- 5_5 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 Marla", 5, 4, 5966, 4559, 3080),
+("5 Marla", 5, 5, 1567, 1304, 1113),
+("5 Marla", 5, 6, 10, 10, 10),
+("5 Marla", 5, 7, 53, 0, 0),
+("5 Marla", 5, 8, 4, 8, 0),
+("5 Marla", 5, 9, 6, 5, 0),
+("5 Marla", 5, 10, 1114, 993, 1023),
+("5 Marla", 5, 11, 15, 15, 15),
+("5 Marla", 5, 12, 15, 15, 15);
+
+-- 5_6 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 MARLA", 6, 4, 6330, 4543, 3872),
+("5 MARLA", 6, 5, 1538, 1371, 1434),
+("5 MARLA", 6, 6, 10, 10, 10),
+("5 MARLA", 6, 7, 44, 0, 0),
+("5 MARLA", 6, 8, 12, 12, 4),
+("5 MARLA", 6, 9, 8, 7, 2),
+("5 MARLA", 6, 10, 1075, 905, 951),
+("5 MARLA", 6, 11, 15, 15, 15),
+("5 MARLA", 6, 12, 15, 15, 15);
+
+-- 5_ 7 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 Marla", 7, 4, 5942, 4708, 0),
+("5 Marla", 7, 5, 1693, 1230, 90),
+("5 Marla", 7, 6, 10, 10, 0),
+("5 Marla", 7, 7, 45, 0, 0),
+("5 Marla", 7, 8, 8, 8, 0),
+("5 Marla", 7, 9, 7, 7, 0),
+("5 Marla", 7, 10, 1061, 857, 0),
+("5 Marla", 7, 11, 15, 15, 0),
+("5 Marla", 7, 12, 15, 15, 0);
+
+-- 5_8 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_5_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("5 Marla", 8, 4, 5923, 4361, 0),
+("5 Marla", 8, 5, 1688, 1242, 0),
+("5 Marla", 8, 6, 10, 10, 0),
+("5 Marla", 8, 7, 48, 0, 0),
+("5 Marla", 8, 8, 8, 8, 0),
+("5 Marla", 8, 9, 7, 6, 0),
+("5 Marla", 8, 10, 1058, 937, 0),
+("5 Marla", 8, 11, 15, 15, 0),
+("5 Marla", 8, 12, 15, 15, 0);
+
+
+-- 7 Marla
+
+-- 7_1 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 1, 4, 7360, 3540, 2992),
+("7 MARLA", 1, 5, 2039, 1245, 1210),
+("7 MARLA", 1, 6, 14, 14, 14),
+("7 MARLA", 1, 7, 48, 0, 0),
+("7 MARLA", 1, 8, 8, 8, 0),
+("7 MARLA", 1, 9, 9, 7, 0),
+("7 MARLA", 1, 10, 1085, 1041, 1120),
+("7 MARLA", 1, 11, 20, 20, 20),
+("7 MARLA", 1, 12, 20, 20, 20);
+
+-- 7_2 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 2, 4, 7010, 3580, 3047),
+("7 MARLA", 2, 5, 2070, 1266, 922),
+("7 MARLA", 2, 6, 14, 14, 14),
+("7 MARLA", 2, 7, 48, 0, 0),
+("7 MARLA", 2, 8, 8, 8, 4),
+("7 MARLA", 2, 9, 9, 7, 2),
+("7 MARLA", 2, 10, 1070, 1123, 634),
+("7 MARLA", 2, 11, 20, 20, 20),
+("7 MARLA", 2, 12, 20, 20, 20);
+
+
+-- 7_3 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 3, 4, 7420, 3920, 0),
+("7 MARLA", 3, 5, 2114, 1708, 0),
+("7 MARLA", 3, 6, 14, 14, 0),
+("7 MARLA", 3, 7, 64, 0, 0),
+("7 MARLA", 3, 8, 8, 4, 0),
+("7 MARLA", 3, 9, 8, 6, 0),
+("7 MARLA", 3, 10, 1011, 1007, 0),
+("7 MARLA", 3, 11, 20, 20, 0),
+("7 MARLA", 3, 12, 20, 20, 0);
+
+
+-- 7_4 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 4, 4, 7630, 3850, 0),
+("7 MARLA", 4, 5, 2034, 1359, 0),
+("7 MARLA", 4, 6, 14, 14, 0),
+("7 MARLA", 4, 7, 42, 0, 0),
+("7 MARLA", 4, 8, 8, 16, 0),
+("7 MARLA", 4, 9, 9, 8, 0),
+("7 MARLA", 4, 10, 1060, 1154, 0),
+("7 MARLA", 4, 11, 20, 20, 0),
+("7 MARLA", 4, 12, 20, 20, 0);
+
+-- 7 Marla Mirrors
+
+-- 7_5 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 5, 4, 7360, 3540, 2992),
+("7 MARLA", 5, 5, 2039, 1245, 1210),
+("7 MARLA", 5, 6, 14, 14, 14),
+("7 MARLA", 5, 7, 48, 0, 0),
+("7 MARLA", 5, 8, 8, 8, 0),
+("7 MARLA", 5, 9, 9, 7, 0),
+("7 MARLA", 5, 10, 1085, 1041, 1120),
+("7 MARLA", 5, 11, 20, 20, 20),
+("7 MARLA", 5, 12, 20, 20, 20);
+
+-- 7_6 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 6, 4, 7010, 3580, 3047),
+("7 MARLA", 6, 5, 2070, 1266, 922),
+("7 MARLA", 6, 6, 14, 14, 14),
+("7 MARLA", 6, 7, 48, 0, 0),
+("7 MARLA", 6, 8, 8, 8, 4),
+("7 MARLA", 6, 9, 9, 7, 2),
+("7 MARLA", 6, 10, 1070, 1123, 634),
+("7 MARLA", 6, 11, 20, 20, 20),
+("7 MARLA", 6, 12, 20, 20, 20);
+
+
+-- 7_7 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 7, 4, 7420, 3920, 0),
+("7 MARLA", 7, 5, 2114, 1708, 0),
+("7 MARLA", 7, 6, 14, 14, 0),
+("7 MARLA", 7, 7, 64, 0, 0),
+("7 MARLA", 7, 8, 8, 4, 0),
+("7 MARLA", 7, 9, 8, 6, 0),
+("7 MARLA", 7, 10, 1011, 1007, 0),
+("7 MARLA", 7, 11, 20, 20, 0),
+("7 MARLA", 7, 12, 20, 20, 0);
+
+
+-- 7_8 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_7_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("7 MARLA", 8, 4, 7630, 3850, 0),
+("7 MARLA", 8, 5, 2034, 1359, 0),
+("7 MARLA", 8, 6, 14, 14, 0),
+("7 MARLA", 8, 7, 42, 0, 0),
+("7 MARLA", 8, 8, 8, 16, 0),
+("7 MARLA", 8, 9, 9, 8, 0),
+("7 MARLA", 8, 10, 1060, 1154, 0),
+("7 MARLA", 8, 11, 20, 20, 0),
+("7 MARLA", 8, 12, 20, 20, 0);
+
+
+-- 10 Marla
+
+-- 10_1 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 1, 4, 9646, 5580, 3542),
+("10 MARLA", 1, 5, 2770, 2167, 1687),
+("10 MARLA", 1, 6, 14, 14, 14),
+("10 MARLA", 1, 7, 60, 60, 0),
+("10 MARLA", 1, 8, 12, 16, 0),
+("10 MARLA", 1, 9, 9, 9, 0),
+("10 MARLA", 1, 10, 1546, 1764, 1568),
+("10 MARLA", 1, 11, 20, 20, 20),
+("10 MARLA", 1, 12, 20, 20, 20);
+
+
+-- 10_2 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 2, 4, 9213, 5335, 3785),
+("10 MARLA", 2, 5, 2741, 1933, 1773),
+("10 MARLA", 2, 6, 14, 14, 14),
+("10 MARLA", 2, 7, 60, 60, 0),
+("10 MARLA", 2, 8, 12, 12, 6),
+("10 MARLA", 2, 9, 10, 9, 2),
+("10 MARLA", 2, 10, 1552, 1682, 1384),
+("10 MARLA", 2, 11, 20, 20, 20),
+("10 MARLA", 2, 12, 20, 20, 20);
+
+
+-- 10_3 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 3, 4, 9480, 4953, 0),
+("10 MARLA", 3, 5, 2830, 2050, 0),
+("10 MARLA", 3, 6, 14, 14, 0),
+("10 MARLA", 3, 7, 51, 57, 0),
+("10 MARLA", 3, 8, 12, 12, 0),
+("10 MARLA", 3, 9, 11, 10, 0),
+("10 MARLA", 3, 10, 1587, 1650, 0),
+("10 MARLA", 3, 11, 20, 20, 0),
+("10 MARLA", 3, 12, 20, 20, 0);
+
+-- 10_4 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 4, 4, 9463, 5302, 0),
+("10 MARLA", 4, 5, 3058, 2365, 0),
+("10 MARLA", 4, 6, 14, 14, 0),
+("10 MARLA", 4, 7, 51, 51, 0),
+("10 MARLA", 4, 8, 18, 18, 0),
+("10 MARLA", 4, 9, 9, 7, 0),
+("10 MARLA", 4, 10, 1739, 1613, 0),
+("10 MARLA", 4, 11, 20, 20, 0),
+("10 MARLA", 4, 12, 20, 20, 0);
+
+-- 10 Marla Mirrors
+
+-- 10_5 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 5, 4, 9646, 5580, 3542),
+("10 MARLA", 5, 5, 2770, 2167, 1687),
+("10 MARLA", 5, 6, 14, 14, 14),
+("10 MARLA", 5, 7, 60, 60, 0),
+("10 MARLA", 5, 8, 12, 16, 0),
+("10 MARLA", 5, 9, 9, 9, 0),
+("10 MARLA", 5, 10, 1546, 1764, 1568),
+("10 MARLA", 5, 11, 20, 20, 20),
+("10 MARLA", 5, 12, 20, 20, 20);
+
+
+-- 10_6 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 6, 4, 9213, 5335, 3785),
+("10 MARLA", 6, 5, 2741, 1933, 1773),
+("10 MARLA", 6, 6, 14, 14, 14),
+("10 MARLA", 6, 7, 60, 60, 0),
+("10 MARLA", 6, 8, 12, 12, 6),
+("10 MARLA", 6, 9, 10, 9, 2),
+("10 MARLA", 6, 10, 1552, 1682, 1384),
+("10 MARLA", 6, 11, 20, 20, 20),
+("10 MARLA", 6, 12, 20, 20, 20);
+
+
+-- 10_7 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 7, 4, 9480, 4953, 0),
+("10 MARLA", 7, 5, 2830, 2050, 0),
+("10 MARLA", 7, 6, 14, 14, 0),
+("10 MARLA", 7, 7, 51, 57, 0),
+("10 MARLA", 7, 8, 12, 12, 0),
+("10 MARLA", 7, 9, 11, 10, 0),
+("10 MARLA", 7, 10, 1587, 1650, 0),
+("10 MARLA", 7, 11, 20, 20, 0),
+("10 MARLA", 7, 12, 20, 20, 0);
+
+-- 10_8 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_10_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("10 MARLA", 8, 4, 9463, 5302, 0),
+("10 MARLA", 8, 5, 3058, 2365, 0),
+("10 MARLA", 8, 6, 14, 14, 0),
+("10 MARLA", 8, 7, 51, 51, 0),
+("10 MARLA", 8, 8, 18, 18, 0),
+("10 MARLA", 8, 9, 9, 7, 0),
+("10 MARLA", 8, 10, 1739, 1613, 0),
+("10 MARLA", 8, 11, 20, 20, 0),
+("10 MARLA", 8, 12, 20, 20, 0);
+
+
+-- 20 Marla
+
+-- 20_1 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 1, 4, 15630, 8217, 4852),
+("20 MARLA", 1, 5, 5529, 3327, 2800),
+("20 MARLA", 1, 6, 25, 25, 25),
+("20 MARLA", 1, 7, 58, 58, 0),
+("20 MARLA", 1, 8, 32, 16, 0),
+("20 MARLA", 1, 9, 12, 11, 0),
+("20 MARLA", 1, 10, 3022, 3000, 2660),
+("20 MARLA", 1, 11, 30, 30, 30),
+("20 MARLA", 1, 12, 30, 30, 30);
+
+-- 20_2 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 2, 4, 1545, 8118, 6028),
+("20 MARLA", 2, 5, 5466, 4281, 3179),
+("20 MARLA", 2, 6, 25, 25, 25),
+("20 MARLA", 2, 7, 78, 84, 0),
+("20 MARLA", 2, 8, 32, 32, 8),
+("20 MARLA", 2, 9, 12, 11, 2),
+("20 MARLA", 2, 10, 3328, 2574, 2436),
+("20 MARLA", 2, 11, 30, 30, 30),
+("20 MARLA", 2, 12, 30, 30, 30);
+
+
+-- 20_3 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 3, 4, 15608, 8426, 0),
+("20 MARLA", 3, 5, 5106, 3419, 0),
+("20 MARLA", 3, 6, 25, 25, 0),
+("20 MARLA", 3, 7, 56, 62, 0),
+("20 MARLA", 3, 8, 24, 32, 0),
+("20 MARLA", 3, 9, 12, 11, 0),
+("20 MARLA", 3, 10, 2586, 2094, 0),
+("20 MARLA", 3, 11, 30, 30, 0),
+("20 MARLA", 3, 12, 30, 30, 0);
+
+-- 20_4 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 4, 4, 15125, 7249, 0),
+("20 MARLA", 4, 5, 5299, 3486, 0),
+("20 MARLA", 4, 6, 25, 25, 0),
+("20 MARLA", 4, 7, 52, 52, 0),
+("20 MARLA", 4, 8, 24, 24, 0),
+("20 MARLA", 4, 9, 12, 11, 0),
+("20 MARLA", 4, 10, 2004, 2110, 0),
+("20 MARLA", 4, 11, 30, 30, 0),
+("20 MARLA", 4, 12, 30, 30, 0);
+
+-- 20 Marla Mirrors
+
+-- 20_5 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 5, 4, 15630, 8217, 4852),
+("20 MARLA", 5, 5, 5529, 3327, 2800),
+("20 MARLA", 5, 6, 25, 25, 25),
+("20 MARLA", 5, 7, 58, 58, 0),
+("20 MARLA", 5, 8, 32, 16, 0),
+("20 MARLA", 5, 9, 12, 11, 0),
+("20 MARLA", 5, 10, 3022, 3000, 2660),
+("20 MARLA", 5, 11, 30, 30, 30),
+("20 MARLA", 5, 12, 30, 30, 30);
+
+-- 20_6 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 6, 4, 1545, 8118, 6028),
+("20 MARLA", 6, 5, 5466, 4281, 3179),
+("20 MARLA", 6, 6, 25, 25, 25),
+("20 MARLA", 6, 7, 78, 84, 0),
+("20 MARLA", 6, 8, 32, 32, 8),
+("20 MARLA", 6, 9, 12, 11, 2),
+("20 MARLA", 6, 10, 3328, 2574, 2436),
+("20 MARLA", 6, 11, 30, 30, 30),
+("20 MARLA", 6, 12, 30, 30, 30);
+
+
+-- 20_7 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 7, 4, 15608, 8426, 0),
+("20 MARLA", 7, 5, 5106, 3419, 0),
+("20 MARLA", 7, 6, 25, 25, 0),
+("20 MARLA", 7, 7, 56, 62, 0),
+("20 MARLA", 7, 8, 24, 32, 0),
+("20 MARLA", 7, 9, 12, 11, 0),
+("20 MARLA", 7, 10, 2586, 2094, 0),
+("20 MARLA", 7, 11, 30, 30, 0),
+("20 MARLA", 7, 12, 30, 30, 0);
+
+-- 20_8 Marla
+
+INSERT INTO filter_labour (AREA_SQFTS, LAYOUT_20_ID, LABOUR_ID, GROUND_SQFTS, FIRST_FLOOR_SQFTS, BASEMENT_SQFTS)
+VALUES 
+("20 MARLA", 8, 4, 15125, 7249, 0),
+("20 MARLA", 8, 5, 5299, 3486, 0),
+("20 MARLA", 8, 6, 25, 25, 0),
+("20 MARLA", 8, 7, 52, 52, 0),
+("20 MARLA", 8, 8, 24, 24, 0),
+("20 MARLA", 8, 9, 12, 11, 0),
+("20 MARLA", 8, 10, 2004, 2110, 0),
+("20 MARLA", 8, 11, 30, 30, 0),
+("20 MARLA", 8, 12, 30, 30, 0);
+
+
+
+
+
+
+UPDATE filter_labour
+SET AREA_SQFTS = UPPER(AREA_SQFTS);
+
+select* from filter_labour;
 SELECT * FROM FILTER_LABOUR WHERE AREA_SQFTS="20 MARLA";
-SELECT * FROM FILTER_LABOUR; 
+SELECT * FROM FILTER_LABOUR where filter_labour_id>120 and area_sqfts="20 MARLA"; 
 SELECT * FROM LABOUR;
+
+
+
+
 
 SELECT A.LABOUR_ID, A.LABOUR_TYPE, B.GROUND_SQFTS, B.FIRST_FLOOR_SQFTS, B.BASEMENT_SQFTS,A.RATE AS RATE , A.FACTOR,
 A.RATE*B.GROUND_SQFTS AS LABOUR_A, A.RATE*FIRST_FLOOR_SQFTS AS LABOUR_B 
@@ -1988,18 +2603,2006 @@ VALUES
 ('Geyser', 'Unit', 55500, 'Nas Gas Super Heavy', 49800, 'Nas Gas Super Deluxe', 49800, 'Nas Gas Super Deluxe', 41250, 'Nas Gas Deluxe');
 
 
+
 SELECT * FROM FINISHING_MATERIALS;
 
 SELECT Material_Name, Factor, Rate_A,Class_A,Rate_B, Class_B, Rate_C, Class_C, Rate_D, Class_D 
 from Finishing_Materials;
 
+-- -------------------------
+
+DROP TABLE IF EXISTS FILTER_FINISHING_MATERIALS;
+ 
+CREATE TABLE FILTER_FINISHING_MATERIALS
+(
+FILTER_FINISHING_MATERIAL_ID INT NOT NULL primary key auto_increment,
+AREA_QTY VARCHAR(20) NOT NULL,
+LAYOUT_3_ID INT default NULL,
+LAYOUT_5_ID INT default NULL,
+LAYOUT_7_ID INT default NULL,
+LAYOUT_10_ID INT default NULL,
+LAYOUT_20_ID INT default NULL,
+MATERIAL_ID INT default NULL,
+GROUND_QTY INT ,
+FIRST_FLOOR_QTY INT ,
+ROOFTOP_QTY INT ,
+BASEMENT_QTY INT NULL,
+FOREIGN KEY (MATERIAL_ID) REFERENCES FINISHING_MATERIALS(MATERIAL_ID),
+FOREIGN KEY (LAYOUT_3_ID) REFERENCES LAYOUT_3(ID),
+FOREIGN KEY (LAYOUT_5_ID) REFERENCES LAYOUT_5(ID),
+FOREIGN KEY (LAYOUT_7_ID) REFERENCES LAYOUT_7(ID),
+FOREIGN KEY (LAYOUT_10_ID) REFERENCES LAYOUT_10(ID),
+FOREIGN KEY (LAYOUT_20_ID) REFERENCES LAYOUT_20(ID)
+);
+
+SELECT * FROM FILTER_GREY_MATERIALS;
+SELECT * FROM FINISHING_MATERIALS;
+SELECT * FROM FILTER_FINISHING_MATERIALS;
+
+
+-- 3_1
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 1, 1, 48, 0, 0, 0),
+('3 MARLA', 1, 2, 131, 0, 0, 0),
+('3 MARLA', 1, 3, 1, 0, 0, 0),
+('3 MARLA', 1, 4, 3.5, 0, 0, 0),
+('3 MARLA', 1, 5, 6, 5, 1, 2),
+('3 MARLA', 1, 6, 2, 3, 0, 0),
+('3 MARLA', 1, 7, 6, 5, 1, 2),
+('3 MARLA', 1, 8, 1, 0, 0, 0),
+('3 MARLA', 1, 9, 6, 5, 1, 1),
+('3 MARLA', 1, 10, 6, 5, 1, 1),
+('3 MARLA', 1, 11, 4.375, 6.5625, 2.1875, 2.1875),
+('3 MARLA', 1, 12, 57, 42, 24, 30),
+('3 MARLA', 1, 13, 2, 2, 0, 1),
+('3 MARLA', 1, 14, 6, 5, 1, 2),
+('3 MARLA', 1, 15, 75, 64, 10, 26),
+('3 MARLA', 1, 16, 6, 5, 2, 5),
+('3 MARLA', 1, 17, 5.25, 3.5, 0, 3.5),
+('3 MARLA', 1, 18, 1, 2, 0, 1),
+('3 MARLA', 1, 19, 4, 8, 0, 4),
+('3 MARLA', 1, 20, 45, 63, 0, 35),
+('3 MARLA', 1, 21, 150, 186, 0, 150),
+('3 MARLA', 1, 22, 1, 2, 0, 1),
+('3 MARLA', 1, 23, 1, 2, 0, 1),
+('3 MARLA', 1, 24, 1, 2, 0, 1),
+('3 MARLA', 1, 25, 1, 2, 0, 1),
+('3 MARLA', 1, 26, 1, 2, 0, 1),
+('3 MARLA', 1, 27, 1, 2, 0, 1),
+('3 MARLA', 1, 28, 24, 0, 0, 0),
+('3 MARLA', 1, 29, 1, 0, 0, 0),
+('3 MARLA', 1, 30, 1, 0, 0, 0),
+('3 MARLA', 1, 31, 32, 0, 0, 0),
+('3 MARLA', 1, 32, 1, 0, 0, 0),
+('3 MARLA', 1, 33, 126, 0, 0, 0),
+('3 MARLA', 1, 34, 1, 0, 0, 0),
+('3 MARLA', 1, 35, 20, 0, 0, 0),
+('3 MARLA', 1, 36, 554, 372, 81, 450),
+('3 MARLA', 1, 37, 14, 14, 0, 14),
+('3 MARLA', 1, 38, 92, 92, 0, 92),
+('3 MARLA', 1, 39, 1, 1, 0, 1),
+('3 MARLA', 1, 40, 586, 586, 81, 401),
+('3 MARLA', 1, 41, 148, 115, 71, 55),
+('3 MARLA', 1, 42, 1, 0, 0, 0);
+	
+ 
+ -- 3_2
+ 
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 2, 1, 48, 0, 0, 0),
+('3 MARLA', 2, 2, 140, 0, 0, 0),
+('3 MARLA', 2, 3, 1, 1, 0, 0),
+('3 MARLA', 2, 4, 3.5, 0, 0, 0),
+('3 MARLA', 2, 5, 5, 4, 1, 2),
+('3 MARLA', 2, 6, 2, 3, 0, 0),
+('3 MARLA', 2, 7, 5, 4, 1, 2),
+('3 MARLA', 2, 8, 1, 1, 0, 0),
+('3 MARLA', 2, 9, 5, 4, 1, 1),
+('3 MARLA', 2, 10, 5, 4, 1, 1),
+('3 MARLA', 2, 11, 8.75, 2.1875, 2.1875, 0),
+('3 MARLA', 2, 12, 81, 54, 36, 0),
+('3 MARLA', 2, 13, 1, 2, 0, 0),
+('3 MARLA', 2, 14, 5, 4, 1, 2),
+('3 MARLA', 2, 15, 80, 72, 10, 26),
+('3 MARLA', 2, 16, 6, 5, 2, 5),
+('3 MARLA', 2, 17, 1.75, 8.75, 0, 0),
+('3 MARLA', 2, 18, 1, 1, 0, 0),
+('3 MARLA', 2, 19, 4, 4, 0, 0),
+('3 MARLA', 2, 20, 27.5, 36, 0, 0),
+('3 MARLA', 2, 21, 111, 130, 0, 0),
+('3 MARLA', 2, 22, 1, 1, 0, 0),
+('3 MARLA', 2, 23, 1, 1, 0, 0),
+('3 MARLA', 2, 24, 1, 1, 0, 0),
+('3 MARLA', 2, 25, 1, 1, 0, 0),
+('3 MARLA', 2, 26, 1, 1, 0, 0),
+('3 MARLA', 2, 27, 1, 1, 0, 0),
+('3 MARLA', 2, 28, 42, 0, 0, 0),
+('3 MARLA', 2, 29, 1, 0, 0, 0),
+('3 MARLA', 2, 30, 1, 0, 0, 0),
+('3 MARLA', 2, 31, 31.5, 0, 0, 0),
+('3 MARLA', 2, 32, 1, 0, 0, 0),
+('3 MARLA', 2, 33, 162, 0, 0, 0),
+('3 MARLA', 2, 34, 1, 0, 0, 0),
+('3 MARLA', 2, 35, 20, 0, 0, 0),
+('3 MARLA', 2, 36, 352.75, 416, 81, 675),
+('3 MARLA', 2, 37, 15, 15, 0, 15),
+('3 MARLA', 2, 38, 98.4, 99, 0, 90),
+('3 MARLA', 2, 39, 1, 1, 0, 0),
+('3 MARLA', 2, 40, 625, 625, 81, 675),
+('3 MARLA', 2, 41, 101, 61, 81, 53),
+('3 MARLA', 2, 42, 1, 0, 0, 0);
+
+ 
+-- 3_3
+ 
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 3, 1, 48, 0, 0, NULL),
+('3 MARLA', 3, 2, 135, 0, 0, NULL),
+('3 MARLA', 3, 3, 1, 1, 0, NULL),
+('3 MARLA', 3, 4, 3.5, 0, 0, NULL),
+('3 MARLA', 3, 5, 5, 4, 1, NULL),
+('3 MARLA', 3, 6, 3, 4, 0, NULL),
+('3 MARLA', 3, 7, 5, 5, 1, NULL),
+('3 MARLA', 3, 8, 1, 1, 0, NULL),
+('3 MARLA', 3, 9, 5, 5, 1, NULL),
+('3 MARLA', 3, 10, 5, 5, 1, NULL),
+('3 MARLA', 3, 11, 4.375, 4.375, 2.1875, NULL),
+('3 MARLA', 3, 12, 72, 66, 36, NULL),
+('3 MARLA', 3, 13, 1, 2, 0, NULL),
+('3 MARLA', 3, 14, 5, 4, 1, NULL),
+('3 MARLA', 3, 15, 83, 69, 12, NULL),
+('3 MARLA', 3, 16, 6, 5, 2, NULL),
+('3 MARLA', 3, 17, 3.5, 3.5, 0, NULL),
+('3 MARLA', 3, 18, 2, 2, 0, NULL),
+('3 MARLA', 3, 19, 8, 8, 0, NULL),
+('3 MARLA', 3, 20, 62, 88, 0, NULL),
+('3 MARLA', 3, 21, 195, 307, 0, NULL),
+('3 MARLA', 3, 22, 2, 2, 0, NULL),
+('3 MARLA', 3, 23, 2, 2, 0, NULL),
+('3 MARLA', 3, 24, 2, 2, 0, NULL),
+('3 MARLA', 3, 25, 2, 2, 0, NULL),
+('3 MARLA', 3, 26, 2, 2, 0, NULL),
+('3 MARLA', 3, 27, 2, 2, 0, NULL),
+('3 MARLA', 3, 28, 40, 0, 0, NULL),
+('3 MARLA', 3, 29, 1, 0, 0, NULL),
+('3 MARLA', 3, 30, 1, 0, 0, NULL),
+('3 MARLA', 3, 31, 26, 0, 0, NULL),
+('3 MARLA', 3, 32, 1, 0, 0, NULL),
+('3 MARLA', 3, 33, 138, 0, 0, NULL),
+('3 MARLA', 3, 34, 1, 0, 0, NULL),
+('3 MARLA', 3, 35, 24, 0, 0, NULL),
+('3 MARLA', 3, 36, 410, 459, 81, NULL),
+('3 MARLA', 3, 37, 15, 14, 0, NULL),
+('3 MARLA', 3, 38, 90, 90, 0, NULL),
+('3 MARLA', 3, 39, 1, 1, 0, NULL),
+('3 MARLA', 3, 40, 639, 565, 81, NULL),
+('3 MARLA', 3, 41, 102, 92, 77, NULL),
+('3 MARLA', 3, 42, 1, 0, 0, NULL);
+
+
+-- 3_4
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 4, 1, 48, 0, 0, NULL),
+('3 MARLA', 4, 2, 176, 0, 0, NULL),
+('3 MARLA', 4, 3, 1, 1, 0, NULL),
+('3 MARLA', 4, 4, 3.5, 0, 0, NULL),
+('3 MARLA', 4, 5, 6, 3, 1, NULL),
+('3 MARLA', 4, 6, 4, 1, 0, NULL),
+('3 MARLA', 4, 7, 9, 3, 1, NULL),
+('3 MARLA', 4, 8, 1, 1, 0, NULL),
+('3 MARLA', 4, 9, 6, 3, 1, NULL),
+('3 MARLA', 4, 10, 9, 3, 1, NULL),
+('3 MARLA', 4, 11, 13.125, 8.75, 2.1875, NULL),
+('3 MARLA', 4, 12, 102, 96, 24, NULL),
+('3 MARLA', 4, 13, 2, 3, 0, NULL),
+('3 MARLA', 4, 14, 6, 3, 1, NULL),
+('3 MARLA', 4, 15, 105, 70, 11, NULL),
+('3 MARLA', 4, 16, 6, 5, 2, NULL),
+('3 MARLA', 4, 17, 5.25, 3.5, 0, NULL),
+('3 MARLA', 4, 18, 3, 2, 0, NULL),
+('3 MARLA', 4, 19, 24, 16, 0, NULL),
+('3 MARLA', 4, 20, 75, 78, 0, NULL),
+('3 MARLA', 4, 21, 317, 267, 0, NULL),
+('3 MARLA', 4, 22, 3, 2, 0, NULL),
+('3 MARLA', 4, 23, 3, 2, 0, NULL),
+('3 MARLA', 4, 24, 3, 2, 0, NULL),
+('3 MARLA', 4, 25, 3, 2, 0, NULL),
+('3 MARLA', 4, 26, 3, 2, 0, NULL),
+('3 MARLA', 4, 27, 3, 2, 0, NULL),
+('3 MARLA', 4, 28, 36, 0, 0, NULL),
+('3 MARLA', 4, 29, 1, 0, 0, NULL),
+('3 MARLA', 4, 30, 1, 0, 0, NULL),
+('3 MARLA', 4, 31, 27, 0, 0, NULL),
+('3 MARLA', 4, 32, 1, 0, 0, NULL),
+('3 MARLA', 4, 33, 126, 0, 0, NULL),
+('3 MARLA', 4, 34, 1, 0, 0, NULL),
+('3 MARLA', 4, 35, 30, 0, 0, NULL),
+('3 MARLA', 4, 36, 345, 541, 81, NULL),
+('3 MARLA', 4, 37, 15, 15, 0, NULL),
+('3 MARLA', 4, 38, 90, 99, 0, NULL),
+('3 MARLA', 4, 39, 1, 1, 0, NULL),
+('3 MARLA', 4, 40, 615, 615, 81, NULL),
+('3 MARLA', 4, 41, 110, 78, 79, NULL),
+('3 MARLA', 4, 42, 1, 0, 0, NULL);
+
+ -- 3_5
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 5, 1, 48, 0, 0, 0),
+('3 MARLA', 5, 2, 131, 0, 0, 0),
+('3 MARLA', 5, 3, 1, 0, 0, 0),
+('3 MARLA', 5, 4, 3.5, 0, 0, 0),
+('3 MARLA', 5, 5, 6, 5, 1, 2),
+('3 MARLA', 5, 6, 2, 3, 0, 0),
+('3 MARLA', 5, 7, 6, 5, 1, 2),
+('3 MARLA', 5, 8, 1, 0, 0, 0),
+('3 MARLA', 5, 9, 6, 5, 1, 1),
+('3 MARLA', 5, 10, 6, 5, 1, 1),
+('3 MARLA', 5, 11, 4.375, 6.5625, 2.1875, 2.1875),
+('3 MARLA', 5, 12, 57, 42, 24, 30),
+('3 MARLA', 5, 13, 2, 2, 0, 1),
+('3 MARLA', 5, 14, 6, 5, 1, 2),
+('3 MARLA', 5, 15, 75, 64, 10, 26),
+('3 MARLA', 5, 16, 6, 5, 2, 5),
+('3 MARLA', 5, 17, 5.25, 3.5, 0, 3.5),
+('3 MARLA', 5, 18, 1, 2, 0, 1),
+('3 MARLA', 5, 19, 4, 8, 0, 4),
+('3 MARLA', 5, 20, 45, 63, 0, 35),
+('3 MARLA', 5, 21, 150, 186, 0, 150),
+('3 MARLA', 5, 22, 1, 2, 0, 1),
+('3 MARLA', 5, 23, 1, 2, 0, 1),
+('3 MARLA', 5, 24, 1, 2, 0, 1),
+('3 MARLA', 5, 25, 1, 2, 0, 1),
+('3 MARLA', 5, 26, 1, 2, 0, 1),
+('3 MARLA', 5, 27, 1, 2, 0, 1),
+('3 MARLA', 5, 28, 24, 0, 0, 0),
+('3 MARLA', 5, 29, 1, 0, 0, 0),
+('3 MARLA', 5, 30, 1, 0, 0, 0),
+('3 MARLA', 5, 31, 32, 0, 0, 0),
+('3 MARLA', 5, 32, 1, 0, 0, 0),
+('3 MARLA', 5, 33, 126, 0, 0, 0),
+('3 MARLA', 5, 34, 1, 0, 0, 0),
+('3 MARLA', 5, 35, 20, 0, 0, 0),
+('3 MARLA', 5, 36, 554, 372, 81, 450),
+('3 MARLA', 5, 37, 14, 14, 0, 14),
+('3 MARLA', 5, 38, 92, 92, 0, 92),
+('3 MARLA', 5, 39, 1, 1, 0, 1),
+('3 MARLA', 5, 40, 586, 586, 81, 401),
+('3 MARLA', 5, 41, 148, 115, 71, 55),
+('3 MARLA', 5, 42, 1, 0, 0, 0);
+
+
+ -- 3_6
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 6, 1, 48, 0, 0, 0),
+('3 MARLA', 6, 2, 140, 0, 0, 0),
+('3 MARLA', 6, 3, 1, 1, 0, 0),
+('3 MARLA', 6, 4, 3.5, 0, 0, 0),
+('3 MARLA', 6, 5, 5, 4, 1, 2),
+('3 MARLA', 6, 6, 2, 3, 0, 0),
+('3 MARLA', 6, 7, 5, 4, 1, 2),
+('3 MARLA', 6, 8, 1, 1, 0, 0),
+('3 MARLA', 6, 9, 5, 4, 1, 1),
+('3 MARLA', 6, 10, 5, 4, 1, 1),
+('3 MARLA', 6, 11, 8.75, 2.1875, 2.1875, 0),
+('3 MARLA', 6, 12, 81, 54, 36, 0),
+('3 MARLA', 6, 13, 1, 2, 0, 0),
+('3 MARLA', 6, 14, 5, 4, 1, 2),
+('3 MARLA', 6, 15, 80, 72, 10, 26),
+('3 MARLA', 6, 16, 6, 5, 2, 5),
+('3 MARLA', 6, 17, 1.75, 8.75, 0, 0),
+('3 MARLA', 6, 18, 1, 1, 0, 0),
+('3 MARLA', 6, 19, 4, 4, 0, 0),
+('3 MARLA', 6, 20, 27.5, 36, 0, 0),
+('3 MARLA', 6, 21, 111, 130, 0, 0),
+('3 MARLA', 6, 22, 1, 1, 0, 0),
+('3 MARLA', 6, 23, 1, 1, 0, 0),
+('3 MARLA', 6, 24, 1, 1, 0, 0),
+('3 MARLA', 6, 25, 1, 1, 0, 0),
+('3 MARLA', 6, 26, 1, 1, 0, 0),
+('3 MARLA', 6, 27, 1, 1, 0, 0),
+('3 MARLA', 6, 28, 42, 0, 0, 0),
+('3 MARLA', 6, 29, 1, 0, 0, 0),
+('3 MARLA', 6, 30, 1, 0, 0, 0),
+('3 MARLA', 6, 31, 31.5, 0, 0, 0),
+('3 MARLA', 6, 32, 1, 0, 0, 0),
+('3 MARLA', 6, 33, 162, 0, 0, 0),
+('3 MARLA', 6, 34, 1, 0, 0, 0),
+('3 MARLA', 6, 35, 20, 0, 0, 0),
+('3 MARLA', 6, 36, 352.75, 416, 81, 675),
+('3 MARLA', 6, 37, 15, 15, 0, 15),
+('3 MARLA', 6, 38, 98.4, 99, 0, 90),
+('3 MARLA', 6, 39, 1, 1, 0, 0),
+('3 MARLA', 6, 40, 625, 625, 81, 675),
+('3 MARLA', 6, 41, 101, 61, 81, 53),
+('3 MARLA', 6, 42, 1, 0, 0, 0);
+ 
+
+ -- 3_7
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 7, 1, 48, 0, 0, NULL),
+('3 MARLA', 7, 2, 135, 0, 0, NULL),
+('3 MARLA', 7, 3, 1, 1, 0, NULL),
+('3 MARLA', 7, 4, 3.5, 0, 0, NULL),
+('3 MARLA', 7, 5, 5, 4, 1, NULL),
+('3 MARLA', 7, 6, 3, 4, 0, NULL),
+('3 MARLA', 7, 7, 5, 5, 1, NULL),
+('3 MARLA', 7, 8, 1, 1, 0, NULL),
+('3 MARLA', 7, 9, 5, 5, 1, NULL),
+('3 MARLA', 7, 10, 5, 5, 1, NULL),
+('3 MARLA', 7, 11, 4.375, 4.375, 2.1875, NULL),
+('3 MARLA', 7, 12, 72, 66, 36, NULL),
+('3 MARLA', 7, 13, 1, 2, 0, NULL),
+('3 MARLA', 7, 14, 5, 4, 1, NULL),
+('3 MARLA', 7, 15, 83, 69, 12, NULL),
+('3 MARLA', 7, 16, 6, 5, 2, NULL),
+('3 MARLA', 7, 17, 3.5, 3.5, 0, NULL),
+('3 MARLA', 7, 18, 2, 2, 0, NULL),
+('3 MARLA', 7, 19, 8, 8, 0, NULL),
+('3 MARLA', 7, 20, 62, 88, 0, NULL),
+('3 MARLA', 7, 21, 195, 307, 0, NULL),
+('3 MARLA', 7, 22, 2, 2, 0, NULL),
+('3 MARLA', 7, 23, 2, 2, 0, NULL),
+('3 MARLA', 7, 24, 2, 2, 0, NULL),
+('3 MARLA', 7, 25, 2, 2, 0, NULL),
+('3 MARLA', 7, 26, 2, 2, 0, NULL),
+('3 MARLA', 7, 27, 2, 2, 0, NULL),
+('3 MARLA', 7, 28, 40, 0, 0, NULL),
+('3 MARLA', 7, 29, 1, 0, 0, NULL),
+('3 MARLA', 7, 30, 1, 0, 0, NULL),
+('3 MARLA', 7, 31, 26, 0, 0, NULL),
+('3 MARLA', 7, 32, 1, 0, 0, NULL),
+('3 MARLA', 7, 33, 138, 0, 0, NULL),
+('3 MARLA', 7, 34, 1, 0, 0, NULL),
+('3 MARLA', 7, 35, 24, 0, 0, NULL),
+('3 MARLA', 7, 36, 410, 459, 81, NULL),
+('3 MARLA', 7, 37, 15, 14, 0, NULL),
+('3 MARLA', 7, 38, 90, 90, 0, NULL),
+('3 MARLA', 7, 39, 1, 1, 0, NULL),
+('3 MARLA', 7, 40, 639, 565, 81, NULL),
+('3 MARLA', 7, 41, 102, 92, 77, NULL),
+('3 MARLA', 7, 42, 1, 0, 0, NULL);
 
 
 
+-- 3_8
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_3_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('3 MARLA', 8, 1, 48, 0, 0, NULL),
+('3 MARLA', 8, 2, 176, 0, 0, NULL),
+('3 MARLA', 8, 3, 1, 1, 0, NULL),
+('3 MARLA', 8, 4, 3.5, 0, 0, NULL),
+('3 MARLA', 8, 5, 6, 3, 1, NULL),
+('3 MARLA', 8, 6, 4, 1, 0, NULL),
+('3 MARLA', 8, 7, 9, 3, 1, NULL),
+('3 MARLA', 8, 8, 1, 1, 0, NULL),
+('3 MARLA', 8, 9, 6, 3, 1, NULL),
+('3 MARLA', 8, 10, 9, 3, 1, NULL),
+('3 MARLA', 8, 11, 13.125, 8.75, 2.1875, NULL),
+('3 MARLA', 8, 12, 102, 96, 24, NULL),
+('3 MARLA', 8, 13, 2, 3, 0, NULL),
+('3 MARLA', 8, 14, 6, 3, 1, NULL),
+('3 MARLA', 8, 15, 105, 70, 11, NULL),
+('3 MARLA', 8, 16, 6, 5, 2, NULL),
+('3 MARLA', 8, 17, 5.25, 3.5, 0, NULL),
+('3 MARLA', 8, 18, 3, 2, 0, NULL),
+('3 MARLA', 8, 19, 24, 16, 0, NULL),
+('3 MARLA', 8, 20, 75, 78, 0, NULL),
+('3 MARLA', 8, 21, 317, 267, 0, NULL),
+('3 MARLA', 8, 22, 3, 2, 0, NULL),
+('3 MARLA', 8, 23, 3, 2, 0, NULL),
+('3 MARLA', 8, 24, 3, 2, 0, NULL),
+('3 MARLA', 8, 25, 3, 2, 0, NULL),
+('3 MARLA', 8, 26, 3, 2, 0, NULL),
+('3 MARLA', 8, 27, 3, 2, 0, NULL),
+('3 MARLA', 8, 28, 36, 0, 0, NULL),
+('3 MARLA', 8, 29, 1, 0, 0, NULL),
+('3 MARLA', 8, 30, 1, 0, 0, NULL),
+('3 MARLA', 8, 31, 27, 0, 0, NULL),
+('3 MARLA', 8, 32, 1, 0, 0, NULL),
+('3 MARLA', 8, 33, 126, 0, 0, NULL),
+('3 MARLA', 8, 34, 1, 0, 0, NULL),
+('3 MARLA', 8, 35, 30, 0, 0, NULL),
+('3 MARLA', 8, 36, 345, 541, 81, NULL),
+('3 MARLA', 8, 37, 15, 15, 0, NULL),
+('3 MARLA', 8, 38, 90, 99, 0, NULL),
+('3 MARLA', 8, 39, 1, 1, 0, NULL),
+('3 MARLA', 8, 40, 615, 615, 81, NULL),
+('3 MARLA', 8, 41, 110, 78, 79, NULL),
+('3 MARLA', 8, 42, 1, 0, 0, NULL);
+ 
+ 
+-- 5_1
+ 
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 1, 1, 60, 0, 0, 0),
+('5 MARLA', 1, 2, 279, 0, 0, 0),
+('5 MARLA', 1, 3, 1, 1, 0, 0),
+('5 MARLA', 1, 4, 3.5, 0, 0, 0),
+('5 MARLA', 1, 5, 5, 5, 1, 2),
+('5 MARLA', 1, 6, 3, 3, 0, 0),
+('5 MARLA', 1, 7, 7, 5, 1, 3),
+('5 MARLA', 1, 8, 1, 1, 0, 0),
+('5 MARLA', 1, 9, 7, 7, 1, 1),
+('5 MARLA', 1, 10, 7, 7, 1, 2),
+('5 MARLA', 1, 11, 10.9375, 8.75, 2.1875, 0),
+('5 MARLA', 1, 12, 102, 72, 42, 0),
+('5 MARLA', 1, 13, 1, 2, 0, 0),
+('5 MARLA', 1, 14, 5, 5, 1, 2),
+('5 MARLA', 1, 15, 89, 72, 12, 30),
+('5 MARLA', 1, 16, 6, 5, 2, 5),
+('5 MARLA', 1, 17, 0.875, 3.5, 0, 0),
+('5 MARLA', 1, 18, 1, 2, 0, 0),
+('5 MARLA', 1, 19, 4, 8, 0, 0),
+('5 MARLA', 1, 20, 36, 103, 0, 0),
+('5 MARLA', 1, 21, 141, 324, 0, 0),
+('5 MARLA', 1, 22, 1, 2, 0, 0),
+('5 MARLA', 1, 23, 1, 2, 0, 0),
+('5 MARLA', 1, 24, 1, 2, 0, 0),
+('5 MARLA', 1, 25, 1, 2, 0, 0),
+('5 MARLA', 1, 26, 1, 2, 0, 0),
+('5 MARLA', 1, 27, 1, 2, 0, 0),
+('5 MARLA', 1, 28, 70, 0, 0, 0),
+('5 MARLA', 1, 29, 1, 0, 0, 0),
+('5 MARLA', 1, 30, 1, 0, 0, 0),
+('5 MARLA', 1, 31, 53, 0, 0, 0),
+('5 MARLA', 1, 32, 1, 0, 0, 0),
+('5 MARLA', 1, 33, 228, 0, 0, 0),
+('5 MARLA', 1, 34, 1, 0, 0, 0),
+('5 MARLA', 1, 35, 24, 0, 0, 0),
+('5 MARLA', 1, 36, 672, 787, 121, 1023),
+('5 MARLA', 1, 37, 15, 15, 0, 15),
+('5 MARLA', 1, 38, 90, 90, 0, 90),
+('5 MARLA', 1, 39, 1, 1, 0, 1),
+('5 MARLA', 1, 40, 993, 993, 121, 1023),
+('5 MARLA', 1, 41, 151, 141, 100, 67),
+('5 MARLA', 1, 42, 1, 0, 0, 0);
+
+ 
+-- 5_2
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 2, 1, 60, 0, 0, 0),
+('5 MARLA', 2, 2, 131, 0, 0, 0),
+('5 MARLA', 2, 3, 1, 1, 0, 0),
+('5 MARLA', 2, 4, 3.5, 0, 0, 0),
+('5 MARLA', 2, 5, 5, 4, 1, 3),
+('5 MARLA', 2, 6, 3, 2, 0, 0),
+('5 MARLA', 2, 7, 7, 4, 1, 3),
+('5 MARLA', 2, 8, 1, 1, 0, 0),
+('5 MARLA', 2, 9, 7, 4, 1, 3),
+('5 MARLA', 2, 10, 7, 4, 1, 3),
+('5 MARLA', 2, 11, 8.75, 8.75, 2.1875, 2.1875),
+('5 MARLA', 2, 12, 108, 144, 42, 30),
+('5 MARLA', 2, 13, 2, 2, 0, 1),
+('5 MARLA', 2, 14, 5, 4, 1, 3),
+('5 MARLA', 2, 15, 86, 80, 14, 35),
+('5 MARLA', 2, 16, 6, 5, 2, 5),
+('5 MARLA', 2, 17, 5.25, 5.25, 0, 1.75),
+('5 MARLA', 2, 18, 3, 3, 0, 1),
+('5 MARLA', 2, 19, 12, 12, 0, 4),
+('5 MARLA', 2, 20, 117, 117, 0, 144),
+('5 MARLA', 2, 21, 418, 418, 0, 273),
+('5 MARLA', 2, 22, 3, 3, 0, 1),
+('5 MARLA', 2, 23, 3, 3, 0, 1),
+('5 MARLA', 2, 24, 3, 3, 0, 1),
+('5 MARLA', 2, 25, 3, 3, 0, 1),
+('5 MARLA', 2, 26, 3, 3, 0, 1),
+('5 MARLA', 2, 27, 3, 3, 0, 1),
+('5 MARLA', 2, 28, 58, 0, 0, 0),
+('5 MARLA', 2, 29, 1, 0, 0, 0),
+('5 MARLA', 2, 30, 1, 0, 0, 0),
+('5 MARLA', 2, 31, 44, 0, 0, 0),
+('5 MARLA', 2, 32, 1, 0, 0, 0),
+('5 MARLA', 2, 33, 193, 0, 0, 0),
+('5 MARLA', 2, 34, 1, 0, 0, 0),
+('5 MARLA', 2, 35, 24, 0, 0, 0),
+('5 MARLA', 2, 36, 480, 746, 109, 927),
+('5 MARLA', 2, 37, 15, 15, 0, 15),
+('5 MARLA', 2, 38, 90, 90, 0, 90),
+('5 MARLA', 2, 39, 1, 1, 0, 1),
+('5 MARLA', 2, 40, 966, 905, 109, 951),
+('5 MARLA', 2, 41, 100, 133, 81, 71),
+('5 MARLA', 2, 42, 1, 0, 0, 0);
+
+ 
+ -- 5_3
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 3, 1, 60, 0, 0, NULL),
+('5 MARLA', 3, 2, 286, 0, 0, NULL),
+('5 MARLA', 3, 3, 1, 1, 0, NULL),
+('5 MARLA', 3, 4, 3.5, 0, 0, NULL),
+('5 MARLA', 3, 5, 6, 4, 1, NULL),
+('5 MARLA', 3, 6, 3, 2, 0, NULL),
+('5 MARLA', 3, 7, 6, 4, 1, NULL),
+('5 MARLA', 3, 8, 1, 1, 0, NULL),
+('5 MARLA', 3, 9, 6, 4, 1, NULL),
+('5 MARLA', 3, 10, 6, 4, 1, NULL),
+('5 MARLA', 3, 11, 8.75, 8.75, 2.1875, NULL),
+('5 MARLA', 3, 12, 84, 120, 36, NULL),
+('5 MARLA', 3, 13, 2, 2, 0, NULL),
+('5 MARLA', 3, 14, 6, 4, 1, NULL),
+('5 MARLA', 3, 15, 106, 97, 17, NULL),
+('5 MARLA', 3, 16, 6, 5, 2, NULL),
+('5 MARLA', 3, 17, 3.5, 3.5, 0, NULL),
+('5 MARLA', 3, 18, 2, 2, 0, NULL),
+('5 MARLA', 3, 19, 8, 8, 0, NULL),
+('5 MARLA', 3, 20, 104, 117, 0, NULL),
+('5 MARLA', 3, 21, 312, 312, 0, NULL),
+('5 MARLA', 3, 22, 2, 2, 0, NULL),
+('5 MARLA', 3, 23, 2, 2, 0, NULL),
+('5 MARLA', 3, 24, 2, 2, 0, NULL),
+('5 MARLA', 3, 25, 2, 2, 0, NULL),
+('5 MARLA', 3, 26, 2, 2, 0, NULL),
+('5 MARLA', 3, 27, 2, 2, 0, NULL),
+('5 MARLA', 3, 28, 60, 0, 0, NULL),
+('5 MARLA', 3, 29, 1, 0, 0, NULL),
+('5 MARLA', 3, 30, 1, 0, 0, NULL),
+('5 MARLA', 3, 31, 45, 0, 0, NULL),
+('5 MARLA', 3, 32, 1, 0, 0, NULL),
+('5 MARLA', 3, 33, 198, 0, 0, NULL),
+('5 MARLA', 3, 34, 1, 0, 0, NULL),
+('5 MARLA', 3, 35, 36, 0, 0, NULL),
+('5 MARLA', 3, 36, 571, 715, 132, NULL),
+('5 MARLA', 3, 37, 15, 15, 0, NULL),
+('5 MARLA', 3, 38, 90, 90, 90, NULL),
+('5 MARLA', 3, 39, 1, 1, 0, NULL),
+('5 MARLA', 3, 40, 929, 857, 132, NULL),
+('5 MARLA', 3, 41, 160, 118, 86, NULL),
+('5 MARLA', 3, 42, 1, 0, 0, NULL);
+
+ 
+-- 5_4 
+ 
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 4, 1, 60, 0, 0, NULL),
+('5 MARLA', 4, 2, 265, 0, 0, NULL),
+('5 MARLA', 4, 3, 1, 1, 0, NULL),
+('5 MARLA', 4, 4, 3.5, 0, 0, NULL),
+('5 MARLA', 4, 5, 6, 5, 1, NULL),
+('5 MARLA', 4, 6, 2, 2, 0, NULL),
+('5 MARLA', 4, 7, 6, 5, 1, NULL),
+('5 MARLA', 4, 8, 1, 1, 0, NULL),
+('5 MARLA', 4, 9, 6, 5, 1, NULL),
+('5 MARLA', 4, 10, 6, 5, 1, NULL),
+('5 MARLA', 4, 11, 10.9375, 8.75, 2.1875, NULL),
+('5 MARLA', 4, 12, 54, 48, 42, NULL),
+('5 MARLA', 4, 13, 1, 2, 0, NULL),
+('5 MARLA', 4, 14, 6, 5, 1, NULL),
+('5 MARLA', 4, 15, 99, 91, 16, NULL),
+('5 MARLA', 4, 16, 6, 5, 2, NULL),
+('5 MARLA', 4, 17, 3.5, 3.5, 0, NULL),
+('5 MARLA', 4, 18, 2, 2, 0, NULL),
+('5 MARLA', 4, 19, 8, 8, 0, NULL),
+('5 MARLA', 4, 20, 84, 84, 0, NULL),
+('5 MARLA', 4, 21, 288, 288, 0, NULL),
+('5 MARLA', 4, 22, 2, 2, 0, NULL),
+('5 MARLA', 4, 23, 2, 2, 0, NULL),
+('5 MARLA', 4, 24, 2, 2, 0, NULL),
+('5 MARLA', 4, 25, 2, 2, 0, NULL),
+('5 MARLA', 4, 26, 2, 2, 0, NULL),
+('5 MARLA', 4, 27, 2, 2, 0, NULL),
+('5 MARLA', 4, 28, 64, 0, 0, NULL),
+('5 MARLA', 4, 29, 1, 0, 0, NULL),
+('5 MARLA', 4, 30, 1, 0, 0, NULL),
+('5 MARLA', 4, 31, 48, 0, 0, NULL),
+('5 MARLA', 4, 32, 1, 0, 0, NULL),
+('5 MARLA', 4, 33, 210, 0, 0, NULL),
+('5 MARLA', 4, 34, 1, 0, 0, NULL),
+('5 MARLA', 4, 35, 36, 0, 0, NULL),
+('5 MARLA', 4, 36, 630, 780, 121, NULL),
+('5 MARLA', 4, 37, 15, 15, 0, NULL),
+('5 MARLA', 4, 38, 90, 90, 0, NULL),
+('5 MARLA', 4, 39, 1, 1, 0, NULL),
+('5 MARLA', 4, 40, 937, 937, 121, NULL),
+('5 MARLA', 4, 41, 131, 822, 93, NULL),
+('5 MARLA', 4, 42, 1, 0, 0, NULL);
+ 
+ -- 5_5
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 5, 1, 60, 0, 0, 0),
+('5 MARLA', 5, 2, 279, 0, 0, 0),
+('5 MARLA', 5, 3, 1, 1, 0, 0),
+('5 MARLA', 5, 4, 3.5, 0, 0, 0),
+('5 MARLA', 5, 5, 5, 5, 1, 2),
+('5 MARLA', 5, 6, 3, 3, 0, 0),
+('5 MARLA', 5, 7, 7, 5, 1, 3),
+('5 MARLA', 5, 8, 1, 1, 0, 0),
+('5 MARLA', 5, 9, 7, 7, 1, 1),
+('5 MARLA', 5, 10, 7, 7, 1, 2),
+('5 MARLA', 5, 11, 10.9375, 8.75, 2.1875, 0),
+('5 MARLA', 5, 12, 102, 72, 42, 0),
+('5 MARLA', 5, 13, 1, 2, 0, 0),
+('5 MARLA', 5, 14, 5, 5, 1, 2),
+('5 MARLA', 5, 15, 89, 72, 12, 30),
+('5 MARLA', 5, 16, 6, 5, 2, 5),
+('5 MARLA', 5, 17, 0.875, 3.5, 0, 0),
+('5 MARLA', 5, 18, 1, 2, 0, 0),
+('5 MARLA', 5, 19, 4, 8, 0, 0),
+('5 MARLA', 5, 20, 36, 103, 0, 0),
+('5 MARLA', 5, 21, 141, 324, 0, 0),
+('5 MARLA', 5, 22, 1, 2, 0, 0),
+('5 MARLA', 5, 23, 1, 2, 0, 0),
+('5 MARLA', 5, 24, 1, 2, 0, 0),
+('5 MARLA', 5, 25, 1, 2, 0, 0),
+('5 MARLA', 5, 26, 1, 2, 0, 0),
+('5 MARLA', 5, 27, 1, 2, 0, 0),
+('5 MARLA', 5, 28, 70, 0, 0, 0),
+('5 MARLA', 5, 29, 1, 0, 0, 0),
+('5 MARLA', 5, 30, 1, 0, 0, 0),
+('5 MARLA', 5, 31, 53, 0, 0, 0),
+('5 MARLA', 5, 32, 1, 0, 0, 0),
+('5 MARLA', 5, 33, 228, 0, 0, 0),
+('5 MARLA', 5, 34, 1, 0, 0, 0),
+('5 MARLA', 5, 35, 24, 0, 0, 0),
+('5 MARLA', 5, 36, 672, 787, 121, 1023),
+('5 MARLA', 5, 37, 15, 15, 0, 15),
+('5 MARLA', 5, 38, 90, 90, 0, 90),
+('5 MARLA', 5, 39, 1, 1, 0, 1),
+('5 MARLA', 5, 40, 993, 993, 121, 1023),
+('5 MARLA', 5, 41, 151, 141, 100, 67),
+('5 MARLA', 5, 42, 1, 0, 0, 0);
+ 
+ -- 5_6
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 6, 1, 60, 0, 0, 0),
+('5 MARLA', 6, 2, 131, 0, 0, 0),
+('5 MARLA', 6, 3, 1, 1, 0, 0),
+('5 MARLA', 6, 4, 3.5, 0, 0, 0),
+('5 MARLA', 6, 5, 5, 4, 1, 3),
+('5 MARLA', 6, 6, 3, 2, 0, 0),
+('5 MARLA', 6, 7, 7, 4, 1, 3),
+('5 MARLA', 6, 8, 1, 1, 0, 0),
+('5 MARLA', 6, 9, 7, 4, 1, 3),
+('5 MARLA', 6, 10, 7, 4, 1, 3),
+('5 MARLA', 6, 11, 8.75, 8.75, 2.1875, 2.1875),
+('5 MARLA', 6, 12, 108, 144, 42, 30),
+('5 MARLA', 6, 13, 2, 2, 0, 1),
+('5 MARLA', 6, 14, 5, 4, 1, 3),
+('5 MARLA', 6, 15, 86, 80, 14, 35),
+('5 MARLA', 6, 16, 6, 5, 2, 5),
+('5 MARLA', 6, 17, 5.25, 5.25, 0, 1.75),
+('5 MARLA', 6, 18, 3, 3, 0, 1),
+('5 MARLA', 6, 19, 12, 12, 0, 4),
+('5 MARLA', 6, 20, 117, 117, 0, 144),
+('5 MARLA', 6, 21, 418, 418, 0, 273),
+('5 MARLA', 6, 22, 3, 3, 0, 1),
+('5 MARLA', 6, 23, 3, 3, 0, 1),
+('5 MARLA', 6, 24, 3, 3, 0, 1),
+('5 MARLA', 6, 25, 3, 3, 0, 1),
+('5 MARLA', 6, 26, 3, 3, 0, 1),
+('5 MARLA', 6, 27, 3, 3, 0, 1),
+('5 MARLA', 6, 28, 58, 0, 0, 0),
+('5 MARLA', 6, 29, 1, 0, 0, 0),
+('5 MARLA', 6, 30, 1, 0, 0, 0),
+('5 MARLA', 6, 31, 44, 0, 0, 0),
+('5 MARLA', 6, 32, 1, 0, 0, 0),
+('5 MARLA', 6, 33, 193, 0, 0, 0),
+('5 MARLA', 6, 34, 1, 0, 0, 0),
+('5 MARLA', 6, 35, 24, 0, 0, 0),
+('5 MARLA', 6, 36, 480, 746, 109, 927),
+('5 MARLA', 6, 37, 15, 15, 0, 15),
+('5 MARLA', 6, 38, 90, 90, 0, 90),
+('5 MARLA', 6, 39, 1, 1, 0, 1),
+('5 MARLA', 6, 40, 966, 905, 109, 951),
+('5 MARLA', 6, 41, 100, 133, 81, 71),
+('5 MARLA', 6, 42, 1, 0, 0, 0);
+
+
+-- 5_7
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 7, 1, 60, 0, 0, NULL),
+('5 MARLA', 7, 2, 286, 0, 0, NULL),
+('5 MARLA', 7, 3, 1, 1, 0, NULL),
+('5 MARLA', 7, 4, 3.5, 0, 0, NULL),
+('5 MARLA', 7, 5, 6, 4, 1, NULL),
+('5 MARLA', 7, 6, 3, 2, 0, NULL),
+('5 MARLA', 7, 7, 6, 4, 1, NULL),
+('5 MARLA', 7, 8, 1, 1, 0, NULL),
+('5 MARLA', 7, 9, 6, 4, 1, NULL),
+('5 MARLA', 7, 10, 6, 4, 1, NULL),
+('5 MARLA', 7, 11, 8.75, 8.75, 2.1875, NULL),
+('5 MARLA', 7, 12, 84, 120, 36, NULL),
+('5 MARLA', 7, 13, 2, 2, 0, NULL),
+('5 MARLA', 7, 14, 6, 4, 1, NULL),
+('5 MARLA', 7, 15, 106, 97, 17, NULL),
+('5 MARLA', 7, 16, 6, 5, 2, NULL),
+('5 MARLA', 7, 17, 3.5, 3.5, 0, NULL),
+('5 MARLA', 7, 18, 2, 2, 0, NULL),
+('5 MARLA', 7, 19, 8, 8, 0, NULL),
+('5 MARLA', 7, 20, 104, 117, 0, NULL),
+('5 MARLA', 7, 21, 312, 312, 0, NULL),
+('5 MARLA', 7, 22, 2, 2, 0, NULL),
+('5 MARLA', 7, 23, 2, 2, 0, NULL),
+('5 MARLA', 7, 24, 2, 2, 0, NULL),
+('5 MARLA', 7, 25, 2, 2, 0, NULL),
+('5 MARLA', 7, 26, 2, 2, 0, NULL),
+('5 MARLA', 7, 27, 2, 2, 0, NULL),
+('5 MARLA', 7, 28, 60, 0, 0, NULL),
+('5 MARLA', 7, 29, 1, 0, 0, NULL),
+('5 MARLA', 7, 30, 1, 0, 0, NULL),
+('5 MARLA', 7, 31, 45, 0, 0, NULL),
+('5 MARLA', 7, 32, 1, 0, 0, NULL),
+('5 MARLA', 7, 33, 198, 0, 0, NULL),
+('5 MARLA', 7, 34, 1, 0, 0, NULL),
+('5 MARLA', 7, 35, 36, 0, 0, NULL),
+('5 MARLA', 7, 36, 571, 715, 132, NULL),
+('5 MARLA', 7, 37, 15, 15, 0, NULL),
+('5 MARLA', 7, 38, 90, 90, 90, NULL),
+('5 MARLA', 7, 39, 1, 1, 0, NULL),
+('5 MARLA', 7, 40, 929, 857, 132, NULL),
+('5 MARLA', 7, 41, 160, 118, 86, NULL),
+('5 MARLA', 7, 42, 1, 0, 0, NULL);
+
+ 
+ -- 5_8
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_5_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('5 MARLA', 8, 1, 60, 0, 0, NULL),
+('5 MARLA', 8, 2, 265, 0, 0, NULL),
+('5 MARLA', 8, 3, 1, 1, 0, NULL),
+('5 MARLA', 8, 4, 3.5, 0, 0, NULL),
+('5 MARLA', 8, 5, 6, 5, 1, NULL),
+('5 MARLA', 8, 6, 2, 2, 0, NULL),
+('5 MARLA', 8, 7, 6, 5, 1, NULL),
+('5 MARLA', 8, 8, 1, 1, 0, NULL),
+('5 MARLA', 8, 9, 6, 5, 1, NULL),
+('5 MARLA', 8, 10, 6, 5, 1, NULL),
+('5 MARLA', 8, 11, 10.9375, 8.75, 2.1875, NULL),
+('5 MARLA', 8, 12, 54, 48, 42, NULL),
+('5 MARLA', 8, 13, 1, 2, 0, NULL),
+('5 MARLA', 8, 14, 6, 5, 1, NULL),
+('5 MARLA', 8, 15, 99, 91, 16, NULL),
+('5 MARLA', 8, 16, 6, 5, 2, NULL),
+('5 MARLA', 8, 17, 3.5, 3.5, 0, NULL),
+('5 MARLA', 8, 18, 2, 2, 0, NULL),
+('5 MARLA', 8, 19, 8, 8, 0, NULL),
+('5 MARLA', 8, 20, 84, 84, 0, NULL),
+('5 MARLA', 8, 21, 288, 288, 0, NULL),
+('5 MARLA', 8, 22, 2, 2, 0, NULL),
+('5 MARLA', 8, 23, 2, 2, 0, NULL),
+('5 MARLA', 8, 24, 2, 2, 0, NULL),
+('5 MARLA', 8, 25, 2, 2, 0, NULL),
+('5 MARLA', 8, 26, 2, 2, 0, NULL),
+('5 MARLA', 8, 27, 2, 2, 0, NULL),
+('5 MARLA', 8, 28, 64, 0, 0, NULL),
+('5 MARLA', 8, 29, 1, 0, 0, NULL),
+('5 MARLA', 8, 30, 1, 0, 0, NULL),
+('5 MARLA', 8, 31, 48, 0, 0, NULL),
+('5 MARLA', 8, 32, 1, 0, 0, NULL),
+('5 MARLA', 8, 33, 210, 0, 0, NULL),
+('5 MARLA', 8, 34, 1, 0, 0, NULL),
+('5 MARLA', 8, 35, 36, 0, 0, NULL),
+('5 MARLA', 8, 36, 630, 780, 121, NULL),
+('5 MARLA', 8, 37, 15, 15, 0, NULL),
+('5 MARLA', 8, 38, 90, 90, 0, NULL),
+('5 MARLA', 8, 39, 1, 1, 0, NULL),
+('5 MARLA', 8, 40, 937, 937, 121, NULL),
+('5 MARLA', 8, 41, 131, 822, 93, NULL),
+('5 MARLA', 8, 42, 1, 0, 0, NULL);
+
+-- 7_1
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 1, 1, 72, 0, 0, 0),
+('7 MARLA', 1, 2, 623, 0, 0, 0),
+('7 MARLA', 1, 3, 1, 1, 0, 0),
+('7 MARLA', 1, 4, 3.5, 0, 0, 0),
+('7 MARLA', 1, 5, 6, 4, 1, 2),
+('7 MARLA', 1, 6, 3, 2, 0, 0),
+('7 MARLA', 1, 7, 6, 4, 1, 2),
+('7 MARLA', 1, 8, 1, 1, 0, 0),
+('7 MARLA', 1, 9, 6, 4, 1, 2),
+('7 MARLA', 1, 10, 6, 4, 1, 2),
+('7 MARLA', 1, 11, 15.3125, 8.75, 2.1875, 0),
+('7 MARLA', 1, 12, 132, 96, 36, 0),
+('7 MARLA', 1, 13, 2, 2, 0, 0),
+('7 MARLA', 1, 14, 6, 4, 1, 2),
+('7 MARLA', 1, 15, 138, 120, 18, 46),
+('7 MARLA', 1, 16, 6, 5, 2, 5),
+('7 MARLA', 1, 17, 3.5, 3.5, 0, 0),
+('7 MARLA', 1, 18, 2, 2, 0, 0),
+('7 MARLA', 1, 19, 8, 8, 0, 0),
+('7 MARLA', 1, 20, 88, 88, 0, 0),
+('7 MARLA', 1, 21, 330, 330, 0, 0),
+('7 MARLA', 1, 22, 2, 2, 0, 0),
+('7 MARLA', 1, 23, 2, 2, 0, 0),
+('7 MARLA', 1, 24, 2, 2, 0, 0),
+('7 MARLA', 1, 25, 2, 2, 0, 0),
+('7 MARLA', 1, 26, 2, 2, 0, 0),
+('7 MARLA', 1, 27, 2, 2, 0, 0),
+('7 MARLA', 1, 28, 48, 0, 0, 0),
+('7 MARLA', 1, 29, 1, 0, 0, 0),
+('7 MARLA', 1, 30, 1, 0, 0, 0),
+('7 MARLA', 1, 31, 48, 0, 0, 0),
+('7 MARLA', 1, 32, 1, 0, 0, 0),
+('7 MARLA', 1, 33, 192, 0, 0, 0),
+('7 MARLA', 1, 34, 1, 0, 0, 0),
+('7 MARLA', 1, 35, 36, 0, 0, 0),
+('7 MARLA', 1, 36, 616, 737, 100, 1120),
+('7 MARLA', 1, 37, 15, 15, 0, 15),
+('7 MARLA', 1, 38, 90, 90, 0, 90),
+('7 MARLA', 1, 39, 1, 1, 0, 1),
+('7 MARLA', 1, 40, 985, 1041, 100, 1120),
+('7 MARLA', 1, 41, 185, 108, 100, 76),
+('7 MARLA', 1, 42, 1, 0, 0, 0);
+
+ 
+ -- 7_2
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 2, 1, 72, 0, 0, 0),
+('7 MARLA', 2, 2, 573, 0, 0, 0),
+('7 MARLA', 2, 3, 1, 1, 0, 0),
+('7 MARLA', 2, 4, 3.5, 0, 0, 0),
+('7 MARLA', 2, 5, 7, 6, 1, 3),
+('7 MARLA', 2, 6, 3, 2, 0, 0),
+('7 MARLA', 2, 7, 9, 6, 1, 3),
+('7 MARLA', 2, 8, 1, 1, 0, 0),
+('7 MARLA', 2, 9, 9, 6, 1, 1),
+('7 MARLA', 2, 10, 10, 6, 1, 1),
+('7 MARLA', 2, 11, 15.3125, 10.9375, 2.1875, 2.1875),
+('7 MARLA', 2, 12, 120, 156, 36, 36),
+('7 MARLA', 2, 13, 1, 1, 0, 1),
+('7 MARLA', 2, 14, 7, 6, 1, 3),
+('7 MARLA', 2, 15, 140, 127, 25, 103),
+('7 MARLA', 2, 16, 6, 5, 2, 5),
+('7 MARLA', 2, 17, 3.5, 3.5, 0, 1.75),
+('7 MARLA', 2, 18, 2, 2, 0, 1),
+('7 MARLA', 2, 19, 8, 8, 0, 4),
+('7 MARLA', 2, 20, 98, 98, 0, 80),
+('7 MARLA', 2, 21, 324, 324, 0, 198),
+('7 MARLA', 2, 22, 2, 2, 0, 1),
+('7 MARLA', 2, 23, 2, 2, 0, 1),
+('7 MARLA', 2, 24, 2, 2, 0, 1),
+('7 MARLA', 2, 25, 2, 2, 0, 1),
+('7 MARLA', 2, 26, 2, 2, 0, 1),
+('7 MARLA', 2, 27, 2, 2, 0, 1),
+('7 MARLA', 2, 28, 48, 0, 0, 0),
+('7 MARLA', 2, 29, 1, 0, 0, 0),
+('7 MARLA', 2, 30, 1, 0, 0, 0),
+('7 MARLA', 2, 31, 48, 0, 0, 0),
+('7 MARLA', 2, 32, 1, 0, 0, 0),
+('7 MARLA', 2, 33, 204, 0, 0, 0),
+('7 MARLA', 2, 34, 1, 0, 0, 0),
+('7 MARLA', 2, 35, 48, 0, 0, 0),
+('7 MARLA', 2, 36, 681, 754, 100, 554),
+('7 MARLA', 2, 37, 15, 15, 0, 15),
+('7 MARLA', 2, 38, 90, 90, 0, 90),
+('7 MARLA', 2, 39, 1, 1, 0, 1),
+('7 MARLA', 2, 40, 970, 1123, 100, 634),
+('7 MARLA', 2, 41, 172, 130, 103, 60),
+('7 MARLA', 2, 42, 1, 0, 0, 0);
+
+ 
+ -- 7_3
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 3, 1, 72, 0, 0, NULL),
+('7 MARLA', 3, 2, 665, 0, 0, NULL),
+('7 MARLA', 3, 3, 1, 1, 0, NULL),
+('7 MARLA', 3, 4, 3.5, 0, 0, NULL),
+('7 MARLA', 3, 5, 6, 5, 1, NULL),
+('7 MARLA', 3, 6, 2, 2, 0, NULL),
+('7 MARLA', 3, 7, 6, 5, 1, NULL),
+('7 MARLA', 3, 8, 1, 1, 0, NULL),
+('7 MARLA', 3, 9, 6, 5, 1, NULL),
+('7 MARLA', 3, 10, 6, 5, 1, NULL),
+('7 MARLA', 3, 11, 8.75, 8.75, 2.1875, NULL),
+('7 MARLA', 3, 12, 144, 144, 36, NULL),
+('7 MARLA', 3, 13, 2, 2, 0, NULL),
+('7 MARLA', 3, 14, 6, 5, 1, NULL),
+('7 MARLA', 3, 15, 149, 131, 22, NULL),
+('7 MARLA', 3, 16, 6, 5, 2, NULL),
+('7 MARLA', 3, 17, 3.5, 1.75, 0, NULL),
+('7 MARLA', 3, 18, 2, 1, 0, NULL),
+('7 MARLA', 3, 19, 8, 4, 0, NULL),
+('7 MARLA', 3, 20, 91, 55, 0, NULL),
+('7 MARLA', 3, 21, 318, 177, 0, NULL),
+('7 MARLA', 3, 22, 2, 1, 0, NULL),
+('7 MARLA', 3, 23, 2, 1, 0, NULL),
+('7 MARLA', 3, 24, 2, 1, 0, NULL),
+('7 MARLA', 3, 25, 2, 1, 0, NULL),
+('7 MARLA', 3, 26, 2, 1, 0, NULL),
+('7 MARLA', 3, 27, 2, 1, 0, NULL),
+('7 MARLA', 3, 28, 64, 0, 0, NULL),
+('7 MARLA', 3, 29, 1, 0, 0, NULL),
+('7 MARLA', 3, 30, 1, 0, 0, NULL),
+('7 MARLA', 3, 31, 64, 0, 0, NULL),
+('7 MARLA', 3, 32, 1, 0, 0, NULL),
+('7 MARLA', 3, 33, 210, 0, 0, NULL),
+('7 MARLA', 3, 34, 1, 0, 0, NULL),
+('7 MARLA', 3, 35, 48, 0, 0, NULL),
+('7 MARLA', 3, 36, 640, 786, 100, NULL),
+('7 MARLA', 3, 37, 15, 15, 0, NULL),
+('7 MARLA', 3, 38, 90, 90, 0, NULL),
+('7 MARLA', 3, 39, 1, 1, 0, NULL),
+('7 MARLA', 3, 40, 911, 1007, 100, NULL),
+('7 MARLA', 3, 41, 203, 122, 92, NULL),
+('7 MARLA', 3, 42, 1, 0, 0, NULL);
+
+ -- 7_4
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 4, 1, 72, 0, 0, NULL),
+('7 MARLA', 4, 2, 616, 0, 0, NULL),
+('7 MARLA', 4, 3, 1, 1, 0, NULL),
+('7 MARLA', 4, 4, 3.5, 0, 0, NULL),
+('7 MARLA', 4, 5, 5, 5, 1, NULL),
+('7 MARLA', 4, 6, 2, 2, 0, NULL),
+('7 MARLA', 4, 7, 5, 5, 1, NULL),
+('7 MARLA', 4, 8, 1, 1, 0, NULL),
+('7 MARLA', 4, 9, 5, 5, 1, NULL),
+('7 MARLA', 4, 10, 5, 5, 1, NULL),
+('7 MARLA', 4, 11, 10.9375, 8.75, 2.1875, NULL),
+('7 MARLA', 4, 12, 138, 138, 36, NULL),
+('7 MARLA', 4, 13, 2, 2, 0, NULL),
+('7 MARLA', 4, 14, 5, 5, 1, NULL),
+('7 MARLA', 4, 15, 150, 159, 26, NULL),
+('7 MARLA', 4, 16, 6, 5, 2, NULL),
+('7 MARLA', 4, 17, 3.5, 3.5, 0, NULL),
+('7 MARLA', 4, 18, 2, 2, 0, NULL),
+('7 MARLA', 4, 19, 8, 16, 0, NULL),
+('7 MARLA', 4, 20, 101, 101, 0, NULL),
+('7 MARLA', 4, 21, 342, 342, 0, NULL),
+('7 MARLA', 4, 22, 2, 2, 0, NULL),
+('7 MARLA', 4, 23, 2, 2, 0, NULL),
+('7 MARLA', 4, 24, 2, 2, 0, NULL),
+('7 MARLA', 4, 25, 2, 2, 0, NULL),
+('7 MARLA', 4, 26, 2, 2, 0, NULL),
+('7 MARLA', 4, 27, 2, 2, 0, NULL),
+('7 MARLA', 4, 28, 44, 0, 0, NULL),
+('7 MARLA', 4, 29, 1, 0, 0, NULL),
+('7 MARLA', 4, 30, 1, 0, 0, NULL),
+('7 MARLA', 4, 31, 42, 0, 0, NULL),
+('7 MARLA', 4, 32, 1, 0, 0, NULL),
+('7 MARLA', 4, 33, 153, 0, 0, NULL),
+('7 MARLA', 4, 34, 1, 0, 0, NULL),
+('7 MARLA', 4, 35, 36, 0, 0, NULL),
+('7 MARLA', 4, 36, 632, 826, 100, NULL),
+('7 MARLA', 4, 37, 15, 15, 0, NULL),
+('7 MARLA', 4, 38, 90, 90, 0, NULL),
+('7 MARLA', 4, 39, 1, 1, 0, NULL),
+('7 MARLA', 4, 40, 960, 1154, 100, NULL),
+('7 MARLA', 4, 41, 272, 116, 96, NULL),
+('7 MARLA', 4, 42, 1, 0, 0, NULL);
+
+-- 7_5
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 5, 1, 72, 0, 0, 0),
+('7 MARLA', 5, 2, 623, 0, 0, 0),
+('7 MARLA', 5, 3, 1, 1, 0, 0),
+('7 MARLA', 5, 4, 3.5, 0, 0, 0),
+('7 MARLA', 5, 5, 6, 4, 1, 2),
+('7 MARLA', 5, 6, 3, 2, 0, 0),
+('7 MARLA', 5, 7, 6, 4, 1, 2),
+('7 MARLA', 5, 8, 1, 1, 0, 0),
+('7 MARLA', 5, 9, 6, 4, 1, 2),
+('7 MARLA', 5, 10, 6, 4, 1, 2),
+('7 MARLA', 5, 11, 15.3125, 8.75, 2.1875, 0),
+('7 MARLA', 5, 12, 132, 96, 36, 0),
+('7 MARLA', 5, 13, 2, 2, 0, 0),
+('7 MARLA', 5, 14, 6, 4, 1, 2),
+('7 MARLA', 5, 15, 138, 120, 18, 46),
+('7 MARLA', 5, 16, 6, 5, 2, 5),
+('7 MARLA', 5, 17, 3.5, 3.5, 0, 0),
+('7 MARLA', 5, 18, 2, 2, 0, 0),
+('7 MARLA', 5, 19, 8, 8, 0, 0),
+('7 MARLA', 5, 20, 88, 88, 0, 0),
+('7 MARLA', 5, 21, 330, 330, 0, 0),
+('7 MARLA', 5, 22, 2, 2, 0, 0),
+('7 MARLA', 5, 23, 2, 2, 0, 0),
+('7 MARLA', 5, 24, 2, 2, 0, 0),
+('7 MARLA', 5, 25, 2, 2, 0, 0),
+('7 MARLA', 5, 26, 2, 2, 0, 0),
+('7 MARLA', 5, 27, 2, 2, 0, 0),
+('7 MARLA', 5, 28, 48, 0, 0, 0),
+('7 MARLA', 5, 29, 1, 0, 0, 0),
+('7 MARLA', 5, 30, 1, 0, 0, 0),
+('7 MARLA', 5, 31, 48, 0, 0, 0),
+('7 MARLA', 5, 32, 1, 0, 0, 0),
+('7 MARLA', 5, 33, 192, 0, 0, 0),
+('7 MARLA', 5, 34, 1, 0, 0, 0),
+('7 MARLA', 5, 35, 36, 0, 0, 0),
+('7 MARLA', 5, 36, 616, 737, 100, 1120),
+('7 MARLA', 5, 37, 15, 15, 0, 15),
+('7 MARLA', 5, 38, 90, 90, 0, 90),
+('7 MARLA', 5, 39, 1, 1, 0, 1),
+('7 MARLA', 5, 40, 985, 1041, 100, 1120),
+('7 MARLA', 5, 41, 185, 108, 100, 76),
+('7 MARLA', 5, 42, 1, 0, 0, 0);
+
+
+
+-- 7_6
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 6, 1, 72, 0, 0, 0),
+('7 MARLA', 6, 2, 573, 0, 0, 0),
+('7 MARLA', 6, 3, 1, 1, 0, 0),
+('7 MARLA', 6, 4, 3.5, 0, 0, 0),
+('7 MARLA', 6, 5, 7, 6, 1, 3),
+('7 MARLA', 6, 6, 3, 2, 0, 0),
+('7 MARLA', 6, 7, 9, 6, 1, 3),
+('7 MARLA', 6, 8, 1, 1, 0, 0),
+('7 MARLA', 6, 9, 9, 6, 1, 1),
+('7 MARLA', 6, 10, 10, 6, 1, 1),
+('7 MARLA', 6, 11, 15.3125, 10.9375, 2.1875, 2.1875),
+('7 MARLA', 6, 12, 120, 156, 36, 36),
+('7 MARLA', 6, 13, 1, 1, 0, 1),
+('7 MARLA', 6, 14, 7, 6, 1, 3),
+('7 MARLA', 6, 15, 140, 127, 25, 103),
+('7 MARLA', 6, 16, 6, 5, 2, 5),
+('7 MARLA', 6, 17, 3.5, 3.5, 0, 1.75),
+('7 MARLA', 6, 18, 2, 2, 0, 1),
+('7 MARLA', 6, 19, 8, 8, 0, 4),
+('7 MARLA', 6, 20, 98, 98, 0, 80),
+('7 MARLA', 6, 21, 324, 324, 0, 198),
+('7 MARLA', 6, 22, 2, 2, 0, 1),
+('7 MARLA', 6, 23, 2, 2, 0, 1),
+('7 MARLA', 6, 24, 2, 2, 0, 1),
+('7 MARLA', 6, 25, 2, 2, 0, 1),
+('7 MARLA', 6, 26, 2, 2, 0, 1),
+('7 MARLA', 6, 27, 2, 2, 0, 1),
+('7 MARLA', 6, 28, 48, 0, 0, 0),
+('7 MARLA', 6, 29, 1, 0, 0, 0),
+('7 MARLA', 6, 30, 1, 0, 0, 0),
+('7 MARLA', 6, 31, 48, 0, 0, 0),
+('7 MARLA', 6, 32, 1, 0, 0, 0),
+('7 MARLA', 6, 33, 204, 0, 0, 0),
+('7 MARLA', 6, 34, 1, 0, 0, 0),
+('7 MARLA', 6, 35, 48, 0, 0, 0),
+('7 MARLA', 6, 36, 681, 754, 100, 554),
+('7 MARLA', 6, 37, 15, 15, 0, 15),
+('7 MARLA', 6, 38, 90, 90, 0, 90),
+('7 MARLA', 6, 39, 1, 1, 0, 1),
+('7 MARLA', 6, 40, 970, 1123, 100, 634),
+('7 MARLA', 6, 41, 172, 130, 103, 60),
+('7 MARLA', 6, 42, 1, 0, 0, 0);
+
+
+
+-- 7_7
+
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 7, 1, 72, 0, 0, NULL),
+('7 MARLA', 7, 2, 665, 0, 0, NULL),
+('7 MARLA', 7, 3, 1, 1, 0, NULL),
+('7 MARLA', 7, 4, 3.5, 0, 0, NULL),
+('7 MARLA', 7, 5, 6, 5, 1, NULL),
+('7 MARLA', 7, 6, 2, 2, 0, NULL),
+('7 MARLA', 7, 7, 6, 5, 1, NULL),
+('7 MARLA', 7, 8, 1, 1, 0, NULL),
+('7 MARLA', 7, 9, 6, 5, 1, NULL),
+('7 MARLA', 7, 10, 6, 5, 1, NULL),
+('7 MARLA', 7, 11, 8.75, 8.75, 2.1875, NULL),
+('7 MARLA', 7, 12, 144, 144, 36, NULL),
+('7 MARLA', 7, 13, 2, 2, 0, NULL),
+('7 MARLA', 7, 14, 6, 5, 1, NULL),
+('7 MARLA', 7, 15, 149, 131, 22, NULL),
+('7 MARLA', 7, 16, 6, 5, 2, NULL),
+('7 MARLA', 7, 17, 3.5, 1.75, 0, NULL),
+('7 MARLA', 7, 18, 2, 1, 0, NULL),
+('7 MARLA', 7, 19, 8, 4, 0, NULL),
+('7 MARLA', 7, 20, 91, 55, 0, NULL),
+('7 MARLA', 7, 21, 318, 177, 0, NULL),
+('7 MARLA', 7, 22, 2, 1, 0, NULL),
+('7 MARLA', 7, 23, 2, 1, 0, NULL),
+('7 MARLA', 7, 24, 2, 1, 0, NULL),
+('7 MARLA', 7, 25, 2, 1, 0, NULL),
+('7 MARLA', 7, 26, 2, 1, 0, NULL),
+('7 MARLA', 7, 27, 2, 1, 0, NULL),
+('7 MARLA', 7, 28, 64, 0, 0, NULL),
+('7 MARLA', 7, 29, 1, 0, 0, NULL),
+('7 MARLA', 7, 30, 1, 0, 0, NULL),
+('7 MARLA', 7, 31, 64, 0, 0, NULL),
+('7 MARLA', 7, 32, 1, 0, 0, NULL),
+('7 MARLA', 7, 33, 210, 0, 0, NULL),
+('7 MARLA', 7, 34, 1, 0, 0, NULL),
+('7 MARLA', 7, 35, 48, 0, 0, NULL),
+('7 MARLA', 7, 36, 640, 786, 100, NULL),
+('7 MARLA', 7, 37, 15, 15, 0, NULL),
+('7 MARLA', 7, 38, 90, 90, 0, NULL),
+('7 MARLA', 7, 39, 1, 1, 0, NULL),
+('7 MARLA', 7, 40, 911, 1007, 100, NULL),
+('7 MARLA', 7, 41, 203, 122, 92, NULL),
+('7 MARLA', 7, 42, 1, 0, 0, NULL);
+
+
+-- 7_8
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_7_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('7 MARLA', 8, 1, 72, 0, 0, NULL),
+('7 MARLA', 8, 2, 616, 0, 0, NULL),
+('7 MARLA', 8, 3, 1, 1, 0, NULL),
+('7 MARLA', 8, 4, 3.5, 0, 0, NULL),
+('7 MARLA', 8, 5, 5, 5, 1, NULL),
+('7 MARLA', 8, 6, 2, 2, 0, NULL),
+('7 MARLA', 8, 7, 5, 5, 1, NULL),
+('7 MARLA', 8, 8, 1, 1, 0, NULL),
+('7 MARLA', 8, 9, 5, 5, 1, NULL),
+('7 MARLA', 8, 10, 5, 5, 1, NULL),
+('7 MARLA', 8, 11, 10.9375, 8.75, 2.1875, NULL),
+('7 MARLA', 8, 12, 138, 138, 36, NULL),
+('7 MARLA', 8, 13, 2, 2, 0, NULL),
+('7 MARLA', 8, 14, 5, 5, 1, NULL),
+('7 MARLA', 8, 15, 150, 159, 26, NULL),
+('7 MARLA', 8, 16, 6, 5, 2, NULL),
+('7 MARLA', 8, 17, 3.5, 3.5, 0, NULL),
+('7 MARLA', 8, 18, 2, 2, 0, NULL),
+('7 MARLA', 8, 19, 8, 16, 0, NULL),
+('7 MARLA', 8, 20, 101, 101, 0, NULL),
+('7 MARLA', 8, 21, 342, 342, 0, NULL),
+('7 MARLA', 8, 22, 2, 2, 0, NULL),
+('7 MARLA', 8, 23, 2, 2, 0, NULL),
+('7 MARLA', 8, 24, 2, 2, 0, NULL),
+('7 MARLA', 8, 25, 2, 2, 0, NULL),
+('7 MARLA', 8, 26, 2, 2, 0, NULL),
+('7 MARLA', 8, 27, 2, 2, 0, NULL),
+('7 MARLA', 8, 28, 44, 0, 0, NULL),
+('7 MARLA', 8, 29, 1, 0, 0, NULL),
+('7 MARLA', 8, 30, 1, 0, 0, NULL),
+('7 MARLA', 8, 31, 42, 0, 0, NULL),
+('7 MARLA', 8, 32, 1, 0, 0, NULL),
+('7 MARLA', 8, 33, 153, 0, 0, NULL),
+('7 MARLA', 8, 34, 1, 0, 0, NULL),
+('7 MARLA', 8, 35, 36, 0, 0, NULL),
+('7 MARLA', 8, 36, 632, 826, 100, NULL),
+('7 MARLA', 8, 37, 15, 15, 0, NULL),
+('7 MARLA', 8, 38, 90, 90, 0, NULL),
+('7 MARLA', 8, 39, 1, 1, 0, NULL),
+('7 MARLA', 8, 40, 960, 1154, 100, NULL),
+('7 MARLA', 8, 41, 272, 116, 96, NULL),
+('7 MARLA', 8, 42, 1, 0, 0, NULL);
+
+ 
+ -- 10_1
+ 
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 1, 1, 90, 0, 0, 0),
+('10 MARLA', 1, 2, 896, 0, 0, 0),
+('10 MARLA', 1, 3, 1, 1, 0, 0),
+('10 MARLA', 1, 4, 4.375, 0, 0, 0),
+('10 MARLA', 1, 5, 6, 6, 1, 2),
+('10 MARLA', 1, 6, 3, 3, 0, 0),
+('10 MARLA', 1, 7, 9, 8, 1, 2),
+('10 MARLA', 1, 8, 1, 1, 0, 0),
+('10 MARLA', 1, 9, 6, 8, 1, 3),
+('10 MARLA', 1, 10, 12, 10, 1, 3),
+('10 MARLA', 1, 11, 13.125, 13.125, 2.1875, 0),
+('10 MARLA', 1, 12, 144, 144, 33, 0),
+('10 MARLA', 1, 13, 2, 2, 0, 0),
+('10 MARLA', 1, 14, 6, 6, 1, 2),
+('10 MARLA', 1, 15, 167, 160, 19, 45),
+('10 MARLA', 1, 16, 6, 5, 2, 5),
+('10 MARLA', 1, 17, 3.5, 3.5, 0, 0),
+('10 MARLA', 1, 18, 2, 2, 0, 0),
+('10 MARLA', 1, 19, 12, 16, 0, 0),
+('10 MARLA', 1, 20, 115, 115, 0, 0),
+('10 MARLA', 1, 21, 351, 351, 0, 0),
+('10 MARLA', 1, 22, 2, 2, 0, 0),
+('10 MARLA', 1, 23, 2, 2, 0, 0),
+('10 MARLA', 1, 24, 2, 2, 0, 0),
+('10 MARLA', 1, 25, 2, 2, 0, 0),
+('10 MARLA', 1, 26, 2, 2, 0, 0),
+('10 MARLA', 1, 27, 2, 2, 0, 0),
+('10 MARLA', 1, 28, 60, 60, 0, 0),
+('10 MARLA', 1, 29, 1, 1, 0, 0),
+('10 MARLA', 1, 30, 1, 1, 0, 0),
+('10 MARLA', 1, 31, 60, 60, 0, 0),
+('10 MARLA', 1, 32, 1, 1, 0, 0),
+('10 MARLA', 1, 33, 198, 198, 0, 0),
+('10 MARLA', 1, 34, 1, 1, 0, 0),
+('10 MARLA', 1, 35, 48, 48, 0, 0),
+('10 MARLA', 1, 36, 959, 1384, 132, 1568),
+('10 MARLA', 1, 37, 14, 14, 0, 14),
+('10 MARLA', 1, 38, 119, 119, 0, 119),
+('10 MARLA', 1, 39, 1, 1, 0, 1),
+('10 MARLA', 1, 40, 1414, 1764, 132, 1568),
+('10 MARLA', 1, 41, 281, 192, 110, 81),
+('10 MARLA', 1, 42, 1, 0, 0, 0);
+
+
+-- 10_2
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 2, 1, 90, 0, 0, 0),
+('10 MARLA', 2, 2, 818, 0, 0, 0),
+('10 MARLA', 2, 3, 1, 1, 0, 0),
+('10 MARLA', 2, 4, 13.125, 13.125, 0, 0),
+('10 MARLA', 2, 5, 7, 7, 1, 3),
+('10 MARLA', 2, 6, 4, 3, 0, 0),
+('10 MARLA', 2, 7, 9, 7, 1, 3),
+('10 MARLA', 2, 8, 1, 1, 0, 0),
+('10 MARLA', 2, 9, 14, 12, 1, 4),
+('10 MARLA', 2, 10, 10, 9, 1, 4),
+('10 MARLA', 2, 11, 8.75, 8.75, 2.1875, 2.1875),
+('10 MARLA', 2, 12, 108, 108, 36, 36),
+('10 MARLA', 2, 13, 2, 2, 0, 1),
+('10 MARLA', 2, 14, 7, 7, 1, 3),
+('10 MARLA', 2, 15, 162, 158, 17, 47),
+('10 MARLA', 2, 16, 6, 5, 2, 5),
+('10 MARLA', 2, 17, 3.5, 3.5, 0, 1.75),
+('10 MARLA', 2, 18, 2, 2, 0, 1),
+('10 MARLA', 2, 19, 12, 12, 0, 6),
+('10 MARLA', 2, 20, 78, 78, 0, 154),
+('10 MARLA', 2, 21, 264, 264, 0, 282),
+('10 MARLA', 2, 22, 2, 2, 0, 1),
+('10 MARLA', 2, 23, 2, 2, 0, 1),
+('10 MARLA', 2, 24, 2, 2, 0, 1),
+('10 MARLA', 2, 25, 2, 2, 0, 1),
+('10 MARLA', 2, 26, 2, 2, 0, 1),
+('10 MARLA', 2, 27, 2, 2, 0, 1),
+('10 MARLA', 2, 28, 60, 60, 0, 0),
+('10 MARLA', 2, 29, 1, 1, 0, 0),
+('10 MARLA', 2, 30, 1, 1, 0, 0),
+('10 MARLA', 2, 31, 60, 60, 0, 0),
+('10 MARLA', 2, 32, 1, 1, 0, 0),
+('10 MARLA', 2, 33, 240, 240, 0, 0),
+('10 MARLA', 2, 34, 1, 1, 0, 0),
+('10 MARLA', 2, 35, 48, 48, 0, 0),
+('10 MARLA', 2, 36, 1139, 1444, 95, 1230),
+('10 MARLA', 2, 37, 14, 14, 0, 14),
+('10 MARLA', 2, 38, 107, 107, 0, 107),
+('10 MARLA', 2, 39, 1, 1, 0, 1),
+('10 MARLA', 2, 40, 1457, 1682, 95, 1384),
+('10 MARLA', 2, 41, 280, 194, 104, 114),
+('10 MARLA', 2, 42, 1, 0, 0, 0);
+
+
+
+ -- 10_3
+ 
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 3, 1, 90, 0, 0, NULL),
+('10 MARLA', 3, 2, 890, 0, 0, NULL),
+('10 MARLA', 3, 3, 1, 1, 0, NULL),
+('10 MARLA', 3, 4, 4.375, 0, 0, NULL),
+('10 MARLA', 3, 5, 7, 7, 1, NULL),
+('10 MARLA', 3, 6, 3, 3, 0, NULL),
+('10 MARLA', 3, 7, 17, 10, 1, NULL),
+('10 MARLA', 3, 8, 1, 1, 0, NULL),
+('10 MARLA', 3, 9, 17, 10, 1, NULL),
+('10 MARLA', 3, 10, 17, 10, 1, NULL),
+('10 MARLA', 3, 11, 19.6875, 15.3125, 2.1875, NULL),
+('10 MARLA', 3, 12, 162, 162, 42, NULL),
+('10 MARLA', 3, 13, 2, 2, 0, NULL),
+('10 MARLA', 3, 14, 7, 7, 1, NULL),
+('10 MARLA', 3, 15, 170, 159, 16, NULL),
+('10 MARLA', 3, 16, 6, 5, 2, NULL),
+('10 MARLA', 3, 17, 3.5, 3.5, 0, NULL),
+('10 MARLA', 3, 18, 2, 2, 0, NULL),
+('10 MARLA', 3, 19, 12, 12, 0, NULL),
+('10 MARLA', 3, 20, 98, 98, 0, NULL),
+('10 MARLA', 3, 21, 360, 360, 0, NULL),
+('10 MARLA', 3, 22, 2, 2, 0, NULL),
+('10 MARLA', 3, 23, 2, 2, 0, NULL),
+('10 MARLA', 3, 24, 2, 2, 0, NULL),
+('10 MARLA', 3, 25, 2, 2, 0, NULL),
+('10 MARLA', 3, 26, 2, 2, 0, NULL),
+('10 MARLA', 3, 27, 2, 2, 0, NULL),
+('10 MARLA', 3, 28, 51, 57, 0, NULL),
+('10 MARLA', 3, 29, 1, 1, 0, NULL),
+('10 MARLA', 3, 30, 1, 1, 0, NULL),
+('10 MARLA', 3, 31, 51, 57, 0, NULL),
+('10 MARLA', 3, 32, 1, 1, 0, NULL),
+('10 MARLA', 3, 33, 204, 222, 0, NULL),
+('10 MARLA', 3, 34, 1, 1, 0, NULL),
+('10 MARLA', 3, 35, 36, 36, 0, NULL),
+('10 MARLA', 3, 36, 1045, 1263, 126, NULL),
+('10 MARLA', 3, 37, 15, 15, 0, NULL),
+('10 MARLA', 3, 38, 107, 107, 0, NULL),
+('10 MARLA', 3, 39, 1, 1, 0, NULL),
+('10 MARLA', 3, 40, 1461, 1650, 126, NULL),
+('10 MARLA', 3, 41, 281, 181, 117, NULL),
+('10 MARLA', 3, 42, 1, 0, 0, NULL);
+
+-- 10_4
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 4, 1, 90, 0, 0, NULL),
+('10 MARLA', 4, 2, 960, 0, 0, NULL),
+('10 MARLA', 4, 3, 1, 1, 0, NULL),
+('10 MARLA', 4, 4, 4.375, 4.375, 0, NULL),
+('10 MARLA', 4, 5, 6, 7, 1, NULL),
+('10 MARLA', 4, 6, 4, 3, 0, NULL),
+('10 MARLA', 4, 7, 15, 14, 1, NULL),
+('10 MARLA', 4, 8, 1, 1, 0, NULL),
+('10 MARLA', 4, 9, 15, 14, 1, NULL),
+('10 MARLA', 4, 10, 15, 14, 1, NULL),
+('10 MARLA', 4, 11, 17.5, 10.9375, 2.1875, NULL),
+('10 MARLA', 4, 12, 165, 201, 36, NULL),
+('10 MARLA', 4, 13, 2, 2, 0, NULL),
+('10 MARLA', 4, 14, 6, 7, 1, NULL),
+('10 MARLA', 4, 15, 168, 174, 15, NULL),
+('10 MARLA', 4, 16, 6, 5, 2, NULL),
+('10 MARLA', 4, 17, 5.25, 5.25, 0, NULL),
+('10 MARLA', 4, 18, 3, 3, 0, NULL),
+('10 MARLA', 4, 19, 18, 18, 0, NULL),
+('10 MARLA', 4, 20, 185, 185, 0, NULL),
+('10 MARLA', 4, 21, 483, 483, 0, NULL),
+('10 MARLA', 4, 22, 3, 3, 0, NULL),
+('10 MARLA', 4, 23, 3, 3, 0, NULL),
+('10 MARLA', 4, 24, 3, 3, 0, NULL),
+('10 MARLA', 4, 25, 3, 3, 0, NULL),
+('10 MARLA', 4, 26, 3, 3, 0, NULL),
+('10 MARLA', 4, 27, 3, 3, 0, NULL),
+('10 MARLA', 4, 28, 51, 51, 0, NULL),
+('10 MARLA', 4, 29, 1, 1, 0, NULL),
+('10 MARLA', 4, 30, 1, 1, 0, NULL),
+('10 MARLA', 4, 31, 51, 51, 0, NULL),
+('10 MARLA', 4, 32, 1, 1, 0, NULL),
+('10 MARLA', 4, 33, 177, 177, 0, NULL),
+('10 MARLA', 4, 34, 1, 1, 0, NULL),
+('10 MARLA', 4, 35, 48, 48, 0, NULL),
+('10 MARLA', 4, 36, 1025, 1413, 121, NULL),
+('10 MARLA', 4, 37, 15, 15, 0, NULL),
+('10 MARLA', 4, 38, 107, 107, 0, NULL),
+('10 MARLA', 4, 39, 1, 1, 0, NULL),
+('10 MARLA', 4, 40, 1418, 1613, 121, NULL),
+('10 MARLA', 4, 41, 252, 184, 121, NULL),
+('10 MARLA', 4, 42, 1, 0, 0, NULL);
+
+
+-- 10_5
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 5, 1, 90, 0, 0, 0),
+('10 MARLA', 5, 2, 896, 0, 0, 0),
+('10 MARLA', 5, 3, 1, 1, 0, 0),
+('10 MARLA', 5, 4, 4.375, 0, 0, 0),
+('10 MARLA', 5, 5, 6, 6, 1, 2),
+('10 MARLA', 5, 6, 3, 3, 0, 0),
+('10 MARLA', 5, 7, 9, 8, 1, 2),
+('10 MARLA', 5, 8, 1, 1, 0, 0),
+('10 MARLA', 5, 9, 6, 8, 1, 3),
+('10 MARLA', 5, 10, 12, 10, 1, 3),
+('10 MARLA', 5, 11, 13.125, 13.125, 2.1875, 0),
+('10 MARLA', 5, 12, 144, 144, 33, 0),
+('10 MARLA', 5, 13, 2, 2, 0, 0),
+('10 MARLA', 5, 14, 6, 6, 1, 2),
+('10 MARLA', 5, 15, 167, 160, 19, 45),
+('10 MARLA', 5, 16, 6, 5, 2, 5),
+('10 MARLA', 5, 17, 3.5, 3.5, 0, 0),
+('10 MARLA', 5, 18, 2, 2, 0, 0),
+('10 MARLA', 5, 19, 12, 16, 0, 0),
+('10 MARLA', 5, 20, 115, 115, 0, 0),
+('10 MARLA', 5, 21, 351, 351, 0, 0),
+('10 MARLA', 5, 22, 2, 2, 0, 0),
+('10 MARLA', 5, 23, 2, 2, 0, 0),
+('10 MARLA', 5, 24, 2, 2, 0, 0),
+('10 MARLA', 5, 25, 2, 2, 0, 0),
+('10 MARLA', 5, 26, 2, 2, 0, 0),
+('10 MARLA', 5, 27, 2, 2, 0, 0),
+('10 MARLA', 5, 28, 60, 60, 0, 0),
+('10 MARLA', 5, 29, 1, 1, 0, 0),
+('10 MARLA', 5, 30, 1, 1, 0, 0),
+('10 MARLA', 5, 31, 60, 60, 0, 0),
+('10 MARLA', 5, 32, 1, 1, 0, 0),
+('10 MARLA', 5, 33, 198, 198, 0, 0),
+('10 MARLA', 5, 34, 1, 1, 0, 0),
+('10 MARLA', 5, 35, 48, 48, 0, 0),
+('10 MARLA', 5, 36, 959, 1384, 132, 1568),
+('10 MARLA', 5, 37, 14, 14, 0, 14),
+('10 MARLA', 5, 38, 119, 119, 0, 119),
+('10 MARLA', 5, 39, 1, 1, 0, 1),
+('10 MARLA', 5, 40, 1414, 1764, 132, 1568),
+('10 MARLA', 5, 41, 281, 192, 110, 81),
+('10 MARLA', 5, 42, 1, 0, 0, 0);
+
+
+-- 10_6
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 6, 1, 90, 0, 0, 0),
+('10 MARLA', 6, 2, 818, 0, 0, 0),
+('10 MARLA', 6, 3, 1, 1, 0, 0),
+('10 MARLA', 6, 4, 13.125, 13.125, 0, 0),
+('10 MARLA', 6, 5, 7, 7, 1, 3),
+('10 MARLA', 6, 6, 4, 3, 0, 0),
+('10 MARLA', 6, 7, 15, 14, 1, 3),
+('10 MARLA', 6, 8, 1, 1, 0, 0),
+('10 MARLA', 6, 9, 15, 14, 1, 3),
+('10 MARLA', 6, 10, 15, 14, 1, 3),
+('10 MARLA', 6, 11, 17.5, 10.9375, 2.1875, 2.1875),
+('10 MARLA', 6, 12, 165, 201, 36, 36),
+('10 MARLA', 6, 13, 2, 2, 0, 1),
+('10 MARLA', 6, 14, 6, 7, 1, 3),
+('10 MARLA', 6, 15, 168, 174, 15, 47),
+('10 MARLA', 6, 16, 6, 5, 2, 5),
+('10 MARLA', 6, 17, 3.5, 3.5, 0, 0),
+('10 MARLA', 6, 18, 2, 2, 0, 0),
+('10 MARLA', 6, 19, 18, 18, 0, 0),
+('10 MARLA', 6, 20, 185, 185, 0, 0),
+('10 MARLA', 6, 21, 483, 483, 0, 0),
+('10 MARLA', 6, 22, 3, 3, 0, 0),
+('10 MARLA', 6, 23, 3, 3, 0, 0),
+('10 MARLA', 6, 24, 3, 3, 0, 0),
+('10 MARLA', 6, 25, 3, 3, 0, 0),
+('10 MARLA', 6, 26, 3, 3, 0, 0),
+('10 MARLA', 6, 27, 3, 3, 0, 0),
+('10 MARLA', 6, 28, 51, 51, 0, 0),
+('10 MARLA', 6, 29, 1, 1, 0, 0),
+('10 MARLA', 6, 30, 1, 1, 0, 0),
+('10 MARLA', 6, 31, 51, 51, 0, 0),
+('10 MARLA', 6, 32, 1, 1, 0, 0),
+('10 MARLA', 6, 33, 177, 177, 0, 0),
+('10 MARLA', 6, 34, 1, 1, 0, 0),
+('10 MARLA', 6, 35, 48, 48, 0, 0),
+('10 MARLA', 6, 36, 1025, 1413, 121, 1230),
+('10 MARLA', 6, 37, 15, 15, 0, 15),
+('10 MARLA', 6, 38, 107, 107, 0, 107),
+('10 MARLA', 6, 39, 1, 1, 0, 1),
+('10 MARLA', 6, 40, 1418, 1613, 121, 1384),
+('10 MARLA', 6, 41, 252, 184, 121, 114),
+('10 MARLA', 6, 42, 1, 0, 0, 0);
+
+
+-- 10_7
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 7, 1, 90, 0, 0, NULL),
+('10 MARLA', 7, 2, 890, 0, 0, NULL),
+('10 MARLA', 7, 3, 1, 1, 0, NULL),
+('10 MARLA', 7, 4, 4.375, 0, 0, NULL),
+('10 MARLA', 7, 5, 7, 7, 1, NULL),
+('10 MARLA', 7, 6, 3, 3, 0, NULL),
+('10 MARLA', 7, 7, 17, 10, 1, NULL),
+('10 MARLA', 7, 8, 1, 1, 0, NULL),
+('10 MARLA', 7, 9, 17, 10, 1, NULL),
+('10 MARLA', 7, 10, 17, 10, 1, NULL),
+('10 MARLA', 7, 11, 19.6875, 15.3125, 2.1875, NULL),
+('10 MARLA', 7, 12, 162, 162, 42, NULL),
+('10 MARLA', 7, 13, 2, 2, 0, NULL),
+('10 MARLA', 7, 14, 7, 7, 1, NULL),
+('10 MARLA', 7, 15, 170, 159, 16, NULL),
+('10 MARLA', 7, 16, 6, 5, 2, NULL),
+('10 MARLA', 7, 17, 3.5, 3.5, 0, NULL),
+('10 MARLA', 7, 18, 2, 2, 0, NULL),
+('10 MARLA', 7, 19, 12, 12, 0, NULL),
+('10 MARLA', 7, 20, 98, 98, 0, NULL),
+('10 MARLA', 7, 21, 360, 360, 0, NULL),
+('10 MARLA', 7, 22, 2, 2, 0, NULL),
+('10 MARLA', 7, 23, 2, 2, 0, NULL),
+('10 MARLA', 7, 24, 2, 2, 0, NULL),
+('10 MARLA', 7, 25, 2, 2, 0, NULL),
+('10 MARLA', 7, 26, 2, 2, 0, NULL),
+('10 MARLA', 7, 27, 2, 2, 0, NULL),
+('10 MARLA', 7, 28, 51, 57, 0, NULL),
+('10 MARLA', 7, 29, 1, 1, 0, NULL),
+('10 MARLA', 7, 30, 1, 1, 0, NULL),
+('10 MARLA', 7, 31, 51, 57, 0, NULL),
+('10 MARLA', 7, 32, 1, 1, 0, NULL),
+('10 MARLA', 7, 33, 204, 222, 0, NULL),
+('10 MARLA', 7, 34, 1, 1, 0, NULL),
+('10 MARLA', 7, 35, 36, 36, 0, NULL),
+('10 MARLA', 7, 36, 1045, 1263, 126, NULL),
+('10 MARLA', 7, 37, 15, 15, 0, NULL),
+('10 MARLA', 7, 38, 107, 107, 0, NULL),
+('10 MARLA', 7, 39, 1, 1, 0, NULL),
+('10 MARLA', 7, 40, 1461, 1650, 126, NULL),
+('10 MARLA', 7, 41, 281, 181, 117, NULL),
+('10 MARLA', 7, 42, 1, 0, 0, NULL);
+
+
+-- 10_8
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_10_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('10 MARLA', 8, 1, 90, 0, 0, NULL),
+('10 MARLA', 8, 2, 960, 0, 0, NULL),
+('10 MARLA', 8, 3, 1, 1, 0, NULL),
+('10 MARLA', 8, 4, 4.375, 4.375, 0, NULL),
+('10 MARLA', 8, 5, 6, 7, 1, NULL),
+('10 MARLA', 8, 6, 4, 3, 0, NULL),
+('10 MARLA', 8, 7, 15, 14, 1, NULL),
+('10 MARLA', 8, 8, 1, 1, 0, NULL),
+('10 MARLA', 8, 9, 15, 14, 1, NULL),
+('10 MARLA', 8, 10, 15, 14, 1, NULL),
+('10 MARLA', 8, 11, 17.5, 10.9375, 2.1875, NULL),
+('10 MARLA', 8, 12, 165, 201, 36, NULL),
+('10 MARLA', 8, 13, 2, 2, 0, NULL),
+('10 MARLA', 8, 14, 6, 7, 1, NULL),
+('10 MARLA', 8, 15, 168, 174, 15, NULL),
+('10 MARLA', 8, 16, 6, 5, 2, NULL),
+('10 MARLA', 8, 17, 5.25, 5.25, 0, NULL),
+('10 MARLA', 8, 18, 3, 3, 0, NULL),
+('10 MARLA', 8, 19, 18, 18, 0, NULL),
+('10 MARLA', 8, 20, 185, 185, 0, NULL),
+('10 MARLA', 8, 21, 483, 483, 0, NULL),
+('10 MARLA', 8, 22, 3, 3, 0, NULL),
+('10 MARLA', 8, 23, 3, 3, 0, NULL),
+('10 MARLA', 8, 24, 3, 3, 0, NULL),
+('10 MARLA', 8, 25, 3, 3, 0, NULL),
+('10 MARLA', 8, 26, 3, 3, 0, NULL),
+('10 MARLA', 8, 27, 3, 3, 0, NULL),
+('10 MARLA', 8, 28, 51, 51, 0, NULL),
+('10 MARLA', 8, 29, 1, 1, 0, NULL),
+('10 MARLA', 8, 30, 1, 1, 0, NULL),
+('10 MARLA', 8, 31, 51, 51, 0, NULL),
+('10 MARLA', 8, 32, 1, 1, 0, NULL),
+('10 MARLA', 8, 33, 177, 177, 0, NULL),
+('10 MARLA', 8, 34, 1, 1, 0, NULL),
+('10 MARLA', 8, 35, 48, 48, 0, NULL),
+('10 MARLA', 8, 36, 1025, 1413, 121, NULL),
+('10 MARLA', 8, 37, 15, 15, 0, NULL),
+('10 MARLA', 8, 38, 107, 107, 0, NULL),
+('10 MARLA', 8, 39, 1, 1, 0, NULL),
+('10 MARLA', 8, 40, 1418, 1613, 121, NULL),
+('10 MARLA', 8, 41, 252, 184, 121, NULL),
+('10 MARLA', 8, 42, 1, 0, 0, NULL);
+
+
+-- 20_1
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 1, 1, 120, 0, 0, 0),
+('20 MARLA', 1, 2, 1845, 0, 0, 0),
+('20 MARLA', 1, 3, 1, 1, 0, 0),
+('20 MARLA', 1, 4, 10.5, 10.5, 0, 0),
+('20 MARLA', 1, 5, 8, 9, 1, 4),
+('20 MARLA', 1, 6, 5, 5, 0, 0),
+('20 MARLA', 1, 7, 20, 22, 1, 4),
+('20 MARLA', 1, 8, 1, 1, 0, 0),
+('20 MARLA', 1, 9, 20, 22, 1, 4),
+('20 MARLA', 1, 10, 20, 22, 1, 4),
+('20 MARLA', 1, 11, 18.375, 13.125, 2.625, 0),
+('20 MARLA', 1, 12, 210, 210, 72, 0),
+('20 MARLA', 1, 13, 3, 4, 0, 0),
+('20 MARLA', 1, 14, 8, 9, 1, 4),
+('20 MARLA', 1, 15, 198, 200, 24, 58),
+('20 MARLA', 1, 16, 6, 5, 2, 5),
+('20 MARLA', 1, 17, 8.75, 4.375, 0, 0),
+('20 MARLA', 1, 18, 4, 2, 0, 0),
+('20 MARLA', 1, 19, 32, 16, 0, 0),
+('20 MARLA', 1, 20, 250, 222, 0, 0),
+('20 MARLA', 1, 21, 736, 468, 0, 0),
+('20 MARLA', 1, 22, 4, 2, 0, 0),
+('20 MARLA', 1, 23, 4, 2, 0, 0),
+('20 MARLA', 1, 24, 4, 2, 0, 0),
+('20 MARLA', 1, 25, 4, 2, 0, 0),
+('20 MARLA', 1, 26, 4, 2, 0, 0),
+('20 MARLA', 1, 27, 4, 2, 0, 0),
+('20 MARLA', 1, 28, 52, 58, 0, 0),
+('20 MARLA', 1, 29, 58, 1, 0, 0),
+('20 MARLA', 1, 30, 1, 1, 0, 0),
+('20 MARLA', 1, 31, 58, 58, 0, 0),
+('20 MARLA', 1, 32, 1, 1, 0, 0),
+('20 MARLA', 1, 33, 240, 240, 0, 0),
+('20 MARLA', 1, 34, 1, 1, 0, 0),
+('20 MARLA', 1, 35, 36, 36, 0, 0),
+('20 MARLA', 1, 36, 1976, 1915, 342, 2660),
+('20 MARLA', 1, 37, 14, 14, 0, 14),
+('20 MARLA', 1, 38, 140, 140, 0, 140),
+('20 MARLA', 1, 39, 1, 1, 0, 1),
+('20 MARLA', 1, 40, 2680, 3000, 342, 2660),
+('20 MARLA', 1, 41, 380, 273, 141, 108),
+('20 MARLA', 1, 42, 1, 0, 0, 0);
+
+
+-- 20_2
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 2, 1, 120, 0, 0, 0),
+('20 MARLA', 2, 2, 1346, 0, 0, 0),
+('20 MARLA', 2, 3, 1, 1, 0, 0),
+('20 MARLA', 2, 4, 15.75, 15.75, 0, 0),
+('20 MARLA', 2, 5, 8, 8, 1, 4),
+('20 MARLA', 2, 6, 6, 3, 0, 0),
+('20 MARLA', 2, 7, 19, 8, 1, 4),
+('20 MARLA', 2, 8, 1, 1, 0, 0),
+('20 MARLA', 2, 9, 19, 8, 1, 6),
+('20 MARLA', 2, 10, 19, 8, 1, 6),
+('20 MARLA', 2, 11, 15.75, 13.125, 2.625, 2.625),
+('20 MARLA', 2, 12, 228, 228, 48, 36),
+('20 MARLA', 2, 13, 3, 3, 0, 1),
+('20 MARLA', 2, 14, 8, 8, 1, 4),
+('20 MARLA', 2, 15, 205, 202, 18, 68),
+('20 MARLA', 2, 16, 6, 5, 2, 5),
+('20 MARLA', 2, 17, 8.75, 8.75, 0, 2.1875),
+('20 MARLA', 2, 18, 4, 4, 0, 1),
+('20 MARLA', 2, 19, 32, 32, 0, 8),
+('20 MARLA', 2, 20, 350, 350, 0, 228),
+('20 MARLA', 2, 21, 875, 875, 0, 357),
+('20 MARLA', 2, 22, 4, 4, 0, 1),
+('20 MARLA', 2, 23, 4, 4, 0, 1),
+('20 MARLA', 2, 24, 4, 4, 0, 1),
+('20 MARLA', 2, 25, 4, 4, 0, 1),
+('20 MARLA', 2, 26, 4, 4, 0, 1),
+('20 MARLA', 2, 27, 4, 4, 0, 1),
+('20 MARLA', 2, 28, 78, 84, 0, 0),
+('20 MARLA', 2, 29, 1, 1, 0, 0),
+('20 MARLA', 2, 30, 1, 1, 0, 0),
+('20 MARLA', 2, 31, 78, 84, 0, 0),
+('20 MARLA', 2, 32, 1, 1, 0, 0),
+('20 MARLA', 2, 33, 324, 342, 0, 0),
+('20 MARLA', 2, 34, 1, 1, 0, 0),
+('20 MARLA', 2, 35, 60, 60, 0, 0),
+('20 MARLA', 2, 36, 2262, 2574, 169, 2436),
+('20 MARLA', 2, 37, 14, 14, 0, 14),
+('20 MARLA', 2, 38, 140, 140, 0, 140),
+('20 MARLA', 2, 39, 1, 1, 0, 1),
+('20 MARLA', 2, 40, 3159, 2574, 169, 2436),
+('20 MARLA', 2, 41, 445, 323, 160, 133),
+('20 MARLA', 2, 42, 1, 0, 0, 0);
+
+
+-- 20_3
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 3, 1, 120, 0, 0, NULL),
+('20 MARLA', 3, 2, 2136, 0, 0, NULL),
+('20 MARLA', 3, 3, 1, 1, 0, NULL),
+('20 MARLA', 3, 4, 15.75, 10.5, 0, NULL),
+('20 MARLA', 3, 5, 10, 8, 1, NULL),
+('20 MARLA', 3, 6, 5, 4, 0, NULL),
+('20 MARLA', 3, 7, 20, 18, 1, NULL),
+('20 MARLA', 3, 8, 1, 1, 0, NULL),
+('20 MARLA', 3, 9, 20, 18, 1, NULL),
+('20 MARLA', 3, 10, 20, 18, 1, NULL),
+('20 MARLA', 3, 11, 15.75, 10.5, 2.625, NULL),
+('20 MARLA', 3, 12, 252, 288, 48, NULL),
+('20 MARLA', 3, 13, 2, 3, 0, NULL),
+('20 MARLA', 3, 14, 10, 8, 1, NULL),
+('20 MARLA', 3, 15, 187, 154, 16, NULL),
+('20 MARLA', 3, 16, 6, 5, 2, NULL),
+('20 MARLA', 3, 17, 6.5625, 8.75, 0, NULL),
+('20 MARLA', 3, 18, 3, 4, 0, NULL),
+('20 MARLA', 3, 19, 24, 32, 0, NULL),
+('20 MARLA', 3, 20, 171, 336, 0, NULL),
+('20 MARLA', 3, 21, 501, 679, 0, NULL),
+('20 MARLA', 3, 22, 3, 4, 0, NULL),
+('20 MARLA', 3, 23, 3, 4, 0, NULL),
+('20 MARLA', 3, 24, 3, 4, 0, NULL),
+('20 MARLA', 3, 25, 3, 4, 0, NULL),
+('20 MARLA', 3, 26, 3, 4, 0, NULL),
+('20 MARLA', 3, 27, 3, 4, 0, NULL),
+('20 MARLA', 3, 28, 56, 62, 0, NULL),
+('20 MARLA', 3, 29, 1, 1, 0, NULL),
+('20 MARLA', 3, 30, 1, 1, 0, NULL),
+('20 MARLA', 3, 31, 56, 62, 0, NULL),
+('20 MARLA', 3, 32, 1, 1, 0, NULL),
+('20 MARLA', 3, 33, 228, 186, 0, NULL),
+('20 MARLA', 3, 34, 1, 1, 0, NULL),
+('20 MARLA', 3, 35, 48, 48, 0, NULL),
+('20 MARLA', 3, 36, 1777, 2094, 169, NULL),
+('20 MARLA', 3, 37, 15, 15, 0, NULL),
+('20 MARLA', 3, 38, 124, 124, 0, NULL),
+('20 MARLA', 3, 39, 1, 1, 0, NULL),
+('20 MARLA', 3, 40, 2417, 2094, 169, NULL),
+('20 MARLA', 3, 41, 449, 228, 142, NULL),
+('20 MARLA', 3, 42, 1, 0, 0, NULL);
+
+
+
+-- 20_4
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 4, 1, 120, 0, 0, NULL),
+('20 MARLA', 4, 2, 1929, 0, 0, NULL),
+('20 MARLA', 4, 3, 1, 1, 0, NULL),
+('20 MARLA', 4, 4, 15.75, 5.25, 0, NULL),
+('20 MARLA', 4, 5, 7, 7, 1, NULL),
+('20 MARLA', 4, 6, 4, 3, 0, NULL),
+('20 MARLA', 4, 7, 17, 16, 1, NULL),
+('20 MARLA', 4, 8, 1, 1, 0, NULL),
+('20 MARLA', 4, 9, 17, 16, 1, NULL),
+('20 MARLA', 4, 10, 17, 16, 1, NULL),
+('20 MARLA', 4, 11, 18.375, 21, 2.625, NULL),
+('20 MARLA', 4, 12, 198, 234, 48, NULL),
+('20 MARLA', 4, 13, 2, 2, 0, NULL),
+('20 MARLA', 4, 14, 7, 7, 1, NULL),
+('20 MARLA', 4, 15, 179, 168, 18, NULL),
+('20 MARLA', 4, 16, 6, 5, 2, NULL),
+('20 MARLA', 4, 17, 6.5625, 6.5625, 0, NULL),
+('20 MARLA', 4, 18, 3, 3, 0, NULL),
+('20 MARLA', 4, 19, 24, 24, 0, NULL),
+('20 MARLA', 4, 20, 254, 254, 0, NULL),
+('20 MARLA', 4, 21, 642, 642, 0, NULL),
+('20 MARLA', 4, 22, 3, 3, 0, NULL),
+('20 MARLA', 4, 23, 3, 3, 0, NULL),
+('20 MARLA', 4, 24, 3, 3, 0, NULL),
+('20 MARLA', 4, 25, 3, 3, 0, NULL),
+('20 MARLA', 4, 26, 3, 3, 0, NULL),
+('20 MARLA', 4, 27, 3, 3, 0, NULL),
+('20 MARLA', 4, 28, 52, 52, 0, NULL),
+('20 MARLA', 4, 29, 1, 1, 0, NULL),
+('20 MARLA', 4, 30, 1, 1, 0, NULL),
+('20 MARLA', 4, 31, 52, 52, 0, NULL),
+('20 MARLA', 4, 32, 1, 1, 0, NULL),
+('20 MARLA', 4, 33, 330, 330, 0, NULL),
+('20 MARLA', 4, 34, 1, 1, 0, NULL),
+('20 MARLA', 4, 35, 48, 48, 0, NULL),
+('20 MARLA', 4, 36, 1835, 2110, 169, NULL),
+('20 MARLA', 4, 37, 14, 14, 0, NULL),
+('20 MARLA', 4, 38, 140, 140, 0, NULL),
+('20 MARLA', 4, 39, 1, 1, 0, NULL),
+('20 MARLA', 4, 40, 1835, 2110, 169, NULL),
+('20 MARLA', 4, 41, 378, 275, 139, NULL),
+('20 MARLA', 4, 42, 1, 0, 0, NULL);
+
+
+-- 20_5
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 5, 1, 120, 0, 0, 0),
+('20 MARLA', 5, 2, 1346, 0, 0, 0),
+('20 MARLA', 5, 3, 1, 1, 0, 0),
+('20 MARLA', 5, 4, 15.75, 15.75, 0, 0),
+('20 MARLA', 5, 5, 8, 8, 1, 4),
+('20 MARLA', 5, 6, 6, 3, 0, 0),
+('20 MARLA', 5, 7, 19, 8, 1, 4),
+('20 MARLA', 5, 8, 1, 1, 0, 0),
+('20 MARLA', 5, 9, 19, 8, 1, 6),
+('20 MARLA', 5, 10, 19, 8, 1, 6),
+('20 MARLA', 5, 11, 15.75, 13.125, 2.625, 2.625),
+('20 MARLA', 5, 12, 228, 228, 48, 36),
+('20 MARLA', 5, 13, 3, 3, 0, 1),
+('20 MARLA', 5, 14, 8, 8, 1, 4),
+('20 MARLA', 5, 15, 205, 202, 18, 68),
+('20 MARLA', 5, 16, 6, 5, 2, 5),
+('20 MARLA', 5, 17, 8.75, 8.75, 0, 2.1875),
+('20 MARLA', 5, 18, 4, 4, 0, 1),
+('20 MARLA', 5, 19, 32, 32, 0, 8),
+('20 MARLA', 5, 20, 350, 350, 0, 228),
+('20 MARLA', 5, 21, 875, 875, 0, 357),
+('20 MARLA', 5, 22, 4, 4, 0, 1),
+('20 MARLA', 5, 23, 4, 4, 0, 1),
+('20 MARLA', 5, 24, 4, 4, 0, 1),
+('20 MARLA', 5, 25, 4, 4, 0, 1),
+('20 MARLA', 5, 26, 4, 4, 0, 1),
+('20 MARLA', 5, 27, 4, 4, 0, 1),
+('20 MARLA', 5, 28, 78, 84, 0, 0),
+('20 MARLA', 5, 29, 1, 1, 0, 0),
+('20 MARLA', 5, 30, 1, 1, 0, 0),
+('20 MARLA', 5, 31, 78, 84, 0, 0),
+('20 MARLA', 5, 32, 1, 1, 0, 0),
+('20 MARLA', 5, 33, 324, 342, 0, 0),
+('20 MARLA', 5, 34, 1, 1, 0, 0),
+('20 MARLA', 5, 35, 60, 60, 0, 0),
+('20 MARLA', 5, 36, 2262, 2574, 169, 2436),
+('20 MARLA', 5, 37, 14, 14, 0, 14),
+('20 MARLA', 5, 38, 140, 140, 0, 140),
+('20 MARLA', 5, 39, 1, 1, 0, 1),
+('20 MARLA', 5, 40, 3159, 2574, 169, 2436),
+('20 MARLA', 5, 41, 445, 323, 160, 133),
+('20 MARLA', 5, 42, 1, 0, 0, 0);
+
+
+-- 20_6
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 6, 1, 120, 0, 0, 0),
+('20 MARLA', 6, 2, 1346, 0, 0, 0),
+('20 MARLA', 6, 3, 1, 1, 0, 0),
+('20 MARLA', 6, 4, 15.75, 15.75, 0, 0),
+('20 MARLA', 6, 5, 8, 8, 1, 4),
+('20 MARLA', 6, 6, 6, 3, 0, 0),
+('20 MARLA', 6, 7, 19, 8, 1, 4),
+('20 MARLA', 6, 8, 1, 1, 0, 0),
+('20 MARLA', 6, 9, 19, 8, 1, 6),
+('20 MARLA', 6, 10, 19, 8, 1, 6),
+('20 MARLA', 6, 11, 15.75, 13.125, 2.625, 2.625),
+('20 MARLA', 6, 12, 228, 228, 48, 36),
+('20 MARLA', 6, 13, 3, 3, 0, 1),
+('20 MARLA', 6, 14, 8, 8, 1, 4),
+('20 MARLA', 6, 15, 205, 202, 18, 68),
+('20 MARLA', 6, 16, 6, 5, 2, 5),
+('20 MARLA', 6, 17, 8.75, 8.75, 0, 2.1875),
+('20 MARLA', 6, 18, 4, 4, 0, 1),
+('20 MARLA', 6, 19, 32, 32, 0, 8),
+('20 MARLA', 6, 20, 350, 350, 0, 228),
+('20 MARLA', 6, 21, 875, 875, 0, 357),
+('20 MARLA', 6, 22, 4, 4, 0, 1),
+('20 MARLA', 6, 23, 4, 4, 0, 1),
+('20 MARLA', 6, 24, 4, 4, 0, 1),
+('20 MARLA', 6, 25, 4, 4, 0, 1),
+('20 MARLA', 6, 26, 4, 4, 0, 1),
+('20 MARLA', 6, 27, 4, 4, 0, 1),
+('20 MARLA', 6, 28, 78, 84, 0, 0),
+('20 MARLA', 6, 29, 1, 1, 0, 0),
+('20 MARLA', 6, 30, 1, 1, 0, 0),
+('20 MARLA', 6, 31, 78, 84, 0, 0),
+('20 MARLA', 6, 32, 1, 1, 0, 0),
+('20 MARLA', 6, 33, 324, 342, 0, 0),
+('20 MARLA', 6, 34, 1, 1, 0, 0),
+('20 MARLA', 6, 35, 60, 60, 0, 0),
+('20 MARLA', 6, 36, 2262, 2574, 169, 2436),
+('20 MARLA', 6, 37, 14, 14, 0, 14),
+('20 MARLA', 6, 38, 140, 140, 0, 140),
+('20 MARLA', 6, 39, 1, 1, 0, 1),
+('20 MARLA', 6, 40, 3159, 2574, 169, 2436),
+('20 MARLA', 6, 41, 445, 323, 160, 133),
+('20 MARLA', 6, 42, 1, 0, 0, 0);
+
+-- 20_7
+
+INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 7, 1, 120, 0, 0, NULL),
+('20 MARLA', 7, 2, 2136, 0, 0, NULL),
+('20 MARLA', 7, 3, 1, 1, 0, NULL),
+('20 MARLA', 7, 4, 15.75, 10.5, 0, NULL),
+('20 MARLA', 7, 5, 10, 8, 1, NULL),
+('20 MARLA', 7, 6, 5, 4, 0, NULL),
+('20 MARLA', 7, 7, 20, 18, 1, NULL),
+('20 MARLA', 7, 8, 1, 1, 0, NULL),
+('20 MARLA', 7, 9, 20, 18, 1, NULL),
+('20 MARLA', 7, 10, 20, 18, 1, NULL),
+('20 MARLA', 7, 11, 15.75, 10.5, 2.625, NULL),
+('20 MARLA', 7, 12, 252, 288, 48, NULL),
+('20 MARLA', 7, 13, 2, 3, 0, NULL),
+('20 MARLA', 7, 14, 10, 8, 1, NULL),
+('20 MARLA', 7, 15, 187, 154, 16, NULL),
+('20 MARLA', 7, 16, 6, 5, 2, NULL),
+('20 MARLA', 7, 17, 6.5625, 8.75, 0, NULL),
+('20 MARLA', 7, 18, 3, 4, 0, NULL),
+('20 MARLA', 7, 19, 24, 32, 0, NULL),
+('20 MARLA', 7, 20, 171, 336, 0, NULL),
+('20 MARLA', 7, 21, 501, 679, 0, NULL),
+('20 MARLA', 7, 22, 3, 4, 0, NULL),
+('20 MARLA', 7, 23, 3, 4, 0, NULL),
+('20 MARLA', 7, 24, 3, 4, 0, NULL),
+('20 MARLA', 7, 25, 3, 4, 0, NULL),
+('20 MARLA', 7, 26, 3, 4, 0, NULL),
+('20 MARLA', 7, 27, 3, 4, 0, NULL),
+('20 MARLA', 7, 28, 56, 62, 0, NULL),
+('20 MARLA', 7, 29, 1, 1, 0, NULL),
+('20 MARLA', 7, 30, 1, 1, 0, NULL),
+('20 MARLA', 7, 31, 56, 62, 0, NULL),
+('20 MARLA', 7, 32, 1, 1, 0, NULL),
+('20 MARLA', 7, 33, 228, 186, 0, NULL),
+('20 MARLA', 7, 34, 1, 1, 0, NULL),
+('20 MARLA', 7, 35, 48, 48, 0, NULL),
+('20 MARLA', 7, 36, 1777, 2094, 169, NULL),
+('20 MARLA', 7, 37, 15, 15, 0, NULL),
+('20 MARLA', 7, 38, 124, 124, 0, NULL),
+('20 MARLA', 7, 39, 1, 1, 0, NULL),
+('20 MARLA', 7, 40, 2417, 2094, 169, NULL),
+('20 MARLA', 7, 41, 449, 228, 142, NULL),
+('20 MARLA', 7, 42, 1, 0, 0, NULL);
+
+
+ -- 20_8
+ 
+ INSERT INTO FILTER_FINISHING_MATERIALS (AREA_QTY, LAYOUT_20_ID, MATERIAL_ID, GROUND_QTY, FIRST_FLOOR_QTY, ROOFTOP_QTY, BASEMENT_QTY) 
+VALUES 
+('20 MARLA', 8, 1, 120, 0, 0, NULL),
+('20 MARLA', 8, 2, 1929, 0, 0, NULL),
+('20 MARLA', 8, 3, 1, 1, 0, NULL),
+('20 MARLA', 8, 4, 15.75, 5.25, 0, NULL),
+('20 MARLA', 8, 5, 7, 7, 1, NULL),
+('20 MARLA', 8, 6, 4, 3, 0, NULL),
+('20 MARLA', 8, 7, 17, 16, 1, NULL),
+('20 MARLA', 8, 8, 1, 1, 0, NULL),
+('20 MARLA', 8, 9, 17, 16, 1, NULL),
+('20 MARLA', 8, 10, 17, 16, 1, NULL),
+('20 MARLA', 8, 11, 18.375, 21, 2.625, NULL),
+('20 MARLA', 8, 12, 198, 234, 48, NULL),
+('20 MARLA', 8, 13, 2, 2, 0, NULL),
+('20 MARLA', 8, 14, 7, 7, 1, NULL),
+('20 MARLA', 8, 15, 179, 168, 18, NULL),
+('20 MARLA', 8, 16, 6, 5, 2, NULL),
+('20 MARLA', 8, 17, 6.5625, 6.5625, 0, NULL),
+('20 MARLA', 8, 18, 3, 3, 0, NULL),
+('20 MARLA', 8, 19, 24, 24, 0, NULL),
+('20 MARLA', 8, 20, 254, 254, 0, NULL),
+('20 MARLA', 8, 21, 642, 642, 0, NULL),
+('20 MARLA', 8, 22, 3, 3, 0, NULL),
+('20 MARLA', 8, 23, 3, 3, 0, NULL),
+('20 MARLA', 8, 24, 3, 3, 0, NULL),
+('20 MARLA', 8, 25, 3, 3, 0, NULL),
+('20 MARLA', 8, 26, 3, 3, 0, NULL),
+('20 MARLA', 8, 27, 3, 3, 0, NULL),
+('20 MARLA', 8, 28, 52, 52, 0, NULL),
+('20 MARLA', 8, 29, 1, 1, 0, NULL),
+('20 MARLA', 8, 30, 1, 1, 0, NULL),
+('20 MARLA', 8, 31, 52, 52, 0, NULL),
+('20 MARLA', 8, 32, 1, 1, 0, NULL),
+('20 MARLA', 8, 33, 330, 330, 0, NULL),
+('20 MARLA', 8, 34, 1, 1, 0, NULL),
+('20 MARLA', 8, 35, 48, 48, 0, NULL),
+('20 MARLA', 8, 36, 1835, 2110, 169, NULL),
+('20 MARLA', 8, 37, 14, 14, 0, NULL),
+('20 MARLA', 8, 38, 140, 140, 0, NULL),
+('20 MARLA', 8, 39, 1, 1, 0, NULL),
+('20 MARLA', 8, 40, 1835, 2110, 169, NULL),
+('20 MARLA', 8, 41, 378, 275, 139, NULL),
+('20 MARLA', 8, 42, 1, 0, 0, NULL);
+
  
  
  
- 
- 
- 
- 
+SELECT * FROM FILTER_FINISHING_MATERIALS WHERE AREA_QTY="20 MARLA" AND LAYOUT_20_ID IS NOT NULL;
+SELECT * FROM FINISHING_MATERIALS;
+SELECT * FROM filter_finishing_materials;
+SELECT * FROM filter_finishing_materials WHERE FILTER_FINISHING_MATERIAL_ID>1000;
+
+
+
+-- FETCH FINISHING MATERIALS QUERY
+
+SELECT 
+                        A.MATERIAL_NAME,
+                        A.CLASS_D,
+                        A.FACTOR,
+                        ROUND((A.RATE_D),0),
+                        (B.GROUND_QTY + B.ROOFTOP_QTY) AS total_quantity,
+                        ROUND((A.RATE_D * (B.GROUND_QTY + B.ROOFTOP_QTY)),0) AS total_cost
+                    FROM 
+                        finishing_materials AS A
+                    JOIN 
+                        filter_finishing_materials AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                    WHERE 
+                        B.AREA_QTY = "3 MARLA" 
+                        AND B.LAYOUT_3_ID = 1;
+                        
+                        
+-- FINISH COST                        
+SELECT 
+                            SUM(GROUND_material_cost) AS 1_total_cost,
+                            SUM(ROOFTOP_material_cost) AS 3_total_cost
+
+
+                        FROM (
+                            SELECT 
+                                (B.GROUND_QTY * A.RATE_D) AS GROUND_material_cost,
+                                (B.ROOFTOP_QTY * A.RATE_D) AS ROOFTOP_material_cost
+                                        
+                            FROM 
+                                finishing_materials AS A
+                            JOIN 
+                                filter_finishing_materials AS B ON A.MATERIAL_ID = B.MATERIAL_ID
+                            WHERE 
+                                B.AREA_QTY = "3 MARLA"
+                                AND B.LAYOUT_3_ID = 1
+                        ) AS subquery;
+                        
+                        
+                        
+                        

@@ -157,6 +157,17 @@ class FinishView2:
     def error_response(message=""):
         return jsonify({"success": False, "error_message": message}), 500
 
+class GetRecommendation:
+    @staticmethod
+    def success_response(data):
+        return jsonify(data)
+    
+    @staticmethod
+    def error_response():
+        return jsonify({"error": "Internal Server Error"}), 500
+
+
+
 class GreyView2:
     @staticmethod
     def success_response(message=""):

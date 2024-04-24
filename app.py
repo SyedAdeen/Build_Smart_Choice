@@ -157,6 +157,15 @@ def labour_double_package():
 def labour_double_basement_package():
     return Labour_controller.getdoublestorybasement()
 
+@app.route('/recommend_data', methods=['GET'])
+def recommend_data():
+    return Finish_Controller.recommendation()
+
+
+@app.route('/pack1_data', methods=['GET'])
+def fetch_pack1_data():
+    return Finish_Controller.fetch_pack1()
+    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
