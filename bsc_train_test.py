@@ -6,12 +6,29 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 import numpy as np
 
 def main2(min,max,area,floor):
+
+    file=""
+    if(area=='3'):
+        file="Data_Sets_3.txt"
+    elif(area=='5'):
+        file="Data_Sets_5.txt"
+    elif(area=='7'):
+        file="Data_Sets_7.txt"
+    elif(area=='1'):
+        file="Data_Sets_1.txt"
+    elif(area=='2'):
+        file="Data_Sets_2.txt"
+    else:
+        print("Wrong area")
+        file="Data_Sets_3.txt"
+
+    
         
-    # Load the dataset (assuming your data is in a CSV file)
-    data = pd.read_csv('Data_Sets.txt', header=None)
+    # Load the dataset (assuming your data is in a txt file)
+    data = pd.read_csv(file, header=None)
 
     # Split the features (X) and target variables (y)
-    X = data.iloc[:, :4]  # First 5 columns as features
+    X = data.iloc[:, :4]  # First 4 columns as features
     y = data.iloc[:, 5:]  # Remaining columns as target variables
 
     # Split data into training and test sets (80% for training, 20% for testing)

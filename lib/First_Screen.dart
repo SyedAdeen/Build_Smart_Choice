@@ -44,7 +44,7 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    securescreen();
+    //securescreen();
   }
 
   String capitalizeWords(String inputStr) {

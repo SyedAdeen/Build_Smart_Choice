@@ -16,11 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      showPerformanceOverlay: Platform.isIOS,
-      theme: ThemeData(
-        primaryColor: const Color.fromARGB(
-            255, 106, 135, 59), // Set the primary color to pink
-      ),
+      // showPerformanceOverlay:
+      //     Platform.isIOS, // Only the Android has this feature
+      // theme: ThemeData(
+      //   primaryColor: const Color.fromARGB(
+      //       255, 106, 135, 59), // Set the primary color to pink
+      // ),
       initialRoute: '/',
       routes: {
         '/': (context) => const FirstScreen(),

@@ -7,14 +7,15 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:sampleapp/Settings.dart';
 
-// ignore: must_be_immutable
 class Pack3 extends StatefulWidget {
   String user;
   List<String> selectedImages;
   final dynamic grey_data_pack;
   final dynamic labourData;
+  final dynamic finishData;
   String? labour_cost;
   String? total_cost;
+  String? finish_cost;
 
   Pack3(
       {Key? key,
@@ -23,24 +24,34 @@ class Pack3 extends StatefulWidget {
       required this.grey_data_pack,
       required this.labourData,
       required this.labour_cost,
-      required this.total_cost})
+      required this.total_cost,
+      required this.finish_cost,
+      required this.finishData})
       : super(key: key);
 
   @override
-  State<Pack3> createState() => _Pack1State();
+  State<Pack3> createState() => _Pack3State();
 }
 
-class _Pack1State extends State<Pack3> {
+class _Pack3State extends State<Pack3> {
   late List<List<dynamic>> greyTableRows;
   late List<List<dynamic>> labourTableRows;
   String? greyTotalCost;
   String? labourTotalCost;
+  late List<List<dynamic>> finishTableRows;
+  String? finishingTotalCost;
 
   @override
   void initState() {
     super.initState();
     greyTableRows = generateRows(widget.grey_data_pack);
     labourTotalCost = widget.labour_cost;
+    finishTableRows = generatefinishingRows(widget.finishData);
+    debugPrint("\n\n\n\n Finish Table Rows = $finishTableRows");
+    finishingTotalCost = widget.finish_cost;
+    debugPrint("Heelllloiiiiiiiii");
+    debugPrint("Finish Data = ${widget.finishData}");
+    debugPrint("Finish cost = ${widget.finish_cost}");
     debugPrint(widget.labour_cost);
     greyTotalCost = widget.total_cost;
     labourTableRows = generateLabourRows(widget.labourData);
@@ -60,45 +71,57 @@ class _Pack1State extends State<Pack3> {
 
   @override
   Widget build(BuildContext context) {
-    return Package1Page(
+    return Package3Page(
       user: widget.user,
       selectedImages: widget.selectedImages,
       greyTableRows: greyTableRows,
       labourTableRows: labourTableRows,
       greyTotalCost: greyTotalCost,
       labourTotalCost: labourTotalCost,
+      finishingTotalCost: finishingTotalCost,
+      finishTableRows: finishTableRows,
     );
   }
 }
 
-class Package1Page extends StatefulWidget {
+class Package3Page extends StatefulWidget {
   String user;
   List<String> selectedImages;
   List<List<dynamic>> greyTableRows;
   List<List<dynamic>> labourTableRows;
   String? greyTotalCost;
   String? labourTotalCost;
+  List<List<dynamic>> finishTableRows;
+  String? finishingTotalCost;
 
-  Package1Page(
+  Package3Page(
       {Key? key,
       required this.user,
       required this.selectedImages,
       required this.greyTableRows,
       required this.labourTableRows,
       required this.greyTotalCost,
-      required this.labourTotalCost})
+      required this.labourTotalCost,
+      required this.finishTableRows,
+      required this.finishingTotalCost})
       : super(key: key);
 
   @override
-  State<Package1Page> createState() => _Package1PageState();
+  State<Package3Page> createState() => _Package3PageState();
 }
 
-class _Package1PageState extends State<Package1Page> {
+class _Package3PageState extends State<Package3Page> {
   Future<void> _displayPdf(BuildContext context) async {
     final images = await _loadImages(widget.selectedImages);
 
-    final pdfBytes = await _generatePdf(images, widget.greyTableRows,
-        widget.labourTableRows, widget.greyTotalCost, widget.labourTotalCost);
+    final pdfBytes = await _generatePdf(
+        images,
+        widget.greyTableRows,
+        widget.labourTableRows,
+        widget.greyTotalCost,
+        widget.labourTotalCost,
+        widget.finishTableRows,
+        widget.finishingTotalCost);
     await Printing.layoutPdf(
       onLayout: (PdfPageFormat format) async => pdfBytes,
       name: 'Package1.pdf',
@@ -117,13 +140,16 @@ class _Package1PageState extends State<Package1Page> {
   }
 
   Future<Uint8List> _generatePdf(
-    List<Uint8List> images,
-    List<List<dynamic>> greyTableRows,
-    List<List<dynamic>> labourTableRows,
-    String? greyTotalCost,
-    String? labourTotalCost,
-  ) async {
+      List<Uint8List> images,
+      List<List<dynamic>> greyTableRows,
+      List<List<dynamic>> labourTableRows,
+      String? greyTotalCost,
+      String? labourTotalCost,
+      List<List<dynamic>> finishTableRows,
+      String? finishingTotalCost) async {
     final doc = pw.Document();
+    debugPrint("Finishing data Rows as PDF = $finishTableRows");
+    debugPrint("Grey data Rows as PDF = $greyTableRows");
 
     for (int i = 0; i < images.length; i++) {
       doc.addPage(
@@ -169,6 +195,45 @@ class _Package1PageState extends State<Package1Page> {
                       'Cost'
                     ],
                     data: greyTableRows,
+                  ),
+                ],
+              ),
+            ),
+          ];
+        },
+      ),
+    );
+
+    doc.addPage(
+      pw.MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return [
+            pw.Container(
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Text('Finishing Materials Cost',
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Text('Total Cost: $finishingTotalCost',
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Table.fromTextArray(
+                    context: context,
+                    cellAlignment: pw.Alignment.center,
+                    cellStyle: pw.TextStyle(
+                      fontWeight: pw.FontWeight.bold,
+                      fontSize: 5,
+                    ),
+                    headerStyle: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                    headers: [
+                      'Material',
+                      'Brand',
+                      'Factor',
+                      'Rate',
+                      'Quantity',
+                      'Cost'
+                    ],
+                    data: finishTableRows,
                   ),
                 ],
               ),
@@ -403,6 +468,53 @@ class _Package1PageState extends State<Package1Page> {
               ),
               const SizedBox(height: 30),
 
+              const Text(
+                'Finishing Materials Cost', // Heading text
+                style: TextStyle(
+                  fontSize: 24, // Adjust the font size as needed
+                  fontWeight: FontWeight.bold, // Make the heading bold
+                ),
+              ),
+              const SizedBox(
+                  height: 10), // Add some space between heading and total cost
+              Text(
+                'Total Cost: ${widget.finishingTotalCost}', // Display total cost
+                style: const TextStyle(
+                  fontSize: 18, // Adjust the font size as needed
+                  fontWeight: FontWeight.bold, // Make the total cost bold
+                ),
+              ),
+              const SizedBox(
+                  height:
+                      20), // Add some space between total cost and DataTable
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  columns: const [
+                    DataColumn(label: Text('Material')),
+                    DataColumn(label: Text('Brand')),
+                    DataColumn(label: Text('Factor')),
+                    DataColumn(label: Text('Rate')),
+                    DataColumn(label: Text('Quantity')),
+                    DataColumn(label: Text('Cost')),
+                  ],
+                  rows: widget.finishTableRows
+                      .map(
+                        (row) => DataRow(
+                          cells: row
+                              .map(
+                                (item) => DataCell(
+                                  Text(item.toString()),
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+              const SizedBox(height: 30),
+
               // Labour Table
               if (widget.labourTableRows.isNotEmpty) ...[
                 const SizedBox(height: 20),
@@ -458,11 +570,11 @@ class _Package1PageState extends State<Package1Page> {
   }
 }
 
-List<List<dynamic>> generateRows(dynamic greyDataPack) {
+List<List<dynamic>> generateRows(dynamic DataPack) {
   List<List<dynamic>> rows = [];
-
-  if (greyDataPack is List && greyDataPack.isNotEmpty) {
-    List<dynamic>? data = greyDataPack[0];
+  debugPrint("DataPack $DataPack");
+  if (DataPack is List && DataPack.isNotEmpty) {
+    List<dynamic>? data = DataPack[0];
     if (data != null) {
       for (var sublist in data) {
         if (sublist is List && sublist.length >= 6) {
@@ -496,6 +608,42 @@ List<List<dynamic>> generateRows(dynamic greyDataPack) {
     }
   }
 
+  return rows;
+}
+
+List<List<dynamic>> generatefinishingRows(dynamic DataPack) {
+  List<List<dynamic>> rows = [];
+  debugPrint("\n\n\n\n DataPack Finishing $DataPack");
+  if (DataPack is List && DataPack.isNotEmpty) {
+    for (var data in DataPack) {
+      // Iterate over each sublist in DataPack
+      debugPrint("Depack index data  = $data");
+      if (data != null && data is List && data.length >= 6) {
+        final String material = data[0]?.toString() ?? '';
+        final String brand = data[1]?.toString() ?? '';
+        final String factor = data[2]?.toString() ?? '';
+        final int cost = (data[3] is num) ? data[3].toInt() : 0;
+        final int quantity = (data[4] is num) ? data[4].toInt() : 0;
+        final int price = (data[5] is num) ? data[5].toInt() : 0;
+        debugPrint(material);
+        debugPrint(brand);
+        debugPrint(factor);
+        debugPrint(cost.toString());
+        debugPrint(factor);
+        debugPrint(quantity.toString());
+        debugPrint(price.toString());
+
+        rows.add([
+          material,
+          brand,
+          factor,
+          cost.toString(),
+          quantity.toString(),
+          price.toString(),
+        ]);
+      }
+    }
+  }
   return rows;
 }
 

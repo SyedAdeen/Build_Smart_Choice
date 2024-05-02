@@ -27,8 +27,19 @@ class PackagesPage extends StatefulWidget {
   String? totalCost;
   String? labour_cost;
   String? finishing_cost;
+  String? finishing2_cost;
+  String? finishing3_cost;
+  String? finishing4_cost;
+
   int TotalPackageCost = 0;
+  int TotalPackageCost2 = 0;
+  int TotalPackageCost3 = 0;
+  int TotalPackageCost4 = 0;
+
   List<dynamic> pack1_finishing = [];
+  List<dynamic> pack2_finishing = [];
+  List<dynamic> pack3_finishing = [];
+  List<dynamic> pack4_finishing = [];
 
   PackagesPage(
       {super.key,
@@ -74,27 +85,65 @@ class _PackagesPageState extends State<PackagesPage> {
 
       // debugPrint('Last element: $lastElement');
       widget.finishing_cost = lastElement.toString();
-      debugPrint("Fetch Data ${widget.finishing_cost}");
+      debugPrint("Fetch Data of Pack1 ${widget.finishing_cost}");
 
-      // final response2 = await http.get(
-      //   Uri.parse(
-      //       '${ApiUrls.fetch_pack1_data}?set_id=$layout_id&area=$area&storey=$Storey&predicted_array=$package2'),
-      //   // Pass any additional parameters as needed
-      // );
-      // final response3 = await http.get(
-      //   Uri.parse(
-      //       '${ApiUrls.fetch_pack1_data}?set_id=$layout_id&area=$area&storey=$Storey&predicted_array=$package3'),
-      //   // Pass any additional parameters as needed
-      // );
-      // final response4 = await http.get(
-      //   Uri.parse(
-      //       '${ApiUrls.fetch_pack1_data}?set_id=$layout_id&area=$area&storey=$Storey&predicted_array=$premium'),
-      //   // Pass any additional parameters as needed
-      // );
+      final response2 = await http.get(
+        Uri.parse(
+            '${ApiUrls.fetch_pack1_data}?set_id=$layout_id&area=$area&storey=$Storey&predicted_array=$package2'),
+        // Pass any additional parameters as needed
+      );
+
+      widget.pack2_finishing = json.decode(response2.body);
+      debugPrint(widget.pack2_finishing.toString());
+      var lastElement2 =
+          widget.pack2_finishing[widget.pack2_finishing.length - 1];
+
+      // debugPrint('Last element: $lastElement');
+      widget.finishing2_cost = lastElement2.toString();
+      debugPrint("Fetch Data of Pack2 ${widget.finishing2_cost}");
+
+      final response3 = await http.get(
+        Uri.parse(
+            '${ApiUrls.fetch_pack1_data}?set_id=$layout_id&area=$area&storey=$Storey&predicted_array=$package3'),
+        // Pass any additional parameters as needed
+      );
+      widget.pack3_finishing = json.decode(response3.body);
+      debugPrint(widget.pack3_finishing.toString());
+      var lastElement3 =
+          widget.pack3_finishing[widget.pack3_finishing.length - 1];
+
+      // debugPrint('Last element: $lastElement');
+      widget.finishing3_cost = lastElement3.toString();
+      debugPrint("Fetch Data of Pack3 ${widget.finishing3_cost}");
+
+      final response4 = await http.get(
+        Uri.parse(
+            '${ApiUrls.fetch_pack1_data}?set_id=$layout_id&area=$area&storey=$Storey&predicted_array=$premium'),
+        // Pass any additional parameters as needed
+      );
+      widget.pack4_finishing = json.decode(response4.body);
+      debugPrint(widget.pack4_finishing.toString());
+      var lastElement4 =
+          widget.pack4_finishing[widget.pack4_finishing.length - 1];
+
+      // debugPrint('Last element: $lastElement');
+      widget.finishing4_cost = lastElement4.toString();
+      debugPrint("Fetch Data of Pack4 ${widget.finishing4_cost}");
+
       if (response1.statusCode == 200) {
-        debugPrint("Successful");
+        debugPrint("Successful1");
+      }
+      if (response2.statusCode == 200) {
+        debugPrint("Successful2");
+      }
+      if (response3.statusCode == 200) {
+        debugPrint("Successful3");
+      }
+      if (response4.statusCode == 200) {
+        debugPrint("Successful4");
       } else {
-        debugPrint('Failed to fetch data: ${response1.statusCode}');
+        debugPrint(
+            'Failed to fetch data: ${response1.statusCode}${response2.statusCode}${response3.statusCode}${response4.statusCode}');
       }
     } catch (e) {
       debugPrint('Error fetching data: $e');
@@ -141,6 +190,13 @@ class _PackagesPageState extends State<PackagesPage> {
       widget.input_range1 = int.parse(rounded);
     }
 
+    if (widget.Area == '7' && widget.Storey == '4') {
+      widget.input_range1 = widget.input_range1 - 1000000;
+    }
+
+    if (widget.Area == '2' && widget.Storey == '4') {
+      widget.input_range1 = widget.input_range1 - 1200000;
+    }
     widget.input_range2 = widget.input_range1 + 1000000;
     debugPrint("Input Range 1 = ${widget.input_range1}");
     debugPrint("Input Range 2 = ${widget.input_range2}");
@@ -188,25 +244,73 @@ class _PackagesPageState extends State<PackagesPage> {
 
         await fetch_db_data(widget.layout_id, inputArea, inputStorey,
             package1_data, package2_data, package3_data, premium_package_data);
-        debugPrint("finish cost at fetchdb func = ${widget.finishing_cost}");
+        debugPrint(
+            "finish cost at fetchdb func of Pack1 = ${widget.finishing_cost}");
+        debugPrint("final3 at fetchdb func = $final3");
+
+        debugPrint(
+            "finish cost at fetchdb func of Pack2 = ${widget.finishing2_cost}");
+        debugPrint("final3 at fetchdb func = $final3");
+
+        debugPrint(
+            "finish cost at fetchdb func of Pack3 = ${widget.finishing3_cost}");
+        debugPrint("final3 at fetchdb func = $final3");
+
+        debugPrint(
+            "finish cost at fetchdb func of Pack4 = ${widget.finishing4_cost}");
         debugPrint("final3 at fetchdb func = $final3");
 
 // Parse widget.finishing_cost to a double
         double? parsedFinishingCost =
             double.tryParse(widget.finishing_cost.toString());
 
+        double? parsedFinishingCost2 =
+            double.tryParse(widget.finishing2_cost.toString());
+
+        double? parsedFinishingCost3 =
+            double.tryParse(widget.finishing3_cost.toString());
+
+        double? parsedFinishingCost4 =
+            double.tryParse(widget.finishing4_cost.toString());
 // Check if parsing was successful and the parsed value is not null
-        if (parsedFinishingCost != null) {
+        if (parsedFinishingCost != null &&
+            parsedFinishingCost2 != null &&
+            parsedFinishingCost3 != null &&
+            parsedFinishingCost4 != null) {
           // Round the parsed value to the nearest integer
           int roundedFinishingCost = parsedFinishingCost.round();
-
+          int roundedFinishingCost2 = parsedFinishingCost2.round();
+          int roundedFinishingCost3 = parsedFinishingCost3.round();
+          int roundedFinishingCost4 = parsedFinishingCost4.round();
           // Add final3 to the rounded finishing cost
           int totalPackageCost = roundedFinishingCost + final3;
-          debugPrint("Total Package Cost = $totalPackageCost");
+          debugPrint("Total Package1 Cost = $totalPackageCost");
+
+          int totalPackageCost2 = roundedFinishingCost2 + final3;
+          debugPrint("Total Package2 Cost = $totalPackageCost2");
+
+          int totalPackageCost3 = roundedFinishingCost3 + final3;
+          debugPrint("Total Package3 Cost = $totalPackageCost3");
+
+          int totalPackageCost4 = roundedFinishingCost4 + final3;
+          debugPrint("Total Package3 Cost = $totalPackageCost3");
 
           widget.TotalPackageCost = totalPackageCost;
+          widget.TotalPackageCost2 = totalPackageCost2;
+          widget.TotalPackageCost3 = totalPackageCost3;
+          widget.TotalPackageCost4 = totalPackageCost4;
+
           widget.finishing_cost =
               removeLastCharacters(widget.finishing_cost.toString(), 2);
+
+          widget.finishing2_cost =
+              removeLastCharacters(widget.finishing2_cost.toString(), 2);
+
+          widget.finishing3_cost =
+              removeLastCharacters(widget.finishing3_cost.toString(), 2);
+
+          widget.finishing4_cost =
+              removeLastCharacters(widget.finishing4_cost.toString(), 2);
           widget.totalCost =
               removeLastCharacters(widget.totalCost.toString(), 3);
           widget.labour_cost =
@@ -357,7 +461,19 @@ class _PackagesPageState extends State<PackagesPage> {
                   finish_cost:
                       formatAmount(int.parse(widget.finishing_cost.toString())),
                   packagecost: formatAmount(widget.TotalPackageCost),
+                  finish_cost2: formatAmount(
+                      int.parse(widget.finishing2_cost.toString())),
                   finish_data: widget.pack1_finishing,
+                  finish_data2: widget.pack2_finishing,
+                  package2cost: formatAmount(widget.TotalPackageCost2),
+                  finish_cost3: formatAmount(
+                      int.parse(widget.finishing3_cost.toString())),
+                  finish_data3: widget.pack3_finishing,
+                  package3cost: formatAmount(widget.TotalPackageCost3),
+                  finish_cost4: formatAmount(
+                      int.parse(widget.finishing4_cost.toString())),
+                  finish_data4: widget.pack4_finishing,
+                  package4cost: formatAmount(widget.TotalPackageCost4),
                 ),
               ),
             ),
@@ -427,10 +543,21 @@ class Packs extends StatelessWidget {
   final String? totalCost;
   final String? labour_cost;
   final String? finish_cost;
+  final String? finish_cost2;
+  final String? finish_cost3;
+  final String? finish_cost4;
+
   final dynamic grey_data;
   final dynamic labour_data;
   final dynamic finish_data;
+  final dynamic finish_data2;
+  final dynamic finish_data3;
+  final dynamic finish_data4;
+
   String packagecost;
+  String package2cost;
+  String package3cost;
+  String package4cost;
 
   bool role = false;
 
@@ -444,7 +571,16 @@ class Packs extends StatelessWidget {
       required this.labour_data,
       required this.finish_cost,
       required this.packagecost,
-      required this.finish_data});
+      required this.finish_data,
+      required this.finish_cost2,
+      required this.finish_data2,
+      required this.package2cost,
+      required this.finish_cost3,
+      required this.finish_cost4,
+      required this.finish_data3,
+      required this.finish_data4,
+      required this.package3cost,
+      required this.package4cost});
 
   @override
   Widget build(BuildContext context) {
@@ -644,7 +780,9 @@ class Packs extends StatelessWidget {
                     grey_data_pack: grey_data,
                     labourData: labour_data,
                     total_cost: totalCost,
-                    labour_cost: labour_cost),
+                    labour_cost: labour_cost,
+                    finishData: finish_data2,
+                    finish_cost: finish_cost2),
               ),
             );
           },
@@ -666,9 +804,9 @@ class Packs extends StatelessWidget {
                         fontSize: 30, // Bold font weight
                       ),
                       children: [
-                        const TextSpan(
-                          text: 'Total cost: 1 Crore\n',
-                          style: TextStyle(
+                        TextSpan(
+                          text: 'Total cost: $package2cost \n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -680,9 +818,9 @@ class Packs extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        const TextSpan(
-                          text: 'Finishing Material Cost : 550,000\n',
-                          style: TextStyle(
+                        TextSpan(
+                          text: 'Finishing Material Cost : $finish_cost2\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -711,7 +849,9 @@ class Packs extends StatelessWidget {
                     grey_data_pack: grey_data,
                     labourData: labour_data,
                     total_cost: totalCost,
-                    labour_cost: labour_cost),
+                    labour_cost: labour_cost,
+                    finishData: finish_data3,
+                    finish_cost: finish_cost3),
               ),
             );
           },
@@ -733,9 +873,9 @@ class Packs extends StatelessWidget {
                         fontSize: 30, // Bold font weight
                       ),
                       children: [
-                        const TextSpan(
-                          text: 'Total cost: 1 Crore\n',
-                          style: TextStyle(
+                        TextSpan(
+                          text: 'Total cost: $package3cost\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -747,9 +887,9 @@ class Packs extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        const TextSpan(
-                          text: 'Finishing Material Cost : 550,000\n',
-                          style: TextStyle(
+                        TextSpan(
+                          text: 'Finishing Material Cost : $finish_cost3\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -778,7 +918,9 @@ class Packs extends StatelessWidget {
                     grey_data_pack: grey_data,
                     labourData: labour_data,
                     total_cost: totalCost,
-                    labour_cost: labour_cost),
+                    labour_cost: labour_cost,
+                    finishData: finish_data4,
+                    finish_cost: finish_cost4),
               ),
             );
           },
@@ -799,9 +941,9 @@ class Packs extends StatelessWidget {
                           fontSize: 30,
                           height: 1.5),
                       children: [
-                        const TextSpan(
-                          text: 'Total cost: 2 Crore\n',
-                          style: TextStyle(
+                        TextSpan(
+                          text: 'Total cost: $package4cost\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),
@@ -813,9 +955,9 @@ class Packs extends StatelessWidget {
                             fontSize: 15,
                           ),
                         ),
-                        const TextSpan(
-                          text: 'Finishing Material Cost : 1,000,000\n',
-                          style: TextStyle(
+                        TextSpan(
+                          text: 'Finishing Material Cost : $finish_cost4\n',
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),

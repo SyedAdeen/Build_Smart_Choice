@@ -1264,6 +1264,8 @@ class FinishMaterialsModel:
 
                         
                         elif(predicted_array[i]<1.0):
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)
                             get_query = get_query.replace(change_class, "A.CLASS_C")
                             get_query = get_query.replace(change_rate, "A.RATE_C")
                             change_class="A.CLASS_C"
@@ -1277,14 +1279,26 @@ class FinishMaterialsModel:
                             get_query = get_query.replace(change_rate, "A.RATE_C")
                             change_class="A.CLASS_C"
                             change_rate="A.RATE_C"
+                        
+                        elif(predicted_array[i]==4.0):        
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)               
+                            get_query = get_query.replace(change_class, "A.CLASS_D")
+                            get_query = get_query.replace(change_rate, "A.RATE_D")
+                            change_class="A.CLASS_D"
+                            change_rate="A.RATE_D"
 
                         elif(predicted_array[i]==2.0):
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)
                             get_query = get_query.replace(change_class, "A.CLASS_B")
                             get_query = get_query.replace(change_rate, "A.RATE_B")
                             change_class="A.CLASS_B"
                             change_rate="A.RATE_B"
 
                         elif(predicted_array[i]==1.0):
+                            print("Change_class = ",change_class)
+                            print("Change Rate  = ", change_rate)
                             get_query = get_query.replace(change_class, "A.CLASS_A")
                             get_query = get_query.replace(change_rate, "A.RATE_A")
                             change_class="A.CLASS_A"
