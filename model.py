@@ -1264,41 +1264,41 @@ class FinishMaterialsModel:
 
                         
                         elif(predicted_array[i]<1.0):
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)
-                            get_query = get_query.replace(change_class, "A.CLASS_C")
-                            get_query = get_query.replace(change_rate, "A.RATE_C")
-                            change_class="A.CLASS_C"
-                            change_rate="A.RATE_C"
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
 
 
                         elif(predicted_array[i]==3.0):        
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)               
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)               
                             get_query = get_query.replace(change_class, "A.CLASS_C")
                             get_query = get_query.replace(change_rate, "A.RATE_C")
                             change_class="A.CLASS_C"
                             change_rate="A.RATE_C"
                         
                         elif(predicted_array[i]==4.0):        
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)               
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)               
                             get_query = get_query.replace(change_class, "A.CLASS_D")
                             get_query = get_query.replace(change_rate, "A.RATE_D")
                             change_class="A.CLASS_D"
                             change_rate="A.RATE_D"
 
                         elif(predicted_array[i]==2.0):
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)
                             get_query = get_query.replace(change_class, "A.CLASS_B")
                             get_query = get_query.replace(change_rate, "A.RATE_B")
                             change_class="A.CLASS_B"
                             change_rate="A.RATE_B"
 
                         elif(predicted_array[i]==1.0):
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)
                             get_query = get_query.replace(change_class, "A.CLASS_A")
                             get_query = get_query.replace(change_rate, "A.RATE_A")
                             change_class="A.CLASS_A"
@@ -1409,15 +1409,15 @@ class FinishMaterialsModel:
 
                         
                         elif(predicted_array[i]<1.0):
-                            get_query = get_query.replace(change_class, "A.CLASS_C")
-                            get_query = get_query.replace(change_rate, "A.RATE_C")
-                            change_class="A.CLASS_C"
-                            change_rate="A.RATE_C"
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
 
 
                         elif(predicted_array[i]==3.0):        
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)               
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)               
                             get_query = get_query.replace(change_class, "A.CLASS_C")
                             get_query = get_query.replace(change_rate, "A.RATE_C")
                             change_class="A.CLASS_C"
@@ -1531,23 +1531,23 @@ class FinishMaterialsModel:
 
                     for i in range(len(predicted_array)):
 
-                        if(predicted_array[i]>4.0):
+                        if(predicted_array[i]>4.0 and predicted_array[i]<6.0):
                             get_query = get_query.replace(change_class, "A.CLASS_D")
                             get_query = get_query.replace(change_rate, "A.RATE_D")
                             change_class="A.CLASS_D"
                             change_rate="A.RATE_D"
-
+ 
                         
-                        elif(predicted_array[i]<1.0):
-                            get_query = get_query.replace(change_class, "A.CLASS_C")
-                            get_query = get_query.replace(change_rate, "A.RATE_C")
-                            change_class="A.CLASS_C"
-                            change_rate="A.RATE_C"
+                        elif(predicted_array[i]<1.0 or predicted_array[i]>4.0):
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
 
 
                         elif(predicted_array[i]==3.0):        
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)               
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)               
                             get_query = get_query.replace(change_class, "A.CLASS_C")
                             get_query = get_query.replace(change_rate, "A.RATE_C")
                             change_class="A.CLASS_C"
@@ -1670,15 +1670,15 @@ class FinishMaterialsModel:
 
                         
                         elif(predicted_array[i]<1.0):
-                            get_query = get_query.replace(change_class, "A.CLASS_C")
-                            get_query = get_query.replace(change_rate, "A.RATE_C")
-                            change_class="A.CLASS_C"
-                            change_rate="A.RATE_C"
+                            get_query = get_query.replace(change_class, "A.CLASS_A")
+                            get_query = get_query.replace(change_rate, "A.RATE_A")
+                            change_class="A.CLASS_A"
+                            change_rate="A.RATE_A"
 
 
                         elif(predicted_array[i]==3.0):        
-                            print("Change_class = ",change_class)
-                            print("Change Rate  = ", change_rate)               
+                            # print("Change_class = ",change_class)
+                            # print("Change Rate  = ", change_rate)               
                             get_query = get_query.replace(change_class, "A.CLASS_C")
                             get_query = get_query.replace(change_rate, "A.RATE_C")
                             change_class="A.CLASS_C"

@@ -466,8 +466,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
     if (response.statusCode == 200) {
       setState(() {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const FirstScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FirstScreen()));
 
         setState(() {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -513,8 +513,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
     if (response.statusCode == 200) {
       setState(() {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const FirstScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => FirstScreen()));
 
         setState(() {
           verifyEmail();

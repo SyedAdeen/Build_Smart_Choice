@@ -15,7 +15,9 @@ import 'package:sampleapp/home.dart';
 import 'api_urls.dart';
 
 class FirstScreen extends StatefulWidget {
-  const FirstScreen({super.key});
+  static String UserType = "N1";
+
+  FirstScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -192,15 +194,21 @@ class _FirstScreenState extends State<FirstScreen> {
 
     final response = await http.post(
       Uri.parse(apiUrl),
-      body: json
-          .encode({'username': username, 'password': password, "role": role}),
+      body: json.encode({
+        'username': username,
+        'password': password,
+        "role": role,
+        'usertype': FirstScreen.UserType
+      }),
       headers: {'Content-Type': 'application/json'},
     );
     final Map<String, dynamic> responseData = json.decode(response.body);
 
-    debugPrint('Response body: ${response.body}');
-
     if (response.statusCode == 200) {
+      FirstScreen.UserType = responseData['usertype'];
+      debugPrint("User Type = ${FirstScreen.UserType}");
+      debugPrint('Response body: ${response.body}');
+      debugPrint("Response Code of Login ${response.statusCode.toString()}");
       final data = json.decode(response.body);
 
       final String loggedInUsername = data['username'];
@@ -228,7 +236,7 @@ class _FirstScreenState extends State<FirstScreen> {
                       )));
         });
       }
-    } else if (response.statusCode == 401) {
+    } else {
       setState(() {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

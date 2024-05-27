@@ -16,6 +16,7 @@ class PremiumPack extends StatefulWidget {
   String? labour_cost;
   String? total_cost;
   String? finish_cost;
+  String? pack_cost;
 
   PremiumPack(
       {Key? key,
@@ -26,7 +27,8 @@ class PremiumPack extends StatefulWidget {
       required this.labour_cost,
       required this.total_cost,
       required this.finish_cost,
-      required this.finishData})
+      required this.finishData,
+      required this.pack_cost})
       : super(key: key);
 
   @override
@@ -72,15 +74,15 @@ class _PremiumPackState extends State<PremiumPack> {
   @override
   Widget build(BuildContext context) {
     return PremiumPackage(
-      user: widget.user,
-      selectedImages: widget.selectedImages,
-      greyTableRows: greyTableRows,
-      labourTableRows: labourTableRows,
-      greyTotalCost: greyTotalCost,
-      labourTotalCost: labourTotalCost,
-      finishingTotalCost: finishingTotalCost,
-      finishTableRows: finishTableRows,
-    );
+        user: widget.user,
+        selectedImages: widget.selectedImages,
+        greyTableRows: greyTableRows,
+        labourTableRows: labourTableRows,
+        greyTotalCost: greyTotalCost,
+        labourTotalCost: labourTotalCost,
+        finishingTotalCost: finishingTotalCost,
+        finishTableRows: finishTableRows,
+        packCost: widget.pack_cost);
   }
 }
 
@@ -93,6 +95,7 @@ class PremiumPackage extends StatefulWidget {
   String? labourTotalCost;
   List<List<dynamic>> finishTableRows;
   String? finishingTotalCost;
+  String? packCost;
 
   PremiumPackage(
       {Key? key,
@@ -103,7 +106,8 @@ class PremiumPackage extends StatefulWidget {
       required this.greyTotalCost,
       required this.labourTotalCost,
       required this.finishTableRows,
-      required this.finishingTotalCost})
+      required this.finishingTotalCost,
+      required this.packCost})
       : super(key: key);
 
   @override
@@ -289,7 +293,7 @@ class _PremiumPackageState extends State<PremiumPackage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 60, 71, 194),
         automaticallyImplyLeading: false,
-        title: const Text("Premium Package"),
+        title: Text("Premium Package  |   ${widget.packCost}"),
         actions: [
           PopupMenuButton<int>(
             icon: const Icon(

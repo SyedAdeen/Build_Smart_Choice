@@ -4583,6 +4583,7 @@ SELECT
                         AND B.LAYOUT_3_ID = 1;
                         
                         
+                        
 -- FINISH COST                        
 SELECT 
                             SUM(GROUND_material_cost) AS 1_total_cost,

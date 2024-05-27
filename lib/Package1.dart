@@ -6,6 +6,8 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:sampleapp/Settings.dart';
+import 'package:sampleapp/First_Screen.dart';
+import 'package:sampleapp/UpgradeApp.dart';
 
 class Pack1 extends StatefulWidget {
   String user;
@@ -16,6 +18,9 @@ class Pack1 extends StatefulWidget {
   String? labour_cost;
   String? total_cost;
   String? finish_cost;
+  String? pack_cost;
+  FirstScreen obj = FirstScreen();
+  String UserType = "N1";
 
   Pack1(
       {Key? key,
@@ -26,7 +31,8 @@ class Pack1 extends StatefulWidget {
       required this.labour_cost,
       required this.total_cost,
       required this.finish_cost,
-      required this.finishData})
+      required this.finishData,
+      required this.pack_cost})
       : super(key: key);
 
   @override
@@ -55,6 +61,9 @@ class _Pack1State extends State<Pack1> {
     debugPrint(widget.labour_cost);
     greyTotalCost = widget.total_cost;
     labourTableRows = generateLabourRows(widget.labourData);
+    widget.UserType = FirstScreen.UserType;
+    debugPrint("Usertype at Frist Screen init = ${FirstScreen.UserType}");
+    debugPrint("At inint state ${widget.UserType}");
 
     // greyTotalCost = (widget.grey_data_pack[1] is num)
     //     ? widget.grey_data_pack[1].toString()
@@ -72,15 +81,16 @@ class _Pack1State extends State<Pack1> {
   @override
   Widget build(BuildContext context) {
     return Package1Page(
-      user: widget.user,
-      selectedImages: widget.selectedImages,
-      greyTableRows: greyTableRows,
-      labourTableRows: labourTableRows,
-      greyTotalCost: greyTotalCost,
-      labourTotalCost: labourTotalCost,
-      finishingTotalCost: finishingTotalCost,
-      finishTableRows: finishTableRows,
-    );
+        user: widget.user,
+        selectedImages: widget.selectedImages,
+        greyTableRows: greyTableRows,
+        labourTableRows: labourTableRows,
+        greyTotalCost: greyTotalCost,
+        labourTotalCost: labourTotalCost,
+        finishingTotalCost: finishingTotalCost,
+        finishTableRows: finishTableRows,
+        usertype: widget.UserType,
+        packCost: widget.pack_cost);
   }
 }
 
@@ -93,6 +103,9 @@ class Package1Page extends StatefulWidget {
   String? labourTotalCost;
   List<List<dynamic>> finishTableRows;
   String? finishingTotalCost;
+  String? packCost;
+
+  String? usertype;
 
   Package1Page(
       {Key? key,
@@ -103,7 +116,9 @@ class Package1Page extends StatefulWidget {
       required this.greyTotalCost,
       required this.labourTotalCost,
       required this.finishTableRows,
-      required this.finishingTotalCost})
+      required this.finishingTotalCost,
+      required this.usertype,
+      required this.packCost})
       : super(key: key);
 
   @override
@@ -289,7 +304,7 @@ class _Package1PageState extends State<Package1Page> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 60, 71, 194),
         automaticallyImplyLeading: false,
-        title: const Text("Package No. 1"),
+        title: Text("Package No. 1   |   ${widget.packCost}"),
         actions: [
           PopupMenuButton<int>(
             icon: const Icon(
@@ -416,7 +431,50 @@ class _Package1PageState extends State<Package1Page> {
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () => _displayPdf(context),
+                onPressed: () {
+                  debugPrint("User Type at Package 1 = ${widget.usertype}");
+                  if (widget.usertype == "N") {
+                    // Show a dialog for premium version
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Premium Feature"),
+                          content: const Text(
+                              "Please upgrade to premium version to access this feature."),
+                          actions: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 255, 249, 64)),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => UpgradeApp(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Buy Premium',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    // Display PDF
+                    _displayPdf(context);
+                  }
+                },
                 child: const Text("Save PDF"),
               ),
               const SizedBox(

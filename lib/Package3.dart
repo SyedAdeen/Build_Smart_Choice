@@ -16,6 +16,7 @@ class Pack3 extends StatefulWidget {
   String? labour_cost;
   String? total_cost;
   String? finish_cost;
+  String? pack_cost;
 
   Pack3(
       {Key? key,
@@ -26,7 +27,8 @@ class Pack3 extends StatefulWidget {
       required this.labour_cost,
       required this.total_cost,
       required this.finish_cost,
-      required this.finishData})
+      required this.finishData,
+      required this.pack_cost})
       : super(key: key);
 
   @override
@@ -72,15 +74,15 @@ class _Pack3State extends State<Pack3> {
   @override
   Widget build(BuildContext context) {
     return Package3Page(
-      user: widget.user,
-      selectedImages: widget.selectedImages,
-      greyTableRows: greyTableRows,
-      labourTableRows: labourTableRows,
-      greyTotalCost: greyTotalCost,
-      labourTotalCost: labourTotalCost,
-      finishingTotalCost: finishingTotalCost,
-      finishTableRows: finishTableRows,
-    );
+        user: widget.user,
+        selectedImages: widget.selectedImages,
+        greyTableRows: greyTableRows,
+        labourTableRows: labourTableRows,
+        greyTotalCost: greyTotalCost,
+        labourTotalCost: labourTotalCost,
+        finishingTotalCost: finishingTotalCost,
+        finishTableRows: finishTableRows,
+        packCost: widget.pack_cost);
   }
 }
 
@@ -93,6 +95,7 @@ class Package3Page extends StatefulWidget {
   String? labourTotalCost;
   List<List<dynamic>> finishTableRows;
   String? finishingTotalCost;
+  String? packCost;
 
   Package3Page(
       {Key? key,
@@ -103,7 +106,8 @@ class Package3Page extends StatefulWidget {
       required this.greyTotalCost,
       required this.labourTotalCost,
       required this.finishTableRows,
-      required this.finishingTotalCost})
+      required this.finishingTotalCost,
+      required this.packCost})
       : super(key: key);
 
   @override
@@ -289,7 +293,7 @@ class _Package3PageState extends State<Package3Page> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 60, 71, 194),
         automaticallyImplyLeading: false,
-        title: const Text("Package No. 3"),
+        title: Text("Package No. 3   |   ${widget.packCost}"),
         actions: [
           PopupMenuButton<int>(
             icon: const Icon(

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       // ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const FirstScreen(),
+        '/': (context) => FirstScreen(),
         '/profile': (context) => const ProfilePage(),
         '/settings': (context) => const SettingsPage(
               username: 'Admin',
@@ -32,8 +32,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(
               username: '',
             ),
-        '/logout': (context) =>
-            const FirstScreen(), // Navigate to DoubleStory class
+        '/logout': (context) => FirstScreen(), // Navigate to DoubleStory class
       },
     );
   }

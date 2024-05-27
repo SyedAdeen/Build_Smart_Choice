@@ -9,8 +9,10 @@ import 'package:sampleapp/Premium_Package.dart';
 import 'package:sampleapp/Settings.dart';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
+import 'package:sampleapp/UpgradeApp.dart';
 
 import 'package:sampleapp/api_urls.dart'; // Add this line to import the 'dart:ui' library
+import 'package:sampleapp/First_Screen.dart';
 
 // ignore: must_be_immutable
 class PackagesPage extends StatefulWidget {
@@ -348,7 +350,7 @@ class _PackagesPageState extends State<PackagesPage> {
             appBar: AppBar(
               backgroundColor: const Color.fromARGB(255, 60, 71, 194),
               automaticallyImplyLeading: false,
-              title: const Text("Packages"),
+              title: Text("Packages | ${widget.budget.toString()}"),
               actions: [
                 PopupMenuButton<int>(
                   icon: const Icon(
@@ -582,6 +584,42 @@ class Packs extends StatelessWidget {
       required this.package3cost,
       required this.package4cost});
 
+  void showPremiumDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Premium Feature"),
+          content: const Text(
+              "Please upgrade to premium version to access this feature."),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 255, 249, 64)),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UpgradeApp(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Buy Premium',
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              ),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -712,6 +750,7 @@ class Packs extends StatelessWidget {
                         labour_cost: labour_cost,
                         finishData: finish_data,
                         finish_cost: finish_cost,
+                        pack_cost: packagecost,
                       ),
                     ),
                   );
@@ -772,9 +811,12 @@ class Packs extends StatelessWidget {
         const SizedBox(height: 40.0),
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => Pack2(
+            if (FirstScreen.UserType == "N") {
+              showPremiumDialog(context);
+            } else {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Pack2(
                     user: user,
                     selectedImages: selectedImages,
                     grey_data_pack: grey_data,
@@ -782,12 +824,15 @@ class Packs extends StatelessWidget {
                     total_cost: totalCost,
                     labour_cost: labour_cost,
                     finishData: finish_data2,
-                    finish_cost: finish_cost2),
-              ),
-            );
+                    finish_cost: finish_cost2,
+                    pack_cost: package2cost,
+                  ),
+                ),
+              );
+            }
           },
           child: ColoredBox(
-            color: Colors.green,
+            color: FirstScreen.UserType == "N" ? Colors.grey : Colors.green,
             child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20.0),
@@ -841,9 +886,12 @@ class Packs extends StatelessWidget {
         const SizedBox(height: 40.0),
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => Pack3(
+            if (FirstScreen.UserType == "N") {
+              showPremiumDialog(context);
+            } else {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => Pack3(
                     user: user,
                     selectedImages: selectedImages,
                     grey_data_pack: grey_data,
@@ -851,12 +899,17 @@ class Packs extends StatelessWidget {
                     total_cost: totalCost,
                     labour_cost: labour_cost,
                     finishData: finish_data3,
-                    finish_cost: finish_cost3),
-              ),
-            );
+                    finish_cost: finish_cost3,
+                    pack_cost: package3cost,
+                  ),
+                ),
+              );
+            }
           },
           child: ColoredBox(
-            color: const Color.fromARGB(255, 42, 48, 42),
+            color: FirstScreen.UserType == "N"
+                ? Colors.grey
+                : const Color.fromARGB(255, 42, 48, 42),
             child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(20.0),
@@ -910,9 +963,12 @@ class Packs extends StatelessWidget {
         const SizedBox(height: 40.0),
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => PremiumPack(
+            if (FirstScreen.UserType == "N") {
+              showPremiumDialog(context);
+            } else {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PremiumPack(
                     user: user,
                     selectedImages: selectedImages,
                     grey_data_pack: grey_data,
@@ -920,12 +976,17 @@ class Packs extends StatelessWidget {
                     total_cost: totalCost,
                     labour_cost: labour_cost,
                     finishData: finish_data4,
-                    finish_cost: finish_cost4),
-              ),
-            );
+                    finish_cost: finish_cost4,
+                    pack_cost: package4cost,
+                  ),
+                ),
+              );
+            }
           },
           child: ColoredBox(
-            color: const Color.fromARGB(255, 186, 16, 4),
+            color: FirstScreen.UserType == "N"
+                ? Colors.grey
+                : const Color.fromARGB(255, 186, 16, 4),
             child: Container(
                 width: double.maxFinite,
                 padding: const EdgeInsets.all(20.0),

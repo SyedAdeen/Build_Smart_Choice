@@ -30,8 +30,9 @@ class LoginController:
 
             if user and self.user_auth_model.check_password(password, user[3]):
                 role=user[6]
+                user_type=user[5]
 
-                return LoginView.success_response(username,role)
+                return LoginView.success_response(username,role,user_type)
             else:
                 return LoginView.failure_response()
 
@@ -624,7 +625,76 @@ class FinishMaterialsController:
             max = request.args['max']
             area=request.args['area']
             floor = request.args['floor']
+            
+
+            print("Minimum value outside of if condition",min,area,floor,type(area),type(floor),max)
             min=int(min)
+            max=int(max)
+            
+
+            if(area==3 and floor==1):
+                min=min-400000
+
+
+            if(area=="3" and floor=="2"):
+                min=min-700000
+                print("Minimum*************************************=", min)
+
+            if(area=="3" and floor=="3"):
+                min=min-1000000
+                print("Minimum*************************************=", min)
+
+            if(area=="3" and floor=="4"):
+                min=min-800000
+                print("Minimum*************************************=", min)
+
+            if(area=="5" and floor=="1"):
+                min=min-500000
+                print("Minimum*************************************=", min)
+
+            if(area=="5" and floor=="2"):
+                min=min-1500000
+                print("Minimum*************************************=", min)
+
+            if(area=="5" and floor=="3"):
+                min=min-1800000
+                print("Minimum*************************************=", min)
+
+            if(area=="5" and floor=="4"):
+                min=min-1900000
+                print("Minimum*************************************=", min)
+
+
+            if(area=="7" and floor=="3"):
+                min=min-1000000
+                print("Minimum*************************************=", min)
+
+
+            if(area=="7" and floor=="4"):
+                min=min-200000
+                print("Minimum*************************************=", min)
+
+            if(area=="1" and floor=="3"):
+                min=min-800000
+                print("Minimum*************************************=", min)
+
+            if(area=="1" and floor=="4"):
+                min=min-1100000
+                print("Minimum*************************************=", min)
+
+            if(area=="2" and floor=="2"):
+                min=min-600000
+                print("Minimum*************************************=", min)
+
+            if(area=="2" and floor=="3"):
+                min=min-1000000
+                print("Minimum*************************************=", min)
+
+            if(area=="2" and floor=="4"):
+                min=min-2200000
+                print("Minimum*************************************=", min)
+
+
             val1=min+500000
             print(val1)
 
@@ -653,7 +723,18 @@ class FinishMaterialsController:
             min=min+800000
             val1=val1+800000
 
-            premium = main2(min,val1,area,floor)
+            if(area=="1" and floor=="4"):
+                max=max+600000
+                print("Max*************************************=", max)
+
+            elif(area=="2" and floor=="1"):
+                max=max+300000
+                print("Max*************************************=", max)
+            else:
+                 max=max+1200000
+
+
+            premium = main2(max,val1,area,floor)
 
 
             combined_predictions = np.concatenate([predicted_classes1, predicted_classes2, predicted_classes3,premium], axis=0)
@@ -687,21 +768,21 @@ class FinishMaterialsController:
 
                 finishing_materials = self.finshing_materials_model.get_singlestory_finishing(area, set_id,predicted_array)
 
-                print("At Controller = ",finishing_materials)
+                # print("At Controller = ",finishing_materials)
             elif(storey=='2'):
                 finishing_materials = self.finshing_materials_model.get_singlestorybasement_finishing(area, set_id,predicted_array)
 
-                print("At Controller = ",finishing_materials)
+                # print("At Controller = ",finishing_materials)
 
             elif(storey=='3'):
                 finishing_materials = self.finshing_materials_model.get_doublestory_finishing(area, set_id,predicted_array)
 
-                print("At Controller = ",finishing_materials)
+                # print("At Controller = ",finishing_materials)
 
             elif(storey=='4'):
                 finishing_materials = self.finshing_materials_model.get_doublestorybasement_finishing(area, set_id,predicted_array)
 
-                print("At Controller = ",finishing_materials)
+                # print("At Controller = ",finishing_materials)
 
 
 

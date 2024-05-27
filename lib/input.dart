@@ -452,47 +452,22 @@ class _InputPageState extends State<InputPage> {
         !with_basement) {
       return const [
         DropdownMenuItem<String>(
-          value: '4400000 - 5400000',
-          child: Text('44 Lakh to 54 Lakh'),
+          value: '4800000 - 5800000',
+          child: Text('48 Lakh to 58 Lakh'),
         ),
         DropdownMenuItem<String>(
-          value: '5400000 - 6400000',
-          child: Text('54 Lakh to 64 Lakh'),
+          value: '5800000 - 6800000',
+          child: Text('58 Lakh to 68 Lakh'),
         ),
         DropdownMenuItem<String>(
-          value: '6400000 - 7400000',
-          child: Text('64 Lakh to 74 Lakh'),
+          value: '6800000 - 7800000',
+          child: Text('68 Lakh to 78 Lakh'),
         )
       ];
     } else if (_selectedArea == '3 Marla    (675 sq. ft.)' &&
         _selectedFloors == 'Single Storey' &&
         with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '5700000 - 6700000',
-          child: Text('57 Lakh to 67 Lakh'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '6700000 - 7700000',
-          child: Text('67 Lakh to 77 Lakh'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '7700000 - 8700000',
-          child: Text('77 Lakh to 87 Lakh'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '8700000 - 9700000',
-          child: Text('87 Lakh to 97 Lakh'),
-        )
-      ];
-    } else if (_selectedArea == '3 Marla    (675 sq. ft.)' &&
-        _selectedFloors == 'Double Storey' &&
-        !with_basement) {
-      return [
-        const DropdownMenuItem<String>(
-          value: '6600000 - 7600000',
-          child: Text('66 Lakh to 76 Lakh'),
-        ),
         const DropdownMenuItem<String>(
           value: '7600000 - 8600000',
           child: Text('76 Lakh to 86 Lakh'),
@@ -504,68 +479,69 @@ class _InputPageState extends State<InputPage> {
         const DropdownMenuItem<String>(
           value: '9600000 - 10600000',
           child: Text('96 Lakh to 1.06 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '10600000 - 11600000',
-          child: Text('1.06 Crore to 1.16 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '11600000 - 12600000',
-          child: Text('1.16 Crore to 1.26 Crore'),
         )
+      ];
+    } else if (_selectedArea == '3 Marla    (675 sq. ft.)' &&
+        _selectedFloors == 'Double Storey' &&
+        !with_basement) {
+      return [
+        const DropdownMenuItem<String>(
+          value: '7900000 - 8900000',
+          child: Text('79 Lakh to 89 Lakh'),
+        ),
+        const DropdownMenuItem<String>(
+          value: '8900000 - 9900000',
+          child: Text('89 Lakh to 99 Lakh'),
+        ),
+        const DropdownMenuItem<String>(
+          value: '9900000 - 10900000',
+          child: Text('99 Lakh to 1.09 Crore'),
+        ),
+        const DropdownMenuItem<String>(
+          value: '10900000 - 11900000',
+          child: Text('1.09 Crore to 1.19 Crore'),
+        ),
       ];
     } else if (_selectedArea == '3 Marla    (675 sq. ft.)' &&
         _selectedFloors == 'Double Storey' &&
         with_basement) {
       return [
         const DropdownMenuItem<String>(
-          value: '8100000 - 9100000',
-          child: Text('81 Lakh to 91 Lakh'),
+          value: '9500000 - 10500000',
+          child: Text('95 Lakh to 1.05 Crore'),
         ),
         const DropdownMenuItem<String>(
-          value: '9100000 - 10100000',
-          child: Text('91 Lakh to 1.01 Crore'),
+          value: '10500000 - 11500000',
+          child: Text('1.05 Crore to 1.15 Crore'),
         ),
         const DropdownMenuItem<String>(
-          value: '10100000 - 11100000',
-          child: Text('1.01 Crore to 1.11 Crore'),
+          value: '11500000 - 12500000',
+          child: Text('1.15 Crore to 1.25 Crore'),
         ),
         const DropdownMenuItem<String>(
-          value: '11100000 - 12100000',
-          child: Text('1.11 Crore to 1.21 Crore'),
+          value: '12500000 - 13500000',
+          child: Text('1.25 Crore to 1.35 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '12100000 - 13100000',
-          child: Text('1.21 Crore to 1.31 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '13100000 - 14100000',
-          child: Text('1.31 Crore to 1.41 Crore'),
-        )
       ];
     } else if (_selectedArea == '5 Marla    (1125 sq. ft.)' &&
         _selectedFloors == 'Single Storey' &&
         !with_basement) {
       return [
         const DropdownMenuItem<String>(
-          value: '6100000 - 7100000',
-          child: Text('61 Lakh to 71 Lakh'),
+          value: '6400000 - 7400000',
+          child: Text('64 Lakh to 74 Lakh'),
         ),
         const DropdownMenuItem<String>(
-          value: '7100000 - 8100000',
-          child: Text('71 Lakh to 81 Lakh'),
+          value: '7400000 - 8400000',
+          child: Text('74 Lakh to 84 Lakh'),
         ),
         const DropdownMenuItem<String>(
-          value: '8100000 - 9100000',
-          child: Text('81 Lakh to 91 Lakh'),
+          value: '8400000 - 9400000',
+          child: Text('84 Lakh to 94 Lakh'),
         ),
         const DropdownMenuItem<String>(
-          value: '9100000 - 10100000',
-          child: Text('91 Lakh to 1.01 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '10100000 - 11100000',
-          child: Text('1.01 Crore to 1.11 Crore'),
+          value: '9400000 - 10400000',
+          child: Text('94 Lakh to 1.04 Crore'),
         ),
       ];
     } else if (_selectedArea == '5 Marla    (1125 sq. ft.)' &&
@@ -573,21 +549,22 @@ class _InputPageState extends State<InputPage> {
         with_basement) {
       return [
         const DropdownMenuItem<String>(
-          value: '8000000 - 9000000',
-          child: Text('80 Lakh to 90 Lakh'),
+          value: '11200000 - 12200000',
+          child: Text('1.12 Crore to 1.22 Crore'),
         ),
         const DropdownMenuItem<String>(
-          value: '9000000 - 10000000',
-          child: Text('90 Lakh to 1 Crore'),
+          value: '12200000 - 13200000',
+          child: Text('1.22 Crore to 1.32 Crore'),
         ),
         const DropdownMenuItem<String>(
-          value: '10000000 - 11000000',
-          child: Text('1 Crore to 1.10 Crore'),
+          value: '13200000 - 14200000',
+          child: Text('1.32 Crore to 1.42 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '11000000 - 12000000',
-          child: Text('1.10 Crore to 1.20 Crore'),
-        ),
+      ];
+    } else if (_selectedArea == '5 Marla    (1125 sq. ft.)' &&
+        _selectedFloors == 'Double Storey' &&
+        !with_basement) {
+      return [
         const DropdownMenuItem<String>(
           value: '12000000 - 13000000',
           child: Text('1.20 Crore to 1.30 Crore'),
@@ -596,60 +573,19 @@ class _InputPageState extends State<InputPage> {
           value: '13000000 - 14000000',
           child: Text('1.30 Crore to 1.40 Crore'),
         ),
-      ];
-    } else if (_selectedArea == '5 Marla    (1125 sq. ft.)' &&
-        _selectedFloors == 'Double Storey' &&
-        !with_basement) {
-      return [
         const DropdownMenuItem<String>(
-          value: '8700000 - 9700000',
-          child: Text('87 Lakh to 97 Lakh'),
+          value: '14000000 - 15000000',
+          child: Text('1.40 Crore to 1.50 Crore'),
         ),
         const DropdownMenuItem<String>(
-          value: '9700000 - 10700000',
-          child: Text('97 Lakh to 1.07 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '10700000 - 11700000',
-          child: Text('1.07 Crore to 1.17 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '11700000 - 12700000',
-          child: Text('1.17 Crore to 1.27 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '12700000 - 13700000',
-          child: Text('1.27 Crore to 1.37 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '13700000 - 14700000',
-          child: Text('1.37 Crore to 1.47 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '14700000 - 15700000',
-          child: Text('1.47 Crore to 1.57 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '15700000 - 16700000',
-          child: Text('1.57 Crore to 1.67 Crore'),
+          value: '15000000 - 16000000',
+          child: Text('1.50 Crore to 1.60 Crore'),
         ),
       ];
     } else if (_selectedArea == '5 Marla    (1125 sq. ft.)' &&
         _selectedFloors == 'Double Storey' &&
         with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '11600000 - 12600000',
-          child: Text('1.16 Crore to 1.26 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '12600000 - 13600000',
-          child: Text('1.26 Crore to 1.36 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '13600000 - 14600000',
-          child: Text('1.36 Crore to 1.46 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '14600000 - 15600000',
           child: Text('1.46 Crore to 1.56 Crore'),
@@ -670,10 +606,6 @@ class _InputPageState extends State<InputPage> {
           value: '18600000 - 19600000',
           child: Text('1.86 Crore to 1.96 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '19600000 - 20600000',
-          child: Text('1.96 Crore to 2.06 Crore'),
-        ),
       ];
     } else if (_selectedArea == '7 Marla    (1575 sq. ft.)' &&
         _selectedFloors == 'Single Storey' &&
@@ -695,19 +627,11 @@ class _InputPageState extends State<InputPage> {
           value: '11000000 - 12000000',
           child: Text('1.10 Crore to 1.20 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '12000000 - 13000000',
-          child: Text('1.20 Crore to 1.30 Crore'),
-        ),
       ];
     } else if (_selectedArea == '7 Marla    (1575 sq. ft.)' &&
         _selectedFloors == 'Single Storey' &&
         with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '9700000 - 10700000',
-          child: Text('97 Lakh to 1.07 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '10700000 - 11700000',
           child: Text('1.07 Crore to 1.17 Crore'),
@@ -729,18 +653,6 @@ class _InputPageState extends State<InputPage> {
         _selectedFloors == 'Double Storey' &&
         !with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '10500000 - 11500000',
-          child: Text('1.05 Crore to 1.15 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '11500000 - 12500000',
-          child: Text('1.15 Crore to 1.25 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '12500000 - 13500000',
-          child: Text('1.25 Crore to 1.35 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '13500000 - 14500000',
           child: Text('1.35 Crore to 1.45 Crore'),
@@ -763,18 +675,6 @@ class _InputPageState extends State<InputPage> {
         with_basement) {
       return [
         const DropdownMenuItem<String>(
-          value: '13000000 - 14000000',
-          child: Text('1.30 Crore to 1.40 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '14000000 - 15000000',
-          child: Text('1.40 Crore to 1.50 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '15000000 - 16000000',
-          child: Text('1.50 Crore to 1.60 Crore'),
-        ),
-        const DropdownMenuItem<String>(
           value: '16000000 - 17000000',
           child: Text('1.60 Crore to 1.70 Crore'),
         ),
@@ -796,14 +696,6 @@ class _InputPageState extends State<InputPage> {
         !with_basement) {
       return [
         const DropdownMenuItem<String>(
-          value: '9700000 - 10700000',
-          child: Text('97 Lakh to 1.07 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '10700000 - 11700000',
-          child: Text('1.07 Crore to 1.17 Crore'),
-        ),
-        const DropdownMenuItem<String>(
           value: '11700000 - 12700000',
           child: Text('1.17 Crore to 1.27 Crore'),
         ),
@@ -825,14 +717,6 @@ class _InputPageState extends State<InputPage> {
         with_basement) {
       return [
         const DropdownMenuItem<String>(
-          value: '11700000 - 12700000',
-          child: Text('1.17 Crore to 1.27 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '12700000 - 13700000',
-          child: Text('1.27 Crore to 1.37 Crore'),
-        ),
-        const DropdownMenuItem<String>(
           value: '13700000 - 14700000',
           child: Text('1.37 Crore to 1.47 Crore'),
         ),
@@ -848,27 +732,11 @@ class _InputPageState extends State<InputPage> {
           value: '16700000 - 17700000',
           child: Text('1.67 Crore to 1.77 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '17700000 - 18700000',
-          child: Text('1.77 Crore to 1.87 Crore'),
-        ),
       ];
     } else if (_selectedArea == '10 Marla   (2250 sq. ft.)' &&
         _selectedFloors == 'Double Storey' &&
         !with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '14500000 - 15500000',
-          child: Text('1.45 Crore to 1.55 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '15500000 - 16500000',
-          child: Text('1.55 Crore to 1.65 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '16500000 - 17500000',
-          child: Text('1.65 Crore to 1.75 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '17500000 - 18500000',
           child: Text('1.75 Crore to 1.85 Crore'),
@@ -890,18 +758,6 @@ class _InputPageState extends State<InputPage> {
         _selectedFloors == 'Double Storey' &&
         with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '17500000 - 18500000',
-          child: Text('1.75 Crore to 1.85 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '18500000 - 19500000',
-          child: Text('1.85 Crore to 1.95 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '19500000 - 20500000',
-          child: Text('1.95 Crore to 2.05 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '20500000 - 21500000',
           child: Text('2.05 Crore to 2.15 Crore'),
@@ -927,14 +783,6 @@ class _InputPageState extends State<InputPage> {
         _selectedFloors == 'Single Storey' &&
         !with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '17500000 - 18500000',
-          child: Text('1.75 Crore to 1.85 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '18500000 - 19500000',
-          child: Text('1.85 Crore to 1.95 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '19500000 - 20500000',
           child: Text('1.95 Crore to 2.05 Crore'),
@@ -968,18 +816,6 @@ class _InputPageState extends State<InputPage> {
         _selectedFloors == 'Single Storey' &&
         with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '21500000 - 22500000',
-          child: Text('2.15 Crore to 2.25 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '22500000 - 23500000',
-          child: Text('2.25 Crore to 2.35 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '23500000 - 24500000',
-          child: Text('2.35 Crore to 2.45 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '24500000 - 25500000',
           child: Text('2.45 Crore to 2.55 Crore'),
@@ -1000,31 +836,11 @@ class _InputPageState extends State<InputPage> {
           value: '28500000 - 29500000',
           child: Text('2.85 Crore to 2.95 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '29500000 - 30500000',
-          child: Text('2.95 Crore to 3.05 Crore'),
-        ),
       ];
     } else if (_selectedArea == '20 Marla | 1 Kanal   (4500 sq. ft.)' &&
         _selectedFloors == 'Double Storey' &&
         !with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '25000000 - 26000000',
-          child: Text('2.50 Crore to 2.60 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '26000000 - 27000000',
-          child: Text('2.60 Crore to 2.70 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '27000000 - 28000000',
-          child: Text('2.70 Crore to 2.80 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '28000000 - 29000000',
-          child: Text('2.80 Crore to 2.90 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '29000000 - 30000000',
           child: Text('2.90 Crore to 3.00 Crore'),
@@ -1037,27 +853,11 @@ class _InputPageState extends State<InputPage> {
           value: '31000000 - 32000000',
           child: Text('3.10 Crore to 3.20 Crore'),
         ),
-        const DropdownMenuItem<String>(
-          value: '32000000 - 33000000',
-          child: Text('3.20 Crore to 3.30 Crore'),
-        ),
       ];
     } else if (_selectedArea == '20 Marla | 1 Kanal   (4500 sq. ft.)' &&
         _selectedFloors == 'Double Storey' &&
         with_basement) {
       return [
-        const DropdownMenuItem<String>(
-          value: '31500000 - 32500000',
-          child: Text('3.15 Crore to 3.25 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '32500000 - 33500000',
-          child: Text('3.25 Crore to 3.35 Crore'),
-        ),
-        const DropdownMenuItem<String>(
-          value: '33500000 - 34500000',
-          child: Text('3.35 Crore to 3.45 Crore'),
-        ),
         const DropdownMenuItem<String>(
           value: '34500000 - 35500000',
           child: Text('3.45 Crore to 3.55 Crore'),
@@ -1069,6 +869,10 @@ class _InputPageState extends State<InputPage> {
         const DropdownMenuItem<String>(
           value: '36500000 - 37500000',
           child: Text('3.65 Crore to 3.75 Crore'),
+        ),
+        const DropdownMenuItem<String>(
+          value: '37500000 - 38500000',
+          child: Text('3.75 Crore to 3.85 Crore'),
         ),
       ];
     }

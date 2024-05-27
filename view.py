@@ -3,8 +3,8 @@ from flask import jsonify
 
 class LoginView:
     @staticmethod
-    def success_response(username,role):
-        return jsonify({"message": "Login successful", 'username': username,'role':role}), 200
+    def success_response(username,role,user_type):
+        return jsonify({"message": "Login successful", 'username': username,'role':role,'usertype':user_type}), 200
 
     @staticmethod
     def failure_response():

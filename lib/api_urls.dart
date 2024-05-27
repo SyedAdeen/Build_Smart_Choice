@@ -1,7 +1,7 @@
 class ApiUrls {
   //static const String baseUrl = 'http://10.0.2.2:5000';
   static const String baseUrl = 'http://192.168.18.30:5000';
-  //static const String baseUrl = 'https://03c8-58-27-213-34.ngrok-free.app';
+  //static const String baseUrl ='https://84fa-2401-ba80-a183-aa39-cdd7-bb6a-12dd-b8fe.ngrok-free.app';
   static const String forgot = '$baseUrl/forgot';
   static const String login = '$baseUrl/login';
   static const String signup = '$baseUrl/signup';
