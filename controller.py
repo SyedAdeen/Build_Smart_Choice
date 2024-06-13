@@ -8,6 +8,7 @@ import locale
 from bsc_train_test import main2
 import numpy as np
 import json
+import random
 
 
 
@@ -343,9 +344,12 @@ class GreyMaterialsController:
 
             ans=self.grey_materials_model.update_scraped(prices)
             if(ans==1):
+                print("Successful Scrap")
 
                 return GreyView2.success_response("Data has been updated successfully")
             else:
+                print("Un Successful Scrap")
+
                 return GreyView2.error_response("Unable to update Data")
 
 
@@ -631,6 +635,11 @@ class FinishMaterialsController:
             min=int(min)
             max=int(max)
             
+            random_min = random.randint(min - 300000, min - 50000)
+            print("Original min:", min, "Random min:", random_min)
+
+            # Replace min_value with random_min for further processing
+            min = random_min
 
             if(area==3 and floor==1):
                 min=min-400000
